@@ -3,75 +3,100 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#111827" />
+  <meta name="theme-color" content="#151b2b" />
 
   <title>Phrasal Verbs Quiz</title>
 
   <style>
     * {
       box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    :root {
+      --navy: #151b2b;
+      --blue: #4f6ff2;
+      --blue-soft: #eef3ff;
+      --green: #2f9e6f;
+      --green-soft: #e7f8ef;
+      --red: #d95d6f;
+      --red-soft: #fdecef;
+      --yellow: #c6922f;
+      --yellow-soft: #fff6db;
+      --text: #151b2b;
+      --muted: #778091;
+      --border: #e7eaf0;
+      --surface: #ffffff;
+      --background: #f8f9fc;
     }
 
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      background: #f3f4f6;
-      color: #111827;
+      background: var(--background);
+      color: var(--text);
+    }
+
+    button {
+      font-family: inherit;
     }
 
     .app {
-      max-width: 700px;
+      max-width: 720px;
       margin: 0 auto;
       min-height: 100vh;
-      background: #ffffff;
-      padding-bottom: 100px;
+      background: var(--surface);
+      padding-bottom: calc(100px + env(safe-area-inset-bottom));
     }
 
     header {
-      background: #111827;
+      background: var(--navy);
       color: white;
-      padding: 24px 20px 20px;
-      padding-top: calc(24px + env(safe-area-inset-top));
+      padding: calc(28px + env(safe-area-inset-top)) 26px 24px;
     }
 
     header h1 {
       margin: 0;
-      font-size: 27px;
+      font-size: 29px;
+      line-height: 1.1;
+      letter-spacing: -0.8px;
     }
 
     header p {
-      margin: 7px 0 0;
-      opacity: 0.75;
-      font-size: 14px;
+      margin: 9px 0 0;
+      opacity: 0.72;
+      font-size: 15px;
     }
 
     nav {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      border-bottom: 1px solid #e5e7eb;
       position: sticky;
       top: 0;
-      background: white;
-      z-index: 10;
+      z-index: 20;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
     }
 
     nav button {
       border: 0;
-      background: white;
-      padding: 14px 4px;
+      background: transparent;
+      padding: 16px 2px 14px;
       font-size: 12px;
-      font-weight: 700;
-      color: #6b7280;
+      font-weight: 800;
+      color: #777e8c;
+      border-bottom: 3px solid transparent;
     }
 
     nav button.active {
-      color: #2563eb;
-      border-bottom: 3px solid #2563eb;
+      color: var(--blue);
+      border-bottom-color: var(--blue);
     }
 
     .screen {
       display: none;
-      padding: 20px;
+      padding: 24px 20px;
     }
 
     .screen.active {
@@ -80,105 +105,168 @@
 
     .card {
       background: white;
-      border: 1px solid #e5e7eb;
-      border-radius: 18px;
-      padding: 18px;
-      margin-bottom: 15px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 5px 18px rgba(24, 30, 50, 0.045);
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -0.4px;
+      margin: 2px 0 14px;
+    }
+
+    .subtle {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.5;
     }
 
     .main-button,
     .secondary-button,
     .danger-button {
-      border: 0;
-      border-radius: 14px;
-      padding: 15px;
-      font-size: 16px;
-      font-weight: 700;
       width: 100%;
-      margin-top: 10px;
+      border: 0;
+      border-radius: 17px;
+      padding: 16px;
+      font-size: 17px;
+      font-weight: 850;
+      margin-top: 11px;
+      transition: transform 0.12s ease, opacity 0.12s ease;
+    }
+
+    .main-button:active,
+    .secondary-button:active,
+    .danger-button:active,
+    .answer:active {
+      transform: scale(0.985);
     }
 
     .main-button {
-      background: #2563eb;
+      background: var(--blue);
       color: white;
+      box-shadow: 0 7px 18px rgba(79, 111, 242, 0.20);
     }
 
     .secondary-button {
-      background: #e5e7eb;
-      color: #111827;
+      background: #eef0f5;
+      color: var(--text);
     }
 
     .danger-button {
-      background: #fee2e2;
-      color: #991b1b;
+      background: var(--red-soft);
+      color: #b64155;
     }
 
     .quiz-top {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin-bottom: 16px;
-      font-size: 14px;
-      color: #6b7280;
-      font-weight: 600;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .counter-pill,
+    .score-pill {
+      border-radius: 999px;
+      padding: 7px 11px;
+      font-size: 13px;
+      font-weight: 850;
+    }
+
+    .counter-pill {
+      background: #f0f2f6;
+      color: var(--muted);
+    }
+
+    .score-pill {
+      background: var(--blue-soft);
+      color: var(--blue);
     }
 
     .progress {
-      height: 8px;
+      height: 11px;
       border-radius: 999px;
-      background: #e5e7eb;
+      background: #edf0f5;
       overflow: hidden;
-      margin-bottom: 24px;
+      margin-bottom: 27px;
     }
 
     .progress-bar {
       height: 100%;
-      background: #2563eb;
       width: 0%;
-      transition: width .25s;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #7390ff, var(--blue));
+      transition: width 0.3s ease;
+    }
+
+    .question-box {
+      text-align: center;
+      padding: 4px 4px 9px;
     }
 
     .direction {
-      font-size: 13px;
+      display: inline-block;
+      padding: 7px 11px;
+      margin-bottom: 15px;
+      border-radius: 999px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-size: 12px;
       text-transform: uppercase;
-      font-weight: 800;
-      color: #2563eb;
-      margin-bottom: 10px;
+      letter-spacing: 0.4px;
+      font-weight: 900;
     }
 
     .question {
+      max-width: 600px;
+      margin: 0 auto 26px;
       font-size: 25px;
-      font-weight: 800;
-      line-height: 1.25;
-      margin-bottom: 22px;
+      font-weight: 900;
+      line-height: 1.28;
+      letter-spacing: -0.4px;
+      text-align: center;
     }
 
     .answers {
       display: grid;
-      gap: 11px;
+      gap: 12px;
     }
 
     .answer {
-      padding: 15px;
-      border-radius: 14px;
-      border: 2px solid #e5e7eb;
+      width: 100%;
+      min-height: 66px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 13px 16px;
+      border-radius: 18px;
+      border: 2px solid var(--border);
       background: white;
-      text-align: left;
+      color: var(--text);
       font-size: 16px;
-      font-weight: 600;
+      line-height: 1.3;
+      font-weight: 750;
+      transition:
+        background 0.18s ease,
+        border-color 0.18s ease,
+        transform 0.12s ease;
     }
 
     .answer.correct {
-      background: #dcfce7;
-      border-color: #22c55e;
-      color: #166534;
+      background: var(--green-soft);
+      border-color: #9adfbd;
+      color: #19744f;
     }
 
     .answer.wrong {
-      background: #fee2e2;
-      border-color: #ef4444;
-      color: #991b1b;
+      background: var(--red-soft);
+      border-color: #f3a8b4;
+      color: #b53e53;
     }
 
     .answer:disabled {
@@ -187,45 +275,90 @@
 
     .feedback {
       margin-top: 18px;
-      padding: 15px;
-      border-radius: 14px;
-      font-weight: 700;
+      padding: 16px;
+      border-radius: 17px;
+      text-align: center;
+      font-weight: 800;
+      line-height: 1.45;
       display: none;
+      animation: appear 0.18s ease;
     }
 
     .feedback.correct {
       display: block;
-      background: #dcfce7;
-      color: #166534;
+      background: var(--green-soft);
+      color: #19744f;
     }
 
     .feedback.wrong {
       display: block;
-      background: #fee2e2;
-      color: #991b1b;
+      background: var(--red-soft);
+      color: #b53e53;
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(5px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .score-big {
       text-align: center;
-      font-size: 54px;
-      font-weight: 900;
+      font-size: 58px;
+      font-weight: 950;
+      letter-spacing: -2px;
       margin: 15px 0 0;
     }
 
     .percentage {
+      width: max-content;
+      margin: 8px auto 25px;
+      padding: 7px 13px;
+      border-radius: 999px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-size: 20px;
+      font-weight: 900;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .mini-card {
+      background: #f7f8fb;
+      border: 1px solid #eef0f4;
+      border-radius: 18px;
+      padding: 18px 10px;
       text-align: center;
-      font-size: 22px;
-      margin-bottom: 24px;
-      color: #6b7280;
+    }
+
+    .mini-card strong {
+      display: block;
+      font-size: 25px;
+      margin-bottom: 5px;
+    }
+
+    .mini-card span {
+      font-size: 12px;
+      color: var(--muted);
     }
 
     .stat-row {
       display: grid;
       grid-template-columns: 1fr auto;
-      gap: 10px;
+      gap: 12px;
       align-items: center;
-      padding: 12px 0;
-      border-bottom: 1px solid #e5e7eb;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
     }
 
     .stat-row:last-child {
@@ -233,104 +366,150 @@
     }
 
     .verb {
-      font-weight: 800;
+      font-weight: 900;
+      font-size: 16px;
     }
 
     .translation {
       font-size: 13px;
-      color: #6b7280;
-      margin-top: 3px;
+      color: var(--muted);
+      margin-top: 4px;
+      line-height: 1.35;
     }
 
     .stat-number {
-      text-align: right;
-      font-weight: 800;
+      min-width: 58px;
+      text-align: center;
+      padding: 7px 9px;
+      border-radius: 999px;
+      font-weight: 900;
+      background: #f1f3f6;
+      color: var(--muted);
     }
 
-    .bad {
-      color: #dc2626;
+    .stat-number.good {
+      background: var(--green-soft);
+      color: #19744f;
     }
 
-    .good {
-      color: #16a34a;
+    .stat-number.bad {
+      background: var(--red-soft);
+      color: #b53e53;
     }
 
-    .history-item {
-      padding: 15px 0;
-      border-bottom: 1px solid #e5e7eb;
+    .mastery-track {
+      height: 7px;
+      background: #edf0f4;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 8px;
+      max-width: 220px;
+    }
+
+    .mastery-bar {
+      height: 100%;
+      border-radius: 999px;
+    }
+
+    .history-card {
+      padding: 19px;
+    }
+
+    .history-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
     }
 
     .history-score {
-      font-size: 22px;
-      font-weight: 900;
+      font-size: 29px;
+      font-weight: 950;
+      letter-spacing: -1px;
     }
 
     .history-date {
-      color: #6b7280;
+      color: var(--muted);
       font-size: 13px;
-      margin-top: 4px;
+      margin-top: 5px;
     }
 
-    .history-errors {
-      margin-top: 8px;
-      font-size: 13px;
-      color: #6b7280;
-    }
-
-    .section-title {
-      font-size: 21px;
-      font-weight: 900;
-      margin: 5px 0 15px;
-    }
-
-    .subtle {
-      color: #6b7280;
+    .history-badge {
+      border-radius: 999px;
+      padding: 7px 11px;
       font-size: 14px;
-      line-height: 1.45;
+      font-weight: 900;
+    }
+
+    .history-badge.excellent {
+      background: var(--green-soft);
+      color: #19744f;
+    }
+
+    .history-badge.good {
+      background: var(--blue-soft);
+      color: var(--blue);
+    }
+
+    .history-badge.medium {
+      background: var(--yellow-soft);
+      color: #9b711e;
+    }
+
+    .history-badge.low {
+      background: var(--red-soft);
+      color: #b53e53;
+    }
+
+    .review-label {
+      margin-top: 16px;
+      margin-bottom: 8px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--muted);
+      font-weight: 900;
+    }
+
+    .error-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .error-tag {
+      display: inline-flex;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: var(--red-soft);
+      color: #b53e53;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .perfect-tag {
+      display: inline-flex;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: var(--green-soft);
+      color: #19744f;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .database-card {
+      padding: 17px;
     }
 
     .empty {
       text-align: center;
-      color: #9ca3af;
+      color: #9aa1ad;
       padding: 30px 10px;
-    }
-
-    .pill {
-      display: inline-block;
-      padding: 5px 9px;
-      border-radius: 999px;
-      background: #eff6ff;
-      color: #2563eb;
-      font-size: 12px;
-      font-weight: 800;
+      line-height: 1.5;
     }
 
     .hidden {
       display: none !important;
-    }
-
-    .mini-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 15px;
-    }
-
-    .mini-card {
-      background: #f9fafb;
-      border-radius: 14px;
-      padding: 14px;
-      text-align: center;
-    }
-
-    .mini-card strong {
-      display: block;
-      font-size: 23px;
-    }
-
-    .mini-card span {
-      font-size: 12px;
-      color: #6b7280;
     }
   </style>
 </head>
@@ -341,7 +520,7 @@
 
   <header>
     <h1>Phrasal Verbs</h1>
-    <p>100 verbs · Quiz · Progress tracking</p>
+    <p>100 Verbs · Quiz · Progress Tracking</p>
   </header>
 
   <nav>
@@ -356,27 +535,28 @@
     <div id="startArea">
 
       <div class="card">
-        <div class="section-title">Nuovo quiz</div>
+        <div class="section-title">Nuovo Quiz</div>
+
         <p class="subtle">
-          20 domande casuali: 10 Italiano → Inglese e 10 Inglese → Italiano.
+          20 Domande casuali: 10 Italiano → Inglese e 10 Inglese → Italiano.
         </p>
 
         <button class="main-button" onclick="startQuiz('normal')">
-          Inizia quiz da 20
+          Inizia Quiz Da 20
         </button>
 
         <button class="secondary-button" onclick="startQuiz('mistakes')">
-          Ripassa i miei errori
+          Ripassa I Miei Errori
         </button>
       </div>
 
       <div class="card">
-        <div class="section-title">Il tuo progresso</div>
+        <div class="section-title">Il Tuo Progresso</div>
 
         <div class="mini-grid">
           <div class="mini-card">
             <strong id="homeQuizCount">0</strong>
-            <span>Quiz completati</span>
+            <span>Quiz Completati</span>
           </div>
 
           <div class="mini-card">
@@ -391,24 +571,28 @@
     <div id="quizArea" class="hidden">
 
       <div class="quiz-top">
-        <span id="questionCounter">Domanda 1/20</span>
-        <span id="liveScore">0/0</span>
+        <span id="questionCounter" class="counter-pill">Domanda 1/20</span>
+        <span id="liveScore" class="score-pill">0/0</span>
       </div>
 
       <div class="progress">
         <div id="progressBar" class="progress-bar"></div>
       </div>
 
-      <div id="direction" class="direction"></div>
-      <div id="question" class="question"></div>
+      <div class="question-box">
+        <div id="direction" class="direction"></div>
+        <div id="question" class="question"></div>
+      </div>
+
       <div id="answers" class="answers"></div>
 
       <div id="feedback" class="feedback"></div>
 
-      <button id="nextButton"
-              class="main-button hidden"
-              onclick="nextQuestion()">
-        Prossima domanda
+      <button
+        id="nextButton"
+        class="main-button hidden"
+        onclick="nextQuestion()">
+        Prossima Domanda
       </button>
 
     </div>
@@ -416,17 +600,20 @@
     <div id="resultArea" class="hidden">
 
       <div class="card">
-        <div class="section-title">Quiz completato</div>
+        <div class="section-title" style="text-align:center;">
+          Quiz Completato
+        </div>
+
         <div id="finalScore" class="score-big"></div>
         <div id="finalPercentage" class="percentage"></div>
 
         <button class="main-button" onclick="resetQuizView()">
-          Nuovo quiz
+          Nuovo Quiz
         </button>
       </div>
 
       <div class="card">
-        <div class="section-title">Errori di questo quiz</div>
+        <div class="section-title">Da Ripassare</div>
         <div id="resultErrors"></div>
       </div>
 
@@ -442,7 +629,7 @@
       <div class="mini-grid">
         <div class="mini-card">
           <strong id="totalAnswers">0</strong>
-          <span>Risposte totali</span>
+          <span>Risposte Totali</span>
         </div>
 
         <div class="mini-card">
@@ -453,24 +640,24 @@
     </div>
 
     <div class="card">
-      <div class="section-title">🔴 Più sbagliati</div>
+      <div class="section-title">🔴 Più Sbagliati</div>
       <div id="worstVerbs"></div>
     </div>
 
     <div class="card">
-      <div class="section-title">🟢 Più conosciuti</div>
+      <div class="section-title">🟢 Più Conosciuti</div>
       <div id="bestVerbs"></div>
     </div>
 
     <button class="danger-button" onclick="resetAllData()">
-      Reset di tutte le statistiche
+      Reset Di Tutte Le Statistiche
     </button>
 
   </section>
 
   <section id="history" class="screen">
 
-    <div class="section-title">Storico quiz</div>
+    <div class="section-title">Storico Quiz</div>
     <div id="historyList"></div>
 
   </section>
@@ -478,7 +665,10 @@
   <section id="database" class="screen">
 
     <div class="section-title">100 Phrasal Verbs</div>
-    <p class="subtle">Database completo utilizzato dai quiz.</p>
+
+    <p class="subtle">
+      Database completo utilizzato nei quiz.
+    </p>
 
     <div id="databaseList"></div>
 
@@ -597,6 +787,11 @@ let score = 0;
 let answered = false;
 let quizErrors = [];
 
+function capitalizeFirst(text) {
+  if (!text) return text;
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
 function shuffle(array) {
   return [...array].sort(() => Math.random() - 0.5);
 }
@@ -615,20 +810,6 @@ function loadHistory() {
 
 function saveHistory(history) {
   localStorage.setItem("pvHistory", JSON.stringify(history));
-}
-
-function getVerbStat(verb) {
-  const stats = loadStats();
-
-  if (!stats[verb]) {
-    stats[verb] = {
-      seen: 0,
-      correct: 0,
-      wrong: 0
-    };
-  }
-
-  return stats[verb];
 }
 
 function showScreen(screenId) {
@@ -671,13 +852,13 @@ function startQuiz(mode = "normal") {
     if (ranked.length >= 10) {
       pool = ranked;
     } else {
-      alert("Serve qualche errore in più prima di creare un quiz dedicato. Per ora avvio un quiz normale.");
+      alert("Servono più errori registrati. Per ora avvio un quiz normale.");
     }
   }
 
-  const selected = shuffle(pool).slice(0, 20);
+  const selected = shuffle(pool).slice(0,20);
 
-  quiz = selected.map((item, index) => ({
+  quiz = selected.map((item,index) => ({
     verb: item[0],
     italian: item[1],
     direction: index < 10 ? "IT_EN" : "EN_IT"
@@ -707,7 +888,7 @@ function renderQuestion() {
   document.getElementById("nextButton").classList.add("hidden");
 
   document.getElementById("questionCounter").textContent =
-    `Domanda ${currentIndex + 1}/${quiz.length}`;
+    `Domanda ${currentIndex + 1} Di ${quiz.length}`;
 
   document.getElementById("liveScore").textContent =
     `${score}/${currentIndex}`;
@@ -726,7 +907,7 @@ function renderQuestion() {
     direction.textContent = "Italiano → Inglese";
 
     question.textContent =
-      `Come si dice “${q.italian}”?`;
+      `Come Si Dice “${capitalizeFirst(q.italian)}”?`;
 
     correctAnswer = q.verb;
 
@@ -741,14 +922,14 @@ function renderQuestion() {
     direction.textContent = "Inglese → Italiano";
 
     question.textContent =
-      `Che cosa significa “${q.verb}”?`;
+      `Che Cosa Significa “${q.verb}”?`;
 
-    correctAnswer = q.italian;
+    correctAnswer = capitalizeFirst(q.italian);
 
     wrongOptions = shuffle(
       phrasalVerbs
         .filter(v => v[0] !== q.verb)
-        .map(v => v[1])
+        .map(v => capitalizeFirst(v[1]))
     ).slice(0,3);
   }
 
@@ -825,13 +1006,13 @@ function answerQuestion(button, selected, correctAnswer, q) {
 
     feedback.className = "feedback correct";
     feedback.innerHTML =
-      `✅ Corretto<br><small>Punteggio: ${score}/${currentIndex + 1}</small>`;
+      `✓ Corretto<br><small>Punteggio: ${score}/${currentIndex + 1}</small>`;
 
   } else {
 
     feedback.className = "feedback wrong";
     feedback.innerHTML =
-      `❌ Errato<br>Risposta corretta: <strong>${correctAnswer}</strong><br><small>Punteggio: ${score}/${currentIndex + 1}</small>`;
+      `✕ Errato<br>Risposta Corretta: <strong>${correctAnswer}</strong><br><small>Punteggio: ${score}/${currentIndex + 1}</small>`;
   }
 
   document.getElementById("liveScore").textContent =
@@ -869,28 +1050,26 @@ function finishQuiz() {
   if (quizErrors.length === 0) {
 
     resultErrors.innerHTML =
-      `<div class="empty">🎉 Nessun errore!</div>`;
+      `<div class="empty">🎉 Nessun Errore!</div>`;
 
   } else {
 
-    resultErrors.innerHTML = quizErrors.map(e => `
-      <div class="stat-row">
-        <div>
-          <div class="verb">${e.verb}</div>
-          <div class="translation">${e.italian}</div>
-        </div>
-        <div class="bad">❌</div>
+    resultErrors.innerHTML = `
+      <div class="error-tags">
+        ${quizErrors.map(e =>
+          `<span class="error-tag">${e.verb}</span>`
+        ).join("")}
       </div>
-    `).join("");
+    `;
   }
 
   const history = loadHistory();
 
   history.unshift({
     date: new Date().toISOString(),
-    score: score,
+    score,
     total: quiz.length,
-    percentage: percentage,
+    percentage,
     errors: quizErrors
   });
 
@@ -926,7 +1105,7 @@ function renderStats() {
 
   const entries = phrasalVerbs
     .filter(([verb]) => stats[verb] && stats[verb].seen > 0)
-    .map(([verb, italian]) => {
+    .map(([verb,italian]) => {
 
       const s = stats[verb];
 
@@ -957,36 +1136,57 @@ function renderStats() {
   document.getElementById("worstVerbs").innerHTML =
     worst.length
       ? worst.map(renderStatRow).join("")
-      : `<div class="empty">Completa qualche quiz.</div>`;
+      : `<div class="empty">Completa Qualche Quiz.</div>`;
 
   document.getElementById("bestVerbs").innerHTML =
     best.length
       ? best.map(renderStatRow).join("")
-      : `<div class="empty">Completa qualche quiz.</div>`;
+      : `<div class="empty">Completa Qualche Quiz.</div>`;
 }
 
 function renderStatRow(item) {
 
-  const className =
-    item.accuracy >= 80
-      ? "good"
-      : item.accuracy <= 50
-      ? "bad"
-      : "";
+  const value = Math.round(item.accuracy);
+
+  let className = "";
+  let barColor = "#c3cad5";
+
+  if (value >= 80) {
+    className = "good";
+    barColor = "#72cba2";
+  } else if (value <= 50) {
+    className = "bad";
+    barColor = "#ef9baa";
+  } else {
+    barColor = "#efc96d";
+  }
 
   return `
     <div class="stat-row">
+
       <div>
         <div class="verb">${item.verb}</div>
-        <div class="translation">${item.italian}</div>
+
         <div class="translation">
-          ${item.correct} corrette · ${item.wrong} errate · ${item.seen} tentativi
+          ${capitalizeFirst(item.italian)}
+        </div>
+
+        <div class="translation">
+          ${item.correct} Corrette · ${item.wrong} Errate · ${item.seen} Tentativi
+        </div>
+
+        <div class="mastery-track">
+          <div
+            class="mastery-bar"
+            style="width:${value}%; background:${barColor};">
+          </div>
         </div>
       </div>
 
       <div class="stat-number ${className}">
-        ${Math.round(item.accuracy)}%
+        ${value}%
       </div>
+
     </div>
   `;
 }
@@ -998,14 +1198,12 @@ function renderHistory() {
   const container = document.getElementById("historyList");
 
   if (!history.length) {
-
     container.innerHTML =
-      `<div class="empty">Nessun quiz completato.</div>`;
-
+      `<div class="empty">Nessun Quiz Completato.</div>`;
     return;
   }
 
-  container.innerHTML = history.map((h, index) => {
+  container.innerHTML = history.map(h => {
 
     const date = new Date(h.date);
 
@@ -1017,26 +1215,49 @@ function renderHistory() {
         minute: "2-digit"
       });
 
-    const errorNames =
+    let badgeClass = "low";
+
+    if (h.percentage >= 90) badgeClass = "excellent";
+    else if (h.percentage >= 75) badgeClass = "good";
+    else if (h.percentage >= 60) badgeClass = "medium";
+
+    const errors =
       h.errors && h.errors.length
-        ? h.errors.map(e => e.verb).join(", ")
-        : "Nessun errore";
+        ? `
+          <div class="review-label">Da Ripassare</div>
+          <div class="error-tags">
+            ${h.errors.map(e =>
+              `<span class="error-tag">${e.verb}</span>`
+            ).join("")}
+          </div>
+        `
+        : `
+          <div class="review-label">Risultato</div>
+          <span class="perfect-tag">✓ Nessun Errore</span>
+        `;
 
     return `
-      <div class="card history-item">
+      <div class="card history-card">
 
-        <div class="history-score">
-          ${h.score}/${h.total}
-          <span class="pill">${h.percentage}%</span>
+        <div class="history-head">
+
+          <div>
+            <div class="history-score">
+              ${h.score}/${h.total}
+            </div>
+
+            <div class="history-date">
+              ${formatted}
+            </div>
+          </div>
+
+          <div class="history-badge ${badgeClass}">
+            ${h.percentage}%
+          </div>
+
         </div>
 
-        <div class="history-date">
-          ${formatted}
-        </div>
-
-        <div class="history-errors">
-          <strong>Errori:</strong> ${errorNames}
-        </div>
+        ${errors}
 
       </div>
     `;
@@ -1048,28 +1269,33 @@ function renderDatabase() {
   const stats = loadStats();
 
   document.getElementById("databaseList").innerHTML =
-    phrasalVerbs.map(([verb, italian]) => {
+    phrasalVerbs.map(([verb,italian]) => {
 
       const s = stats[verb];
 
-      let info = "Mai testato";
+      let info = "Mai Testato";
 
       if (s && s.seen) {
-
         const accuracy =
           Math.round((s.correct / s.seen) * 100);
 
         info =
-          `${accuracy}% · ${s.correct}/${s.seen} corrette`;
+          `${accuracy}% · ${s.correct}/${s.seen} Corrette`;
       }
 
       return `
-        <div class="card">
+        <div class="card database-card">
+
           <div class="verb">${verb}</div>
-          <div class="translation">${italian}</div>
-          <div class="translation" style="margin-top:7px;">
+
+          <div class="translation">
+            ${capitalizeFirst(italian)}
+          </div>
+
+          <div class="translation" style="margin-top:8px;">
             ${info}
           </div>
+
         </div>
       `;
     }).join("");
@@ -1083,10 +1309,7 @@ function updateHomeStats() {
     history.length;
 
   if (!history.length) {
-
-    document.getElementById("homeAverage").textContent =
-      "—";
-
+    document.getElementById("homeAverage").textContent = "—";
     return;
   }
 
@@ -1104,7 +1327,7 @@ function resetAllData() {
 
   const confirmation =
     confirm(
-      "Vuoi davvero cancellare tutto lo storico e tutte le statistiche?"
+      "Vuoi Davvero Cancellare Tutto Lo Storico E Tutte Le Statistiche?"
     );
 
   if (!confirmation) return;
@@ -1117,7 +1340,7 @@ function resetAllData() {
   renderDatabase();
   updateHomeStats();
 
-  alert("Statistiche eliminate.");
+  alert("Statistiche Eliminate.");
 }
 
 updateHomeStats();
