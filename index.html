@@ -2,10 +2,14 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#151b2b" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  />
 
-  <title>Phrasal Verbs Quiz</title>
+  <meta name="theme-color" content="#171d2d" />
+
+  <title>Phrasal Verbs</title>
 
   <style>
     * {
@@ -14,85 +18,143 @@
     }
 
     :root {
-      --navy: #151b2b;
-      --blue: #4f6ff2;
-      --blue-soft: #eef3ff;
-      --green: #2f9e6f;
-      --green-soft: #e7f8ef;
-      --red: #d95d6f;
-      --red-soft: #fdecef;
-      --yellow: #c6922f;
-      --yellow-soft: #fff6db;
-      --text: #151b2b;
-      --muted: #778091;
-      --border: #e7eaf0;
+      --navy: #171d2d;
+
+      --primary: #6379ee;
+      --primary-light: #eef1ff;
+
+      --sky: #dff2ff;
+      --sky-text: #3477a5;
+
+      --mint: #e0f6e9;
+      --mint-text: #277b55;
+
+      --rose: #fde9ed;
+      --rose-text: #bd5063;
+
+      --cream: #fff3d7;
+      --cream-text: #9c7425;
+
+      --lavender: #eee8ff;
+      --lavender-text: #7259b8;
+
+      --text: #171d2d;
+      --muted: #7a8396;
+
+      --border: #e5e8ef;
+      --background: #f7f8fc;
       --surface: #ffffff;
-      --background: #f8f9fc;
     }
 
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
       background: var(--background);
       color: var(--text);
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+    }
+
+    button,
+    input {
+      font-family: inherit;
     }
 
     button {
-      font-family: inherit;
+      cursor: pointer;
     }
 
     .app {
       max-width: 720px;
-      margin: 0 auto;
       min-height: 100vh;
+      margin: 0 auto;
       background: var(--surface);
       padding-bottom: calc(100px + env(safe-area-inset-bottom));
     }
 
+    /* HEADER */
+
     header {
-      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+
       color: white;
-      padding: calc(28px + env(safe-area-inset-top)) 26px 24px;
+
+      background:
+        radial-gradient(
+          circle at 92% 20%,
+          rgba(125, 147, 255, 0.35),
+          transparent 32%
+        ),
+        radial-gradient(
+          circle at 15% 120%,
+          rgba(110, 220, 193, 0.18),
+          transparent 42%
+        ),
+        var(--navy);
+
+      padding:
+        calc(30px + env(safe-area-inset-top))
+        26px
+        27px;
     }
 
     header h1 {
       margin: 0;
-      font-size: 29px;
-      line-height: 1.1;
-      letter-spacing: -0.8px;
+
+      font-size: 30px;
+      line-height: 1.08;
+      letter-spacing: -0.9px;
+      font-weight: 900;
     }
 
     header p {
-      margin: 9px 0 0;
-      opacity: 0.72;
+      margin: 10px 0 0;
+
       font-size: 15px;
+      opacity: 0.74;
     }
 
+    /* NAV */
+
     nav {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
       position: sticky;
       top: 0;
       z-index: 20;
-      background: rgba(255,255,255,0.96);
-      backdrop-filter: blur(14px);
+
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(16px);
+
       border-bottom: 1px solid var(--border);
     }
 
     nav button {
-      border: 0;
-      background: transparent;
       padding: 16px 2px 14px;
-      font-size: 12px;
-      font-weight: 800;
-      color: #777e8c;
+
+      border: 0;
       border-bottom: 3px solid transparent;
+
+      background: transparent;
+
+      color: #798092;
+
+      font-size: 12px;
+      font-weight: 850;
     }
 
     nav button.active {
-      color: var(--blue);
-      border-bottom-color: var(--blue);
+      color: var(--primary);
+      border-bottom-color: var(--primary);
     }
+
+    /* GENERAL */
 
     .screen {
       display: none;
@@ -104,38 +166,76 @@
     }
 
     .card {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      padding: 20px;
       margin-bottom: 16px;
-      box-shadow: 0 5px 18px rgba(24, 30, 50, 0.045);
+      padding: 20px;
+
+      background: white;
+
+      border: 1px solid var(--border);
+      border-radius: 23px;
+
+      box-shadow:
+        0 7px 22px rgba(23, 29, 45, 0.05);
+    }
+
+    .gradient-card {
+      border: 0;
+
+      background:
+        linear-gradient(
+          135deg,
+          #f1f3ff 0%,
+          #f7f4ff 50%,
+          #eff9ff 100%
+        );
     }
 
     .section-title {
+      margin: 2px 0 14px;
+
       font-size: 22px;
       font-weight: 900;
-      letter-spacing: -0.4px;
-      margin: 2px 0 14px;
+      letter-spacing: -0.5px;
     }
 
     .subtle {
       color: var(--muted);
+
       font-size: 15px;
       line-height: 1.5;
     }
+
+    .eyebrow {
+      margin-bottom: 7px;
+
+      color: var(--primary);
+
+      font-size: 12px;
+      font-weight: 900;
+
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+    }
+
+    /* BUTTONS */
 
     .main-button,
     .secondary-button,
     .danger-button {
       width: 100%;
+
+      margin-top: 11px;
+      padding: 16px;
+
       border: 0;
       border-radius: 17px;
-      padding: 16px;
+
       font-size: 17px;
       font-weight: 850;
-      margin-top: 11px;
-      transition: transform 0.12s ease, opacity 0.12s ease;
+
+      transition:
+        transform 0.12s ease,
+        opacity 0.12s ease;
     }
 
     .main-button:active,
@@ -146,89 +246,243 @@
     }
 
     .main-button {
-      background: var(--blue);
       color: white;
-      box-shadow: 0 7px 18px rgba(79, 111, 242, 0.20);
+
+      background:
+        linear-gradient(
+          135deg,
+          #687ff5,
+          #596fe8
+        );
+
+      box-shadow:
+        0 8px 19px rgba(99, 121, 238, 0.23);
     }
 
     .secondary-button {
-      background: #eef0f5;
       color: var(--text);
+      background: #eff1f5;
     }
 
     .danger-button {
-      background: var(--red-soft);
-      color: #b64155;
+      color: var(--rose-text);
+      background: var(--rose);
     }
+
+    /* HOME */
+
+    .hero-quiz {
+      position: relative;
+      overflow: hidden;
+
+      padding: 23px;
+    }
+
+    .hero-quiz::after {
+      content: "";
+
+      position: absolute;
+      width: 130px;
+      height: 130px;
+
+      right: -48px;
+      top: -44px;
+
+      border-radius: 50%;
+
+      background:
+        rgba(127, 149, 255, 0.13);
+    }
+
+    .home-description {
+      max-width: 520px;
+      margin: 0 0 18px;
+
+      color: var(--muted);
+
+      font-size: 16px;
+      line-height: 1.48;
+    }
+
+    .small-feature-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+
+      margin: 0 0 18px;
+    }
+
+    .feature-pill {
+      padding: 7px 10px;
+
+      border-radius: 999px;
+
+      color: var(--primary);
+      background: var(--primary-light);
+
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+
+      margin-top: 15px;
+    }
+
+    .mini-card {
+      min-height: 105px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      padding: 16px 10px;
+
+      text-align: center;
+
+      border: 1px solid rgba(225, 228, 239, 0.85);
+      border-radius: 19px;
+
+      background: rgba(255, 255, 255, 0.65);
+    }
+
+    .mini-card:nth-child(1) {
+      background: var(--sky);
+    }
+
+    .mini-card:nth-child(2) {
+      background: var(--mint);
+    }
+
+    .mini-card strong {
+      display: block;
+
+      margin-bottom: 5px;
+
+      font-size: 26px;
+      font-weight: 900;
+    }
+
+    .mini-card span {
+      color: var(--muted);
+
+      font-size: 12px;
+      line-height: 1.3;
+    }
+
+    .home-last-result {
+      margin-top: 15px;
+      padding: 15px;
+
+      border-radius: 18px;
+
+      background: var(--cream);
+    }
+
+    .home-last-result strong {
+      font-size: 20px;
+    }
+
+    /* QUIZ */
 
     .quiz-top {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
+
       gap: 10px;
+
       margin-bottom: 12px;
     }
 
     .counter-pill,
     .score-pill {
-      border-radius: 999px;
       padding: 7px 11px;
+
+      border-radius: 999px;
+
       font-size: 13px;
       font-weight: 850;
     }
 
     .counter-pill {
-      background: #f0f2f6;
       color: var(--muted);
+      background: #f0f2f6;
     }
 
     .score-pill {
-      background: var(--blue-soft);
-      color: var(--blue);
+      color: var(--primary);
+      background: var(--primary-light);
     }
 
     .progress {
       height: 11px;
-      border-radius: 999px;
-      background: #edf0f5;
+
+      margin-bottom: 28px;
+
       overflow: hidden;
-      margin-bottom: 27px;
+
+      border-radius: 999px;
+
+      background: #eceff4;
     }
 
     .progress-bar {
-      height: 100%;
       width: 0%;
+      height: 100%;
+
       border-radius: 999px;
-      background: linear-gradient(90deg, #7390ff, var(--blue));
+
+      background:
+        linear-gradient(
+          90deg,
+          #90a2ff,
+          var(--primary)
+        );
+
       transition: width 0.3s ease;
     }
 
     .question-box {
       text-align: center;
-      padding: 4px 4px 9px;
+
+      padding: 4px 3px 10px;
     }
 
     .direction {
       display: inline-block;
+
+      margin-bottom: 16px;
       padding: 7px 11px;
-      margin-bottom: 15px;
+
       border-radius: 999px;
-      background: var(--blue-soft);
-      color: var(--blue);
+
+      color: var(--primary);
+      background: var(--primary-light);
+
       font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.4px;
       font-weight: 900;
+
+      text-transform: uppercase;
+      letter-spacing: 0.45px;
     }
 
     .question {
       max-width: 600px;
-      margin: 0 auto 26px;
-      font-size: 25px;
-      font-weight: 900;
-      line-height: 1.28;
-      letter-spacing: -0.4px;
+
+      margin: 0 auto 27px;
+
       text-align: center;
+
+      font-size: 25px;
+      line-height: 1.3;
+      letter-spacing: -0.45px;
+
+      font-weight: 900;
     }
 
     .answers {
@@ -239,34 +493,41 @@
     .answer {
       width: 100%;
       min-height: 66px;
+
       display: flex;
       justify-content: center;
       align-items: center;
+
+      padding: 14px 16px;
+
       text-align: center;
-      padding: 13px 16px;
-      border-radius: 18px;
-      border: 2px solid var(--border);
-      background: white;
+
       color: var(--text);
+      background: white;
+
+      border: 2px solid var(--border);
+      border-radius: 18px;
+
       font-size: 16px;
-      line-height: 1.3;
+      line-height: 1.32;
       font-weight: 750;
+
       transition:
-        background 0.18s ease,
-        border-color 0.18s ease,
+        background 0.17s ease,
+        border-color 0.17s ease,
         transform 0.12s ease;
     }
 
     .answer.correct {
-      background: var(--green-soft);
-      border-color: #9adfbd;
-      color: #19744f;
+      color: var(--mint-text);
+      background: var(--mint);
+      border-color: #a5dfbf;
     }
 
     .answer.wrong {
-      background: var(--red-soft);
-      border-color: #f3a8b4;
-      color: #b53e53;
+      color: var(--rose-text);
+      background: var(--rose);
+      border-color: #efacb8;
     }
 
     .answer:disabled {
@@ -274,90 +535,145 @@
     }
 
     .feedback {
+      display: none;
+
       margin-top: 18px;
       padding: 16px;
-      border-radius: 17px;
+
       text-align: center;
+
+      border-radius: 17px;
+
       font-weight: 800;
       line-height: 1.45;
-      display: none;
+
       animation: appear 0.18s ease;
     }
 
     .feedback.correct {
       display: block;
-      background: var(--green-soft);
-      color: #19744f;
+
+      color: var(--mint-text);
+      background: var(--mint);
     }
 
     .feedback.wrong {
       display: block;
-      background: var(--red-soft);
-      color: #b53e53;
+
+      color: var(--rose-text);
+      background: var(--rose);
     }
 
     @keyframes appear {
       from {
         opacity: 0;
-        transform: translateY(5px);
+        transform: translateY(6px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
       }
     }
 
+    /* RESULTS */
+
     .score-big {
+      margin: 15px 0 0;
+
       text-align: center;
+
       font-size: 58px;
       font-weight: 950;
       letter-spacing: -2px;
-      margin: 15px 0 0;
     }
 
     .percentage {
       width: max-content;
+
       margin: 8px auto 25px;
       padding: 7px 13px;
+
+      color: var(--primary);
+      background: var(--primary-light);
+
       border-radius: 999px;
-      background: var(--blue-soft);
-      color: var(--blue);
+
       font-size: 20px;
       font-weight: 900;
     }
 
-    .mini-grid {
+    /* STATS */
+
+    .stats-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 16px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 11px;
+
+      margin-top: 15px;
     }
 
-    .mini-card {
-      background: #f7f8fb;
-      border: 1px solid #eef0f4;
+    .stat-box {
+      min-height: 103px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      padding: 15px;
+
       border-radius: 18px;
-      padding: 18px 10px;
-      text-align: center;
     }
 
-    .mini-card strong {
+    .stat-box.blue {
+      background: var(--sky);
+    }
+
+    .stat-box.green {
+      background: var(--mint);
+    }
+
+    .stat-box.yellow {
+      background: var(--cream);
+    }
+
+    .stat-box.purple {
+      background: var(--lavender);
+    }
+
+    .stat-box.rose {
+      background: var(--rose);
+    }
+
+    .stat-box.gray {
+      background: #f0f2f6;
+    }
+
+    .stat-box strong {
       display: block;
+
+      margin-bottom: 4px;
+
       font-size: 25px;
-      margin-bottom: 5px;
+      font-weight: 900;
     }
 
-    .mini-card span {
-      font-size: 12px;
+    .stat-box span {
       color: var(--muted);
+
+      font-size: 12px;
+      line-height: 1.25;
     }
 
     .stat-row {
       display: grid;
       grid-template-columns: 1fr auto;
       gap: 12px;
+
       align-items: center;
+
       padding: 14px 0;
+
       border-bottom: 1px solid var(--border);
     }
 
@@ -366,50 +682,64 @@
     }
 
     .verb {
-      font-weight: 900;
       font-size: 16px;
+      font-weight: 900;
     }
 
     .translation {
-      font-size: 13px;
-      color: var(--muted);
       margin-top: 4px;
+
+      color: var(--muted);
+
+      font-size: 13px;
       line-height: 1.35;
     }
 
     .stat-number {
       min-width: 58px;
-      text-align: center;
+
       padding: 7px 9px;
+
+      text-align: center;
+
       border-radius: 999px;
-      font-weight: 900;
+
       background: #f1f3f6;
       color: var(--muted);
+
+      font-weight: 900;
     }
 
     .stat-number.good {
-      background: var(--green-soft);
-      color: #19744f;
+      color: var(--mint-text);
+      background: var(--mint);
     }
 
     .stat-number.bad {
-      background: var(--red-soft);
-      color: #b53e53;
+      color: var(--rose-text);
+      background: var(--rose);
     }
 
     .mastery-track {
+      max-width: 230px;
       height: 7px;
-      background: #edf0f4;
-      border-radius: 999px;
-      overflow: hidden;
+
       margin-top: 8px;
-      max-width: 220px;
+
+      overflow: hidden;
+
+      border-radius: 999px;
+
+      background: #edf0f4;
     }
 
     .mastery-bar {
       height: 100%;
+
       border-radius: 999px;
     }
+
+    /* HISTORY */
 
     .history-card {
       padding: 19px;
@@ -419,56 +749,64 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
+
       gap: 12px;
     }
 
     .history-score {
-      font-size: 29px;
+      font-size: 30px;
       font-weight: 950;
       letter-spacing: -1px;
     }
 
     .history-date {
-      color: var(--muted);
-      font-size: 13px;
       margin-top: 5px;
+
+      color: var(--muted);
+
+      font-size: 13px;
     }
 
     .history-badge {
-      border-radius: 999px;
       padding: 7px 11px;
+
+      border-radius: 999px;
+
       font-size: 14px;
       font-weight: 900;
     }
 
     .history-badge.excellent {
-      background: var(--green-soft);
-      color: #19744f;
+      color: var(--mint-text);
+      background: var(--mint);
     }
 
     .history-badge.good {
-      background: var(--blue-soft);
-      color: var(--blue);
+      color: var(--primary);
+      background: var(--primary-light);
     }
 
     .history-badge.medium {
-      background: var(--yellow-soft);
-      color: #9b711e;
+      color: var(--cream-text);
+      background: var(--cream);
     }
 
     .history-badge.low {
-      background: var(--red-soft);
-      color: #b53e53;
+      color: var(--rose-text);
+      background: var(--rose);
     }
 
     .review-label {
       margin-top: 16px;
       margin-bottom: 8px;
+
+      color: var(--muted);
+
       font-size: 12px;
+      font-weight: 900;
+
       text-transform: uppercase;
       letter-spacing: 0.6px;
-      color: var(--muted);
-      font-weight: 900;
     }
 
     .error-tags {
@@ -477,24 +815,191 @@
       gap: 7px;
     }
 
-    .error-tag {
+    .error-tag,
+    .perfect-tag {
       display: inline-flex;
+
       padding: 7px 10px;
+
       border-radius: 999px;
-      background: var(--red-soft);
-      color: #b53e53;
+
       font-size: 12px;
       font-weight: 800;
     }
 
+    .error-tag {
+      color: var(--rose-text);
+      background: var(--rose);
+    }
+
     .perfect-tag {
-      display: inline-flex;
-      padding: 7px 10px;
+      color: var(--mint-text);
+      background: var(--mint);
+    }
+
+    /* ACCOUNT */
+
+    .profile-card {
+      position: relative;
+      overflow: hidden;
+
+      text-align: center;
+
+      border: 0;
+
+      background:
+        linear-gradient(
+          145deg,
+          #eef1ff,
+          #f5f0ff 50%,
+          #edf9ff
+        );
+    }
+
+    .profile-card::before {
+      content: "";
+
+      position: absolute;
+
+      width: 160px;
+      height: 160px;
+
+      top: -90px;
+      left: -60px;
+
+      border-radius: 50%;
+
+      background: rgba(125, 143, 255, 0.13);
+    }
+
+    .avatar {
+      width: 92px;
+      height: 92px;
+
+      margin: 4px auto 13px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      overflow: hidden;
+
+      border-radius: 50%;
+
+      background: white;
+
+      border: 4px solid rgba(255, 255, 255, 0.9);
+
+      box-shadow:
+        0 7px 20px rgba(65, 72, 112, 0.13);
+
+      font-size: 45px;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+    }
+
+    .profile-name {
+      font-size: 23px;
+      font-weight: 900;
+      letter-spacing: -0.4px;
+    }
+
+    .profile-subtitle {
+      margin-top: 4px;
+
+      color: var(--muted);
+
+      font-size: 13px;
+    }
+
+    .profile-controls {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+
+      margin-top: 16px;
+    }
+
+    .profile-small-button {
+      padding: 9px 12px;
+
+      border: 0;
       border-radius: 999px;
-      background: var(--green-soft);
-      color: #19744f;
+
+      color: var(--primary);
+      background: white;
+
       font-size: 12px;
-      font-weight: 800;
+      font-weight: 850;
+
+      box-shadow:
+        0 3px 10px rgba(30, 40, 80, 0.06);
+    }
+
+    .avatar-options {
+      display: none;
+
+      margin-top: 15px;
+
+      grid-template-columns: repeat(6, 1fr);
+      gap: 8px;
+    }
+
+    .avatar-options.open {
+      display: grid;
+    }
+
+    .emoji-button {
+      padding: 9px 3px;
+
+      border: 0;
+      border-radius: 13px;
+
+      background: rgba(255,255,255,.75);
+
+      font-size: 25px;
+    }
+
+    .account-name-input {
+      width: 100%;
+
+      margin-top: 12px;
+      padding: 13px 14px;
+
+      border: 1px solid var(--border);
+      border-radius: 14px;
+
+      font-size: 16px;
+    }
+
+    .backup-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .backup-button {
+      padding: 14px;
+
+      border: 0;
+      border-radius: 16px;
+
+      color: var(--text);
+      background: #f0f2f6;
+
+      font-size: 14px;
+      font-weight: 850;
+    }
+
+    #avatarFile,
+    #backupFile {
+      display: none;
     }
 
     .database-card {
@@ -502,14 +1007,32 @@
     }
 
     .empty {
-      text-align: center;
-      color: #9aa1ad;
       padding: 30px 10px;
+
+      text-align: center;
+
+      color: #9aa1ad;
+
       line-height: 1.5;
     }
 
     .hidden {
       display: none !important;
+    }
+
+    @media (max-width: 390px) {
+      .screen {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .card {
+        padding: 18px;
+      }
+
+      .question {
+        font-size: 23px;
+      }
     }
   </style>
 </head>
@@ -520,73 +1043,173 @@
 
   <header>
     <h1>Phrasal Verbs</h1>
-    <p>100 Verbs · Quiz · Progress Tracking</p>
+    <p>Learn · Practice · Master</p>
   </header>
 
   <nav>
-    <button id="navHome" class="active" onclick="showScreen('home')">Quiz</button>
-    <button id="navStats" onclick="showScreen('stats')">Statistiche</button>
-    <button id="navHistory" onclick="showScreen('history')">Storico</button>
-    <button id="navDatabase" onclick="showScreen('database')">Database</button>
+    <button
+      id="navHome"
+      class="active"
+      onclick="showScreen('home')">
+      Quiz
+    </button>
+
+    <button
+      id="navHistory"
+      onclick="showScreen('history')">
+      Storico
+    </button>
+
+    <button
+      id="navDatabase"
+      onclick="showScreen('database')">
+      Database
+    </button>
+
+    <button
+      id="navAccount"
+      onclick="showScreen('account')">
+      Account
+    </button>
   </nav>
+
+
+  <!-- QUIZ -->
 
   <section id="home" class="screen active">
 
     <div id="startArea">
 
-      <div class="card">
-        <div class="section-title">Nuovo Quiz</div>
+      <div class="card gradient-card hero-quiz">
 
-        <p class="subtle">
-          20 Domande casuali: 10 Italiano → Inglese e 10 Inglese → Italiano.
+        <div class="eyebrow">
+          Allenamento
+        </div>
+
+        <div class="section-title">
+          Nuovo Quiz
+        </div>
+
+        <p class="home-description">
+          Quanto ne ricordi oggi?
+          Mettiti alla prova con 20 domande
+          tra Inglese e Italiano.
         </p>
 
-        <button class="main-button" onclick="startQuiz('normal')">
-          Inizia Quiz Da 20
+        <div class="small-feature-row">
+          <span class="feature-pill">20 Domande</span>
+          <span class="feature-pill">EN ↔ IT</span>
+          <span class="feature-pill">Progress Tracking</span>
+        </div>
+
+        <button
+          class="main-button"
+          onclick="startQuiz('normal')">
+          Inizia Quiz
         </button>
 
-        <button class="secondary-button" onclick="startQuiz('mistakes')">
+        <button
+          class="secondary-button"
+          onclick="startQuiz('mistakes')">
           Ripassa I Miei Errori
         </button>
+
       </div>
 
+
       <div class="card">
-        <div class="section-title">Il Tuo Progresso</div>
+
+        <div class="section-title">
+          Il Tuo Progresso
+        </div>
 
         <div class="mini-grid">
+
           <div class="mini-card">
-            <strong id="homeQuizCount">0</strong>
-            <span>Quiz Completati</span>
+            <strong id="homeQuizCount">
+              0
+            </strong>
+
+            <span>
+              Quiz Completati
+            </span>
           </div>
 
           <div class="mini-card">
-            <strong id="homeAverage">—</strong>
-            <span>Media</span>
+            <strong id="homeAverage">
+              —
+            </strong>
+
+            <span>
+              Media
+            </span>
           </div>
+
         </div>
+
+        <div
+          id="homeLastResult"
+          class="home-last-result hidden">
+        </div>
+
       </div>
 
     </div>
 
+
     <div id="quizArea" class="hidden">
 
       <div class="quiz-top">
-        <span id="questionCounter" class="counter-pill">Domanda 1/20</span>
-        <span id="liveScore" class="score-pill">0/0</span>
+
+        <span
+          id="questionCounter"
+          class="counter-pill">
+          Domanda 1 Di 20
+        </span>
+
+        <span
+          id="liveScore"
+          class="score-pill">
+          0/0
+        </span>
+
       </div>
+
 
       <div class="progress">
-        <div id="progressBar" class="progress-bar"></div>
+        <div
+          id="progressBar"
+          class="progress-bar">
+        </div>
       </div>
+
 
       <div class="question-box">
-        <div id="direction" class="direction"></div>
-        <div id="question" class="question"></div>
+
+        <div
+          id="direction"
+          class="direction">
+        </div>
+
+        <div
+          id="question"
+          class="question">
+        </div>
+
       </div>
 
-      <div id="answers" class="answers"></div>
 
-      <div id="feedback" class="feedback"></div>
+      <div
+        id="answers"
+        class="answers">
+      </div>
+
+
+      <div
+        id="feedback"
+        class="feedback">
+      </div>
+
 
       <button
         id="nextButton"
@@ -597,88 +1220,360 @@
 
     </div>
 
+
     <div id="resultArea" class="hidden">
 
       <div class="card">
-        <div class="section-title" style="text-align:center;">
+
+        <div
+          class="section-title"
+          style="text-align:center;">
           Quiz Completato
         </div>
 
-        <div id="finalScore" class="score-big"></div>
-        <div id="finalPercentage" class="percentage"></div>
+        <div
+          id="finalScore"
+          class="score-big">
+        </div>
 
-        <button class="main-button" onclick="resetQuizView()">
+        <div
+          id="finalPercentage"
+          class="percentage">
+        </div>
+
+        <button
+          class="main-button"
+          onclick="resetQuizView()">
           Nuovo Quiz
         </button>
+
       </div>
+
 
       <div class="card">
-        <div class="section-title">Da Ripassare</div>
-        <div id="resultErrors"></div>
+
+        <div class="section-title">
+          Da Ripassare
+        </div>
+
+        <div id="resultErrors">
+        </div>
+
       </div>
 
     </div>
 
   </section>
 
-  <section id="stats" class="screen">
 
-    <div class="card">
-      <div class="section-title">Panoramica</div>
+  <!-- HISTORY -->
 
-      <div class="mini-grid">
-        <div class="mini-card">
-          <strong id="totalAnswers">0</strong>
-          <span>Risposte Totali</span>
-        </div>
+  <section
+    id="history"
+    class="screen">
 
-        <div class="mini-card">
-          <strong id="overallAccuracy">—</strong>
-          <span>Accuracy</span>
-        </div>
-      </div>
+    <div class="section-title">
+      Storico Quiz
     </div>
 
-    <div class="card">
-      <div class="section-title">🔴 Più Sbagliati</div>
-      <div id="worstVerbs"></div>
+    <div id="historyList">
     </div>
-
-    <div class="card">
-      <div class="section-title">🟢 Più Conosciuti</div>
-      <div id="bestVerbs"></div>
-    </div>
-
-    <button class="danger-button" onclick="resetAllData()">
-      Reset Di Tutte Le Statistiche
-    </button>
 
   </section>
 
-  <section id="history" class="screen">
 
-    <div class="section-title">Storico Quiz</div>
-    <div id="historyList"></div>
+  <!-- DATABASE -->
 
-  </section>
+  <section
+    id="database"
+    class="screen">
 
-  <section id="database" class="screen">
-
-    <div class="section-title">100 Phrasal Verbs</div>
+    <div class="section-title">
+      100 Phrasal Verbs
+    </div>
 
     <p class="subtle">
-      Database completo utilizzato nei quiz.
+      Il tuo database personale.
+      Ogni verbo aggiorna automaticamente
+      le proprie statistiche.
     </p>
 
-    <div id="databaseList"></div>
+    <div id="databaseList">
+    </div>
+
+  </section>
+
+
+  <!-- ACCOUNT -->
+
+  <section
+    id="account"
+    class="screen">
+
+    <div class="card profile-card">
+
+      <div
+        id="profileAvatar"
+        class="avatar">
+        👤
+      </div>
+
+      <div
+        id="profileNameDisplay"
+        class="profile-name">
+        My Account
+      </div>
+
+      <div class="profile-subtitle">
+        Phrasal Verbs Journey
+      </div>
+
+      <div class="profile-controls">
+
+        <button
+          class="profile-small-button"
+          onclick="toggleAvatarOptions()">
+          Cambia Avatar
+        </button>
+
+        <button
+          class="profile-small-button"
+          onclick="document.getElementById('avatarFile').click()">
+          Carica Foto
+        </button>
+
+        <button
+          class="profile-small-button"
+          onclick="toggleNameEditor()">
+          Cambia Nome
+        </button>
+
+      </div>
+
+
+      <input
+        id="avatarFile"
+        type="file"
+        accept="image/*"
+        onchange="loadAvatarPhoto(event)"
+      />
+
+
+      <div
+        id="avatarOptions"
+        class="avatar-options">
+
+        <button class="emoji-button" onclick="setEmojiAvatar('👤')">👤</button>
+        <button class="emoji-button" onclick="setEmojiAvatar('🧠')">🧠</button>
+        <button class="emoji-button" onclick="setEmojiAvatar('🎓')">🎓</button>
+        <button class="emoji-button" onclick="setEmojiAvatar('🦊')">🦊</button>
+        <button class="emoji-button" onclick="setEmojiAvatar('🐺')">🐺</button>
+        <button class="emoji-button" onclick="setEmojiAvatar('🦁')">🦁</button>
+
+      </div>
+
+
+      <div
+        id="nameEditor"
+        class="hidden">
+
+        <input
+          id="accountNameInput"
+          class="account-name-input"
+          placeholder="Nome account"
+        />
+
+        <button
+          class="main-button"
+          onclick="saveAccountName()">
+          Salva Nome
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="section-title">
+        Dashboard
+      </div>
+
+      <div class="stats-grid">
+
+        <div class="stat-box blue">
+          <strong id="accountTime">
+            0m
+          </strong>
+          <span>
+            Tempo Totale Nell'App
+          </span>
+        </div>
+
+        <div class="stat-box green">
+          <strong id="accountAccuracy">
+            —
+          </strong>
+          <span>
+            Accuracy Totale
+          </span>
+        </div>
+
+        <div class="stat-box purple">
+          <strong id="accountQuizCount">
+            0
+          </strong>
+          <span>
+            Quiz Completati
+          </span>
+        </div>
+
+        <div class="stat-box yellow">
+          <strong id="accountAverage">
+            —
+          </strong>
+          <span>
+            Media Quiz
+          </span>
+        </div>
+
+        <div class="stat-box green">
+          <strong id="accountBest">
+            —
+          </strong>
+          <span>
+            Miglior Risultato
+          </span>
+        </div>
+
+        <div class="stat-box blue">
+          <strong id="accountLast">
+            —
+          </strong>
+          <span>
+            Ultimo Quiz
+          </span>
+        </div>
+
+        <div class="stat-box purple">
+          <strong id="accountTested">
+            0/100
+          </strong>
+          <span>
+            Verbi Testati
+          </span>
+        </div>
+
+        <div class="stat-box green">
+          <strong id="accountMastered">
+            0
+          </strong>
+          <span>
+            Verbi ≥80%
+          </span>
+        </div>
+
+        <div class="stat-box rose">
+          <strong id="accountWeak">
+            0
+          </strong>
+          <span>
+            Verbi ≤50%
+          </span>
+        </div>
+
+        <div class="stat-box gray">
+          <strong id="accountAvgQuizTime">
+            —
+          </strong>
+          <span>
+            Tempo Medio Per Quiz
+          </span>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="section-title">
+        🔴 Più Sbagliati
+      </div>
+
+      <div id="worstVerbs">
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="section-title">
+        🟢 Più Conosciuti
+      </div>
+
+      <div id="bestVerbs">
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="section-title">
+        Backup Dei Dati
+      </div>
+
+      <p class="subtle">
+        Finché non aggiungeremo il cloud,
+        usa il backup per conservare una copia
+        di storico, statistiche, profilo e tempo di utilizzo.
+      </p>
+
+      <div class="backup-row">
+
+        <button
+          class="backup-button"
+          onclick="exportBackup()">
+          Esporta Backup
+        </button>
+
+        <button
+          class="backup-button"
+          onclick="document.getElementById('backupFile').click()">
+          Ripristina Backup
+        </button>
+
+      </div>
+
+      <input
+        id="backupFile"
+        type="file"
+        accept=".json,application/json"
+        onchange="importBackup(event)"
+      />
+
+    </div>
+
+
+    <button
+      class="danger-button"
+      onclick="resetAllData()">
+      Reset Di Tutti I Dati
+    </button>
 
   </section>
 
 </div>
 
+
 <script>
 
 const phrasalVerbs = [
+
   ["Back up","fare un backup / sostenere con prove"],
   ["Break down","guastarsi / analizzare per componenti"],
   ["Break out","scoppiare"],
@@ -779,7 +1674,10 @@ const phrasalVerbs = [
   ["Wake up","svegliarsi"],
   ["Work out","risolvere / capire / funzionare"],
   ["Write down","annotare"]
+
 ];
+
+
 
 let quiz = [];
 let currentIndex = 0;
@@ -787,561 +1685,2204 @@ let score = 0;
 let answered = false;
 let quizErrors = [];
 
+let quizStartTime = null;
+
+
+/* ---------------------------
+   HELPERS
+--------------------------- */
+
 function capitalizeFirst(text) {
+
   if (!text) return text;
-  return text.charAt(0).toUpperCase() + text.slice(1);
+
+  return (
+    text.charAt(0).toUpperCase()
+    + text.slice(1)
+  );
+
 }
+
 
 function shuffle(array) {
-  return [...array].sort(() => Math.random() - 0.5);
+
+  return [...array]
+    .sort(() => Math.random() - 0.5);
+
 }
+
+
+
+/* ---------------------------
+   STORAGE
+--------------------------- */
 
 function loadStats() {
-  return JSON.parse(localStorage.getItem("pvStats") || "{}");
+
+  return JSON.parse(
+    localStorage.getItem("pvStats")
+    || "{}"
+  );
+
 }
+
 
 function saveStats(stats) {
-  localStorage.setItem("pvStats", JSON.stringify(stats));
+
+  localStorage.setItem(
+    "pvStats",
+    JSON.stringify(stats)
+  );
+
 }
+
 
 function loadHistory() {
-  return JSON.parse(localStorage.getItem("pvHistory") || "[]");
+
+  return JSON.parse(
+    localStorage.getItem("pvHistory")
+    || "[]"
+  );
+
 }
+
 
 function saveHistory(history) {
-  localStorage.setItem("pvHistory", JSON.stringify(history));
+
+  localStorage.setItem(
+    "pvHistory",
+    JSON.stringify(history)
+  );
+
 }
+
+
+
+/* ---------------------------
+   TIME TRACKING
+--------------------------- */
+
+let activeSessionStart = null;
+
+
+function getStoredTime() {
+
+  return Number(
+    localStorage.getItem("pvTotalTime")
+    || 0
+  );
+
+}
+
+
+function saveVisibleSessionTime() {
+
+  if (!activeSessionStart) return;
+
+  const now = Date.now();
+
+  const elapsed =
+    Math.floor(
+      (now - activeSessionStart) / 1000
+    );
+
+  const total =
+    getStoredTime() + elapsed;
+
+  localStorage.setItem(
+    "pvTotalTime",
+    total
+  );
+
+  activeSessionStart = null;
+
+}
+
+
+function startVisibleSession() {
+
+  if (
+    document.visibilityState === "visible"
+    && !activeSessionStart
+  ) {
+
+    activeSessionStart =
+      Date.now();
+
+  }
+
+}
+
+
+document.addEventListener(
+  "visibilitychange",
+  () => {
+
+    if (
+      document.visibilityState === "hidden"
+    ) {
+
+      saveVisibleSessionTime();
+
+    } else {
+
+      startVisibleSession();
+
+    }
+
+  }
+);
+
+
+window.addEventListener(
+  "beforeunload",
+  saveVisibleSessionTime
+);
+
+
+startVisibleSession();
+
+
+
+function getLiveTotalTime() {
+
+  let total =
+    getStoredTime();
+
+  if (activeSessionStart) {
+
+    total +=
+      Math.floor(
+        (Date.now() - activeSessionStart)
+        / 1000
+      );
+
+  }
+
+  return total;
+
+}
+
+
+function formatDuration(seconds) {
+
+  if (seconds < 60) {
+
+    return `${seconds}s`;
+
+  }
+
+  if (seconds < 3600) {
+
+    return `${Math.floor(seconds / 60)}m`;
+
+  }
+
+  const hours =
+    Math.floor(seconds / 3600);
+
+  const minutes =
+    Math.floor(
+      (seconds % 3600) / 60
+    );
+
+  return `${hours}h ${minutes}m`;
+
+}
+
+
+
+/* ---------------------------
+   NAVIGATION
+--------------------------- */
 
 function showScreen(screenId) {
-  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
-  document.getElementById(screenId).classList.add("active");
 
-  document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
+  document
+    .querySelectorAll(".screen")
+    .forEach(
+      screen =>
+        screen.classList.remove("active")
+    );
 
-  if (screenId === "home") document.getElementById("navHome").classList.add("active");
-  if (screenId === "stats") document.getElementById("navStats").classList.add("active");
-  if (screenId === "history") document.getElementById("navHistory").classList.add("active");
-  if (screenId === "database") document.getElementById("navDatabase").classList.add("active");
 
-  if (screenId === "stats") renderStats();
-  if (screenId === "history") renderHistory();
-  if (screenId === "database") renderDatabase();
+  document
+    .getElementById(screenId)
+    .classList.add("active");
+
+
+  document
+    .querySelectorAll("nav button")
+    .forEach(
+      button =>
+        button.classList.remove("active")
+    );
+
+
+  if (screenId === "home") {
+
+    document
+      .getElementById("navHome")
+      .classList.add("active");
+
+  }
+
+
+  if (screenId === "history") {
+
+    document
+      .getElementById("navHistory")
+      .classList.add("active");
+
+    renderHistory();
+
+  }
+
+
+  if (screenId === "database") {
+
+    document
+      .getElementById("navDatabase")
+      .classList.add("active");
+
+    renderDatabase();
+
+  }
+
+
+  if (screenId === "account") {
+
+    document
+      .getElementById("navAccount")
+      .classList.add("active");
+
+    renderAccount();
+
+  }
+
 
   updateHomeStats();
+
 }
+
+
+
+/* ---------------------------
+   QUIZ
+--------------------------- */
 
 function startQuiz(mode = "normal") {
 
-  let pool = [...phrasalVerbs];
+  let pool =
+    [...phrasalVerbs];
+
 
   if (mode === "mistakes") {
-    const stats = loadStats();
 
-    const ranked = [...phrasalVerbs]
-      .filter(([verb]) => stats[verb] && stats[verb].wrong > 0)
-      .sort((a,b) => {
-        const sa = stats[a[0]];
-        const sb = stats[b[0]];
+    const stats =
+      loadStats();
 
-        const accA = sa.correct / sa.seen;
-        const accB = sb.correct / sb.seen;
 
-        return accA - accB;
-      });
+    const ranked =
+      [...phrasalVerbs]
+
+      .filter(
+        ([verb]) =>
+          stats[verb]
+          && stats[verb].wrong > 0
+      )
+
+      .sort(
+        (a, b) => {
+
+          const sa =
+            stats[a[0]];
+
+          const sb =
+            stats[b[0]];
+
+          return (
+            (sa.correct / sa.seen)
+            -
+            (sb.correct / sb.seen)
+          );
+
+        }
+      );
+
 
     if (ranked.length >= 10) {
+
       pool = ranked;
+
     } else {
-      alert("Servono più errori registrati. Per ora avvio un quiz normale.");
+
+      alert(
+        "Servono più errori registrati. "
+        + "Per ora avvio un quiz normale."
+      );
+
     }
+
   }
 
-  const selected = shuffle(pool).slice(0,20);
 
-  quiz = selected.map((item,index) => ({
-    verb: item[0],
-    italian: item[1],
-    direction: index < 10 ? "IT_EN" : "EN_IT"
-  }));
+  const selected =
+    shuffle(pool)
+      .slice(0, 20);
 
-  quiz = shuffle(quiz);
+
+  quiz =
+    selected.map(
+      (item, index) => ({
+
+        verb:
+          item[0],
+
+        italian:
+          item[1],
+
+        direction:
+          index < 10
+          ? "IT_EN"
+          : "EN_IT"
+
+      })
+    );
+
+
+  quiz =
+    shuffle(quiz);
+
 
   currentIndex = 0;
   score = 0;
   answered = false;
   quizErrors = [];
 
-  document.getElementById("startArea").classList.add("hidden");
-  document.getElementById("resultArea").classList.add("hidden");
-  document.getElementById("quizArea").classList.remove("hidden");
+  quizStartTime =
+    Date.now();
+
+
+  document
+    .getElementById("startArea")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("resultArea")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("quizArea")
+    .classList.remove("hidden");
+
 
   renderQuestion();
+
 }
+
+
 
 function renderQuestion() {
 
   answered = false;
 
-  const q = quiz[currentIndex];
 
-  document.getElementById("feedback").className = "feedback";
-  document.getElementById("nextButton").classList.add("hidden");
+  const q =
+    quiz[currentIndex];
 
-  document.getElementById("questionCounter").textContent =
-    `Domanda ${currentIndex + 1} Di ${quiz.length}`;
 
-  document.getElementById("liveScore").textContent =
-    `${score}/${currentIndex}`;
+  document
+    .getElementById("feedback")
+    .className =
+      "feedback";
 
-  document.getElementById("progressBar").style.width =
-    `${(currentIndex / quiz.length) * 100}%`;
 
-  const question = document.getElementById("question");
-  const direction = document.getElementById("direction");
+  document
+    .getElementById("nextButton")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("questionCounter")
+    .textContent =
+      `Domanda ${currentIndex + 1} Di ${quiz.length}`;
+
+
+  document
+    .getElementById("liveScore")
+    .textContent =
+      `${score}/${currentIndex}`;
+
+
+  document
+    .getElementById("progressBar")
+    .style.width =
+      `${(currentIndex / quiz.length) * 100}%`;
+
+
+  const question =
+    document.getElementById("question");
+
+
+  const direction =
+    document.getElementById("direction");
+
 
   let correctAnswer;
+
   let wrongOptions;
+
 
   if (q.direction === "IT_EN") {
 
-    direction.textContent = "Italiano → Inglese";
+    direction.textContent =
+      "Italiano → Inglese";
+
 
     question.textContent =
-      `Come Si Dice “${capitalizeFirst(q.italian)}”?`;
+      `Come si dice “${capitalizeFirst(q.italian)}”?`;
 
-    correctAnswer = q.verb;
 
-    wrongOptions = shuffle(
-      phrasalVerbs
-        .filter(v => v[0] !== q.verb)
-        .map(v => v[0])
-    ).slice(0,3);
+    correctAnswer =
+      q.verb;
+
+
+    wrongOptions =
+      shuffle(
+
+        phrasalVerbs
+
+        .filter(
+          v =>
+            v[0] !== q.verb
+        )
+
+        .map(
+          v =>
+            v[0]
+        )
+
+      ).slice(0, 3);
+
 
   } else {
 
-    direction.textContent = "Inglese → Italiano";
+
+    direction.textContent =
+      "Inglese → Italiano";
+
 
     question.textContent =
-      `Che Cosa Significa “${q.verb}”?`;
+      `Che cosa significa “${q.verb}”?`;
 
-    correctAnswer = capitalizeFirst(q.italian);
 
-    wrongOptions = shuffle(
-      phrasalVerbs
-        .filter(v => v[0] !== q.verb)
-        .map(v => capitalizeFirst(v[1]))
-    ).slice(0,3);
+    correctAnswer =
+      capitalizeFirst(
+        q.italian
+      );
+
+
+    wrongOptions =
+      shuffle(
+
+        phrasalVerbs
+
+        .filter(
+          v =>
+            v[0] !== q.verb
+        )
+
+        .map(
+          v =>
+            capitalizeFirst(v[1])
+        )
+
+      ).slice(0, 3);
+
   }
 
-  const options = shuffle([correctAnswer, ...wrongOptions]);
 
-  const answers = document.getElementById("answers");
-  answers.innerHTML = "";
+  const options =
+    shuffle([
+      correctAnswer,
+      ...wrongOptions
+    ]);
 
-  options.forEach(option => {
 
-    const btn = document.createElement("button");
-    btn.className = "answer";
-    btn.textContent = option;
+  const answers =
+    document.getElementById("answers");
 
-    btn.onclick = () =>
-      answerQuestion(btn, option, correctAnswer, q);
 
-    answers.appendChild(btn);
-  });
+  answers.innerHTML =
+    "";
+
+
+  options.forEach(
+    option => {
+
+      const button =
+        document.createElement("button");
+
+
+      button.className =
+        "answer";
+
+
+      button.textContent =
+        option;
+
+
+      button.onclick =
+        () =>
+          answerQuestion(
+            button,
+            option,
+            correctAnswer,
+            q
+          );
+
+
+      answers.appendChild(
+        button
+      );
+
+    }
+  );
+
 }
 
-function answerQuestion(button, selected, correctAnswer, q) {
+
+
+function answerQuestion(
+  button,
+  selected,
+  correctAnswer,
+  q
+) {
 
   if (answered) return;
 
   answered = true;
 
-  const correct = selected === correctAnswer;
 
-  const stats = loadStats();
+  const correct =
+    selected === correctAnswer;
+
+
+  const stats =
+    loadStats();
+
 
   if (!stats[q.verb]) {
+
     stats[q.verb] = {
+
       seen: 0,
       correct: 0,
       wrong: 0
+
     };
+
   }
 
+
   stats[q.verb].seen++;
+
 
   if (correct) {
 
     score++;
+
     stats[q.verb].correct++;
-    button.classList.add("correct");
+
+    button.classList.add(
+      "correct"
+    );
+
 
   } else {
 
+
     stats[q.verb].wrong++;
-    button.classList.add("wrong");
+
+    button.classList.add(
+      "wrong"
+    );
+
 
     quizErrors.push({
-      verb: q.verb,
-      italian: q.italian
+
+      verb:
+        q.verb,
+
+      italian:
+        q.italian
+
     });
 
-    document.querySelectorAll(".answer").forEach(btn => {
-      if (btn.textContent === correctAnswer) {
-        btn.classList.add("correct");
-      }
-    });
+
+    document
+      .querySelectorAll(".answer")
+      .forEach(
+        btn => {
+
+          if (
+            btn.textContent
+            === correctAnswer
+          ) {
+
+            btn.classList.add(
+              "correct"
+            );
+
+          }
+
+        }
+      );
+
   }
+
 
   saveStats(stats);
 
-  document.querySelectorAll(".answer").forEach(btn => {
-    btn.disabled = true;
-  });
 
-  const feedback = document.getElementById("feedback");
+  document
+    .querySelectorAll(".answer")
+    .forEach(
+      btn =>
+        btn.disabled = true
+    );
+
+
+  const feedback =
+    document.getElementById("feedback");
+
 
   if (correct) {
 
-    feedback.className = "feedback correct";
+    feedback.className =
+      "feedback correct";
+
+
     feedback.innerHTML =
-      `✓ Corretto<br><small>Punteggio: ${score}/${currentIndex + 1}</small>`;
+      `✓ Corretto
+      <br>
+      <small>
+        Punteggio:
+        ${score}/${currentIndex + 1}
+      </small>`;
+
 
   } else {
 
-    feedback.className = "feedback wrong";
+
+    feedback.className =
+      "feedback wrong";
+
+
     feedback.innerHTML =
-      `✕ Errato<br>Risposta Corretta: <strong>${correctAnswer}</strong><br><small>Punteggio: ${score}/${currentIndex + 1}</small>`;
+      `✕ Errato
+      <br>
+      Risposta corretta:
+      <strong>
+        ${correctAnswer}
+      </strong>
+      <br>
+      <small>
+        Punteggio:
+        ${score}/${currentIndex + 1}
+      </small>`;
+
   }
 
-  document.getElementById("liveScore").textContent =
-    `${score}/${currentIndex + 1}`;
 
-  document.getElementById("nextButton").classList.remove("hidden");
+  document
+    .getElementById("liveScore")
+    .textContent =
+      `${score}/${currentIndex + 1}`;
+
+
+  document
+    .getElementById("nextButton")
+    .classList.remove("hidden");
+
 }
+
+
 
 function nextQuestion() {
 
   currentIndex++;
 
-  if (currentIndex >= quiz.length) {
+
+  if (
+    currentIndex >= quiz.length
+  ) {
+
     finishQuiz();
+
   } else {
+
     renderQuestion();
+
   }
+
 }
+
+
 
 function finishQuiz() {
 
-  document.getElementById("quizArea").classList.add("hidden");
-  document.getElementById("resultArea").classList.remove("hidden");
+  document
+    .getElementById("quizArea")
+    .classList.add("hidden");
 
-  const percentage = Math.round((score / quiz.length) * 100);
 
-  document.getElementById("finalScore").textContent =
-    `${score}/${quiz.length}`;
+  document
+    .getElementById("resultArea")
+    .classList.remove("hidden");
 
-  document.getElementById("finalPercentage").textContent =
-    `${percentage}%`;
 
-  const resultErrors = document.getElementById("resultErrors");
+  const percentage =
+    Math.round(
+      (score / quiz.length)
+      * 100
+    );
 
-  if (quizErrors.length === 0) {
+
+  const durationSeconds =
+    quizStartTime
+      ? Math.round(
+          (Date.now() - quizStartTime)
+          / 1000
+        )
+      : null;
+
+
+  document
+    .getElementById("finalScore")
+    .textContent =
+      `${score}/${quiz.length}`;
+
+
+  document
+    .getElementById("finalPercentage")
+    .textContent =
+      `${percentage}%`;
+
+
+  const resultErrors =
+    document
+      .getElementById("resultErrors");
+
+
+  if (
+    quizErrors.length === 0
+  ) {
 
     resultErrors.innerHTML =
-      `<div class="empty">🎉 Nessun Errore!</div>`;
+      `<div class="empty">
+        🎉 Nessun Errore!
+      </div>`;
+
 
   } else {
 
-    resultErrors.innerHTML = `
+
+    resultErrors.innerHTML =
+      `
       <div class="error-tags">
-        ${quizErrors.map(e =>
-          `<span class="error-tag">${e.verb}</span>`
+
+        ${quizErrors.map(
+          error =>
+            `<span class="error-tag">
+              ${error.verb}
+            </span>`
         ).join("")}
+
       </div>
-    `;
+      `;
+
   }
 
-  const history = loadHistory();
+
+  const history =
+    loadHistory();
+
 
   history.unshift({
-    date: new Date().toISOString(),
+
+    date:
+      new Date().toISOString(),
+
     score,
-    total: quiz.length,
+
+    total:
+      quiz.length,
+
     percentage,
-    errors: quizErrors
+
+    durationSeconds,
+
+    errors:
+      quizErrors
+
   });
 
-  saveHistory(history.slice(0,100));
+
+  saveHistory(
+    history.slice(0, 200)
+  );
+
 
   updateHomeStats();
+
 }
+
+
+
+/* ---------------------------
+   HOME
+--------------------------- */
 
 function resetQuizView() {
-  document.getElementById("resultArea").classList.add("hidden");
-  document.getElementById("quizArea").classList.add("hidden");
-  document.getElementById("startArea").classList.remove("hidden");
+
+  document
+    .getElementById("resultArea")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("quizArea")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("startArea")
+    .classList.remove("hidden");
+
 }
 
-function renderStats() {
 
-  const stats = loadStats();
 
-  let totalSeen = 0;
-  let totalCorrect = 0;
+function updateHomeStats() {
 
-  Object.values(stats).forEach(s => {
-    totalSeen += s.seen;
-    totalCorrect += s.correct;
-  });
+  const history =
+    loadHistory();
 
-  document.getElementById("totalAnswers").textContent = totalSeen;
 
-  document.getElementById("overallAccuracy").textContent =
+  document
+    .getElementById("homeQuizCount")
+    .textContent =
+      history.length;
+
+
+  if (
+    !history.length
+  ) {
+
+    document
+      .getElementById("homeAverage")
+      .textContent =
+        "—";
+
+
+    document
+      .getElementById("homeLastResult")
+      .classList.add("hidden");
+
+
+    return;
+
+  }
+
+
+  const average =
+    Math.round(
+
+      history.reduce(
+        (sum, quiz) =>
+          sum + quiz.percentage,
+        0
+      )
+
+      / history.length
+
+    );
+
+
+  document
+    .getElementById("homeAverage")
+    .textContent =
+      `${average}%`;
+
+
+  const last =
+    history[0];
+
+
+  const lastBox =
+    document
+      .getElementById("homeLastResult");
+
+
+  lastBox.classList.remove(
+    "hidden"
+  );
+
+
+  lastBox.innerHTML =
+    `
+    <div
+      style="
+        font-size:12px;
+        font-weight:900;
+        text-transform:uppercase;
+        color:#9c7425;
+        margin-bottom:4px;
+      ">
+      Ultimo Quiz
+    </div>
+
+    <strong>
+      ${last.score}/${last.total}
+      ·
+      ${last.percentage}%
+    </strong>
+    `;
+
+}
+
+
+
+/* ---------------------------
+   HISTORY
+--------------------------- */
+
+function renderHistory() {
+
+  const history =
+    loadHistory();
+
+
+  const container =
+    document
+      .getElementById("historyList");
+
+
+  if (
+    !history.length
+  ) {
+
+    container.innerHTML =
+      `<div class="empty">
+        Nessun Quiz Completato.
+      </div>`;
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    history.map(
+      quiz => {
+
+
+        const date =
+          new Date(
+            quiz.date
+          );
+
+
+        const formatted =
+          date.toLocaleDateString(
+            "it-IT"
+          )
+          +
+          " · "
+          +
+          date.toLocaleTimeString(
+            "it-IT",
+            {
+              hour: "2-digit",
+              minute: "2-digit"
+            }
+          );
+
+
+        let badgeClass =
+          "low";
+
+
+        if (
+          quiz.percentage >= 90
+        ) {
+
+          badgeClass =
+            "excellent";
+
+        } else if (
+          quiz.percentage >= 75
+        ) {
+
+          badgeClass =
+            "good";
+
+        } else if (
+          quiz.percentage >= 60
+        ) {
+
+          badgeClass =
+            "medium";
+
+        }
+
+
+        const errors =
+          quiz.errors
+          && quiz.errors.length
+
+          ? `
+            <div class="review-label">
+              Da Ripassare
+            </div>
+
+            <div class="error-tags">
+
+              ${quiz.errors.map(
+                error =>
+                  `<span class="error-tag">
+                    ${error.verb}
+                  </span>`
+              ).join("")}
+
+            </div>
+          `
+
+          : `
+            <div class="review-label">
+              Risultato
+            </div>
+
+            <span class="perfect-tag">
+              ✓ Nessun Errore
+            </span>
+          `;
+
+
+        const duration =
+          quiz.durationSeconds
+          ? `
+            <div
+              class="history-date">
+              Tempo Quiz:
+              ${formatDuration(
+                quiz.durationSeconds
+              )}
+            </div>
+          `
+          : "";
+
+
+        return `
+          <div class="card history-card">
+
+            <div class="history-head">
+
+              <div>
+
+                <div class="history-score">
+                  ${quiz.score}/${quiz.total}
+                </div>
+
+                <div class="history-date">
+                  ${formatted}
+                </div>
+
+                ${duration}
+
+              </div>
+
+              <div
+                class="
+                  history-badge
+                  ${badgeClass}
+                ">
+                ${quiz.percentage}%
+              </div>
+
+            </div>
+
+            ${errors}
+
+          </div>
+        `;
+
+      }
+    ).join("");
+
+}
+
+
+
+/* ---------------------------
+   DATABASE
+--------------------------- */
+
+function renderDatabase() {
+
+  const stats =
+    loadStats();
+
+
+  document
+    .getElementById("databaseList")
+    .innerHTML =
+
+      phrasalVerbs.map(
+        ([verb, italian]) => {
+
+
+          const stat =
+            stats[verb];
+
+
+          let info =
+            "Mai Testato";
+
+
+          if (
+            stat
+            && stat.seen
+          ) {
+
+            const accuracy =
+              Math.round(
+                (stat.correct / stat.seen)
+                * 100
+              );
+
+
+            info =
+              `${accuracy}%
+              ·
+              ${stat.correct}/${stat.seen}
+              Corrette`;
+
+          }
+
+
+          return `
+            <div class="card database-card">
+
+              <div class="verb">
+                ${verb}
+              </div>
+
+              <div class="translation">
+                ${capitalizeFirst(italian)}
+              </div>
+
+              <div
+                class="translation"
+                style="margin-top:8px;">
+                ${info}
+              </div>
+
+            </div>
+          `;
+
+        }
+      ).join("");
+
+}
+
+
+
+/* ---------------------------
+   ACCOUNT PROFILE
+--------------------------- */
+
+function loadProfile() {
+
+  const name =
+    localStorage.getItem(
+      "pvProfileName"
+    )
+    || "My Account";
+
+
+  document
+    .getElementById(
+      "profileNameDisplay"
+    )
+    .textContent =
+      name;
+
+
+  document
+    .getElementById(
+      "accountNameInput"
+    )
+    .value =
+      name;
+
+
+  const avatarType =
+    localStorage.getItem(
+      "pvAvatarType"
+    );
+
+
+  const avatarValue =
+    localStorage.getItem(
+      "pvAvatarValue"
+    );
+
+
+  const avatar =
+    document
+      .getElementById(
+        "profileAvatar"
+      );
+
+
+  if (
+    avatarType === "photo"
+    && avatarValue
+  ) {
+
+    avatar.innerHTML =
+      `<img src="${avatarValue}">`;
+
+  } else {
+
+    avatar.textContent =
+      avatarValue
+      || "👤";
+
+  }
+
+}
+
+
+
+function toggleAvatarOptions() {
+
+  document
+    .getElementById(
+      "avatarOptions"
+    )
+    .classList.toggle(
+      "open"
+    );
+
+}
+
+
+
+function setEmojiAvatar(
+  emoji
+) {
+
+  localStorage.setItem(
+    "pvAvatarType",
+    "emoji"
+  );
+
+
+  localStorage.setItem(
+    "pvAvatarValue",
+    emoji
+  );
+
+
+  loadProfile();
+
+}
+
+
+
+function loadAvatarPhoto(
+  event
+) {
+
+  const file =
+    event.target.files[0];
+
+
+  if (!file) return;
+
+
+  const reader =
+    new FileReader();
+
+
+  reader.onload =
+    function() {
+
+      localStorage.setItem(
+        "pvAvatarType",
+        "photo"
+      );
+
+
+      localStorage.setItem(
+        "pvAvatarValue",
+        reader.result
+      );
+
+
+      loadProfile();
+
+    };
+
+
+  reader.readAsDataURL(
+    file
+  );
+
+}
+
+
+
+function toggleNameEditor() {
+
+  document
+    .getElementById(
+      "nameEditor"
+    )
+    .classList.toggle(
+      "hidden"
+    );
+
+}
+
+
+
+function saveAccountName() {
+
+  const value =
+    document
+      .getElementById(
+        "accountNameInput"
+      )
+      .value
+      .trim();
+
+
+  if (!value) return;
+
+
+  localStorage.setItem(
+    "pvProfileName",
+    value
+  );
+
+
+  loadProfile();
+
+
+  document
+    .getElementById(
+      "nameEditor"
+    )
+    .classList.add(
+      "hidden"
+    );
+
+}
+
+
+
+/* ---------------------------
+   ACCOUNT DASHBOARD
+--------------------------- */
+
+function renderAccount() {
+
+  loadProfile();
+
+
+  const history =
+    loadHistory();
+
+
+  const stats =
+    loadStats();
+
+
+  let totalSeen =
+    0;
+
+
+  let totalCorrect =
+    0;
+
+
+  Object.values(
+    stats
+  ).forEach(
+    stat => {
+
+      totalSeen +=
+        stat.seen || 0;
+
+
+      totalCorrect +=
+        stat.correct || 0;
+
+    }
+  );
+
+
+  const accuracy =
     totalSeen
-      ? `${Math.round((totalCorrect / totalSeen) * 100)}%`
+      ? Math.round(
+          totalCorrect
+          / totalSeen
+          * 100
+        )
+      : null;
+
+
+  const average =
+    history.length
+      ? Math.round(
+          history.reduce(
+            (sum, quiz) =>
+              sum + quiz.percentage,
+            0
+          )
+          / history.length
+        )
+      : null;
+
+
+  const best =
+    history.length
+      ? Math.max(
+          ...history.map(
+            quiz =>
+              quiz.percentage
+          )
+        )
+      : null;
+
+
+  const last =
+    history.length
+      ? history[0].percentage
+      : null;
+
+
+  const tested =
+    phrasalVerbs.filter(
+      ([verb]) =>
+        stats[verb]
+        && stats[verb].seen > 0
+    ).length;
+
+
+  const mastered =
+    phrasalVerbs.filter(
+      ([verb]) => {
+
+        const stat =
+          stats[verb];
+
+        return (
+          stat
+          &&
+          stat.seen > 0
+          &&
+          (
+            stat.correct
+            /
+            stat.seen
+          ) >= 0.8
+        );
+
+      }
+    ).length;
+
+
+  const weak =
+    phrasalVerbs.filter(
+      ([verb]) => {
+
+        const stat =
+          stats[verb];
+
+        return (
+          stat
+          &&
+          stat.seen > 0
+          &&
+          (
+            stat.correct
+            /
+            stat.seen
+          ) <= 0.5
+        );
+
+      }
+    ).length;
+
+
+  const timedQuizzes =
+    history.filter(
+      quiz =>
+        quiz.durationSeconds
+    );
+
+
+  let averageQuizTime =
+    null;
+
+
+  if (
+    timedQuizzes.length
+  ) {
+
+    averageQuizTime =
+      Math.round(
+
+        timedQuizzes.reduce(
+          (sum, quiz) =>
+            sum
+            +
+            quiz.durationSeconds,
+          0
+        )
+
+        / timedQuizzes.length
+
+      );
+
+  }
+
+
+  document
+    .getElementById("accountTime")
+    .textContent =
+      formatDuration(
+        getLiveTotalTime()
+      );
+
+
+  document
+    .getElementById("accountAccuracy")
+    .textContent =
+      accuracy !== null
+      ? `${accuracy}%`
       : "—";
 
-  const entries = phrasalVerbs
-    .filter(([verb]) => stats[verb] && stats[verb].seen > 0)
-    .map(([verb,italian]) => {
 
-      const s = stats[verb];
+  document
+    .getElementById("accountQuizCount")
+    .textContent =
+      history.length;
 
-      return {
-        verb,
-        italian,
-        seen: s.seen,
-        correct: s.correct,
-        wrong: s.wrong,
-        accuracy: (s.correct / s.seen) * 100
-      };
-    });
 
-  const worst = [...entries]
-    .sort((a,b) =>
-      a.accuracy - b.accuracy ||
-      b.wrong - a.wrong
-    )
-    .slice(0,10);
+  document
+    .getElementById("accountAverage")
+    .textContent =
+      average !== null
+      ? `${average}%`
+      : "—";
 
-  const best = [...entries]
-    .sort((a,b) =>
-      b.accuracy - a.accuracy ||
-      b.correct - a.correct
-    )
-    .slice(0,10);
 
-  document.getElementById("worstVerbs").innerHTML =
-    worst.length
-      ? worst.map(renderStatRow).join("")
-      : `<div class="empty">Completa Qualche Quiz.</div>`;
+  document
+    .getElementById("accountBest")
+    .textContent =
+      best !== null
+      ? `${best}%`
+      : "—";
 
-  document.getElementById("bestVerbs").innerHTML =
-    best.length
-      ? best.map(renderStatRow).join("")
-      : `<div class="empty">Completa Qualche Quiz.</div>`;
+
+  document
+    .getElementById("accountLast")
+    .textContent =
+      last !== null
+      ? `${last}%`
+      : "—";
+
+
+  document
+    .getElementById("accountTested")
+    .textContent =
+      `${tested}/100`;
+
+
+  document
+    .getElementById("accountMastered")
+    .textContent =
+      mastered;
+
+
+  document
+    .getElementById("accountWeak")
+    .textContent =
+      weak;
+
+
+  document
+    .getElementById("accountAvgQuizTime")
+    .textContent =
+      averageQuizTime
+      ? formatDuration(
+          averageQuizTime
+        )
+      : "—";
+
+
+  renderRankings(
+    stats
+  );
+
 }
 
-function renderStatRow(item) {
 
-  const value = Math.round(item.accuracy);
 
-  let className = "";
-  let barColor = "#c3cad5";
+/* ---------------------------
+   RANKINGS
+--------------------------- */
 
-  if (value >= 80) {
-    className = "good";
-    barColor = "#72cba2";
-  } else if (value <= 50) {
-    className = "bad";
-    barColor = "#ef9baa";
+function renderRankings(
+  stats
+) {
+
+  const entries =
+    phrasalVerbs
+
+    .filter(
+      ([verb]) =>
+        stats[verb]
+        &&
+        stats[verb].seen > 0
+    )
+
+    .map(
+      ([verb, italian]) => {
+
+
+        const stat =
+          stats[verb];
+
+
+        return {
+
+          verb,
+          italian,
+
+          seen:
+            stat.seen,
+
+          correct:
+            stat.correct,
+
+          wrong:
+            stat.wrong,
+
+          accuracy:
+            (
+              stat.correct
+              /
+              stat.seen
+            )
+            * 100
+
+        };
+
+      }
+    );
+
+
+  const worst =
+    [...entries]
+
+    .sort(
+      (a, b) =>
+        a.accuracy
+        -
+        b.accuracy
+        ||
+        b.wrong
+        -
+        a.wrong
+    )
+
+    .slice(0, 10);
+
+
+  const best =
+    [...entries]
+
+    .sort(
+      (a, b) =>
+        b.accuracy
+        -
+        a.accuracy
+        ||
+        b.correct
+        -
+        a.correct
+    )
+
+    .slice(0, 10);
+
+
+  document
+    .getElementById(
+      "worstVerbs"
+    )
+    .innerHTML =
+
+      worst.length
+
+      ? worst.map(
+          renderStatRow
+        ).join("")
+
+      : `
+        <div class="empty">
+          Completa qualche quiz.
+        </div>
+      `;
+
+
+  document
+    .getElementById(
+      "bestVerbs"
+    )
+    .innerHTML =
+
+      best.length
+
+      ? best.map(
+          renderStatRow
+        ).join("")
+
+      : `
+        <div class="empty">
+          Completa qualche quiz.
+        </div>
+      `;
+
+}
+
+
+
+function renderStatRow(
+  item
+) {
+
+  const value =
+    Math.round(
+      item.accuracy
+    );
+
+
+  let className =
+    "";
+
+
+  let barColor =
+    "#c3cad5";
+
+
+  if (
+    value >= 80
+  ) {
+
+    className =
+      "good";
+
+    barColor =
+      "#75cba1";
+
+
+  } else if (
+    value <= 50
+  ) {
+
+    className =
+      "bad";
+
+    barColor =
+      "#ee9baa";
+
+
   } else {
-    barColor = "#efc96d";
+
+    barColor =
+      "#eecb75";
+
   }
+
 
   return `
     <div class="stat-row">
 
       <div>
-        <div class="verb">${item.verb}</div>
+
+        <div class="verb">
+          ${item.verb}
+        </div>
 
         <div class="translation">
           ${capitalizeFirst(item.italian)}
         </div>
 
         <div class="translation">
-          ${item.correct} Corrette · ${item.wrong} Errate · ${item.seen} Tentativi
+          ${item.correct} Corrette
+          ·
+          ${item.wrong} Errate
+          ·
+          ${item.seen} Tentativi
         </div>
 
         <div class="mastery-track">
+
           <div
             class="mastery-bar"
-            style="width:${value}%; background:${barColor};">
+            style="
+              width:${value}%;
+              background:${barColor};
+            ">
           </div>
+
         </div>
+
       </div>
 
-      <div class="stat-number ${className}">
+      <div
+        class="
+          stat-number
+          ${className}
+        ">
         ${value}%
       </div>
 
     </div>
   `;
+
 }
 
-function renderHistory() {
 
-  const history = loadHistory();
 
-  const container = document.getElementById("historyList");
+/* ---------------------------
+   BACKUP
+--------------------------- */
 
-  if (!history.length) {
-    container.innerHTML =
-      `<div class="empty">Nessun Quiz Completato.</div>`;
-    return;
-  }
+function exportBackup() {
 
-  container.innerHTML = history.map(h => {
+  saveVisibleSessionTime();
 
-    const date = new Date(h.date);
+  startVisibleSession();
 
-    const formatted =
-      date.toLocaleDateString("it-IT") +
-      " · " +
-      date.toLocaleTimeString("it-IT", {
-        hour: "2-digit",
-        minute: "2-digit"
-      });
 
-    let badgeClass = "low";
+  const backup = {
 
-    if (h.percentage >= 90) badgeClass = "excellent";
-    else if (h.percentage >= 75) badgeClass = "good";
-    else if (h.percentage >= 60) badgeClass = "medium";
+    version: 1,
 
-    const errors =
-      h.errors && h.errors.length
-        ? `
-          <div class="review-label">Da Ripassare</div>
-          <div class="error-tags">
-            ${h.errors.map(e =>
-              `<span class="error-tag">${e.verb}</span>`
-            ).join("")}
-          </div>
-        `
-        : `
-          <div class="review-label">Risultato</div>
-          <span class="perfect-tag">✓ Nessun Errore</span>
-        `;
+    exportedAt:
+      new Date().toISOString(),
 
-    return `
-      <div class="card history-card">
+    stats:
+      loadStats(),
 
-        <div class="history-head">
+    history:
+      loadHistory(),
 
-          <div>
-            <div class="history-score">
-              ${h.score}/${h.total}
-            </div>
+    totalTime:
+      getStoredTime(),
 
-            <div class="history-date">
-              ${formatted}
-            </div>
-          </div>
+    profileName:
+      localStorage.getItem(
+        "pvProfileName"
+      ),
 
-          <div class="history-badge ${badgeClass}">
-            ${h.percentage}%
-          </div>
+    avatarType:
+      localStorage.getItem(
+        "pvAvatarType"
+      ),
 
-        </div>
+    avatarValue:
+      localStorage.getItem(
+        "pvAvatarValue"
+      )
 
-        ${errors}
+  };
 
-      </div>
-    `;
-  }).join("");
-}
 
-function renderDatabase() {
-
-  const stats = loadStats();
-
-  document.getElementById("databaseList").innerHTML =
-    phrasalVerbs.map(([verb,italian]) => {
-
-      const s = stats[verb];
-
-      let info = "Mai Testato";
-
-      if (s && s.seen) {
-        const accuracy =
-          Math.round((s.correct / s.seen) * 100);
-
-        info =
-          `${accuracy}% · ${s.correct}/${s.seen} Corrette`;
+  const blob =
+    new Blob(
+      [
+        JSON.stringify(
+          backup,
+          null,
+          2
+        )
+      ],
+      {
+        type:
+          "application/json"
       }
-
-      return `
-        <div class="card database-card">
-
-          <div class="verb">${verb}</div>
-
-          <div class="translation">
-            ${capitalizeFirst(italian)}
-          </div>
-
-          <div class="translation" style="margin-top:8px;">
-            ${info}
-          </div>
-
-        </div>
-      `;
-    }).join("");
-}
-
-function updateHomeStats() {
-
-  const history = loadHistory();
-
-  document.getElementById("homeQuizCount").textContent =
-    history.length;
-
-  if (!history.length) {
-    document.getElementById("homeAverage").textContent = "—";
-    return;
-  }
-
-  const average =
-    Math.round(
-      history.reduce((sum,h) => sum + h.percentage,0)
-      / history.length
     );
 
-  document.getElementById("homeAverage").textContent =
-    `${average}%`;
+
+  const url =
+    URL.createObjectURL(
+      blob
+    );
+
+
+  const link =
+    document.createElement(
+      "a"
+    );
+
+
+  const date =
+    new Date()
+      .toISOString()
+      .slice(0, 10);
+
+
+  link.href =
+    url;
+
+
+  link.download =
+    `phrasal-verbs-backup-${date}.json`;
+
+
+  document.body.appendChild(
+    link
+  );
+
+
+  link.click();
+
+
+  link.remove();
+
+
+  URL.revokeObjectURL(
+    url
+  );
+
 }
+
+
+
+function importBackup(
+  event
+) {
+
+  const file =
+    event.target.files[0];
+
+
+  if (!file) return;
+
+
+  const reader =
+    new FileReader();
+
+
+  reader.onload =
+    function() {
+
+      try {
+
+        const backup =
+          JSON.parse(
+            reader.result
+          );
+
+
+        if (backup.stats) {
+
+          localStorage.setItem(
+            "pvStats",
+            JSON.stringify(
+              backup.stats
+            )
+          );
+
+        }
+
+
+        if (backup.history) {
+
+          localStorage.setItem(
+            "pvHistory",
+            JSON.stringify(
+              backup.history
+            )
+          );
+
+        }
+
+
+        if (
+          backup.totalTime
+          !== undefined
+        ) {
+
+          localStorage.setItem(
+            "pvTotalTime",
+            backup.totalTime
+          );
+
+        }
+
+
+        if (
+          backup.profileName
+        ) {
+
+          localStorage.setItem(
+            "pvProfileName",
+            backup.profileName
+          );
+
+        }
+
+
+        if (
+          backup.avatarType
+        ) {
+
+          localStorage.setItem(
+            "pvAvatarType",
+            backup.avatarType
+          );
+
+        }
+
+
+        if (
+          backup.avatarValue
+        ) {
+
+          localStorage.setItem(
+            "pvAvatarValue",
+            backup.avatarValue
+          );
+
+        }
+
+
+        alert(
+          "Backup ripristinato correttamente."
+        );
+
+
+        updateHomeStats();
+
+        renderAccount();
+
+
+      } catch (error) {
+
+        alert(
+          "Il file selezionato non è un backup valido."
+        );
+
+      }
+
+    };
+
+
+  reader.readAsText(
+    file
+  );
+
+}
+
+
+
+/* ---------------------------
+   RESET
+--------------------------- */
 
 function resetAllData() {
 
   const confirmation =
     confirm(
-      "Vuoi Davvero Cancellare Tutto Lo Storico E Tutte Le Statistiche?"
+      "Vuoi davvero cancellare "
+      + "storico, statistiche, tempo "
+      + "e profilo?"
     );
+
 
   if (!confirmation) return;
 
-  localStorage.removeItem("pvStats");
-  localStorage.removeItem("pvHistory");
 
-  renderStats();
-  renderHistory();
-  renderDatabase();
+  localStorage.removeItem(
+    "pvStats"
+  );
+
+
+  localStorage.removeItem(
+    "pvHistory"
+  );
+
+
+  localStorage.removeItem(
+    "pvTotalTime"
+  );
+
+
+  localStorage.removeItem(
+    "pvProfileName"
+  );
+
+
+  localStorage.removeItem(
+    "pvAvatarType"
+  );
+
+
+  localStorage.removeItem(
+    "pvAvatarValue"
+  );
+
+
+  activeSessionStart =
+    Date.now();
+
+
   updateHomeStats();
 
-  alert("Statistiche Eliminate.");
+  renderHistory();
+
+  renderDatabase();
+
+  renderAccount();
+
+
+  alert(
+    "Tutti i dati sono stati eliminati."
+  );
+
 }
+
+
+
+/* ---------------------------
+   INITIAL LOAD
+--------------------------- */
+
+loadProfile();
 
 updateHomeStats();
 
