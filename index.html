@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#111827" />
+
+  <title>Phrasal Verbs Quiz</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: #f3f4f6;
+      color: #111827;
+    }
+
+    .app {
+      max-width: 700px;
+      margin: 0 auto;
+      min-height: 100vh;
+      background: #ffffff;
+      padding-bottom: 100px;
+    }
+
+    header {
+      background: #111827;
+      color: white;
+      padding: 24px 20px 20px;
+      padding-top: calc(24px + env(safe-area-inset-top));
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 27px;
+    }
+
+    header p {
+      margin: 7px 0 0;
+      opacity: 0.75;
+      font-size: 14px;
+    }
+
+    nav {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-bottom: 1px solid #e5e7eb;
+      position: sticky;
+      top: 0;
+      background: white;
+      z-index: 10;
+    }
+
+    nav button {
+      border: 0;
+      background: white;
+      padding: 14px 4px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #6b7280;
+    }
+
+    nav button.active {
+      color: #2563eb;
+      border-bottom: 3px solid #2563eb;
+    }
+
+    .screen {
+      display: none;
+      padding: 20px;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 18px;
+      padding: 18px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    .main-button,
+    .secondary-button,
+    .danger-button {
+      border: 0;
+      border-radius: 14px;
+      padding: 15px;
+      font-size: 16px;
+      font-weight: 700;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .main-button {
+      background: #2563eb;
+      color: white;
+    }
+
+    .secondary-button {
+      background: #e5e7eb;
+      color: #111827;
+    }
+
+    .danger-button {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .quiz-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      font-size: 14px;
+      color: #6b7280;
+      font-weight: 600;
+    }
+
+    .progress {
+      height: 8px;
+      border-radius: 999px;
+      background: #e5e7eb;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: #2563eb;
+      width: 0%;
+      transition: width .25s;
+    }
+
+    .direction {
+      font-size: 13px;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: #2563eb;
+      margin-bottom: 10px;
+    }
+
+    .question {
+      font-size: 25px;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 22px;
+    }
+
+    .answers {
+      display: grid;
+      gap: 11px;
+    }
+
+    .answer {
+      padding: 15px;
+      border-radius: 14px;
+      border: 2px solid #e5e7eb;
+      background: white;
+      text-align: left;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .answer.correct {
+      background: #dcfce7;
+      border-color: #22c55e;
+      color: #166534;
+    }
+
+    .answer.wrong {
+      background: #fee2e2;
+      border-color: #ef4444;
+      color: #991b1b;
+    }
+
+    .answer:disabled {
+      opacity: 1;
+    }
+
+    .feedback {
+      margin-top: 18px;
+      padding: 15px;
+      border-radius: 14px;
+      font-weight: 700;
+      display: none;
+    }
+
+    .feedback.correct {
+      display: block;
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .feedback.wrong {
+      display: block;
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .score-big {
+      text-align: center;
+      font-size: 54px;
+      font-weight: 900;
+      margin: 15px 0 0;
+    }
+
+    .percentage {
+      text-align: center;
+      font-size: 22px;
+      margin-bottom: 24px;
+      color: #6b7280;
+    }
+
+    .stat-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .stat-row:last-child {
+      border-bottom: 0;
+    }
+
+    .verb {
+      font-weight: 800;
+    }
+
+    .translation {
+      font-size: 13px;
+      color: #6b7280;
+      margin-top: 3px;
+    }
+
+    .stat-number {
+      text-align: right;
+      font-weight: 800;
+    }
+
+    .bad {
+      color: #dc2626;
+    }
+
+    .good {
+      color: #16a34a;
+    }
+
+    .history-item {
+      padding: 15px 0;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .history-score {
+      font-size: 22px;
+      font-weight: 900;
+    }
+
+    .history-date {
+      color: #6b7280;
+      font-size: 13px;
+      margin-top: 4px;
+    }
+
+    .history-errors {
+      margin-top: 8px;
+      font-size: 13px;
+      color: #6b7280;
+    }
+
+    .section-title {
+      font-size: 21px;
+      font-weight: 900;
+      margin: 5px 0 15px;
+    }
+
+    .subtle {
+      color: #6b7280;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .empty {
+      text-align: center;
+      color: #9ca3af;
+      padding: 30px 10px;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: #eff6ff;
+      color: #2563eb;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .mini-card {
+      background: #f9fafb;
+      border-radius: 14px;
+      padding: 14px;
+      text-align: center;
+    }
+
+    .mini-card strong {
+      display: block;
+      font-size: 23px;
+    }
+
+    .mini-card span {
+      font-size: 12px;
+      color: #6b7280;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <header>
+    <h1>Phrasal Verbs</h1>
+    <p>100 verbs · Quiz · Progress tracking</p>
+  </header>
+
+  <nav>
+    <button id="navHome" class="active" onclick="showScreen('home')">Quiz</button>
+    <button id="navStats" onclick="showScreen('stats')">Statistiche</button>
+    <button id="navHistory" onclick="showScreen('history')">Storico</button>
+    <button id="navDatabase" onclick="showScreen('database')">Database</button>
+  </nav>
+
+  <section id="home" class="screen active">
+
+    <div id="startArea">
+
+      <div class="card">
+        <div class="section-title">Nuovo quiz</div>
+        <p class="subtle">
+          20 domande casuali: 10 Italiano → Inglese e 10 Inglese → Italiano.
+        </p>
+
+        <button class="main-button" onclick="startQuiz('normal')">
+          Inizia quiz da 20
+        </button>
+
+        <button class="secondary-button" onclick="startQuiz('mistakes')">
+          Ripassa i miei errori
+        </button>
+      </div>
+
+      <div class="card">
+        <div class="section-title">Il tuo progresso</div>
+
+        <div class="mini-grid">
+          <div class="mini-card">
+            <strong id="homeQuizCount">0</strong>
+            <span>Quiz completati</span>
+          </div>
+
+          <div class="mini-card">
+            <strong id="homeAverage">—</strong>
+            <span>Media</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div id="quizArea" class="hidden">
+
+      <div class="quiz-top">
+        <span id="questionCounter">Domanda 1/20</span>
+        <span id="liveScore">0/0</span>
+      </div>
+
+      <div class="progress">
+        <div id="progressBar" class="progress-bar"></div>
+      </div>
+
+      <div id="direction" class="direction"></div>
+      <div id="question" class="question"></div>
+      <div id="answers" class="answers"></div>
+
+      <div id="feedback" class="feedback"></div>
+
+      <button id="nextButton"
+              class="main-button hidden"
+              onclick="nextQuestion()">
+        Prossima domanda
+      </button>
+
+    </div>
+
+    <div id="resultArea" class="hidden">
+
+      <div class="card">
+        <div class="section-title">Quiz completato</div>
+        <div id="finalScore" class="score-big"></div>
+        <div id="finalPercentage" class="percentage"></div>
+
+        <button class="main-button" onclick="resetQuizView()">
+          Nuovo quiz
+        </button>
+      </div>
+
+      <div class="card">
+        <div class="section-title">Errori di questo quiz</div>
+        <div id="resultErrors"></div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <section id="stats" class="screen">
+
+    <div class="card">
+      <div class="section-title">Panoramica</div>
+
+      <div class="mini-grid">
+        <div class="mini-card">
+          <strong id="totalAnswers">0</strong>
+          <span>Risposte totali</span>
+        </div>
+
+        <div class="mini-card">
+          <strong id="overallAccuracy">—</strong>
+          <span>Accuracy</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">🔴 Più sbagliati</div>
+      <div id="worstVerbs"></div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">🟢 Più conosciuti</div>
+      <div id="bestVerbs"></div>
+    </div>
+
+    <button class="danger-button" onclick="resetAllData()">
+      Reset di tutte le statistiche
+    </button>
+
+  </section>
+
+  <section id="history" class="screen">
+
+    <div class="section-title">Storico quiz</div>
+    <div id="historyList"></div>
+
+  </section>
+
+  <section id="database" class="screen">
+
+    <div class="section-title">100 Phrasal Verbs</div>
+    <p class="subtle">Database completo utilizzato dai quiz.</p>
+
+    <div id="databaseList"></div>
+
+  </section>
+
+</div>
+
+<script>
+
+const phrasalVerbs = [
+  ["Back up","fare un backup / sostenere con prove"],
+  ["Break down","guastarsi / analizzare per componenti"],
+  ["Break out","scoppiare"],
+  ["Break up","separarsi / sciogliersi"],
+  ["Bring about","provocare / determinare"],
+  ["Bring back","riportare / far tornare alla mente"],
+  ["Bring up","sollevare un argomento"],
+  ["Call back","richiamare"],
+  ["Call off","annullare"],
+  ["Carry on","continuare"],
+  ["Carry out","svolgere / eseguire"],
+  ["Check out","controllare / dare un'occhiata"],
+  ["Come across","imbattersi in"],
+  ["Come back","tornare"],
+  ["Come down to","ridursi essenzialmente a"],
+  ["Come from","provenire da"],
+  ["Come out","uscire / essere pubblicato"],
+  ["Come up with","trovare / elaborare"],
+  ["Cut down on","ridurre"],
+  ["Cut off","interrompere / tagliare fuori"],
+  ["Deal with","affrontare / occuparsi di"],
+  ["Drop off","lasciare qualcuno / qualcosa"],
+  ["End up","finire per"],
+  ["Fall behind","rimanere indietro"],
+  ["Figure out","capire / trovare una soluzione"],
+  ["Fill in","compilare"],
+  ["Fill out","compilare completamente"],
+  ["Find out","scoprire"],
+  ["Follow up","dare seguito"],
+  ["Get along with","andare d'accordo con"],
+  ["Get away","andare via / scappare"],
+  ["Get back","tornare / ricontattare"],
+  ["Get by","cavarsela"],
+  ["Get in","entrare / arrivare"],
+  ["Get out","uscire"],
+  ["Get over","superare / riprendersi da"],
+  ["Get through","superare / riuscire a contattare"],
+  ["Give back","restituire"],
+  ["Give in","cedere"],
+  ["Give up","rinunciare / smettere"],
+  ["Go ahead","procedere"],
+  ["Go on","continuare / accadere"],
+  ["Go over","rivedere / esaminare"],
+  ["Go through","attraversare / esaminare"],
+  ["Grow up","crescere"],
+  ["Hand in","consegnare"],
+  ["Hand out","distribuire"],
+  ["Hold on","aspettare / tenere duro"],
+  ["Join in","partecipare"],
+  ["Keep away from","stare lontano da"],
+  ["Keep on","continuare"],
+  ["Keep up with","stare al passo con"],
+  ["Leave behind","lasciare indietro"],
+  ["Leave out","omettere / escludere"],
+  ["Let down","deludere"],
+  ["Look after","prendersi cura di"],
+  ["Look back on","ripensare a"],
+  ["Look for","cercare"],
+  ["Look forward to","non vedere l'ora di"],
+  ["Look into","indagare / approfondire"],
+  ["Look out","fare attenzione"],
+  ["Look up","cercare un'informazione"],
+  ["Make up","inventare / fare pace"],
+  ["Make up for","compensare"],
+  ["Move on","andare avanti"],
+  ["Pass away","morire"],
+  ["Pay back","restituire denaro"],
+  ["Pick up","prendere / acquisire / imparare"],
+  ["Point out","far notare"],
+  ["Put away","mettere via"],
+  ["Put off","rimandare"],
+  ["Put on","indossare / mettere"],
+  ["Put together","assemblare / preparare"],
+  ["Put up with","sopportare"],
+  ["Rule out","escludere"],
+  ["Run into","incontrare casualmente / incorrere in"],
+  ["Run out of","rimanere senza"],
+  ["Set out","esporre / partire con uno scopo"],
+  ["Set up","creare / organizzare"],
+  ["Show up","presentarsi"],
+  ["Sort out","risolvere / sistemare"],
+  ["Speak up","parlare più forte / esprimersi apertamente"],
+  ["Stand out","distinguersi"],
+  ["Step down","dimettersi da una posizione"],
+  ["Step up","intensificare / aumentare il proprio impegno"],
+  ["Sum up","riassumere"],
+  ["Take back","riprendersi / ritirare ciò che si è detto"],
+  ["Take off","decollare / togliersi / avere successo rapidamente"],
+  ["Take on","assumere / accettare una responsabilità"],
+  ["Take over","assumere il controllo / subentrare"],
+  ["Take up","iniziare un'attività / occupare"],
+  ["Think over","riflettere attentamente su"],
+  ["Turn down","rifiutare"],
+  ["Turn off","spegnere"],
+  ["Turn on","accendere"],
+  ["Turn out","risultare / rivelarsi"],
+  ["Turn up","presentarsi / aumentare"],
+  ["Wake up","svegliarsi"],
+  ["Work out","risolvere / capire / funzionare"],
+  ["Write down","annotare"]
+];
+
+let quiz = [];
+let currentIndex = 0;
+let score = 0;
+let answered = false;
+let quizErrors = [];
+
+function shuffle(array) {
+  return [...array].sort(() => Math.random() - 0.5);
+}
+
+function loadStats() {
+  return JSON.parse(localStorage.getItem("pvStats") || "{}");
+}
+
+function saveStats(stats) {
+  localStorage.setItem("pvStats", JSON.stringify(stats));
+}
+
+function loadHistory() {
+  return JSON.parse(localStorage.getItem("pvHistory") || "[]");
+}
+
+function saveHistory(history) {
+  localStorage.setItem("pvHistory", JSON.stringify(history));
+}
+
+function getVerbStat(verb) {
+  const stats = loadStats();
+
+  if (!stats[verb]) {
+    stats[verb] = {
+      seen: 0,
+      correct: 0,
+      wrong: 0
+    };
+  }
+
+  return stats[verb];
+}
+
+function showScreen(screenId) {
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  document.getElementById(screenId).classList.add("active");
+
+  document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
+
+  if (screenId === "home") document.getElementById("navHome").classList.add("active");
+  if (screenId === "stats") document.getElementById("navStats").classList.add("active");
+  if (screenId === "history") document.getElementById("navHistory").classList.add("active");
+  if (screenId === "database") document.getElementById("navDatabase").classList.add("active");
+
+  if (screenId === "stats") renderStats();
+  if (screenId === "history") renderHistory();
+  if (screenId === "database") renderDatabase();
+
+  updateHomeStats();
+}
+
+function startQuiz(mode = "normal") {
+
+  let pool = [...phrasalVerbs];
+
+  if (mode === "mistakes") {
+    const stats = loadStats();
+
+    const ranked = [...phrasalVerbs]
+      .filter(([verb]) => stats[verb] && stats[verb].wrong > 0)
+      .sort((a,b) => {
+        const sa = stats[a[0]];
+        const sb = stats[b[0]];
+
+        const accA = sa.correct / sa.seen;
+        const accB = sb.correct / sb.seen;
+
+        return accA - accB;
+      });
+
+    if (ranked.length >= 10) {
+      pool = ranked;
+    } else {
+      alert("Serve qualche errore in più prima di creare un quiz dedicato. Per ora avvio un quiz normale.");
+    }
+  }
+
+  const selected = shuffle(pool).slice(0, 20);
+
+  quiz = selected.map((item, index) => ({
+    verb: item[0],
+    italian: item[1],
+    direction: index < 10 ? "IT_EN" : "EN_IT"
+  }));
+
+  quiz = shuffle(quiz);
+
+  currentIndex = 0;
+  score = 0;
+  answered = false;
+  quizErrors = [];
+
+  document.getElementById("startArea").classList.add("hidden");
+  document.getElementById("resultArea").classList.add("hidden");
+  document.getElementById("quizArea").classList.remove("hidden");
+
+  renderQuestion();
+}
+
+function renderQuestion() {
+
+  answered = false;
+
+  const q = quiz[currentIndex];
+
+  document.getElementById("feedback").className = "feedback";
+  document.getElementById("nextButton").classList.add("hidden");
+
+  document.getElementById("questionCounter").textContent =
+    `Domanda ${currentIndex + 1}/${quiz.length}`;
+
+  document.getElementById("liveScore").textContent =
+    `${score}/${currentIndex}`;
+
+  document.getElementById("progressBar").style.width =
+    `${(currentIndex / quiz.length) * 100}%`;
+
+  const question = document.getElementById("question");
+  const direction = document.getElementById("direction");
+
+  let correctAnswer;
+  let wrongOptions;
+
+  if (q.direction === "IT_EN") {
+
+    direction.textContent = "Italiano → Inglese";
+
+    question.textContent =
+      `Come si dice “${q.italian}”?`;
+
+    correctAnswer = q.verb;
+
+    wrongOptions = shuffle(
+      phrasalVerbs
+        .filter(v => v[0] !== q.verb)
+        .map(v => v[0])
+    ).slice(0,3);
+
+  } else {
+
+    direction.textContent = "Inglese → Italiano";
+
+    question.textContent =
+      `Che cosa significa “${q.verb}”?`;
+
+    correctAnswer = q.italian;
+
+    wrongOptions = shuffle(
+      phrasalVerbs
+        .filter(v => v[0] !== q.verb)
+        .map(v => v[1])
+    ).slice(0,3);
+  }
+
+  const options = shuffle([correctAnswer, ...wrongOptions]);
+
+  const answers = document.getElementById("answers");
+  answers.innerHTML = "";
+
+  options.forEach(option => {
+
+    const btn = document.createElement("button");
+    btn.className = "answer";
+    btn.textContent = option;
+
+    btn.onclick = () =>
+      answerQuestion(btn, option, correctAnswer, q);
+
+    answers.appendChild(btn);
+  });
+}
+
+function answerQuestion(button, selected, correctAnswer, q) {
+
+  if (answered) return;
+
+  answered = true;
+
+  const correct = selected === correctAnswer;
+
+  const stats = loadStats();
+
+  if (!stats[q.verb]) {
+    stats[q.verb] = {
+      seen: 0,
+      correct: 0,
+      wrong: 0
+    };
+  }
+
+  stats[q.verb].seen++;
+
+  if (correct) {
+
+    score++;
+    stats[q.verb].correct++;
+    button.classList.add("correct");
+
+  } else {
+
+    stats[q.verb].wrong++;
+    button.classList.add("wrong");
+
+    quizErrors.push({
+      verb: q.verb,
+      italian: q.italian
+    });
+
+    document.querySelectorAll(".answer").forEach(btn => {
+      if (btn.textContent === correctAnswer) {
+        btn.classList.add("correct");
+      }
+    });
+  }
+
+  saveStats(stats);
+
+  document.querySelectorAll(".answer").forEach(btn => {
+    btn.disabled = true;
+  });
+
+  const feedback = document.getElementById("feedback");
+
+  if (correct) {
+
+    feedback.className = "feedback correct";
+    feedback.innerHTML =
+      `✅ Corretto<br><small>Punteggio: ${score}/${currentIndex + 1}</small>`;
+
+  } else {
+
+    feedback.className = "feedback wrong";
+    feedback.innerHTML =
+      `❌ Errato<br>Risposta corretta: <strong>${correctAnswer}</strong><br><small>Punteggio: ${score}/${currentIndex + 1}</small>`;
+  }
+
+  document.getElementById("liveScore").textContent =
+    `${score}/${currentIndex + 1}`;
+
+  document.getElementById("nextButton").classList.remove("hidden");
+}
+
+function nextQuestion() {
+
+  currentIndex++;
+
+  if (currentIndex >= quiz.length) {
+    finishQuiz();
+  } else {
+    renderQuestion();
+  }
+}
+
+function finishQuiz() {
+
+  document.getElementById("quizArea").classList.add("hidden");
+  document.getElementById("resultArea").classList.remove("hidden");
+
+  const percentage = Math.round((score / quiz.length) * 100);
+
+  document.getElementById("finalScore").textContent =
+    `${score}/${quiz.length}`;
+
+  document.getElementById("finalPercentage").textContent =
+    `${percentage}%`;
+
+  const resultErrors = document.getElementById("resultErrors");
+
+  if (quizErrors.length === 0) {
+
+    resultErrors.innerHTML =
+      `<div class="empty">🎉 Nessun errore!</div>`;
+
+  } else {
+
+    resultErrors.innerHTML = quizErrors.map(e => `
+      <div class="stat-row">
+        <div>
+          <div class="verb">${e.verb}</div>
+          <div class="translation">${e.italian}</div>
+        </div>
+        <div class="bad">❌</div>
+      </div>
+    `).join("");
+  }
+
+  const history = loadHistory();
+
+  history.unshift({
+    date: new Date().toISOString(),
+    score: score,
+    total: quiz.length,
+    percentage: percentage,
+    errors: quizErrors
+  });
+
+  saveHistory(history.slice(0,100));
+
+  updateHomeStats();
+}
+
+function resetQuizView() {
+  document.getElementById("resultArea").classList.add("hidden");
+  document.getElementById("quizArea").classList.add("hidden");
+  document.getElementById("startArea").classList.remove("hidden");
+}
+
+function renderStats() {
+
+  const stats = loadStats();
+
+  let totalSeen = 0;
+  let totalCorrect = 0;
+
+  Object.values(stats).forEach(s => {
+    totalSeen += s.seen;
+    totalCorrect += s.correct;
+  });
+
+  document.getElementById("totalAnswers").textContent = totalSeen;
+
+  document.getElementById("overallAccuracy").textContent =
+    totalSeen
+      ? `${Math.round((totalCorrect / totalSeen) * 100)}%`
+      : "—";
+
+  const entries = phrasalVerbs
+    .filter(([verb]) => stats[verb] && stats[verb].seen > 0)
+    .map(([verb, italian]) => {
+
+      const s = stats[verb];
+
+      return {
+        verb,
+        italian,
+        seen: s.seen,
+        correct: s.correct,
+        wrong: s.wrong,
+        accuracy: (s.correct / s.seen) * 100
+      };
+    });
+
+  const worst = [...entries]
+    .sort((a,b) =>
+      a.accuracy - b.accuracy ||
+      b.wrong - a.wrong
+    )
+    .slice(0,10);
+
+  const best = [...entries]
+    .sort((a,b) =>
+      b.accuracy - a.accuracy ||
+      b.correct - a.correct
+    )
+    .slice(0,10);
+
+  document.getElementById("worstVerbs").innerHTML =
+    worst.length
+      ? worst.map(renderStatRow).join("")
+      : `<div class="empty">Completa qualche quiz.</div>`;
+
+  document.getElementById("bestVerbs").innerHTML =
+    best.length
+      ? best.map(renderStatRow).join("")
+      : `<div class="empty">Completa qualche quiz.</div>`;
+}
+
+function renderStatRow(item) {
+
+  const className =
+    item.accuracy >= 80
+      ? "good"
+      : item.accuracy <= 50
+      ? "bad"
+      : "";
+
+  return `
+    <div class="stat-row">
+      <div>
+        <div class="verb">${item.verb}</div>
+        <div class="translation">${item.italian}</div>
+        <div class="translation">
+          ${item.correct} corrette · ${item.wrong} errate · ${item.seen} tentativi
+        </div>
+      </div>
+
+      <div class="stat-number ${className}">
+        ${Math.round(item.accuracy)}%
+      </div>
+    </div>
+  `;
+}
+
+function renderHistory() {
+
+  const history = loadHistory();
+
+  const container = document.getElementById("historyList");
+
+  if (!history.length) {
+
+    container.innerHTML =
+      `<div class="empty">Nessun quiz completato.</div>`;
+
+    return;
+  }
+
+  container.innerHTML = history.map((h, index) => {
+
+    const date = new Date(h.date);
+
+    const formatted =
+      date.toLocaleDateString("it-IT") +
+      " · " +
+      date.toLocaleTimeString("it-IT", {
+        hour: "2-digit",
+        minute: "2-digit"
+      });
+
+    const errorNames =
+      h.errors && h.errors.length
+        ? h.errors.map(e => e.verb).join(", ")
+        : "Nessun errore";
+
+    return `
+      <div class="card history-item">
+
+        <div class="history-score">
+          ${h.score}/${h.total}
+          <span class="pill">${h.percentage}%</span>
+        </div>
+
+        <div class="history-date">
+          ${formatted}
+        </div>
+
+        <div class="history-errors">
+          <strong>Errori:</strong> ${errorNames}
+        </div>
+
+      </div>
+    `;
+  }).join("");
+}
+
+function renderDatabase() {
+
+  const stats = loadStats();
+
+  document.getElementById("databaseList").innerHTML =
+    phrasalVerbs.map(([verb, italian]) => {
+
+      const s = stats[verb];
+
+      let info = "Mai testato";
+
+      if (s && s.seen) {
+
+        const accuracy =
+          Math.round((s.correct / s.seen) * 100);
+
+        info =
+          `${accuracy}% · ${s.correct}/${s.seen} corrette`;
+      }
+
+      return `
+        <div class="card">
+          <div class="verb">${verb}</div>
+          <div class="translation">${italian}</div>
+          <div class="translation" style="margin-top:7px;">
+            ${info}
+          </div>
+        </div>
+      `;
+    }).join("");
+}
+
+function updateHomeStats() {
+
+  const history = loadHistory();
+
+  document.getElementById("homeQuizCount").textContent =
+    history.length;
+
+  if (!history.length) {
+
+    document.getElementById("homeAverage").textContent =
+      "—";
+
+    return;
+  }
+
+  const average =
+    Math.round(
+      history.reduce((sum,h) => sum + h.percentage,0)
+      / history.length
+    );
+
+  document.getElementById("homeAverage").textContent =
+    `${average}%`;
+}
+
+function resetAllData() {
+
+  const confirmation =
+    confirm(
+      "Vuoi davvero cancellare tutto lo storico e tutte le statistiche?"
+    );
+
+  if (!confirmation) return;
+
+  localStorage.removeItem("pvStats");
+  localStorage.removeItem("pvHistory");
+
+  renderStats();
+  renderHistory();
+  renderDatabase();
+  updateHomeStats();
+
+  alert("Statistiche eliminate.");
+}
+
+updateHomeStats();
+
+</script>
+
+</body>
+</html>
