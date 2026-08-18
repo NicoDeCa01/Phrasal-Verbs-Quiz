@@ -9599,6 +9599,52 @@ const svg = ` <svg  xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 120 120" > 
 
 
 /* =========================================================
+ SAFE STORAGE — Safari/iOS defensive layer
+========================================================= */
+
+function safeStorageGet(key, fallback = null) {
+    try {
+        const value = window.localStorage.getItem(key);
+        return value === null ? fallback : value;
+    } catch (error) {
+        return fallback;
+    }
+}
+
+function safeStorageSet(key, value) {
+    try {
+        window.localStorage.setItem(key, value);
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
+
+function safeStorageRemove(key) {
+    try {
+        window.localStorage.removeItem(key);
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
+
+function safeStorageKeys() {
+    try {
+        const keys = [];
+        for (let index = 0; index < window.localStorage.length; index++) {
+            const key = window.localStorage.key(index);
+            if (key !== null) {
+                keys.push(key);
+            }
+        }
+        return keys;
+    } catch (error) {
+        return [];
+    }
+}
+
+/* =========================================================
  STATE
 ========================================================= */
 
@@ -9617,7 +9663,7 @@ let quizAnswers = [];
 let quizStartTime = null;
 let selectedQuizSize =
  Number(
-  localStorage.getItem(
+  safeStorageGet(
     "pvQuizSize"
   )
   ||
@@ -9684,7 +9730,7 @@ function loadStats() {
     try {
 
         return JSON.parse(
-         localStorage.getItem(
+         safeStorageGet(
            "pvStats"
          )
          ||
@@ -9702,7 +9748,7 @@ function loadStats() {
 
 function saveStats(stats) {
 
-    localStorage.setItem(
+    safeStorageSet(
      "pvStats",
      JSON.stringify(stats)
     );
@@ -9714,7 +9760,7 @@ function loadHistory() {
     try {
 
         return JSON.parse(
-         localStorage.getItem(
+         safeStorageGet(
            "pvHistory"
          )
          ||
@@ -9732,7 +9778,7 @@ function loadHistory() {
 
 function saveHistory(history) {
 
-    localStorage.setItem(
+    safeStorageSet(
      "pvHistory",
      JSON.stringify(history)
     );
@@ -9750,7 +9796,7 @@ let audioContext = null;
 function isSoundEnabled() {
 
     const saved =
-     localStorage.getItem(
+     safeStorageGet(
       "pvSoundEnabled"
         );
 
@@ -9802,7 +9848,7 @@ function ensureAudioContext() {
 
 function setSoundEnabled(enabled) {
 
-    localStorage.setItem(
+    safeStorageSet(
      "pvSoundEnabled",
      enabled
     );
@@ -9837,73 +9883,85 @@ function playTone(
     }
 
 
-    ensureAudioContext();
+    try {
+
+      ensureAudioContext();
 
 
-    if (!audioContext) {
-      return;
+      if (!audioContext) {
+        return;
+      }
+
+
+      const oscillator =
+       audioContext
+        .createOscillator();
+
+
+      const gain =
+       audioContext
+        .createGain();
+
+
+      oscillator.type =
+       type;
+
+
+      oscillator.frequency.value =
+       frequency;
+
+
+      oscillator.connect(
+       gain
+      );
+
+
+      gain.connect(
+       audioContext.destination
+      );
+
+
+      const start =
+       audioContext.currentTime
+       +
+       delay;
+
+
+      const end =
+       start
+       +
+       duration;
+
+
+      gain.gain.setValueAtTime(
+       volume,
+       start
+      );
+
+
+      gain.gain.exponentialRampToValueAtTime(
+       .001,
+       end
+      );
+
+
+      oscillator.start(
+       start
+      );
+
+
+      oscillator.stop(
+       end
+      );
+
+    } catch (error) {
+
+      /* Audio must never block navigation or quiz interaction. */
+      audioContext = null;
+
     }
-const oscillator =
- audioContext
-  .createOscillator();
-
-
-const gain =
- audioContext
-  .createGain();
-
-
-oscillator.type =
- type;
-
-
-oscillator.frequency.value =
- frequency;
-
-
-oscillator.connect(
- gain
-);
-
-
-gain.connect(
- audioContext.destination
-);
-
-
-const start =
- audioContext.currentTime
- +
- delay;
-
-
-const end =
- start
- +
- duration;
-
-
-gain.gain.setValueAtTime(
- volume,
- start
-);
-    gain.gain.exponentialRampToValueAtTime(
-     .001,
-     end
-    );
-
-
-    oscillator.start(
-     start
-    );
-
-
-    oscillator.stop(
-     end
-    );
 
 }
-
 
 /* =========================================================
  CLICK SECCO
@@ -9916,187 +9974,199 @@ function playWoodClick() {
     }
 
 
-    ensureAudioContext();
+    try {
+
+      ensureAudioContext();
 
 
-    if (!audioContext) {
-      return;
+      if (!audioContext) {
+        return;
+      }
+
+
+      const now =
+       audioContext.currentTime;
+
+
+      const osc =
+       audioContext
+        .createOscillator();
+
+
+      const gain =
+       audioContext
+        .createGain();
+
+
+      osc.type =
+       "square";
+
+
+      osc.frequency
+       .setValueAtTime(
+         520,
+         now
+       );
+
+
+      osc.frequency
+       .exponentialRampToValueAtTime(
+        230,
+        now + .018
+       );
+
+
+      gain.gain
+       .setValueAtTime(
+         .036,
+         now
+       );
+
+
+      gain.gain
+       .exponentialRampToValueAtTime(
+        .001,
+        now + .021
+       );
+
+
+      osc.connect(
+       gain
+      );
+
+
+      gain.connect(
+       audioContext.destination
+      );
+
+
+      osc.start(
+       now
+      );
+
+
+      osc.stop(
+       now + .023
+      );
+
+
+      const duration =
+       .009;
+
+
+      const buffer =
+       audioContext
+        .createBuffer(
+          1,
+          Math.floor(
+           audioContext.sampleRate
+           *
+           duration
+          ),
+          audioContext.sampleRate
+        );
+
+
+      const data =
+       buffer
+        .getChannelData(0);
+
+
+      for (
+       let i = 0;
+       i < data.length;
+       i++
+      ){
+
+       const envelope =
+        Math.pow(
+         1 - i / data.length,
+         2.5
+        );
+
+
+       data[i] =
+        (
+          Math.random() * 2 - 1
+        )
+        *
+        envelope;
+
+      }
+
+
+      const noise =
+       audioContext
+        .createBufferSource();
+
+
+      noise.buffer =
+       buffer;
+
+
+      const filter =
+       audioContext
+        .createBiquadFilter();
+
+
+      filter.type =
+       "bandpass";
+
+
+      filter.frequency.value =
+       1900;
+
+
+      filter.Q.value =
+       1.8;
+
+
+      const noiseGain =
+       audioContext
+        .createGain();
+
+
+      noiseGain.gain
+       .setValueAtTime(
+         .052,
+         now
+       );
+
+
+      noiseGain.gain
+       .exponentialRampToValueAtTime(
+        .001,
+        now + duration
+       );
+
+
+      noise.connect(
+       filter
+      );
+
+
+      filter.connect(
+       noiseGain
+      );
+
+
+      noiseGain.connect(
+       audioContext.destination
+      );
+
+
+      noise.start(
+       now
+      );
+
+    } catch (error) {
+
+      /* Safari can reject audio context work; UI interaction must continue. */
+      audioContext = null;
+
     }
 
-
-    const now =
-     audioContext.currentTime;
-
-
-    const osc =
-     audioContext
-      .createOscillator();
-const gain =
- audioContext
-  .createGain();
-
-
-osc.type =
- "square";
-
-
-osc.frequency
- .setValueAtTime(
-   520,
-   now
- );
-
-
-osc.frequency
- .exponentialRampToValueAtTime(
-  230,
-  now + .018
- );
-
-
-gain.gain
- .setValueAtTime(
-   .036,
-   now
- );
-
-
-gain.gain
- .exponentialRampToValueAtTime(
-  .001,
-  now + .021
- );
-
-
-osc.connect(
- gain
-);
-
-
-gain.connect(
- audioContext.destination
-);
-
-
-osc.start(
- now
-);
-
-
-osc.stop(
- now + .023
-);
-
-
-const duration =
- .009;
-
-
-const buffer =
- audioContext
-  .createBuffer(
-    1,
-    Math.floor(
-     audioContext.sampleRate
-     *
-     duration
-    ),
-    audioContext.sampleRate
-  );
-
-
-const data =
- buffer
-  .getChannelData(0);
-
-
-for (
- let i = 0;
- i < data.length;
- i++
-){
-
- const envelope =
-  Math.pow(
-   1 - i / data.length,
-   2.5
-  );
-    data[i] =
-     (
-       Math.random() * 2 - 1
-     )
-     *
-     envelope;
-
 }
-
-
-const noise =
- audioContext
-  .createBufferSource();
-
-
-noise.buffer =
- buffer;
-
-
-const filter =
- audioContext
-  .createBiquadFilter();
-
-
-filter.type =
-  "bandpass";
-
-
-filter.frequency.value =
-  1900;
-
-
-filter.Q.value =
-  1.8;
-
-
-const noiseGain =
- audioContext
-  .createGain();
-
-
-noiseGain.gain
- .setValueAtTime(
-   .052,
-      now
-     );
-
-
-    noiseGain.gain
-     .exponentialRampToValueAtTime(
-      .001,
-      now + duration
-     );
-
-
-    noise.connect(
-     filter
-    );
-
-
-    filter.connect(
-      noiseGain
-    );
-
-
-    noiseGain.connect(
-     audioContext.destination
-    );
-
-
-    noise.start(
-     now
-    );
-
-}
-
 
 /* =========================================================
  CORRECT / WRONG / COMPLETION
@@ -10174,7 +10244,7 @@ let activeSessionStart =
 function getStoredTime() {
 
     return Number(
-     localStorage.getItem(
+     safeStorageGet(
        "pvTotalTime"
      )
      ||
@@ -10201,7 +10271,7 @@ function saveVisibleSessionTime() {
       /
       1000
      );
-    localStorage.setItem(
+    safeStorageSet(
      "pvTotalTime",
      getStoredTime()
      +
@@ -11351,7 +11421,7 @@ function selectQuizSize(
      Number(size);
 
 
-    localStorage.setItem(
+    safeStorageSet(
      "pvQuizSize",
      selectedQuizSize
     );
@@ -12578,7 +12648,7 @@ function startQuizFromResult(size) {
     selectedQuizSize =
      Number(size);
 
-    localStorage.setItem(
+    safeStorageSet(
      "pvQuizSize",
      selectedQuizSize
     );
@@ -13312,19 +13382,19 @@ const VALID_DB_SORT_KEYS =
 
 let databaseSortKey =
  VALID_DB_SORT_KEYS.has(
-  localStorage.getItem(
+  safeStorageGet(
    "pvDbSortKey"
   )
  )
  ?
- localStorage.getItem(
+ safeStorageGet(
   "pvDbSortKey"
  )
  :
  "alpha";
 
 let databaseSortDir =
- localStorage.getItem(
+ safeStorageGet(
   "pvDbSortDir"
  ) === "desc"
  ?
@@ -13386,7 +13456,7 @@ function setDatabaseSortKey(key) {
     databaseSortKey =
      key;
 
-    localStorage.setItem(
+    safeStorageSet(
      "pvDbSortKey",
      databaseSortKey
     );
@@ -13406,7 +13476,7 @@ function toggleDatabaseSortDirection() {
      :
      "asc";
 
-    localStorage.setItem(
+    safeStorageSet(
      "pvDbSortDir",
      databaseSortDir
     );
@@ -13989,11 +14059,11 @@ function renderAvatarOptions() {
 
 
     const currentType =
-     localStorage.getItem(
+     safeStorageGet(
       "pvAvatarType"
      );
 const currentValue =
- localStorage.getItem(
+ safeStorageGet(
   "pvAvatarValue"
  );
 
@@ -14031,7 +14101,7 @@ container.innerHTML =
 function loadProfile() {
 
     const name =
-     localStorage.getItem(
+     safeStorageGet(
        "pvProfileName"
      )
      ||
@@ -14055,13 +14125,13 @@ function loadProfile() {
 
 
     let avatarType =
-    localStorage.getItem(
+    safeStorageGet(
      "pvAvatarType"
     );
 
 
 let avatarValue =
- localStorage.getItem(
+ safeStorageGet(
   "pvAvatarValue"
  );
 
@@ -14086,13 +14156,13 @@ if (
      "lion";
 
 
-    localStorage.setItem(
+    safeStorageSet(
      "pvAvatarType",
      "custom"
     );
 
 
-    localStorage.setItem(
+    safeStorageSet(
      "pvAvatarValue",
      "lion"
     );
@@ -14164,13 +14234,13 @@ function setCustomAvatar(key) {
     playWoodClick();
 
 
-    localStorage.setItem(
+    safeStorageSet(
      "pvAvatarType",
      "custom"
     );
 
 
-    localStorage.setItem(
+    safeStorageSet(
      "pvAvatarValue",
      key
     );
@@ -14208,13 +14278,13 @@ function loadAvatarPhoto(event) {
     reader.onload =
      function() {
 
-      localStorage.setItem(
+      safeStorageSet(
        "pvAvatarType",
        "photo"
       );
 
 
-      localStorage.setItem(
+      safeStorageSet(
        "pvAvatarValue",
        reader.result
       );
@@ -14325,7 +14395,7 @@ function saveAccountName() {
     playWoodClick();
 
 
-    localStorage.setItem(
+    safeStorageSet(
      "pvProfileName",
      value
     );
@@ -15575,7 +15645,7 @@ function loadMedalDates() {
 
       const data =
        JSON.parse(
-        localStorage.getItem(
+        safeStorageGet(
          "pvMedalDates"
         )
         ||
@@ -15602,7 +15672,7 @@ function loadMedalDates() {
 
 function saveMedalDates(dates) {
 
-    localStorage.setItem(
+    safeStorageSet(
      "pvMedalDates",
      JSON.stringify(dates)
     );
@@ -15734,7 +15804,7 @@ function syncAchievements(
 
 
     const featured =
-     localStorage.getItem(
+     safeStorageGet(
       "pvFeaturedMedal"
      );
 
@@ -15744,7 +15814,7 @@ function syncAchievements(
       &&
       !dates[featured]
     ){
-      localStorage.removeItem(
+      safeStorageRemove(
        "pvFeaturedMedal"
       );
     }
@@ -15868,7 +15938,7 @@ function renderFeaturedMedal() {
      loadMedalDates();
 
     const featuredId =
-     localStorage.getItem(
+     safeStorageGet(
       "pvFeaturedMedal"
      );
 
@@ -15922,7 +15992,7 @@ function renderFeaturedMedal() {
 function openFeaturedMedal() {
 
     const featuredId =
-     localStorage.getItem(
+     safeStorageGet(
       "pvFeaturedMedal"
      );
 
@@ -15953,7 +16023,7 @@ function openMedalCollection() {
      syncAchievements();
 
     const featured =
-     localStorage.getItem(
+     safeStorageGet(
       "pvFeaturedMedal"
      );
 
@@ -16035,7 +16105,7 @@ function openMedalDetail(id) {
      dates[id];
 
     const featured =
-     localStorage.getItem(
+     safeStorageGet(
       "pvFeaturedMedal"
      );
 
@@ -16095,7 +16165,7 @@ function setFeaturedMedal(id) {
 
     playWoodClick();
 
-    localStorage.setItem(
+    safeStorageSet(
      "pvFeaturedMedal",
      id
     );
@@ -16133,15 +16203,15 @@ function exportBackup() {
      totalTime:
       getStoredTime(),
      profileName:
-      localStorage.getItem(
+      safeStorageGet(
        "pvProfileName"
       ),
      avatarType:
-      localStorage.getItem(
+      safeStorageGet(
        "pvAvatarType"
       ),
      avatarValue:
-      localStorage.getItem(
+      safeStorageGet(
        "pvAvatarValue"
       ),
      soundEnabled:
@@ -16159,7 +16229,7 @@ function exportBackup() {
      medalDates:
       medalDates,
      featuredMedal:
-      localStorage.getItem(
+      safeStorageGet(
        "pvFeaturedMedal"
       )
     };
@@ -16265,7 +16335,7 @@ function importBackup(event) {
           !Array.isArray(backup.stats)
         ){
 
-          localStorage.setItem(
+          safeStorageSet(
            "pvStats",
            JSON.stringify(
             backup.stats
@@ -16281,7 +16351,7 @@ function importBackup(event) {
           )
         ){
 
-          localStorage.setItem(
+          safeStorageSet(
            "pvHistory",
            JSON.stringify(
             backup.history
@@ -16303,7 +16373,7 @@ function importBackup(event) {
             Number(backup.totalTime) || 0
            );
 
-          localStorage.setItem(
+          safeStorageSet(
            "pvTotalTime",
            totalTime
           );
@@ -16320,7 +16390,7 @@ function importBackup(event) {
           backup.profileName !== null
         ){
 
-          localStorage.setItem(
+          safeStorageSet(
            "pvProfileName",
            String(backup.profileName)
           );
@@ -16332,7 +16402,7 @@ function importBackup(event) {
           backup.avatarType
         ){
 
-          localStorage.setItem(
+          safeStorageSet(
            "pvAvatarType",
            String(backup.avatarType)
           );
@@ -16344,7 +16414,7 @@ function importBackup(event) {
           backup.avatarValue
         ){
 
-          localStorage.setItem(
+          safeStorageSet(
            "pvAvatarValue",
            String(backup.avatarValue)
           );
@@ -16358,7 +16428,7 @@ function importBackup(event) {
           undefined
         ){
 
-          localStorage.setItem(
+          safeStorageSet(
            "pvSoundEnabled",
            String(
             Boolean(
@@ -16388,7 +16458,7 @@ function importBackup(event) {
             backup.quizSize
            );
 
-          localStorage.setItem(
+          safeStorageSet(
            "pvQuizSize",
            selectedQuizSize
           );
@@ -16405,7 +16475,7 @@ function importBackup(event) {
           databaseSortKey =
            backup.dbSortKey;
 
-          localStorage.setItem(
+          safeStorageSet(
            "pvDbSortKey",
            databaseSortKey
           );
@@ -16422,7 +16492,7 @@ function importBackup(event) {
           databaseSortDir =
            backup.dbSortDir;
 
-          localStorage.setItem(
+          safeStorageSet(
            "pvDbSortDir",
            databaseSortDir
           );
@@ -16438,7 +16508,7 @@ function importBackup(event) {
           !Array.isArray(backup.medalDates)
         ){
 
-          localStorage.setItem(
+          safeStorageSet(
            "pvMedalDates",
            JSON.stringify(
             backup.medalDates
@@ -16457,7 +16527,7 @@ function importBackup(event) {
           )
         ){
 
-          localStorage.setItem(
+          safeStorageSet(
            "pvFeaturedMedal",
            backup.featuredMedal
           );
@@ -16533,33 +16603,16 @@ function resetAllData() {
 
 
     const keysToRemove =
-     [];
-
-
-    for (
-      let index = 0;
-      index < localStorage.length;
-      index++
-    ){
-
-      const key =
-       localStorage.key(index);
-
-
-      if (
-        key
-        &&
+     safeStorageKeys()
+      .filter(
+       key =>
         key.startsWith("pv")
-      ){
-        keysToRemove.push(key);
-      }
-
-    }
+      );
 
 
     keysToRemove.forEach(
      key =>
-      localStorage.removeItem(key)
+      safeStorageRemove(key)
     );
 
 
@@ -16604,33 +16657,16 @@ function resetAllData() {
      so the reset finishes with an actually empty app namespace.
     */
     const recreatedKeys =
-     [];
-
-
-    for (
-      let index = 0;
-      index < localStorage.length;
-      index++
-    ){
-
-      const key =
-       localStorage.key(index);
-
-
-      if (
-        key
-        &&
+     safeStorageKeys()
+      .filter(
+       key =>
         key.startsWith("pv")
-      ){
-        recreatedKeys.push(key);
-      }
-
-    }
+      );
 
 
     recreatedKeys.forEach(
      key =>
-      localStorage.removeItem(key)
+      safeStorageRemove(key)
     );
 
 
@@ -16709,4 +16745,172 @@ document.addEventListener(
      )
      ||
      target.classList.contains(
-      "home-la
+      "home-last-result"
+     )
+     ||
+     target.classList.contains(
+      "account-action-card"
+     )
+     ||
+     target.classList.contains(
+      "history-card-clickable"
+     )
+     ||
+     target.classList.contains(
+      "database-card"
+     )
+     ||
+     target.classList.contains(
+      "clickable-stat-row"
+     )
+     ||
+     target.classList.contains(
+      "avatar-wrapper"
+     )
+     ||
+     target.classList.contains(
+      "profile-name"
+     )
+    )
+  ){
+
+    event.preventDefault();
+    target.click();
+
+  }
+
+ }
+);
+
+
+/* =========================================================
+ INITIAL LOAD
+========================================================= */
+
+function runBootStep(step) {
+    try {
+        step();
+    } catch (error) {
+        /* Keep the core app interactive even if one optional module fails. */
+    }
+}
+
+runBootStep(loadProfile);
+runBootStep(initialiseQuizSize);
+runBootStep(closePerformanceChart);
+runBootStep(updateHomeStats);
+runBootStep(syncAchievements);
+runBootStep(renderFeaturedMedal);
+runBootStep(syncDatabaseControls);
+runBootStep(syncAppMode);
+
+/* Home chart: an intentional vertical gesture closes it and never reopens it automatically. */
+document.addEventListener(
+ "touchstart",
+ event => {
+
+  if (
+    !chartExplicitlyOpen
+    ||
+    !document.getElementById("home").classList.contains("active")
+    ||
+    !event.touches
+    ||
+    !event.touches.length
+  ){
+    return;
+  }
+
+  homeTouchStartX =
+   event.touches[0].clientX;
+
+  homeTouchStartY =
+   event.touches[0].clientY;
+
+ },
+ {
+  passive:
+   true
+ }
+);
+
+
+document.addEventListener(
+ "touchmove",
+ event => {
+
+  if (
+    !chartExplicitlyOpen
+    ||
+    homeTouchStartX === null
+    ||
+    homeTouchStartY === null
+    ||
+    !event.touches
+    ||
+    !event.touches.length
+  ){
+    return;
+  }
+
+
+  const dx =
+   Math.abs(
+    event.touches[0].clientX
+    -
+    homeTouchStartX
+   );
+
+  const dy =
+   Math.abs(
+    event.touches[0].clientY
+    -
+    homeTouchStartY
+   );
+
+
+  if (
+    dy > 12
+    &&
+    dy > dx
+  ){
+
+    closePerformanceChart();
+    homeTouchStartX = null;
+    homeTouchStartY = null;
+
+  }
+
+ },
+ {
+  passive:
+   true
+ }
+);
+
+
+window.addEventListener(
+ "wheel",
+ event => {
+
+  if (
+    chartExplicitlyOpen
+    &&
+    document.getElementById("home").classList.contains("active")
+    &&
+    Math.abs(event.deltaY) > 4
+  ){
+    closePerformanceChart();
+  }
+
+ },
+ {
+  passive:
+   true
+ }
+);
+
+
+</script>
+</body>
+</html>
