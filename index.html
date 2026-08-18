@@ -3931,6 +3931,382 @@ nav button,.app.quiz-mode nav button{height:58px;min-height:58px!important;paddi
 }
 
 </style>
+<style>
+
+/* =====================================================
+   V9 — LAYOUT REFINEMENT, CEFR COLORS, DASHBOARD DETAILS,
+        DATABASE SORTING & ACHIEVEMENTS
+===================================================== */
+
+/* Chrome coerente e un po' più compatto, con tab più leggibili */
+header{
+  height:116px!important;
+  min-height:116px!important;
+  padding:calc(22px + env(safe-area-inset-top)) 24px 18px!important;
+}
+header h1{font-size:29px!important}
+header p{margin-top:7px!important;font-size:14px!important}
+nav{
+  height:52px!important;
+  min-height:52px!important;
+}
+nav button,.app.quiz-mode nav button{
+  height:52px!important;
+  min-height:52px!important;
+  padding:13px 2px 11px!important;
+  font-size:14px!important;
+  font-weight:900!important;
+}
+
+/* HOME: un solo viewport, meno vuoti e gerarchia più forte */
+.app.home-mode #home{
+  height:calc(100dvh - 168px)!important;
+  padding:10px 16px max(8px,env(safe-area-inset-bottom))!important;
+}
+.app.home-mode #startArea{gap:10px!important}
+.app.home-mode .hero-quiz{
+  padding:16px 19px!important;
+  border-radius:22px!important;
+}
+.app.home-mode .hero-quiz .section-title{
+  font-size:27px!important;
+  line-height:1.06!important;
+}
+.app.home-mode .eyebrow{margin-bottom:4px!important}
+.app.home-mode .quiz-size-label{margin:11px 0 7px!important}
+.app.home-mode .quiz-size-selector{margin-bottom:8px!important}
+.app.home-mode .quiz-size-button{min-height:42px!important}
+.app.home-mode .hero-quiz .main-button{
+  min-height:48px!important;
+  padding:11px!important;
+  margin-top:7px!important;
+  font-size:18px!important;
+}
+.app.home-mode .hero-quiz .secondary-button{
+  min-height:44px!important;
+  padding:10px!important;
+  margin-top:7px!important;
+  font-size:15.5px!important;
+}
+.app.home-mode #startArea>.card:last-child{
+  padding:13px 16px!important;
+  justify-content:flex-start!important;
+}
+.app.home-mode #startArea>.card:last-child .section-title{
+  font-size:22px!important;
+  margin-bottom:7px!important;
+}
+.app.home-mode .mini-grid{gap:9px!important}
+.app.home-mode .mini-card{
+  min-height:76px!important;
+  padding:9px 8px!important;
+}
+.app.home-mode .mini-card strong{
+  font-size:28px!important;
+  margin-bottom:2px!important;
+}
+.app.home-mode .mini-card span{font-size:11px!important}
+.app.home-mode .home-last-result{
+  display:block!important;
+  margin-top:8px!important;
+  padding:10px 13px!important;
+  min-height:64px!important;
+}
+.home-last-empty-title{
+  color:var(--cream-text);
+  font-size:11px;
+  font-weight:950;
+  text-transform:uppercase;
+  letter-spacing:.45px;
+}
+.home-last-empty-text{
+  margin-top:5px;
+  font-size:14px;
+  line-height:1.25;
+  font-weight:800;
+  color:#70551f;
+}
+
+/* Il grafico compare solo dopo una scelta e comprime il resto con moderazione */
+.app.home-mode.chart-open .hero-quiz{padding:11px 16px 12px!important}
+.app.home-mode.chart-open .hero-quiz .section-title{font-size:23px!important}
+.app.home-mode.chart-open .quiz-size-label{margin:6px 0 5px!important}
+.app.home-mode.chart-open .quiz-size-selector{margin-bottom:5px!important}
+.app.home-mode.chart-open .quiz-size-button{min-height:35px!important}
+.app.home-mode.chart-open .performance-chart-wrap{margin:5px 0 6px!important;padding:7px!important}
+.app.home-mode.chart-open .performance-chart{height:74px!important}
+.app.home-mode.chart-open .chart-head{font-size:11px!important;margin-bottom:3px!important}
+.app.home-mode.chart-open .chart-head span{font-size:10px!important}
+.app.home-mode.chart-open .hero-quiz .main-button,
+.app.home-mode.chart-open .hero-quiz .secondary-button{
+  min-height:38px!important;
+  padding:7px!important;
+  margin-top:5px!important;
+}
+.app.home-mode.chart-open #startArea>.card:last-child{padding:8px 14px!important}
+.app.home-mode.chart-open #startArea>.card:last-child .section-title{font-size:18px!important;margin-bottom:4px!important}
+.app.home-mode.chart-open .mini-card{min-height:48px!important;padding:5px!important}
+.app.home-mode.chart-open .mini-card strong{font-size:20px!important}
+.app.home-mode.chart-open .mini-card span{font-size:9.5px!important}
+.app.home-mode.chart-open .home-last-result{min-height:48px!important;margin-top:5px!important;padding:6px 10px!important}
+
+/* CEFR: colori leggibili e coerenti lungo tutta l'app */
+.cefr-badge{
+  min-width:42px!important;
+  height:27px!important;
+  border-radius:9px!important;
+  font-size:12px!important;
+  font-weight:950!important;
+  background:#f2f4f8!important;
+  color:#5d6678!important;
+  border:1px solid #e2e6ee!important;
+}
+.cefr-badge.cefr-a1{background:#e8f7ef!important;color:#34785a!important;border-color:#cbe9da!important}
+.cefr-badge.cefr-a2{background:#dcf3e8!important;color:#257651!important;border-color:#b6e1cd!important}
+.cefr-badge.cefr-b1{background:#cff0df!important;color:#1f754d!important;border-color:#9ed9ba!important}
+.cefr-badge.cefr-b2{background:#fff0d7!important;color:#a46513!important;border-color:#f3cea0!important}
+.cefr-badge.cefr-c1{background:#fde1e5!important;color:#b84457!important;border-color:#efb1ba!important}
+.cefr-badge.cefr-c2{background:#f7cdd5!important;color:#982f43!important;border-color:#e795a4!important}
+
+/* Quiz: badge difficoltà a destra del verso di traduzione */
+.app.quiz-mode .v9-meta-row{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:9px;
+  margin:2px 0 12px;
+}
+.app.quiz-mode .v9-meta-row .direction,
+.app.quiz-mode .v9-meta-row .question-meta{margin:0!important}
+.app.quiz-mode .v9-meta-row .direction{
+  padding:7px 12px!important;
+  font-size:12px!important;
+}
+.app.quiz-mode .question{
+  margin:0 auto!important;
+  font-size:clamp(24px,3.35vh,30px)!important;
+  line-height:1.12!important;
+}
+.app.quiz-mode .question-box{padding:0 2px!important}
+.app.quiz-mode .answers{
+  flex:0 0 auto!important;
+  justify-content:flex-start!important;
+  margin-top:clamp(20px,3.8vh,38px)!important;
+  gap:clamp(8px,1.15vh,12px)!important;
+}
+.app.quiz-mode .answer{
+  min-height:clamp(66px,8.3vh,78px)!important;
+  flex-basis:auto!important;
+  font-size:clamp(17px,2.05vh,19px)!important;
+}
+
+/* Stato corretto: spazio armonico, senza comprimere le quattro risposte */
+.app.quiz-mode #quizArea.correct-state .answers{margin-top:clamp(15px,2.6vh,28px)!important}
+.app.quiz-mode #quizArea.correct-state .feedback.correct{
+  margin-top:auto!important;
+  padding:0!important;
+  background:transparent!important;
+  color:inherit!important;
+}
+.v9-correct-panel{
+  min-height:66px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:12px 16px;
+  border-radius:18px;
+  background:#e5f7ed;
+  border:1px solid #bce5cf;
+  color:#277b55;
+  font-size:17px;
+  line-height:1.2;
+  font-weight:900;
+}
+.v9-correct-panel small{font-size:13px;font-weight:800;opacity:.85}
+.app.quiz-mode #quizArea.correct-state #nextButton{
+  min-height:52px!important;
+  margin-top:8px!important;
+  font-size:16px!important;
+}
+
+/* Errore: solo due alternative e correzione meno rossa, più leggibile */
+.app.quiz-mode #quizArea.wrong-state .v9-meta-row{margin-bottom:6px!important}
+.app.quiz-mode #quizArea.wrong-state .question{font-size:clamp(20px,2.7vh,24px)!important}
+.app.quiz-mode #quizArea.wrong-state .answers{margin-top:10px!important;gap:5px!important}
+.app.quiz-mode #quizArea.wrong-state .answer.v8-keep-answer{
+  min-height:39px!important;
+  max-height:39px!important;
+  height:39px!important;
+  flex-basis:39px!important;
+  font-size:13px!important;
+  padding:4px 9px!important;
+}
+.app.quiz-mode #quizArea.wrong-state .feedback.wrong{
+  background:#fff5f6!important;
+  border:1px solid #f1d4da!important;
+  color:#3f4656!important;
+  gap:6px!important;
+  padding:9px 10px!important;
+}
+.v8-feedback-head{color:#a83f52!important;font-size:15px!important}
+.v8-explanation-card.wrong-card{
+  background:#fff!important;
+  border:1px solid #ecd9dd!important;
+  border-left:4px solid #dd7183!important;
+  color:#3f4656!important;
+}
+.v8-explanation-card.right-card{
+  background:#eaf8f0!important;
+  border:1px solid #c4e8d4!important;
+  border-left:4px solid #63b78b!important;
+  color:#315a46!important;
+}
+.v8-explanation-card{padding:8px 11px!important}
+.v8-explanation-label{font-size:10.5px!important}
+.v8-explanation-title{font-size:14px!important;color:inherit!important}
+.v8-explanation-text{font-size:12.5px!important;line-height:1.33!important}
+.v8-example{font-size:12.2px!important;line-height:1.28!important}
+.v8-example-translation{font-size:11.7px!important;line-height:1.26!important}
+.app.quiz-mode #quizArea.wrong-state #nextButton{min-height:48px!important;font-size:15.5px!important}
+
+/* DATABASE: ordinamento + modale centrato */
+.database-sortbar{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:9px;
+  margin:6px 0 14px;
+}
+.database-sort-select,
+.database-sort-direction{
+  min-height:44px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:#f7f8fb;
+  color:var(--text);
+  font-size:14px;
+  font-weight:850;
+}
+.database-sort-select{padding:0 12px}
+.database-sort-direction{width:48px;font-size:20px}
+.database-detail{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:calc(18px + env(safe-area-inset-top)) 18px calc(18px + env(safe-area-inset-bottom))!important;
+}
+.database-detail.hidden{display:none!important}
+.database-detail-card{
+  width:min(100%,650px);
+  max-height:min(82dvh,760px);
+  overflow:auto;
+  margin:auto;
+}
+.database-card .cefr-badge{flex:0 0 auto}
+
+/* Ranking cliccabili */
+.stat-row.v9-clickable-verb{cursor:pointer;border-radius:14px;padding-left:8px;padding-right:8px;transition:background .15s ease,transform .12s ease}
+.stat-row.v9-clickable-verb:active{transform:scale(.99);background:#f7f8fb}
+
+/* ACCOUNT: profilo più importante e palette più elegante */
+.profile-card{padding-top:24px!important;padding-bottom:20px!important}
+.avatar-wrapper,.avatar{width:126px!important;height:126px!important}
+.avatar-wrapper{margin-bottom:18px!important}
+.avatar-edit-hint{width:34px!important;height:34px!important;right:-3px!important;bottom:0!important}
+.profile-name{font-size:25px!important}
+.profile-medal-row{
+  position:relative;
+  z-index:3;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  margin-top:13px;
+}
+.featured-medal{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  min-height:34px;
+  padding:7px 11px;
+  border-radius:999px;
+  background:rgba(255,255,255,.82);
+  border:1px solid rgba(99,121,238,.15);
+  font-size:12px;
+  font-weight:900;
+}
+.medals-button{
+  width:34px;height:34px;border:0;border-radius:50%;background:var(--primary-light);color:var(--primary);font-size:18px;font-weight:900
+}
+
+/* Dashboard: sei box, palette ordinata */
+#accountDashboardCard .stats-grid{grid-template-columns:repeat(2,1fr)!important;gap:10px!important}
+#accountDashboardCard .stat-box{
+  min-height:112px!important;
+  background:#f4f6fa!important;
+  border:1px solid #e9edf3;
+  cursor:pointer;
+  transition:transform .12s ease,box-shadow .12s ease;
+}
+#accountDashboardCard .stat-box:nth-child(1),#accountDashboardCard .stat-box:nth-child(4){background:#e9f4fb!important}
+#accountDashboardCard .stat-box:nth-child(2),#accountDashboardCard .stat-box:nth-child(5){background:#eef5ec!important}
+#accountDashboardCard .stat-box:nth-child(3),#accountDashboardCard .stat-box:nth-child(6){background:#f3effa!important}
+#accountDashboardCard .stat-box:active{transform:scale(.985);box-shadow:0 4px 12px rgba(23,29,45,.06)}
+#accountDashboardCard .stat-box strong{font-size:29px!important}
+#accountDashboardCard .stat-box span{font-size:12px!important;font-weight:700}
+
+/* Modali dashboard e medaglie */
+.v9-modal{
+  position:fixed;
+  z-index:120;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:calc(18px + env(safe-area-inset-top)) 18px calc(18px + env(safe-area-inset-bottom));
+  background:rgba(23,29,45,.38);
+  backdrop-filter:blur(9px);
+}
+.v9-modal.hidden{display:none!important}
+.v9-modal-card{
+  width:min(100%,620px);
+  max-height:82dvh;
+  overflow:auto;
+  border-radius:25px;
+  padding:21px;
+  background:white;
+  box-shadow:0 20px 70px rgba(23,29,45,.24);
+}
+.v9-modal-card.tone-blue{background:#eef8fd}.v9-modal-card.tone-green{background:#f1f8ef}.v9-modal-card.tone-purple{background:#f6f2fb}
+.v9-modal-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.v9-modal-close{width:38px;height:38px;border:0;border-radius:50%;background:rgba(255,255,255,.75);font-size:21px;font-weight:900;color:var(--text)}
+.v9-modal-kicker{font-size:11px;text-transform:uppercase;letter-spacing:.55px;color:var(--muted);font-weight:950}
+.v9-modal-title{margin-top:4px;font-size:25px;font-weight:950;line-height:1.08}
+.v9-modal-value{margin-top:16px;font-size:44px;font-weight:950;letter-spacing:-1px}
+.v9-modal-text{margin-top:9px;color:#515a6b;font-size:15px;line-height:1.5;font-weight:650}
+.v9-modal-mini{margin-top:13px;padding:13px;border-radius:16px;background:rgba(255,255,255,.68);font-size:13px;line-height:1.45;color:#626b7b}
+
+.medal-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:16px}
+.medal-card{padding:14px;border-radius:17px;background:#f5f6f9;border:1px solid #e7eaf0;text-align:center;cursor:pointer}
+.medal-card.won{background:#fff8e7;border-color:#efdca9}.medal-card.locked{opacity:.48;cursor:default}
+.medal-icon{font-size:30px}.medal-name{margin-top:5px;font-size:13px;font-weight:950}.medal-desc{margin-top:3px;color:var(--muted);font-size:10.5px;line-height:1.25}
+
+@media(max-height:760px){
+  header{height:108px!important;min-height:108px!important;padding-top:calc(17px + env(safe-area-inset-top))!important}
+  nav,nav button,.app.quiz-mode nav button{height:49px!important;min-height:49px!important}
+  .app.home-mode #home{height:calc(100dvh - 157px)!important;padding-top:7px!important}
+  .app.home-mode .hero-quiz{padding:11px 16px!important}
+  .app.home-mode .hero-quiz .section-title{font-size:23px!important}
+  .app.home-mode .mini-card{min-height:62px!important}
+  .app.home-mode .home-last-result{min-height:54px!important}
+  .app.quiz-mode .answers{margin-top:13px!important;gap:6px!important}
+  .app.quiz-mode .answer{min-height:56px!important;font-size:15.5px!important}
+  .app.quiz-mode #quizArea.correct-state .v9-correct-panel{min-height:52px;padding:8px 12px;font-size:15px}
+  .app.quiz-mode #quizArea.correct-state #nextButton{min-height:44px!important}
+  .app.quiz-mode #quizArea.wrong-state .answer.v8-keep-answer{min-height:32px!important;max-height:32px!important;height:32px!important;flex-basis:32px!important;font-size:11.5px!important}
+  .v8-explanation-text{font-size:11.3px!important}.v8-example{font-size:11px!important}.v8-example-translation{font-size:10.5px!important}
+}
+</style>
 </head>
 
 
@@ -13386,5 +13762,587 @@ updateHomeStats();
 syncAppMode();
 
 </script>
+
+
+<script>
+/* =========================================================
+   V9 BEHAVIOUR
+========================================================= */
+(function(){
+  function cefrClass(level){return 'cefr-'+String(level||'B2').toLowerCase().replace(/[^a-z0-9]/g,'');}
+  function paintCefrBadges(root=document){root.querySelectorAll('.cefr-badge').forEach(b=>{[...b.classList].filter(c=>c.startsWith('cefr-')).forEach(c=>b.classList.remove(c));b.classList.add(cefrClass(b.textContent.trim()));});}
+  window.paintCefrBadges=paintCefrBadges;
+
+  function arrangeQuestionMeta(){
+    const box=document.querySelector('#quizArea .question-box'); if(!box)return;
+    const direction=box.querySelector('#direction'); const meta=box.querySelector('.question-meta');
+    if(!direction||!meta)return;
+    let row=box.querySelector('.v9-meta-row');
+    if(!row){row=document.createElement('div');row.className='v9-meta-row';box.insertBefore(row,box.firstChild);}
+    if(direction.parentElement!==row)row.appendChild(direction);
+    if(meta.parentElement!==row)row.appendChild(meta);
+    paintCefrBadges(row);
+  }
+
+  const prevRenderQuestion=window.renderQuestion;
+  window.renderQuestion=function(){prevRenderQuestion();arrangeQuestionMeta();};
+
+  const prevAnswerQuestion=window.answerQuestion;
+  window.answerQuestion=function(button,selected,correctAnswer,q){
+    const isCorrect=selected===correctAnswer;
+    prevAnswerQuestion(button,selected,correctAnswer,q);
+    if(isCorrect){
+      const feedback=document.getElementById('feedback');
+      if(feedback){
+        feedback.className='feedback correct';
+        feedback.innerHTML=`<div class="v9-correct-panel"><span>✓ Corretto</span><small>Punteggio ${score}/${currentIndex+1}</small></div>`;
+      }
+    }
+  };
+
+  function hidePerformanceChart(){
+    const wrap=document.getElementById('performanceChartWrap');
+    if(wrap)wrap.classList.remove('visible');
+    const app=document.getElementById('appShell');
+    if(app)app.classList.remove('chart-open');
+  }
+  window.hidePerformanceChart=hidePerformanceChart;
+
+  const prevShowScreen=window.showScreen;
+  window.showScreen=function(screenId){
+    hidePerformanceChart();
+    const result=prevShowScreen(screenId);
+    setTimeout(()=>paintCefrBadges(),0);
+    return result;
+  };
+
+  /* Ultimo quiz sempre visibile, anche prima del primo test */
+  const prevUpdateHomeStats=window.updateHomeStats;
+  window.updateHomeStats=function(){
+    prevUpdateHomeStats();
+    const history=loadHistory();
+    const box=document.getElementById('homeLastResult');
+    if(!box)return;
+    if(!history.length){
+      box.classList.remove('hidden');
+      box.innerHTML=`<div class="home-last-empty-title">Ultimo quiz</div><div class="home-last-empty-text">In attesa del tuo primo quiz.</div>`;
+    }
+  };
+
+  /* DATABASE SORTING */
+  let dbSortKey=localStorage.getItem('pvDbSortKey')||'alpha';
+  let dbSortDir=localStorage.getItem('pvDbSortDir')||'asc';
+  const levelOrder={A1:1,A2:2,B1:3,B2:4,C1:5,C2:6};
+
+  function getSortedVerbRows(){
+    const stats=loadStats();
+    const rows=phrasalVerbs.map((item,index)=>({item,index,wrong:(stats[item[0]]&&stats[item[0]].wrong)||0}));
+    rows.sort((a,b)=>{
+      let cmp=0;
+      if(dbSortKey==='level') cmp=(levelOrder[a.item[5]]||99)-(levelOrder[b.item[5]]||99)||a.item[0].localeCompare(b.item[0],'en');
+      else if(dbSortKey==='wrong') cmp=a.wrong-b.wrong||a.item[0].localeCompare(b.item[0],'en');
+      else cmp=a.item[0].localeCompare(b.item[0],'en');
+      return dbSortDir==='desc'?-cmp:cmp;
+    });
+    return rows;
+  }
+
+  function renderDatabaseV9(){
+    const list=document.getElementById('databaseList'); if(!list)return;
+    const stats=loadStats();
+    const rows=getSortedVerbRows();
+    list.innerHTML=`
+      <div class="database-sortbar">
+        <select class="database-sort-select" id="databaseSortSelect" aria-label="Ordina database">
+          <option value="alpha" ${dbSortKey==='alpha'?'selected':''}>Ordine alfabetico</option>
+          <option value="level" ${dbSortKey==='level'?'selected':''}>Livello CEFR</option>
+          <option value="wrong" ${dbSortKey==='wrong'?'selected':''}>Numero di errori</option>
+        </select>
+        <button class="database-sort-direction" id="databaseSortDirection" aria-label="Inverti ordinamento">${dbSortDir==='asc'?'↑':'↓'}</button>
+      </div>
+      ${rows.map(({item,index})=>{
+        const st=stats[item[0]]; const info=st&&st.seen?`${Math.round(st.correct/st.seen*100)}% · ${st.correct}/${st.seen} corrette · ${st.wrong||0} errori`:'Mai testato';
+        return `<div class="card database-card" role="button" tabindex="0" onclick="openDatabaseDetail(${index})"><div class="database-card-head"><div><div class="verb">${escapeHTML(item[0])}</div><div class="translation">${escapeHTML(capitalizeFirst(item[1]))}</div></div><span class="cefr-badge ${cefrClass(item[5])}">${escapeHTML(item[5]||'B2')}</span></div><div class="translation" style="margin-top:8px">${info} · Tocca per studiare</div></div>`;
+      }).join('')}
+    `;
+    const select=document.getElementById('databaseSortSelect'); const dir=document.getElementById('databaseSortDirection');
+    if(select)select.onchange=()=>{playWoodClick();dbSortKey=select.value;localStorage.setItem('pvDbSortKey',dbSortKey);renderDatabaseV9();};
+    if(dir)dir.onclick=()=>{playWoodClick();dbSortDir=dbSortDir==='asc'?'desc':'asc';localStorage.setItem('pvDbSortDir',dbSortDir);renderDatabaseV9();};
+    paintCefrBadges(list);
+  }
+  window.renderDatabase=renderDatabaseV9;
+
+  const prevOpenDatabaseDetail=window.openDatabaseDetail;
+  window.openDatabaseDetail=function(index){prevOpenDatabaseDetail(index);setTimeout(()=>paintCefrBadges(document.getElementById('databaseDetail')),0);};
+  window.openVerbDetailByName=function(name){const idx=phrasalVerbs.findIndex(v=>v[0]===name);if(idx>=0){const db=document.getElementById('database');if(!db.classList.contains('active')){showScreen('database');}setTimeout(()=>openDatabaseDetail(idx),30);}};
+
+  /* Ranking cliccabili */
+  window.renderRankings=function(stats){
+    const entries=phrasalVerbs.filter(i=>stats[i[0]]&&stats[i[0]].seen>0).map(i=>{const s=stats[i[0]];return{verb:i[0],italian:i[1],seen:s.seen,correct:s.correct,wrong:s.wrong,accuracy:s.correct/s.seen*100};});
+    const worst=[...entries].sort((a,b)=>a.accuracy-b.accuracy||b.wrong-a.wrong).slice(0,10);
+    const best=[...entries].sort((a,b)=>b.accuracy-a.accuracy||b.correct-a.correct).slice(0,10);
+    const render=item=>`<div class="stat-row v9-clickable-verb" role="button" tabindex="0" onclick="openVerbDetailByName(${JSON.stringify(item.verb).replace(/"/g,'&quot;')})"><div><div class="verb">${escapeHTML(item.verb)}</div><div class="translation">${escapeHTML(capitalizeFirst(item.italian))}</div><div class="translation">${item.correct} corrette · ${item.wrong} errate · ${item.seen} tentativi</div><div class="mastery-track"><div class="mastery-bar" style="width:${Math.round(item.accuracy)}%;background:${item.accuracy>=80?'#75cba1':item.accuracy<=50?'#ee9baa':'#eecb75'}"></div></div></div><div class="stat-number ${item.accuracy>=80?'good':item.accuracy<=50?'bad':''}">${Math.round(item.accuracy)}%</div></div>`;
+    document.getElementById('worstVerbs').innerHTML=worst.length?worst.map(render).join(''):'<div class="empty">Completa qualche quiz.</div>';
+    document.getElementById('bestVerbs').innerHTML=best.length?best.map(render).join(''):'<div class="empty">Completa qualche quiz.</div>';
+  };
+
+  /* CEFR estimate */
+  function getCefrEstimate(){
+    const stats=loadStats(); const levels=['A1','A2','B1','B2','C1','C2'];
+    const detail={};
+    levels.forEach(level=>{const verbs=phrasalVerbs.filter(v=>(v[5]||'B2')===level && stats[v[0]]&&stats[v[0]].seen>0);let seen=0,correct=0;verbs.forEach(v=>{seen+=stats[v[0]].seen||0;correct+=stats[v[0]].correct||0;});detail[level]={unique:verbs.length,seen,accuracy:seen?Math.round(correct/seen*100):null};});
+    let estimate='—';
+    for(const level of levels){const d=detail[level];if(d.unique>=3&&d.accuracy>=70)estimate=level;}
+    return {estimate,detail};
+  }
+  window.getCefrEstimate=getCefrEstimate;
+
+  function ensureV9Modals(){
+    if(!document.getElementById('v9StatsModal'))document.body.insertAdjacentHTML('beforeend','<div id="v9StatsModal" class="v9-modal hidden"><div id="v9StatsModalCard" class="v9-modal-card"></div></div>');
+    if(!document.getElementById('v9MedalsModal'))document.body.insertAdjacentHTML('beforeend','<div id="v9MedalsModal" class="v9-modal hidden"><div id="v9MedalsModalCard" class="v9-modal-card"></div></div>');
+    document.querySelectorAll('.v9-modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m){m.classList.add('hidden');document.body.style.overflow='';}}));
+  }
+  window.closeV9Modal=function(id){const m=document.getElementById(id);if(m)m.classList.add('hidden');document.body.style.overflow='';};
+
+  function dashboardStats(){
+    const history=loadHistory(); const stats=loadStats(); let totalSeen=0; Object.values(stats).forEach(s=>totalSeen+=s.seen||0);
+    const avg=history.length?Math.round(history.reduce((s,q)=>s+q.percentage,0)/history.length):null;
+    const tested=phrasalVerbs.filter(v=>stats[v[0]]&&stats[v[0]].seen>0).length;
+    const timed=history.filter(q=>q.durationSeconds); const avgTime=timed.length?Math.round(timed.reduce((s,q)=>s+q.durationSeconds,0)/timed.length):null;
+    const cefr=getCefrEstimate();
+    return {history,stats,totalSeen,avg,tested,avgTime,cefr};
+  }
+
+  const dashboardDefs=[
+    {key:'time',label:"Tempo totale nell'app",tone:'blue',get:d=>formatDuration(getLiveTotalTime()),text:d=>`Tempo effettivo registrato mentre l'app è visibile. Hai completato ${d.history.length} quiz e risposto a ${d.totalSeen} domande.`,mini:d=>'Il conteggio continua automaticamente durante l’utilizzo dell’app.'},
+    {key:'quizzes',label:'Quiz completati',tone:'green',get:d=>String(d.history.length),text:d=>d.history.length?`Hai completato ${d.history.length} quiz. L’ultimo è stato da ${d.history[0].total} domande con ${d.history[0].percentage}% di accuratezza.`:'Completa il primo quiz per iniziare a costruire lo storico.',mini:d=>`Quiz da 10: ${d.history.filter(q=>q.total===10).length} · 20: ${d.history.filter(q=>q.total===20).length} · 50: ${d.history.filter(q=>q.total===50).length} · 100: ${d.history.filter(q=>q.total===100).length}`},
+    {key:'average',label:'Media quiz',tone:'purple',get:d=>d.avg===null?'—':d.avg+'%',text:d=>d.avg===null?'Non ci sono ancora quiz completati.':`La tua media complessiva è ${d.avg}%, calcolata su tutti i quiz salvati nello storico.`,mini:d=>d.history.length?`Migliore: ${Math.max(...d.history.map(q=>q.percentage))}% · Ultimo: ${d.history[0].percentage}%`:'La media si aggiorna a ogni quiz.'},
+    {key:'tested',label:'Verbi testati',tone:'blue',get:d=>`${d.tested}/500`,text:d=>`Hai incontrato almeno una volta ${d.tested} dei 500 phrasal verbs del database.`,mini:d=>`${500-d.tested} verbi non sono ancora comparsi nei tuoi quiz.`},
+    {key:'avgtime',label:'Tempo medio per quiz',tone:'green',get:d=>d.avgTime?formatDuration(d.avgTime):'—',text:d=>d.avgTime?`Un quiz dura mediamente ${formatDuration(d.avgTime)} sulla base dei quiz per cui è disponibile il tempo.`:'Serve almeno un quiz temporizzato per calcolare questa statistica.',mini:d=>d.history.length?`Tempo totale registrato nell’app: ${formatDuration(getLiveTotalTime())}.`:'Il tempo medio comparirà dopo il primo quiz.'},
+    {key:'cefr',label:'Livello CEFR stimato',tone:'purple',get:d=>d.cefr.estimate,text:d=>d.cefr.estimate==='—'?'Servono più risposte distribuite sui diversi livelli prima di stimare il livello.':`Stima attuale: ${d.cefr.estimate}. È basata sui phrasal verbs testati, sulla loro classificazione CEFR e sulla tua accuratezza.`,mini:d=>Object.entries(d.cefr.detail).map(([l,x])=>`${l}: ${x.unique} verbi${x.accuracy!==null?' · '+x.accuracy+'%':''}`).join(' · ')+'\nQuesta è una metrica interna dell’app, non una certificazione ufficiale.'}
+  ];
+
+  window.openDashboardStat=function(key){
+    ensureV9Modals(); playWoodClick(); const d=dashboardStats(); const def=dashboardDefs.find(x=>x.key===key); if(!def)return;
+    const modal=document.getElementById('v9StatsModal'); const card=document.getElementById('v9StatsModalCard');
+    card.className=`v9-modal-card tone-${def.tone}`;
+    card.innerHTML=`<div class="v9-modal-top"><div><div class="v9-modal-kicker">Dashboard</div><div class="v9-modal-title">${def.label}</div></div><button class="v9-modal-close" onclick="closeV9Modal('v9StatsModal')">×</button></div><div class="v9-modal-value">${def.get(d)}</div><div class="v9-modal-text">${def.text(d)}</div><div class="v9-modal-mini">${escapeHTML(def.mini(d)).replace(/\n/g,'<br>')}</div>`;
+    modal.classList.remove('hidden'); document.body.style.overflow='hidden';
+  };
+
+  function rebuildDashboard(){
+    const grid=document.querySelector('#accountDashboardCard .stats-grid'); if(!grid)return;
+    const d=dashboardStats();
+    grid.innerHTML=dashboardDefs.map(def=>`<div class="stat-box" role="button" tabindex="0" onclick="openDashboardStat('${def.key}')"><strong>${def.get(d)}</strong><span>${def.label}</span></div>`).join('');
+  }
+
+  /* Medaglie */
+  function medalDefinitions(){
+    const d=dashboardStats(); const hours=getLiveTotalTime()/3600; const cefrOrder={A1:1,A2:2,B1:3,B2:4,C1:5,C2:6}; const lvl=cefrOrder[d.cefr.estimate]||0;
+    return [
+      {id:'first',icon:'🎖️',name:'Primo passo',desc:'Completa il primo quiz',won:d.history.length>=1},
+      {id:'q10',icon:'🏅',name:'10 Quiz',desc:'Completa 10 quiz',won:d.history.length>=10},
+      {id:'q50',icon:'🏵️',name:'50 Quiz',desc:'Completa 50 quiz',won:d.history.length>=50},
+      {id:'q100',icon:'🥇',name:'100 Quiz',desc:'Completa 100 quiz',won:d.history.length>=100},
+      {id:'verbs100',icon:'📚',name:'100 Verbi',desc:'Testa 100 phrasal verbs',won:d.tested>=100},
+      {id:'verbs250',icon:'📘',name:'250 Verbi',desc:'Testa metà database',won:d.tested>=250},
+      {id:'verbs500',icon:'🏆',name:'Database completo',desc:'Testa tutti i 500 verbi',won:d.tested>=500},
+      {id:'b1',icon:'🛡️',name:'Scudetto B1',desc:'Raggiungi la stima B1',won:lvl>=3},
+      {id:'b2',icon:'🛡️',name:'Scudetto B2',desc:'Raggiungi la stima B2',won:lvl>=4},
+      {id:'c1',icon:'🛡️',name:'Scudetto C1',desc:'Raggiungi la stima C1',won:lvl>=5},
+      {id:'h10',icon:'⏱️',name:'10 Ore',desc:'10 ore nell’app',won:hours>=10},
+      {id:'h100',icon:'🎗️',name:'100 Ore',desc:'100 ore nell’app',won:hours>=100}
+    ];
+  }
+  function ensureProfileMedals(){
+    const profile=document.querySelector('#account .profile-card'); if(!profile)return;
+    let row=profile.querySelector('.profile-medal-row'); if(!row){row=document.createElement('div');row.className='profile-medal-row';profile.appendChild(row);}
+    const medals=medalDefinitions(); const won=medals.filter(m=>m.won); let selected=localStorage.getItem('pvFeaturedMedal'); if(!won.some(m=>m.id===selected))selected=won[0]?.id||null; if(selected)localStorage.setItem('pvFeaturedMedal',selected);
+    const medal=medals.find(m=>m.id===selected);
+    row.innerHTML=`<div class="featured-medal">${medal?`${medal.icon} ${medal.name}`:'🔒 Nessuna medaglia ancora'}</div><button class="medals-button" onclick="openMedalsGallery()" aria-label="Vedi medaglie">+</button>`;
+  }
+  window.openMedalsGallery=function(){
+    ensureV9Modals(); playWoodClick(); const medals=medalDefinitions(); const modal=document.getElementById('v9MedalsModal'); const card=document.getElementById('v9MedalsModalCard');
+    card.innerHTML=`<div class="v9-modal-top"><div><div class="v9-modal-kicker">Profilo</div><div class="v9-modal-title">Le tue medaglie</div></div><button class="v9-modal-close" onclick="closeV9Modal('v9MedalsModal')">×</button></div><div class="v9-modal-text">Puoi vincerne più di una. Tocca una medaglia sbloccata per scegliere quella da esporre nel profilo.</div><div class="medal-grid">${medals.map(m=>`<div class="medal-card ${m.won?'won':'locked'}" ${m.won?`onclick="selectFeaturedMedal('${m.id}')"`:''}><div class="medal-icon">${m.icon}</div><div class="medal-name">${m.name}</div><div class="medal-desc">${m.won?'Sbloccata':'Da sbloccare'} · ${m.desc}</div></div>`).join('')}</div>`;
+    modal.classList.remove('hidden');document.body.style.overflow='hidden';
+  };
+  window.selectFeaturedMedal=function(id){localStorage.setItem('pvFeaturedMedal',id);playWoodClick();ensureProfileMedals();closeV9Modal('v9MedalsModal');};
+
+  const prevRenderAccount=window.renderAccount;
+  window.renderAccount=function(){prevRenderAccount();rebuildDashboard();ensureProfileMedals();paintCefrBadges();};
+
+  /* Etichette più grandi / coerenti */
+  function staticTextFixes(){
+    document.querySelectorAll('.hero-quiz .section-title').forEach(el=>{if(el.textContent.trim().toLowerCase()==='nuovo quiz')el.textContent='Nuovo Quiz';});
+    document.querySelectorAll('.hero-quiz .main-button').forEach(el=>{if(el.textContent.trim().toLowerCase()==='inizia quiz')el.textContent='Inizia Quiz';});
+  }
+
+  ensureV9Modals(); staticTextFixes(); updateHomeStats(); paintCefrBadges();
+})();
+</script>
+
+
+
+<style>
+/* =========================================================
+   V9.1 — FEEDBACK PIU PULITO + GRAFICO DINAMICO
+========================================================= */
+
+/* Le schede di correzione mantengono la stessa estetica V9,
+   ma senza il paragrafo esplicativo ridondante. */
+.v91-answer-example{
+  margin-top:10px;
+  padding-top:9px;
+  border-top:1px solid rgba(23,29,45,.11);
+  font-size:13.2px;
+  line-height:1.38;
+  font-weight:650;
+}
+.v91-answer-example-en{
+  color:inherit;
+  font-style:italic;
+  font-weight:780;
+}
+.v91-answer-example-it{
+  margin-top:4px;
+  color:#6f788a;
+  font-size:12.7px;
+  line-height:1.35;
+  font-weight:650;
+}
+.wrong-card .v91-answer-example-it{color:#9c5663;}
+.right-card .v91-answer-example-it{color:#4b866a;}
+
+/* Feedback corretto: stessa logica visiva del box corretto usato negli errori. */
+.v91-correct-feedback{
+  display:block;
+  color:var(--mint-text);
+  background:var(--mint);
+  border:1px solid #b9e5cf;
+  border-radius:16px;
+  padding:12px 13px;
+  text-align:left;
+}
+.v91-correct-feedback-head{
+  text-align:center;
+  font-size:15px;
+  font-weight:900;
+  margin-bottom:8px;
+}
+.v91-correct-card{
+  padding:11px 13px;
+  border-radius:14px;
+  background:rgba(255,255,255,.68);
+  border:1px solid rgba(39,123,85,.16);
+}
+.v91-correct-label{
+  color:var(--mint-text);
+  font-size:11px;
+  font-weight:950;
+  text-transform:uppercase;
+  letter-spacing:.55px;
+}
+.v91-correct-title{
+  margin-top:4px;
+  color:var(--mint-text);
+  font-size:15px;
+  line-height:1.28;
+  font-weight:900;
+}
+.v91-correct-score{
+  margin-top:8px;
+  text-align:center;
+  color:var(--mint-text);
+  font-size:13px;
+  font-weight:850;
+}
+
+/* Il grafico usa bande generate in JS, così lo zoom verticale resta coerente. */
+.performance-chart{
+  position:relative;
+  background:#fff!important;
+}
+.v91-chart-bands{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  border-radius:inherit;
+  pointer-events:none;
+}
+.v91-chart-band{
+  position:absolute;
+  left:0;
+  right:0;
+}
+.v91-chart-band.green-dark{background:rgba(63,140,92,.14);}
+.v91-chart-band.green-light{background:rgba(113,190,135,.11);}
+.v91-chart-band.yellow{background:rgba(235,201,88,.12);}
+.v91-chart-band.red{background:rgba(231,104,117,.10);}
+.performance-chart > svg,
+.performance-chart > .chart-dot{
+  position:absolute;
+  z-index:2;
+}
+.performance-chart > svg{
+  inset:0;
+}
+.v91-chart-scale{
+  position:absolute;
+  left:6px;
+  top:5px;
+  z-index:3;
+  color:#858da0;
+  font-size:9px;
+  line-height:1;
+  font-weight:800;
+  pointer-events:none;
+}
+
+/* In quiz-mode il nuovo feedback corretto resta compatto e leggibile. */
+.app.quiz-mode #quizArea.correct-state .feedback{
+  margin-top:9px;
+}
+.app.quiz-mode #quizArea.correct-state .v91-correct-feedback{
+  padding:9px 11px;
+}
+.app.quiz-mode #quizArea.correct-state .v91-correct-card{
+  padding:8px 10px;
+}
+.app.quiz-mode #quizArea.correct-state .v91-answer-example{
+  margin-top:7px;
+  padding-top:7px;
+}
+
+@media (max-height:760px){
+  .app.quiz-mode #quizArea.correct-state .v91-correct-feedback{padding:7px 9px;}
+  .app.quiz-mode #quizArea.correct-state .v91-correct-feedback-head{font-size:13px;margin-bottom:5px;}
+  .app.quiz-mode #quizArea.correct-state .v91-correct-card{padding:7px 9px;}
+  .app.quiz-mode #quizArea.correct-state .v91-correct-title{font-size:13px;}
+  .app.quiz-mode #quizArea.correct-state .v91-answer-example{font-size:11.2px;line-height:1.26;}
+  .app.quiz-mode #quizArea.correct-state .v91-answer-example-it{font-size:10.8px;line-height:1.24;}
+  .app.quiz-mode #quizArea.correct-state .v91-correct-score{font-size:11.5px;margin-top:5px;}
+}
+</style>
+
+<script>
+/* =========================================================
+   V9.1 BEHAVIOUR
+   - spiegazioni sintetiche con esempi per risposta scelta/corretta
+   - feedback corretto coerente con la stessa struttura
+   - grafico auto-refresh + zoom verticale adattivo + spazio a destra
+========================================================= */
+(function(){
+
+  function v91FindAnswerRow(selected,q){
+    const normalized=String(selected||'').trim().toLowerCase();
+    if(q.direction==='IT_EN'){
+      return phrasalVerbs.find(item=>String(item[0]).toLowerCase()===normalized)||null;
+    }
+    return phrasalVerbs.find(item=>capitalizeFirst(item[1]).toLowerCase()===normalized)||null;
+  }
+
+  function v91ExampleHTML(row,fallbackEN='',fallbackIT=''){
+    const en=row&&row[3]?row[3]:fallbackEN;
+    const it=row&&row[4]?row[4]:fallbackIT;
+    if(!en&&!it)return '';
+    return `
+      <div class="v91-answer-example">
+        ${en?`<div class="v91-answer-example-en">“${escapeHTML(en)}”</div>`:''}
+        ${it?`<div class="v91-answer-example-it">${escapeHTML(it)}</div>`:''}
+      </div>
+    `;
+  }
+
+  /* Sostituisce il builder V8: niente paragrafo generico/ridondante.
+     Entrambe le risposte mostrano significato + esempio contestuale. */
+  window.v8BuildWrongExplanation=function(selected,correctAnswer,q){
+    const wrongRow=v91FindAnswerRow(selected,q);
+    const wrongVerb=wrongRow?wrongRow[0]:selected;
+    const wrongMeaning=wrongRow?capitalizeFirst(wrongRow[1]):'Risposta non corretta per questa domanda';
+    const rightRow=phrasalVerbs.find(item=>item[0]===q.verb)||null;
+
+    return `
+      <div class="v8-feedback-head">
+        ✕ Errato · Risposta corretta: <strong>${escapeHTML(correctAnswer)}</strong>
+      </div>
+
+      <div class="v8-explanation-card wrong-card">
+        <div class="v8-explanation-label">La tua risposta</div>
+        <div class="v8-explanation-title">
+          ${escapeHTML(wrongVerb)} = ${escapeHTML(wrongMeaning)}
+        </div>
+        ${v91ExampleHTML(wrongRow)}
+      </div>
+
+      <div class="v8-explanation-card right-card">
+        <div class="v8-explanation-label">Risposta corretta</div>
+        <div class="v8-explanation-title">
+          ${escapeHTML(q.verb)} = ${escapeHTML(capitalizeFirst(q.italian))}
+        </div>
+        ${v91ExampleHTML(rightRow,q.exampleEN,q.exampleIT)}
+      </div>
+
+      <div class="v8-feedback-score">
+        Punteggio: ${score}/${currentIndex+1}
+      </div>
+    `;
+  };
+
+  /* Override finale del feedback corretto: anche una risposta giusta diventa
+     un micro-momento di ripasso senza appesantire la schermata. */
+  const v91PreviousAnswerQuestion=window.answerQuestion;
+  window.answerQuestion=function(button,selected,correctAnswer,q){
+    const isCorrect=selected===correctAnswer;
+    v91PreviousAnswerQuestion(button,selected,correctAnswer,q);
+
+    if(!isCorrect)return;
+
+    const feedback=document.getElementById('feedback');
+    if(!feedback)return;
+
+    const rightRow=phrasalVerbs.find(item=>item[0]===q.verb)||null;
+    feedback.className='feedback correct';
+    feedback.innerHTML=`
+      <div class="v91-correct-feedback">
+        <div class="v91-correct-feedback-head">✓ Corretto</div>
+        <div class="v91-correct-card">
+          <div class="v91-correct-label">Risposta corretta</div>
+          <div class="v91-correct-title">
+            ${escapeHTML(q.verb)} = ${escapeHTML(capitalizeFirst(q.italian))}
+          </div>
+          ${v91ExampleHTML(rightRow,q.exampleEN,q.exampleIT)}
+        </div>
+        <div class="v91-correct-score">Punteggio: ${score}/${currentIndex+1}</div>
+      </div>
+    `;
+  };
+
+  function v91ChartRange(points){
+    const values=points.map(p=>Number(p.percentage)||0);
+    const shareAtLeast=(threshold)=>values.filter(v=>v>=threshold).length/Math.max(values.length,1);
+
+    /* Zoom progressivo: la fascia rossa sparisce quando la performance
+       è stabilmente sopra il 50%, senza rendere il grafico nervoso. */
+    if(shareAtLeast(90)>=0.7)return {min:80,max:100};
+    if(shareAtLeast(80)>=0.7)return {min:70,max:100};
+    if(shareAtLeast(50)>0.5)return {min:50,max:100};
+    return {min:0,max:100};
+  }
+
+  function v91BandHTML(min,max){
+    const ranges=[
+      {from:90,to:100,cls:'green-dark'},
+      {from:80,to:90,cls:'green-light'},
+      {from:50,to:80,cls:'yellow'},
+      {from:0,to:50,cls:'red'}
+    ];
+    const span=max-min;
+    return ranges.map(r=>{
+      const low=Math.max(min,r.from);
+      const high=Math.min(max,r.to);
+      if(high<=low)return '';
+      const top=(max-high)/span*100;
+      const height=(high-low)/span*100;
+      return `<div class="v91-chart-band ${r.cls}" style="top:${top}%;height:${height}%"></div>`;
+    }).join('');
+  }
+
+  window.renderPerformanceChart=function(size){
+    const wrap=document.getElementById('performanceChartWrap');
+    const chart=document.getElementById('performanceChart');
+    const meta=document.getElementById('chartMeta');
+    const title=document.getElementById('chartTitle');
+    if(!wrap||!chart||!meta||!title)return;
+
+    wrap.classList.add('visible');
+    document.getElementById('appShell').classList.add('chart-open');
+    title.textContent=`Andamento · Quiz da ${size}`;
+
+    const points=loadHistory()
+      .filter(item=>Number(item.total)===Number(size))
+      .slice(0,20)
+      .reverse();
+
+    meta.textContent=points.length?`${points.length} quiz`:'Nessun quiz';
+
+    if(!points.length){
+      chart.innerHTML='<div class="chart-empty">Completa un quiz di questa lunghezza per iniziare lo storico.</div>';
+      return;
+    }
+
+    const {min,max}=v91ChartRange(points);
+    const span=max-min;
+
+    /* L'ultimo punto arriva circa ai 2/3 della larghezza; il terzo finale
+       resta libero per dare respiro visivo e mostrare la direzione futura. */
+    const leftPad=4;
+    const lastX=67;
+    const xPercent=index=>points.length===1?lastX:leftPad+index*(lastX-leftPad)/(points.length-1);
+    const yPercent=value=>{
+      const clamped=Math.max(min,Math.min(max,Number(value)||0));
+      return 4+(max-clamped)*(92/span);
+    };
+
+    const polyline=points.map((point,index)=>`${xPercent(index)},${yPercent(point.percentage)}`).join(' ');
+    const dots=points.map((point,index)=>`
+      <span
+        class="chart-dot"
+        style="left:${xPercent(index)}%;top:${yPercent(point.percentage)}%;"
+        title="${point.percentage}%"
+        aria-label="${point.percentage}%"
+      ></span>
+    `).join('');
+
+    const guideValues=[90,80,50].filter(v=>v>min&&v<max);
+    const guides=guideValues.map(v=>`<line x1="0" y1="${yPercent(v)}" x2="100" y2="${yPercent(v)}" stroke="rgba(0,0,0,.08)" />`).join('');
+
+    chart.innerHTML=`
+      <div class="v91-chart-bands">${v91BandHTML(min,max)}</div>
+      <div class="v91-chart-scale">${min}%–${max}%</div>
+      <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-label="Storico percentuale di successo">
+        ${guides}
+        <polyline
+          points="${polyline}"
+          fill="none"
+          stroke="#6379ee"
+          stroke-width="1.25"
+          vector-effect="non-scaling-stroke"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+      ${dots}
+    `;
+  };
+
+  /* Aggiornamento automatico del grafico appena il quiz viene salvato. */
+  const v91PreviousFinishQuiz=window.finishQuiz;
+  window.finishQuiz=function(){
+    const completedSize=quiz.length;
+    v91PreviousFinishQuiz();
+
+    /* Se il grafico di quella lunghezza era già stato selezionato,
+       aggiorniamo subito i dati anche se il pannello è momentaneamente nascosto. */
+    const title=document.getElementById('chartTitle');
+    const wrap=document.getElementById('performanceChartWrap');
+    const selectedWasVisible=wrap&&wrap.classList.contains('visible');
+    const selectedMatches=title&&title.textContent.includes(`Quiz da ${completedSize}`);
+    if(selectedWasVisible&&selectedMatches){
+      renderPerformanceChart(completedSize);
+    }
+  };
+
+  /* Tornando alla Home dopo un quiz, il grafico appena aggiornato compare
+     automaticamente per la lunghezza appena completata: nessun secondo tap. */
+  const v91PreviousGoHome=window.goHomeAfterQuiz;
+  window.goHomeAfterQuiz=function(){
+    const completedSize=quiz.length||selectedQuizSize;
+    v91PreviousGoHome();
+    setTimeout(()=>renderPerformanceChart(completedSize),0);
+  };
+
+})();
+</script>
+
 </body>
 </html>
