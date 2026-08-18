@@ -50,6 +50,7 @@
     html,
     body {
       margin: 0;
+
       background: var(--background);
       color: var(--text);
 
@@ -73,6 +74,7 @@
 
     .app {
       max-width: 720px;
+
       min-height: 100vh;
       min-height: 100dvh;
 
@@ -231,6 +233,20 @@
       letter-spacing: .7px;
     }
 
+    .hidden {
+      display: none !important;
+    }
+
+    .empty {
+      padding: 30px 10px;
+
+      text-align: center;
+
+      color: #9aa1ad;
+
+      line-height: 1.5;
+    }
+
     /* =====================================================
        BUTTONS
     ===================================================== */
@@ -259,7 +275,8 @@
     .danger-button:active,
     .answer:active,
     .quiz-size-button:active,
-    .avatar-choice:active {
+    .avatar-choice:active,
+    .result-size-button:active {
       transform: scale(.975);
     }
 
@@ -434,7 +451,7 @@
     }
 
     /* =====================================================
-       QUIZ NORMAL
+       QUIZ
     ===================================================== */
 
     .quiz-top {
@@ -643,6 +660,13 @@
       letter-spacing: .45px;
     }
 
+    .learning-meaning {
+      margin-bottom: 7px;
+
+      font-size: 13px;
+      font-weight: 750;
+    }
+
     .learning-explanation {
       margin-bottom: 7px;
 
@@ -651,13 +675,6 @@
       font-size: 12px;
       line-height: 1.35;
       font-weight: 600;
-    }
-
-    .learning-meaning {
-      margin-bottom: 7px;
-
-      font-size: 13px;
-      font-weight: 750;
     }
 
     .learning-example {
@@ -801,53 +818,54 @@
 
     .app.quiz-mode .feedback {
       margin-top: 8px;
-      padding: 9px 11px;
+      padding: 10px 12px;
 
       border-radius: 14px;
 
-      font-size: 13px;
-      line-height: 1.28;
+      font-size: 14px;
+      line-height: 1.3;
 
       flex: 0 0 auto;
     }
 
     .app.quiz-mode .learning-box {
-      margin-top: 6px;
-      padding: 7px 9px;
+      margin-top: 7px;
+      padding: 9px 11px;
 
-      border-radius: 11px;
+      border-radius: 12px;
     }
 
     .app.quiz-mode .learning-title {
-      margin-bottom: 2px;
+      margin-bottom: 3px;
 
-      font-size: 9px;
-    }
-
-    .app.quiz-mode .learning-explanation {
-      margin-bottom: 4px;
-
-      font-size: 10.5px;
-      line-height: 1.2;
+      font-size: 11px;
+      line-height: 1.15;
     }
 
     .app.quiz-mode .learning-meaning {
-      margin-bottom: 4px;
+      margin-bottom: 5px;
 
-      font-size: 11px;
-      line-height: 1.2;
+      font-size: 13px;
+      line-height: 1.25;
+    }
+
+    .app.quiz-mode .learning-explanation {
+      margin-bottom: 6px;
+
+      font-size: 12.2px;
+      line-height: 1.28;
     }
 
     .app.quiz-mode .learning-example {
-      font-size: 10.5px;
-      line-height: 1.2;
+      font-size: 12.2px;
+      line-height: 1.27;
     }
 
     .app.quiz-mode .learning-translation {
-      margin-top: 2px;
+      margin-top: 3px;
 
-      font-size: 10px;
-      line-height: 1.2;
+      font-size: 11.7px;
+      line-height: 1.25;
     }
 
     .app.quiz-mode #nextButton {
@@ -863,9 +881,7 @@
       flex: 0 0 auto;
     }
 
-    /* ancora più compatto sugli schermi bassi */
-
-    @media (max-height: 760px) {
+    @media (max-height:760px) {
 
       .app.quiz-mode nav button {
         padding: 9px 2px 8px;
@@ -876,11 +892,11 @@
       }
 
       .app.quiz-mode .quiz-top {
-        margin-bottom: 4px;
+        margin-bottom: 3px;
       }
 
       .app.quiz-mode .progress {
-        margin-bottom: 6px;
+        margin-bottom: 5px;
       }
 
       .app.quiz-mode .direction {
@@ -898,7 +914,7 @@
       }
 
       .app.quiz-mode .answer {
-        min-height: 41px;
+        min-height: 40px;
 
         padding: 6px 9px;
 
@@ -908,20 +924,32 @@
       .app.quiz-mode .feedback {
         margin-top: 5px;
         padding: 7px 9px;
+
+        font-size: 12.5px;
       }
 
       .app.quiz-mode .learning-box {
         margin-top: 4px;
-        padding: 5px 7px;
+        padding: 6px 8px;
+      }
+
+      .app.quiz-mode .learning-title {
+        font-size: 9.7px;
+      }
+
+      .app.quiz-mode .learning-meaning {
+        font-size: 11.3px;
       }
 
       .app.quiz-mode .learning-explanation,
       .app.quiz-mode .learning-example {
-        font-size: 9.7px;
+        font-size: 10.6px;
+        line-height: 1.18;
       }
 
       .app.quiz-mode .learning-translation {
-        font-size: 9.3px;
+        font-size: 10.2px;
+        line-height: 1.18;
       }
 
       .app.quiz-mode #nextButton {
@@ -958,6 +986,69 @@
       border-radius: 999px;
 
       font-size: 20px;
+      font-weight: 900;
+    }
+
+    .result-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+
+      gap: 10px;
+
+      margin-top: 10px;
+    }
+
+    .result-actions .main-button,
+    .result-actions .secondary-button {
+      margin-top: 0;
+    }
+
+    .result-new-quiz {
+      margin-top: 15px;
+      padding: 16px;
+
+      border-radius: 18px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #f1f3ff,
+          #f5f2ff,
+          #eff9ff
+        );
+
+      animation: appear .18s ease;
+    }
+
+    .result-new-quiz-title {
+      margin-bottom: 11px;
+
+      text-align: center;
+
+      color: var(--text);
+
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    .result-size-grid {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+
+      gap: 7px;
+    }
+
+    .result-size-button {
+      min-height: 45px;
+
+      border: 1.5px solid #dde2ef;
+      border-radius: 14px;
+
+      background: white;
+
+      color: var(--primary);
+
+      font-size: 15px;
       font-weight: 900;
     }
 
@@ -1239,29 +1330,24 @@
         rgba(125,143,255,.13);
     }
 
-    /*
-      wrapper separato per permettere
-      alla pennina di uscire dal cerchio
-    */
-
     .avatar-wrapper {
       position: relative;
       z-index: 2;
 
-      width: 92px;
-      height: 92px;
+      width: 96px;
+      height: 96px;
 
       margin:
         4px
         auto
-        15px;
+        17px;
 
       cursor: pointer;
     }
 
     .avatar {
-      width: 92px;
-      height: 92px;
+      width: 96px;
+      height: 96px;
 
       display: flex;
       align-items: center;
@@ -1274,12 +1360,13 @@
       background: white;
 
       border:
-        4px solid rgba(255,255,255,.95);
+        4px solid rgba(255,255,255,.98);
 
       box-shadow:
         0 7px 20px rgba(65,72,112,.13);
 
-      transition: transform .13s ease;
+      transition:
+        transform .13s ease;
     }
 
     .avatar-wrapper:active .avatar,
@@ -1297,11 +1384,11 @@
     .avatar-edit-hint {
       position: absolute;
 
-      right: -5px;
-      bottom: -5px;
+      right: -7px;
+      bottom: -3px;
 
-      width: 29px;
-      height: 29px;
+      width: 31px;
+      height: 31px;
 
       display: flex;
       align-items: center;
@@ -1309,23 +1396,22 @@
 
       border-radius: 50%;
 
-      background: var(--primary);
+      background:
+        linear-gradient(
+          135deg,
+          #7589f6,
+          #596fe8
+        );
+
       color: white;
 
       border: 3px solid white;
 
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 900;
 
       box-shadow:
-        0 4px 10px rgba(67,84,190,.25);
-
-      /*
-        circa metà dentro / metà fuori
-        rispetto al cerchio dell'avatar
-      */
-      transform:
-        translate(-1px,-1px);
+        0 4px 10px rgba(67,84,190,.27);
     }
 
     .profile-name {
@@ -1362,12 +1448,15 @@
       z-index: 3;
 
       margin-top: 18px;
-      padding: 14px;
+      padding: 17px 13px;
 
-      border-radius: 18px;
+      border-radius: 20px;
 
       background:
-        rgba(255,255,255,.76);
+        rgba(255,255,255,.78);
+
+      border:
+        1px solid rgba(255,255,255,.9);
     }
 
     .avatar-panel.open {
@@ -1375,7 +1464,7 @@
     }
 
     .avatar-panel-title {
-      margin-bottom: 11px;
+      margin-bottom: 14px;
 
       color: var(--muted);
 
@@ -1383,12 +1472,12 @@
       font-weight: 900;
 
       text-transform: uppercase;
-      letter-spacing: .5px;
+      letter-spacing: .7px;
     }
 
     .avatar-options {
       display: grid;
-      grid-template-columns: repeat(4,1fr);
+      grid-template-columns: repeat(2,1fr);
 
       gap: 10px;
     }
@@ -1397,45 +1486,102 @@
       position: relative;
 
       width: 100%;
-      aspect-ratio: 1;
 
-      padding: 4px;
-
-      overflow: hidden;
+      padding: 7px 7px 10px;
 
       border:
         2px solid transparent;
 
-      border-radius: 17px;
+      border-radius: 18px;
 
-      background: white;
+      background:
+        rgba(255,255,255,.78);
+
+      color: var(--text);
 
       transition:
         transform .12s ease,
-        border-color .15s ease;
+        border-color .15s ease,
+        box-shadow .15s ease;
     }
 
     .avatar-choice.selected {
       border-color: var(--primary);
 
+      background: white;
+
       box-shadow:
-        0 5px 12px rgba(99,121,238,.15);
+        0 5px 14px rgba(99,121,238,.18);
+    }
+
+    .avatar-choice.selected::after {
+      content: "✓";
+
+      position: absolute;
+
+      top: 7px;
+      right: 7px;
+
+      width: 22px;
+      height: 22px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 50%;
+
+      color: white;
+      background: var(--primary);
+
+      font-size: 12px;
+      font-weight: 900;
+
+      border: 2px solid white;
     }
 
     .avatar-choice img {
+      display: block;
+
       width: 100%;
-      height: 100%;
+      aspect-ratio: 1;
 
       object-fit: cover;
 
-      border-radius: 13px;
+      border-radius: 14px;
+
+      background: #f4f7ff;
+    }
+
+    .avatar-choice-name {
+      margin-top: 7px;
+
+      font-size: 13px;
+      line-height: 1.15;
+      font-weight: 900;
+
+      text-align: center;
+    }
+
+    .avatar-choice-caption {
+      min-height: 34px;
+
+      margin-top: 4px;
+
+      color: var(--muted);
+
+      font-size: 10px;
+      line-height: 1.25;
+      font-weight: 600;
+
+      text-align: center;
     }
 
     .upload-photo-button {
       width: 100%;
 
-      margin-top: 12px;
-      padding: 12px;
+      margin-top: 13px;
+      padding: 13px;
 
       border: 0;
       border-radius: 14px;
@@ -1564,20 +1710,6 @@
       padding: 17px;
     }
 
-    .empty {
-      padding: 30px 10px;
-
-      text-align: center;
-
-      color: #9aa1ad;
-
-      line-height: 1.5;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-
     @media (max-width:390px) {
 
       .screen {
@@ -1594,8 +1726,7 @@
       }
 
       .avatar-options {
-        grid-template-columns:
-          repeat(4,1fr);
+        grid-template-columns: repeat(2,1fr);
       }
     }
   </style>
@@ -1679,9 +1810,6 @@
         </div>
 
 
-        <!-- Descrizione rimossa -->
-
-
         <div class="quiz-size-label">
           Numero di domande
         </div>
@@ -1718,9 +1846,6 @@
           </button>
 
         </div>
-
-
-        <!-- Pill descrittive rimosse -->
 
 
         <button
@@ -1894,11 +2019,62 @@
         </div>
 
 
-        <button
-          class="main-button"
-          onclick="resetQuizView()">
-          Nuovo quiz
-        </button>
+        <div class="result-actions">
+
+          <button
+            class="secondary-button"
+            onclick="goHomeAfterQuiz()">
+            Home
+          </button>
+
+          <button
+            class="main-button"
+            onclick="toggleResultQuizChooser()">
+            Nuovo quiz
+          </button>
+
+        </div>
+
+
+        <div
+          id="resultQuizChooser"
+          class="result-new-quiz hidden"
+        >
+
+          <div class="result-new-quiz-title">
+            Quante domande?
+          </div>
+
+
+          <div class="result-size-grid">
+
+            <button
+              class="result-size-button"
+              onclick="startQuizFromResult(10)">
+              10
+            </button>
+
+            <button
+              class="result-size-button"
+              onclick="startQuizFromResult(20)">
+              20
+            </button>
+
+            <button
+              class="result-size-button"
+              onclick="startQuizFromResult(50)">
+              50
+            </button>
+
+            <button
+              class="result-size-button"
+              onclick="startQuizFromResult(100)">
+              100
+            </button>
+
+          </div>
+
+        </div>
 
       </div>
 
@@ -2244,8 +2420,8 @@
           </div>
 
           <div class="setting-description">
-            Feedback sonoro morbido per
-            pulsanti, risposte e completamento.
+            Feedback sonoro per pulsanti,
+            risposte e completamento del quiz.
           </div>
 
         </div>
@@ -2256,9 +2432,7 @@
           <input
             id="soundToggle"
             type="checkbox"
-            onchange="
-              setSoundEnabled(this.checked)
-            "
+            onchange="setSoundEnabled(this.checked)"
           />
 
           <span class="switch-slider">
@@ -2364,170 +2538,268 @@
 const phrasalVerbs = [
 
   ["Back up","fare un backup / sostenere con prove","Significa creare una copia di sicurezza oppure sostenere un'affermazione con prove.","You should back up your files before updating the computer.","Dovresti fare un backup dei file prima di aggiornare il computer."],
+
   ["Break down","guastarsi / analizzare per componenti","Può indicare un guasto oppure la suddivisione di qualcosa in parti più semplici da analizzare.","Let's break down the costs by category.","Suddividiamo i costi per categoria."],
+
   ["Break out","scoppiare","Si usa quando qualcosa, come un incendio, una guerra o una malattia, inizia improvvisamente.","A fire broke out during the night.","È scoppiato un incendio durante la notte."],
+
   ["Break up","separarsi / sciogliersi","Indica la fine di una relazione oppure lo scioglimento di un gruppo.","They broke up after five years together.","Si sono lasciati dopo cinque anni insieme."],
+
   ["Bring about","provocare / determinare","Significa causare un cambiamento o una determinata conseguenza.","The reform brought about major changes.","La riforma ha determinato grandi cambiamenti."],
+
   ["Bring back","riportare / far tornare alla mente","Può significare riportare qualcosa oppure evocare un ricordo.","That song brings back good memories.","Quella canzone mi fa tornare in mente bei ricordi."],
+
   ["Bring up","sollevare un argomento","Significa introdurre un tema o una questione durante una conversazione.","She brought up an important issue during the meeting.","Ha sollevato una questione importante durante la riunione."],
+
   ["Call back","richiamare","Significa telefonare nuovamente a qualcuno.","I'll call you back after the meeting.","Ti richiamerò dopo la riunione."],
+
   ["Call off","annullare","Significa cancellare qualcosa che era stato programmato.","They called off the meeting at the last minute.","Hanno annullato la riunione all'ultimo momento."],
+
   ["Carry on","continuare","Significa continuare a fare qualcosa.","Please carry on with your work.","Per favore continua con il tuo lavoro."],
+
   ["Carry out","svolgere / eseguire","Significa effettuare o completare un'attività, un'analisi o un compito.","We carried out a detailed analysis.","Abbiamo svolto un'analisi dettagliata."],
+
   ["Check out","controllare / dare un'occhiata","Significa esaminare o guardare qualcosa per ottenere maggiori informazioni.","Check out this new website.","Dai un'occhiata a questo nuovo sito."],
+
   ["Come across","imbattersi in","Significa incontrare o trovare qualcosa per caso.","I came across an interesting article yesterday.","Ieri mi sono imbattuto in un articolo interessante."],
+
   ["Come back","tornare","Significa ritornare in un luogo o in una situazione precedente.","I'll come back tomorrow morning.","Tornerò domani mattina."],
+
   ["Come down to","ridursi essenzialmente a","Si usa per indicare il vero fattore fondamentale di una situazione.","In the end, it all comes down to cost.","Alla fine, tutto si riduce al costo."],
+
   ["Come from","provenire da","Indica l'origine di una persona o di qualcosa.","Where do you come from?","Da dove vieni?"],
+
   ["Come out","uscire / essere pubblicato","Può indicare qualcosa che viene pubblicato, reso disponibile o diventa noto.","The new report comes out next week.","Il nuovo report esce la prossima settimana."],
+
   ["Come up with","trovare / elaborare","Significa ideare una soluzione, un'idea o un piano.","We need to come up with a better solution.","Dobbiamo trovare una soluzione migliore."],
+
   ["Cut down on","ridurre","Significa diminuire la quantità o la frequenza di qualcosa.","We need to cut down on unnecessary expenses.","Dobbiamo ridurre le spese non necessarie."],
+
   ["Cut off","interrompere / tagliare fuori","Significa interrompere un collegamento, un servizio o una comunicazione.","The phone call was suddenly cut off.","La telefonata si è interrotta improvvisamente."],
+
   ["Deal with","affrontare / occuparsi di","Significa gestire un problema, una situazione o una responsabilità.","We need to deal with this issue quickly.","Dobbiamo affrontare rapidamente questa questione."],
+
   ["Drop off","lasciare qualcuno / qualcosa","Significa accompagnare qualcuno in un luogo e lasciarlo lì.","I'll drop you off at the station.","Ti lascerò alla stazione."],
+
   ["End up","finire per","Descrive il risultato finale, spesso inatteso, di una situazione.","We ended up staying at home.","Alla fine siamo rimasti a casa."],
+
   ["Fall behind","rimanere indietro","Significa perdere terreno rispetto a un programma, un obiettivo o altre persone.","The company is falling behind its competitors.","L'azienda sta rimanendo indietro rispetto ai concorrenti."],
+
   ["Figure out","capire / trovare una soluzione","Significa riuscire a comprendere qualcosa o trovare il modo di risolvere un problema.","I finally figured out how it works.","Finalmente ho capito come funziona."],
+
   ["Fill in","compilare","Significa inserire le informazioni richieste in un modulo o in determinati spazi.","Please fill in this form.","Per favore compila questo modulo."],
+
   ["Fill out","compilare completamente","Significa completare un modulo fornendo tutte le informazioni richieste.","Please fill out the application form.","Per favore compila il modulo di candidatura."],
+
   ["Find out","scoprire","Significa venire a conoscenza di un'informazione.","I need to find out what happened.","Devo scoprire cosa è successo."],
+
   ["Follow up","dare seguito","Significa continuare un'attività o ricontattare qualcuno dopo un primo contatto.","I'll follow up with the client tomorrow.","Domani ricontatterò il cliente."],
+
   ["Get along with","andare d'accordo con","Significa avere un buon rapporto con qualcuno.","I get along well with my colleagues.","Vado d'accordo con i miei colleghi."],
+
   ["Get away","andare via / scappare","Significa allontanarsi da un luogo o prendersi una pausa.","I'd like to get away for the weekend.","Mi piacerebbe andare via per il weekend."],
+
   ["Get back","tornare / ricontattare","Significa ritornare oppure rispondere a qualcuno successivamente.","I'll get back to you tomorrow.","Ti ricontatterò domani."],
+
   ["Get by","cavarsela","Significa riuscire a gestire una situazione con le risorse o le conoscenze disponibili.","I can get by in Spanish.","Me la cavo in spagnolo."],
+
   ["Get in","entrare / arrivare","Può significare entrare oppure arrivare a destinazione.","What time did you get in last night?","A che ora sei arrivato ieri sera?"],
+
   ["Get out","uscire","Significa lasciare un luogo o uscire da qualcosa.","Get out of the car.","Esci dalla macchina."],
+
   ["Get over","superare / riprendersi da","Significa recuperare da una difficoltà, una malattia o una situazione negativa.","It took him months to get over the disappointment.","Gli sono serviti mesi per superare la delusione."],
+
   ["Get through","superare / riuscire a contattare","Può significare superare un periodo difficile oppure riuscire a comunicare con qualcuno.","We got through a very difficult period.","Abbiamo superato un periodo molto difficile."],
+
   ["Give back","restituire","Significa restituire qualcosa al proprietario.","Can you give back the book tomorrow?","Puoi restituire il libro domani?"],
+
   ["Give in","cedere","Significa smettere di opporsi e accettare qualcosa.","After a long discussion, he finally gave in.","Dopo una lunga discussione, alla fine ha ceduto."],
+
   ["Give up","rinunciare / smettere","Significa smettere di provare oppure abbandonare un'attività.","Don't give up just because it's difficult.","Non arrenderti solo perché è difficile."],
+
   ["Go ahead","procedere","Significa iniziare o continuare qualcosa dopo aver ricevuto il permesso o preso una decisione.","Let's go ahead with the project.","Procediamo con il progetto."],
+
   ["Go on","continuare / accadere","Può significare continuare oppure descrivere ciò che sta accadendo.","What's going on here?","Che cosa sta succedendo qui?"],
+
   ["Go over","rivedere / esaminare","Significa controllare attentamente qualcosa.","Let's go over the figures once again.","Rivediamo ancora una volta i dati."],
+
   ["Go through","attraversare / esaminare","Può significare vivere un'esperienza oppure esaminare attentamente qualcosa.","Let's go through the financial statements.","Esaminiamo il bilancio."],
+
   ["Grow up","crescere","Significa diventare adulto o trascorrere l'infanzia in un determinato luogo.","I grew up in Italy.","Sono cresciuto in Italia."],
+
   ["Hand in","consegnare","Significa consegnare formalmente un documento o un compito.","You need to hand in the report by Friday.","Devi consegnare il report entro venerdì."],
+
   ["Hand out","distribuire","Significa distribuire qualcosa a più persone.","She handed out the documents before the meeting.","Ha distribuito i documenti prima della riunione."],
+
   ["Hold on","aspettare / tenere duro","Può significare aspettare brevemente oppure resistere in una situazione difficile.","Hold on a second, please.","Aspetta un secondo, per favore."],
+
   ["Join in","partecipare","Significa prendere parte a un'attività già iniziata.","Everyone joined in the discussion.","Tutti hanno partecipato alla discussione."],
+
   ["Keep away from","stare lontano da","Significa evitare una persona, un luogo o qualcosa di indesiderato.","Keep away from unnecessary risks.","Stai lontano dai rischi non necessari."],
+
   ["Keep on","continuare","Significa continuare a fare qualcosa, spesso nonostante una difficoltà.","Keep on trying and you'll improve.","Continua a provare e migliorerai."],
+
   ["Keep up with","stare al passo con","Significa mantenere lo stesso ritmo di qualcuno o seguire un cambiamento.","It's difficult to keep up with technological change.","È difficile stare al passo con il cambiamento tecnologico."],
+
   ["Leave behind","lasciare indietro","Significa lasciare qualcosa o qualcuno nel passato o in un luogo.","It's time to leave the past behind.","È il momento di lasciarsi il passato alle spalle."],
+
   ["Leave out","omettere / escludere","Significa non includere qualcosa o qualcuno.","Don't leave out any important information.","Non omettere informazioni importanti."],
+
   ["Let down","deludere","Significa non soddisfare le aspettative di qualcuno.","I don't want to let my team down.","Non voglio deludere il mio team."],
+
   ["Look after","prendersi cura di","Significa occuparsi del benessere di qualcuno o qualcosa.","Can you look after the children tonight?","Puoi occuparti dei bambini stasera?"],
+
   ["Look back on","ripensare a","Significa ricordare e riflettere su un periodo passato.","I often look back on my university years.","Ripenso spesso ai miei anni universitari."],
+
   ["Look for","cercare","Significa tentare di trovare qualcuno o qualcosa.","I'm looking for a new job.","Sto cercando un nuovo lavoro."],
+
   ["Look forward to","non vedere l'ora di","Significa attendere qualcosa con piacere o entusiasmo.","I look forward to hearing from you.","Non vedo l'ora di ricevere tue notizie."],
+
   ["Look into","indagare / approfondire","Significa esaminare un problema o una situazione più attentamente.","We'll look into the issue tomorrow.","Approfondiremo la questione domani."],
+
   ["Look out","fare attenzione","È un avvertimento utilizzato quando bisogna prestare attenzione a un pericolo.","Look out! There's a car coming.","Attento! Sta arrivando una macchina."],
+
   ["Look up","cercare un'informazione","Significa cercare una parola o un'informazione in una fonte.","Look up the word in the dictionary.","Cerca la parola nel dizionario."],
+
   ["Make up","inventare / fare pace","Può significare inventare qualcosa oppure riconciliarsi con qualcuno.","He made up an excuse for being late.","Ha inventato una scusa per il ritardo."],
+
   ["Make up for","compensare","Significa compensare una perdita, un errore o uno svantaggio.","I'll work harder to make up for lost time.","Lavorerò di più per recuperare il tempo perso."],
+
   ["Move on","andare avanti","Significa lasciare una situazione alle spalle e continuare.","It's time to move on.","È il momento di andare avanti."],
+
   ["Pass away","morire","È un modo più delicato e formale per dire che qualcuno è morto.","His grandfather passed away last year.","Suo nonno è morto l'anno scorso."],
+
   ["Pay back","restituire denaro","Significa restituire denaro che si deve a qualcuno.","I'll pay you back tomorrow.","Ti restituirò i soldi domani."],
+
   ["Pick up","prendere / acquisire / imparare","Può significare raccogliere, andare a prendere qualcuno oppure imparare qualcosa informalmente.","I picked up a lot of English while travelling.","Ho imparato molto inglese viaggiando."],
+
   ["Point out","far notare","Significa attirare l'attenzione su un fatto o un dettaglio.","I'd like to point out one important detail.","Vorrei far notare un dettaglio importante."],
+
   ["Put away","mettere via","Significa riporre qualcosa nel suo posto.","Put away your phone during the meeting.","Metti via il telefono durante la riunione."],
+
   ["Put off","rimandare","Significa posticipare qualcosa a un momento successivo.","We decided to put off the meeting until Monday.","Abbiamo deciso di rimandare la riunione a lunedì."],
+
   ["Put on","indossare / mettere","Può significare indossare un capo di abbigliamento oppure attivare qualcosa.","Put on a jacket before you go outside.","Indossa una giacca prima di uscire."],
+
   ["Put together","assemblare / preparare","Significa creare qualcosa combinando diverse parti o informazioni.","I need to put together a presentation.","Devo preparare una presentazione."],
+
   ["Put up with","sopportare","Significa tollerare una situazione o un comportamento fastidioso.","I can't put up with this noise anymore.","Non riesco più a sopportare questo rumore."],
+
   ["Rule out","escludere","Significa eliminare una possibilità dalla considerazione.","We can't rule out that possibility.","Non possiamo escludere quella possibilità."],
+
   ["Run into","incontrare casualmente / incorrere in","Può significare incontrare qualcuno per caso oppure incontrare un problema.","We ran into a problem during the analysis.","Abbiamo incontrato un problema durante l'analisi."],
+
   ["Run out of","rimanere senza","Significa esaurire completamente qualcosa.","We've run out of time.","Abbiamo finito il tempo."],
+
   ["Set out","esporre / partire con uno scopo","Può significare presentare chiaramente delle informazioni oppure iniziare un viaggio o un'attività.","The report sets out the main findings.","Il report espone i principali risultati."],
+
   ["Set up","creare / organizzare","Significa creare, organizzare o preparare qualcosa.","Let's set up a meeting for tomorrow.","Organizziamo una riunione per domani."],
+
   ["Show up","presentarsi","Significa arrivare o comparire in un luogo, spesso a un appuntamento.","He didn't show up for the meeting.","Non si è presentato alla riunione."],
+
   ["Sort out","risolvere / sistemare","Significa risolvere un problema o mettere ordine in una situazione.","We need to sort out this problem quickly.","Dobbiamo risolvere rapidamente questo problema."],
+
   ["Speak up","parlare più forte / esprimersi apertamente","Può significare alzare la voce oppure esprimere apertamente la propria opinione.","You need to speak up if you disagree.","Devi esprimerti apertamente se non sei d'accordo."],
+
   ["Stand out","distinguersi","Significa essere particolarmente evidente o migliore rispetto agli altri.","Her CV really stands out.","Il suo CV si distingue davvero."],
+
   ["Step down","dimettersi da una posizione","Significa lasciare volontariamente una posizione di responsabilità.","The CEO decided to step down.","L'amministratore delegato ha deciso di dimettersi."],
+
   ["Step up","intensificare / aumentare il proprio impegno","Significa aumentare gli sforzi o assumersi maggiori responsabilità.","We need to step up our efforts.","Dobbiamo intensificare i nostri sforzi."],
+
   ["Sum up","riassumere","Significa sintetizzare i punti principali di qualcosa.","To sum up, the results were positive.","In sintesi, i risultati sono stati positivi."],
+
   ["Take back","riprendersi / ritirare ciò che si è detto","Può significare riprendere qualcosa oppure ritirare un'affermazione.","I take back what I said yesterday.","Ritiro quello che ho detto ieri."],
+
   ["Take off","decollare / togliersi / avere successo rapidamente","Può indicare un aereo che decolla, togliere un indumento oppure un'attività che inizia ad avere molto successo.","The business really took off last year.","L'attività ha davvero preso il volo l'anno scorso."],
+
   ["Take on","assumere / accettare una responsabilità","Significa accettare un lavoro, un compito o maggiori responsabilità.","She's ready to take on more responsibility.","È pronta ad assumersi maggiori responsabilità."],
+
   ["Take over","assumere il controllo / subentrare","Significa ottenere il controllo o la responsabilità di qualcosa.","A larger company took over the business.","Un'azienda più grande ha acquisito il controllo dell'attività."],
+
   ["Take up","iniziare un'attività / occupare","Può significare iniziare un hobby o occupare spazio o tempo.","I decided to take up running.","Ho deciso di iniziare a correre."],
+
   ["Think over","riflettere attentamente su","Significa considerare attentamente qualcosa prima di prendere una decisione.","I need some time to think it over.","Ho bisogno di un po' di tempo per pensarci."],
+
   ["Turn down","rifiutare","Significa rifiutare un'offerta, una proposta o una richiesta.","She turned down the job offer.","Ha rifiutato l'offerta di lavoro."],
+
   ["Turn off","spegnere","Significa disattivare un dispositivo, una luce o un apparecchio.","Please turn off your phone.","Per favore spegni il telefono."],
+
   ["Turn on","accendere","Significa attivare un dispositivo, una luce o un apparecchio.","Can you turn on the computer?","Puoi accendere il computer?"],
+
   ["Turn out","risultare / rivelarsi","Si usa per descrivere come una situazione si è rivelata alla fine.","It turned out to be a very good decision.","Si è rivelata un'ottima decisione."],
+
   ["Turn up","presentarsi / aumentare","Può significare arrivare in un luogo oppure aumentare il volume o l'intensità.","He turned up twenty minutes late.","Si è presentato con venti minuti di ritardo."],
+
   ["Wake up","svegliarsi","Significa smettere di dormire.","I usually wake up at seven.","Di solito mi sveglio alle sette."],
+
   ["Work out","risolvere / capire / funzionare","Può significare trovare una soluzione, capire qualcosa oppure avere un buon esito.","We'll work out a solution together.","Troveremo insieme una soluzione."],
+
   ["Write down","annotare","Significa scrivere qualcosa per ricordarlo successivamente.","Write down the key points.","Annota i punti principali."]
 
 ];
 
 
 /* =========================================================
-   CUSTOM CARTOON AVATARS
+   AVATAR
 ========================================================= */
 
 const avatarDefinitions = {
 
   lion: {
     name: "Leone",
-    face: "#d9993f",
-    ears: "#bf7930",
-    accent: "#8a542a",
-    mane: "#9b5d2e",
-    type: "lion"
+    caption: "Coraggioso e leader naturale",
+    type: "lion",
+    face: "#d99a3f",
+    accent: "#7f4825"
   },
 
-  giraffe: {
-    name: "Giraffa",
-    face: "#e5b85b",
-    ears: "#c99041",
-    accent: "#9d672f",
-    type: "giraffe"
+  dog: {
+    name: "Cane",
+    caption: "Leale e affettuoso, sempre al tuo fianco",
+    type: "dog",
+    face: "#e2b05c",
+    accent: "#895b31"
   },
 
-  zebra: {
-    name: "Zebra",
-    face: "#f1f1f1",
-    ears: "#d7d7d7",
-    accent: "#242a36",
-    type: "zebra"
+  polarBear: {
+    name: "Orso polare",
+    caption: "Forte e resistente, affronta ogni sfida",
+    type: "polarBear",
+    face: "#f5f7f8",
+    accent: "#313746"
   },
 
-  hippo: {
-    name: "Ippopotamo",
-    face: "#9a8eaa",
-    ears: "#7e738e",
-    accent: "#665c74",
-    type: "hippo"
+  koala: {
+    name: "Koala",
+    caption: "Tranquillo e rilassato, ama il focus",
+    type: "koala",
+    face: "#a79bad",
+    accent: "#403847"
   },
 
-  elephant: {
-    name: "Elefante",
-    face: "#98a4af",
-    ears: "#85919c",
-    accent: "#65717c",
-    type: "elephant"
+  wolf: {
+    name: "Lupo",
+    caption: "Intelligente e strategico, ama lavorare in squadra",
+    type: "wolf",
+    face: "#8995a2",
+    accent: "#303946"
   },
 
   fox: {
     name: "Volpe",
-    face: "#e98643",
-    ears: "#c96832",
-    accent: "#733c27",
-    type: "fox"
+    caption: "Astuta e curiosa, sempre un passo avanti",
+    type: "fox",
+    face: "#e87832",
+    accent: "#61351f"
   },
 
   panda: {
     name: "Panda",
-    face: "#f4f4f4",
-    ears: "#292d36",
-    accent: "#292d36",
-    type: "panda"
+    caption: "Paziente e costante, migliora ogni giorno",
+    type: "panda",
+    face: "#f7f7f5",
+    accent: "#202530"
   }
 
 };
@@ -2539,90 +2811,151 @@ function makeAnimalAvatar(key) {
     avatarDefinitions[key];
 
 
-  let special =
+  let behind =
+    "";
+
+  let front =
     "";
 
 
   if (a.type === "lion") {
 
-    special = `
-      <circle
-        cx="60"
-        cy="49"
-        r="35"
-        fill="${a.mane}"
-      />
+    behind = `
+      <circle cx="60" cy="49" r="39" fill="#8c4d21"/>
+      <circle cx="37" cy="25" r="15" fill="#8c4d21"/>
+      <circle cx="59" cy="16" r="16" fill="#8c4d21"/>
+      <circle cx="82" cy="25" r="15" fill="#8c4d21"/>
+      <circle cx="29" cy="49" r="16" fill="#8c4d21"/>
+      <circle cx="91" cy="49" r="16" fill="#8c4d21"/>
+      <circle cx="37" cy="73" r="15" fill="#8c4d21"/>
+      <circle cx="82" cy="73" r="15" fill="#8c4d21"/>
+    `;
+
+    front = `
+      <ellipse cx="60" cy="66" rx="17" ry="11" fill="#efbf71"/>
     `;
 
   }
 
 
-  if (a.type === "giraffe") {
+  if (a.type === "dog") {
 
-    special = `
-      <circle cx="49" cy="28" r="4" fill="${a.accent}"/>
-      <circle cx="70" cy="24" r="4" fill="${a.accent}"/>
-      <circle cx="44" cy="51" r="4" fill="${a.accent}"/>
-      <circle cx="75" cy="48" r="4" fill="${a.accent}"/>
-      <circle cx="63" cy="62" r="3.5" fill="${a.accent}"/>
-    `;
-
-  }
-
-
-  if (a.type === "zebra") {
-
-    special = `
-      <path
-        d="M45 28 L51 48"
-        stroke="${a.accent}"
-        stroke-width="5"
-        stroke-linecap="round"
-      />
-      <path
-        d="M59 23 L59 45"
-        stroke="${a.accent}"
-        stroke-width="5"
-        stroke-linecap="round"
-      />
-      <path
-        d="M73 29 L67 48"
-        stroke="${a.accent}"
-        stroke-width="5"
-        stroke-linecap="round"
-      />
-    `;
-
-  }
-
-
-  if (a.type === "hippo") {
-
-    special = `
+    behind = `
       <ellipse
-        cx="60"
-        cy="64"
-        rx="25"
-        ry="17"
-        fill="#b1a6bd"
+        cx="31"
+        cy="47"
+        rx="13"
+        ry="27"
+        fill="#a96832"
+        transform="rotate(18 31 47)"
       />
+
+      <ellipse
+        cx="89"
+        cy="47"
+        rx="13"
+        ry="27"
+        fill="#a96832"
+        transform="rotate(-18 89 47)"
+      />
+    `;
+
+    front = `
+      <ellipse cx="60" cy="66" rx="18" ry="12" fill="#f2ca81"/>
+      <circle cx="43" cy="35" r="6" fill="#c18140"/>
     `;
 
   }
 
 
-  if (a.type === "elephant") {
+  if (a.type === "polarBear") {
 
-    special = `
+    behind = `
+      <circle cx="35" cy="30" r="14" fill="#f0f3f5"/>
+      <circle cx="85" cy="30" r="14" fill="#f0f3f5"/>
+
+      <circle cx="35" cy="30" r="7" fill="#d9dee3"/>
+      <circle cx="85" cy="30" r="7" fill="#d9dee3"/>
+    `;
+
+    front = `
+      <ellipse cx="60" cy="66" rx="18" ry="12" fill="#e2e6e9"/>
+    `;
+
+  }
+
+
+  if (a.type === "koala") {
+
+    behind = `
+      <circle cx="28" cy="44" r="21" fill="#817487"/>
+      <circle cx="92" cy="44" r="21" fill="#817487"/>
+
+      <circle cx="28" cy="44" r="13" fill="#bbb2c0"/>
+      <circle cx="92" cy="44" r="13" fill="#bbb2c0"/>
+    `;
+
+    front = `
+      <ellipse cx="60" cy="61" rx="8" ry="12" fill="#34303a"/>
+    `;
+
+  }
+
+
+  if (a.type === "wolf") {
+
+    behind = `
       <path
         d="
-          M57 57
-          C56 75, 54 83, 60 89
-          C67 86, 68 78, 64 68
-          L64 56
+          M33 37
+          L39 8
+          L54 36
           Z
         "
-        fill="${a.face}"
+        fill="#5f6c79"
+      />
+
+      <path
+        d="
+          M87 37
+          L81 8
+          L66 36
+          Z
+        "
+        fill="#5f6c79"
+      />
+
+      <path
+        d="
+          M39 28
+          L42 16
+          L49 32
+          Z
+        "
+        fill="#c7ccd2"
+      />
+
+      <path
+        d="
+          M81 28
+          L78 16
+          L71 32
+          Z
+        "
+        fill="#c7ccd2"
+      />
+    `;
+
+    front = `
+      <path
+        d="
+          M38 57
+          Q45 74 60 78
+          Q75 74 82 57
+          Q69 68 60 69
+          Q51 68 38 57
+        "
+        fill="#dce1e5"
       />
     `;
 
@@ -2631,14 +2964,58 @@ function makeAnimalAvatar(key) {
 
   if (a.type === "fox") {
 
-    special = `
+    behind = `
       <path
-        d="M39 33 L47 15 L54 37 Z"
-        fill="${a.face}"
+        d="
+          M30 40
+          L38 7
+          L56 38
+          Z
+        "
+        fill="#cb5f27"
       />
+
       <path
-        d="M81 33 L73 15 L66 37 Z"
-        fill="${a.face}"
+        d="
+          M90 40
+          L82 7
+          L64 38
+          Z
+        "
+        fill="#cb5f27"
+      />
+
+      <path
+        d="
+          M38 29
+          L42 16
+          L50 33
+          Z
+        "
+        fill="#583126"
+      />
+
+      <path
+        d="
+          M82 29
+          L78 16
+          L70 33
+          Z
+        "
+        fill="#583126"
+      />
+    `;
+
+    front = `
+      <path
+        d="
+          M36 54
+          Q42 75 60 79
+          Q78 75 84 54
+          Q70 67 60 69
+          Q50 67 36 54
+        "
+        fill="#fff3e7"
       />
     `;
 
@@ -2647,31 +3024,38 @@ function makeAnimalAvatar(key) {
 
   if (a.type === "panda") {
 
-    special = `
+    behind = `
+      <circle cx="35" cy="29" r="15" fill="#202530"/>
+      <circle cx="85" cy="29" r="15" fill="#202530"/>
+    `;
+
+    front = `
       <ellipse
         cx="47"
-        cy="48"
-        rx="8"
-        ry="11"
-        fill="${a.accent}"
-        transform="rotate(20 47 48)"
+        cy="49"
+        rx="9"
+        ry="12"
+        fill="#202530"
+        transform="rotate(20 47 49)"
       />
 
       <ellipse
         cx="73"
-        cy="48"
-        rx="8"
-        ry="11"
-        fill="${a.accent}"
-        transform="rotate(-20 73 48)"
+        cy="49"
+        rx="9"
+        ry="12"
+        fill="#202530"
+        transform="rotate(-20 73 49)"
       />
+
+      <circle cx="49" cy="49" r="2.8" fill="white"/>
+      <circle cx="71" cy="49" r="2.8" fill="white"/>
     `;
 
   }
 
 
   const svg = `
-
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 120 120"
@@ -2686,14 +3070,15 @@ function makeAnimalAvatar(key) {
         x2="1"
         y2="1"
       >
+
         <stop
           offset="0%"
-          stop-color="#eef1ff"
+          stop-color="#f1f3ff"
         />
 
         <stop
           offset="100%"
-          stop-color="#e4f6ff"
+          stop-color="#e8f7ff"
         />
 
       </linearGradient>
@@ -2704,50 +3089,51 @@ function makeAnimalAvatar(key) {
     <rect
       width="120"
       height="120"
-      rx="28"
+      rx="26"
       fill="url(#bg)"
     />
 
 
-    <!-- CAMICIA -->
+    <!-- Corpo -->
 
     <path
       d="
-        M28 120
-        C30 88, 42 82, 60 82
-        C78 82, 90 88, 92 120
+        M26 120
+        C28 92, 40 83, 60 82
+        C80 83, 92 92, 94 120
         Z
       "
       fill="#ffffff"
     />
 
 
-    <!-- GIACCA -->
+    <!-- Giacca -->
 
     <path
       d="
-        M22 120
-        C25 93, 37 85, 49 83
-        L60 118
-        L38 120
+        M21 120
+        C24 95, 36 86, 49 83
+        L60 119
+        L36 120
         Z
       "
-      fill="#34415c"
+      fill="#33405c"
     />
+
 
     <path
       d="
-        M98 120
-        C95 93, 83 85, 71 83
-        L60 118
-        L82 120
+        M99 120
+        C96 95, 84 86, 71 83
+        L60 119
+        L84 120
         Z
       "
-      fill="#34415c"
+      fill="#33405c"
     />
 
 
-    <!-- CRAVATTA -->
+    <!-- Cravatta -->
 
     <path
       d="
@@ -2762,38 +3148,24 @@ function makeAnimalAvatar(key) {
     />
 
 
-    <!-- ORECCHIE -->
-
-    <circle
-      cx="36"
-      cy="45"
-      r="12"
-      fill="${a.ears}"
-    />
-
-    <circle
-      cx="84"
-      cy="45"
-      r="12"
-      fill="${a.ears}"
-    />
+    ${behind}
 
 
-    ${special}
-
-
-    <!-- TESTA -->
+    <!-- Testa -->
 
     <ellipse
       cx="60"
-      cy="51"
+      cy="50"
       rx="29"
       ry="31"
       fill="${a.face}"
     />
 
 
-    <!-- OCCHI -->
+    ${front}
+
+
+    <!-- Occhi -->
 
     <circle
       cx="49"
@@ -2810,8 +3182,6 @@ function makeAnimalAvatar(key) {
     />
 
 
-    <!-- LUCE OCCHI -->
-
     <circle
       cx="48"
       cy="48"
@@ -2827,29 +3197,29 @@ function makeAnimalAvatar(key) {
     />
 
 
-    <!-- MUSO -->
+    <!-- Muso -->
 
     <ellipse
       cx="60"
-      cy="65"
-      rx="14"
-      ry="10"
+      cy="66"
+      rx="13"
+      ry="9"
       fill="rgba(255,255,255,.38)"
     />
 
 
-    <!-- NASO -->
+    <!-- Naso -->
 
     <ellipse
       cx="60"
-      cy="61"
-      rx="4.5"
-      ry="3.5"
+      cy="62"
+      rx="4.7"
+      ry="3.6"
       fill="${a.accent}"
     />
 
 
-    <!-- SORRISO -->
+    <!-- Sorriso -->
 
     <path
       d="
@@ -2858,7 +3228,7 @@ function makeAnimalAvatar(key) {
       "
       fill="none"
       stroke="${a.accent}"
-      stroke-width="2.2"
+      stroke-width="2.1"
       stroke-linecap="round"
     />
 
@@ -2882,7 +3252,9 @@ function makeAnimalAvatar(key) {
 let quiz = [];
 
 let currentIndex = 0;
+
 let score = 0;
+
 let answered = false;
 
 let quizErrors = [];
@@ -2971,7 +3343,7 @@ function saveHistory(history) {
 
 
 /* =========================================================
-   SOUNDS
+   SOUND
 ========================================================= */
 
 let audioContext =
@@ -3004,9 +3376,7 @@ function setSoundEnabled(enabled) {
 
 
   if (enabled) {
-
     ensureAudioContext();
-
   }
 
 }
@@ -3044,10 +3414,6 @@ function ensureAudioContext() {
 
 }
 
-
-/* =========================================================
-   BASE TONE
-========================================================= */
 
 function playTone(
   frequency,
@@ -3125,7 +3491,7 @@ function playTone(
 
 
 /* =========================================================
-   WOOD CLICK
+   CLICK SECCO / LEGNOSO
 ========================================================= */
 
 function playWoodClick() {
@@ -3147,16 +3513,11 @@ function playWoodClick() {
     audioContext.currentTime;
 
 
-  /*
-    Parte tonale bassa:
-    piccolo colpo di legno
-  */
-
   const osc =
     audioContext.createOscillator();
 
 
-  const oscGain =
+  const gain =
     audioContext.createGain();
 
 
@@ -3165,35 +3526,32 @@ function playWoodClick() {
 
 
   osc.frequency.setValueAtTime(
-    185,
+    340,
     now
   );
 
 
   osc.frequency.exponentialRampToValueAtTime(
-    120,
-    now + .055
+    165,
+    now + .025
   );
 
 
-  oscGain.gain.setValueAtTime(
-    .06,
+  gain.gain.setValueAtTime(
+    .105,
     now
   );
 
 
-  oscGain.gain.exponentialRampToValueAtTime(
+  gain.gain.exponentialRampToValueAtTime(
     .001,
-    now + .06
+    now + .032
   );
 
 
-  osc.connect(
-    oscGain
-  );
+  osc.connect(gain);
 
-
-  oscGain.connect(
+  gain.connect(
     audioContext.destination
   );
 
@@ -3201,15 +3559,9 @@ function playWoodClick() {
   osc.start(now);
 
   osc.stop(
-    now + .065
+    now + .036
   );
 
-
-  /*
-    Leggerissimo rumore filtrato:
-    rende il click più naturale
-    e meno "elettronico"
-  */
 
   const buffer =
     audioContext.createBuffer(
@@ -3217,7 +3569,7 @@ function playWoodClick() {
       Math.floor(
         audioContext.sampleRate
         *
-        .045
+        .014
       ),
       audioContext.sampleRate
     );
@@ -3233,14 +3585,16 @@ function playWoodClick() {
     i++
   ) {
 
+    const envelope =
+      1 - i / data.length;
+
+
     data[i] =
       (
         Math.random() * 2 - 1
       )
       *
-      (
-        1 - i / data.length
-      );
+      envelope;
 
   }
 
@@ -3262,11 +3616,11 @@ function playWoodClick() {
 
 
   filter.frequency.value =
-    650;
+    1250;
 
 
   filter.Q.value =
-    1.3;
+    2.5;
 
 
   const noiseGain =
@@ -3274,14 +3628,14 @@ function playWoodClick() {
 
 
   noiseGain.gain.setValueAtTime(
-    .016,
+    .028,
     now
   );
 
 
   noiseGain.gain.exponentialRampToValueAtTime(
     .001,
-    now + .045
+    now + .014
   );
 
 
@@ -3300,25 +3654,25 @@ function playWoodClick() {
 
 
 /* =========================================================
-   RESULT SOUNDS
+   CORRECT / WRONG / COMPLETION
 ========================================================= */
 
 function playCorrectSound() {
 
   playTone(
-    620,
-    .09,
+    650,
+    .08,
     "sine",
     .055
   );
 
 
   playTone(
-    820,
-    .13,
+    850,
+    .11,
     "sine",
     .045,
-    .07
+    .065
   );
 
 }
@@ -3327,10 +3681,10 @@ function playCorrectSound() {
 function playWrongSound() {
 
   playTone(
-    210,
-    .16,
+    190,
+    .13,
     "triangle",
-    .055
+    .06
   );
 
 }
@@ -3340,38 +3694,41 @@ function playCompletionSound() {
 
   playTone(
     520,
-    .09,
+    .08,
     "sine",
     .05
   );
 
 
   playTone(
-    660,
-    .10,
+    680,
+    .09,
     "sine",
     .05,
-    .08
+    .07
   );
 
 
   playTone(
-    880,
-    .16,
+    900,
+    .14,
     "sine",
     .05,
-    .17
+    .15
   );
 
 }
 
 
 /*
-  Suono secco su ogni pulsante.
+  CLICK GENERALE
 
-  pointerdown è utile su iPhone:
-  attiva l'audio nello stesso gesto
-  dell'utente.
+  IMPORTANTE:
+  sulle risposte NON parte.
+  Quindi non avrai:
+  click + corretto
+  oppure
+  click + sbagliato.
 */
 
 document.addEventListener(
@@ -3385,6 +3742,15 @@ document.addEventListener(
 
 
     if (!target) {
+      return;
+    }
+
+
+    if (
+      target.classList.contains(
+        "answer"
+      )
+    ) {
       return;
     }
 
@@ -3572,6 +3938,20 @@ function formatDuration(seconds) {
 ========================================================= */
 
 function showScreen(screenId) {
+
+  /*
+    Se si naviga fuori durante un quiz,
+    rimuoviamo il blocco viewport.
+  */
+
+  if (screenId !== "home") {
+
+    document
+      .getElementById("appShell")
+      .classList.remove("quiz-mode");
+
+  }
+
 
   document
     .querySelectorAll(".screen")
@@ -3907,44 +4287,28 @@ function startQuiz(mode = "normal") {
 
 
   document
-    .getElementById(
-      "startArea"
-    )
-    .classList.add(
-      "hidden"
-    );
+    .getElementById("startArea")
+    .classList.add("hidden");
 
 
   document
-    .getElementById(
-      "resultArea"
-    )
-    .classList.add(
-      "hidden"
-    );
+    .getElementById("resultArea")
+    .classList.add("hidden");
 
 
   document
-    .getElementById(
-      "quizArea"
-    )
-    .classList.remove(
-      "hidden"
-    );
+    .getElementById("resultQuizChooser")
+    .classList.add("hidden");
 
-
-  /*
-    Attiva la modalità
-    a schermata singola
-  */
 
   document
-    .getElementById(
-      "appShell"
-    )
-    .classList.add(
-      "quiz-mode"
-    );
+    .getElementById("quizArea")
+    .classList.remove("hidden");
+
+
+  document
+    .getElementById("appShell")
+    .classList.add("quiz-mode");
 
 
   window.scrollTo(
@@ -3969,50 +4333,36 @@ function renderQuestion() {
 
 
   document
-    .getElementById(
-      "feedback"
-    )
+    .getElementById("feedback")
     .className =
       "feedback";
 
 
   document
-    .getElementById(
-      "feedback"
-    )
+    .getElementById("feedback")
     .innerHTML =
       "";
 
 
   document
-    .getElementById(
-      "nextButton"
-    )
-    .classList.add(
-      "hidden"
-    );
+    .getElementById("nextButton")
+    .classList.add("hidden");
 
 
   document
-    .getElementById(
-      "questionCounter"
-    )
+    .getElementById("questionCounter")
     .textContent =
       `Domanda ${currentIndex + 1} di ${quiz.length}`;
 
 
   document
-    .getElementById(
-      "liveScore"
-    )
+    .getElementById("liveScore")
     .textContent =
       `${score}/${currentIndex}`;
 
 
   document
-    .getElementById(
-      "progressBar"
-    )
+    .getElementById("progressBar")
     .style.width =
       `${
         (
@@ -4027,16 +4377,12 @@ function renderQuestion() {
 
   const question =
     document
-      .getElementById(
-        "question"
-      );
+      .getElementById("question");
 
 
   const direction =
     document
-      .getElementById(
-        "direction"
-      );
+      .getElementById("direction");
 
 
   let correctAnswer;
@@ -4136,9 +4482,7 @@ function renderQuestion() {
 
   const answers =
     document
-      .getElementById(
-        "answers"
-      );
+      .getElementById("answers");
 
 
   answers.innerHTML =
@@ -4263,9 +4607,7 @@ function answerQuestion(
 
 
     document
-      .querySelectorAll(
-        ".answer"
-      )
+      .querySelectorAll(".answer")
       .forEach(
         btn => {
 
@@ -4293,9 +4635,7 @@ function answerQuestion(
 
 
   document
-    .querySelectorAll(
-      ".answer"
-    )
+    .querySelectorAll(".answer")
     .forEach(
       btn =>
         btn.disabled =
@@ -4305,9 +4645,7 @@ function answerQuestion(
 
   const feedback =
     document
-      .getElementById(
-        "feedback"
-      );
+      .getElementById("feedback");
 
 
   if (correct) {
@@ -4389,20 +4727,14 @@ function answerQuestion(
 
 
   document
-    .getElementById(
-      "liveScore"
-    )
+    .getElementById("liveScore")
     .textContent =
       `${score}/${currentIndex + 1}`;
 
 
   document
-    .getElementById(
-      "nextButton"
-    )
-    .classList.remove(
-      "hidden"
-    );
+    .getElementById("nextButton")
+    .classList.remove("hidden");
 
 }
 
@@ -4432,30 +4764,23 @@ function nextQuestion() {
 function finishQuiz() {
 
   document
-    .getElementById(
-      "appShell"
-    )
-    .classList.remove(
-      "quiz-mode"
-    );
+    .getElementById("resultQuizChooser")
+    .classList.add("hidden");
 
 
   document
-    .getElementById(
-      "quizArea"
-    )
-    .classList.add(
-      "hidden"
-    );
+    .getElementById("appShell")
+    .classList.remove("quiz-mode");
 
 
   document
-    .getElementById(
-      "resultArea"
-    )
-    .classList.remove(
-      "hidden"
-    );
+    .getElementById("quizArea")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("resultArea")
+    .classList.remove("hidden");
 
 
   const percentage =
@@ -4487,26 +4812,20 @@ function finishQuiz() {
 
 
   document
-    .getElementById(
-      "finalScore"
-    )
+    .getElementById("finalScore")
     .textContent =
       `${score}/${quiz.length}`;
 
 
   document
-    .getElementById(
-      "finalPercentage"
-    )
+    .getElementById("finalPercentage")
     .textContent =
       `${percentage}%`;
 
 
   const resultErrors =
     document
-      .getElementById(
-        "resultErrors"
-      );
+      .getElementById("resultErrors");
 
 
   if (
@@ -4590,45 +4909,92 @@ function finishQuiz() {
 
 
 /* =========================================================
+   RESULT ACTIONS
+========================================================= */
+
+function goHomeAfterQuiz() {
+
+  document
+    .getElementById("resultQuizChooser")
+    .classList.add("hidden");
+
+
+  resetQuizView();
+
+
+  showScreen(
+    "home"
+  );
+
+
+  window.scrollTo(
+    0,
+    0
+  );
+
+}
+
+
+function toggleResultQuizChooser() {
+
+  document
+    .getElementById("resultQuizChooser")
+    .classList.toggle("hidden");
+
+}
+
+
+function startQuizFromResult(size) {
+
+  selectedQuizSize =
+    size;
+
+
+  localStorage.setItem(
+    "pvQuizSize",
+    size
+  );
+
+
+  initialiseQuizSize();
+
+
+  document
+    .getElementById("resultQuizChooser")
+    .classList.add("hidden");
+
+
+  startQuiz(
+    "normal"
+  );
+
+}
+
+
+/* =========================================================
    HOME
 ========================================================= */
 
 function resetQuizView() {
 
   document
-    .getElementById(
-      "appShell"
-    )
-    .classList.remove(
-      "quiz-mode"
-    );
+    .getElementById("appShell")
+    .classList.remove("quiz-mode");
 
 
   document
-    .getElementById(
-      "resultArea"
-    )
-    .classList.add(
-      "hidden"
-    );
+    .getElementById("resultArea")
+    .classList.add("hidden");
 
 
   document
-    .getElementById(
-      "quizArea"
-    )
-    .classList.add(
-      "hidden"
-    );
+    .getElementById("quizArea")
+    .classList.add("hidden");
 
 
   document
-    .getElementById(
-      "startArea"
-    )
-    .classList.remove(
-      "hidden"
-    );
+    .getElementById("startArea")
+    .classList.remove("hidden");
 
 }
 
@@ -4640,9 +5006,7 @@ function updateHomeStats() {
 
 
   document
-    .getElementById(
-      "homeQuizCount"
-    )
+    .getElementById("homeQuizCount")
     .textContent =
       history.length;
 
@@ -4650,20 +5014,14 @@ function updateHomeStats() {
   if (!history.length) {
 
     document
-      .getElementById(
-        "homeAverage"
-      )
+      .getElementById("homeAverage")
       .textContent =
         "—";
 
 
     document
-      .getElementById(
-        "homeLastResult"
-      )
-      .classList.add(
-        "hidden"
-      );
+      .getElementById("homeLastResult")
+      .classList.add("hidden");
 
 
     return;
@@ -4692,9 +5050,7 @@ function updateHomeStats() {
 
 
   document
-    .getElementById(
-      "homeAverage"
-    )
+    .getElementById("homeAverage")
     .textContent =
       `${average}%`;
 
@@ -4705,9 +5061,7 @@ function updateHomeStats() {
 
   const lastBox =
     document
-      .getElementById(
-        "homeLastResult"
-      );
+      .getElementById("homeLastResult");
 
 
   lastBox.classList.remove(
@@ -4751,9 +5105,7 @@ function renderHistory() {
 
   const container =
     document
-      .getElementById(
-        "historyList"
-      );
+      .getElementById("historyList");
 
 
   if (!history.length) {
@@ -4943,9 +5295,7 @@ function renderDatabase() {
 
 
   document
-    .getElementById(
-      "databaseList"
-    )
+    .getElementById("databaseList")
     .innerHTML =
 
       phrasalVerbs.map(
@@ -5025,10 +5375,9 @@ function renderDatabase() {
 function renderAvatarOptions() {
 
   const container =
-    document
-      .getElementById(
-        "avatarOptions"
-      );
+    document.getElementById(
+      "avatarOptions"
+    );
 
 
   if (!container) {
@@ -5055,6 +5404,10 @@ function renderAvatarOptions() {
     .map(
       key => {
 
+        const item =
+          avatarDefinitions[key];
+
+
         const selected =
           currentType === "custom"
           &&
@@ -5067,14 +5420,21 @@ function renderAvatarOptions() {
             avatar-choice
             ${selected ? "selected" : ""}
           "
-          title="${avatarDefinitions[key].name}"
           onclick="setCustomAvatar('${key}')"
         >
 
           <img
             src="${makeAnimalAvatar(key)}"
-            alt="${avatarDefinitions[key].name}"
+            alt="${item.name}"
           />
+
+          <div class="avatar-choice-name">
+            ${item.name}
+          </div>
+
+          <div class="avatar-choice-caption">
+            ${item.caption}
+          </div>
 
         </button>
         `;
@@ -5097,17 +5457,13 @@ function loadProfile() {
 
 
   document
-    .getElementById(
-      "profileNameDisplay"
-    )
+    .getElementById("profileNameDisplay")
     .textContent =
       name;
 
 
   document
-    .getElementById(
-      "accountNameInput"
-    )
+    .getElementById("accountNameInput")
     .value =
       name;
 
@@ -5125,15 +5481,17 @@ function loadProfile() {
 
 
   /*
-    Migrazione dagli emoji precedenti:
-    se non è una foto o un avatar custom
-    usiamo il leone di default.
+    Migrazione automatica dei vecchi avatar.
   */
 
   if (
     avatarType !== "photo"
     &&
-    avatarType !== "custom"
+    (
+      avatarType !== "custom"
+      ||
+      !avatarDefinitions[avatarValue]
+    )
   ) {
 
     avatarType =
@@ -5160,9 +5518,7 @@ function loadProfile() {
 
   const avatar =
     document
-      .getElementById(
-        "profileAvatar"
-      );
+      .getElementById("profileAvatar");
 
 
   if (
@@ -5210,12 +5566,8 @@ function loadProfile() {
 function toggleAvatarPanel() {
 
   document
-    .getElementById(
-      "avatarPanel"
-    )
-    .classList.toggle(
-      "open"
-    );
+    .getElementById("avatarPanel")
+    .classList.toggle("open");
 
 
   renderAvatarOptions();
@@ -5248,12 +5600,8 @@ function setCustomAvatar(key) {
 
 
   document
-    .getElementById(
-      "avatarPanel"
-    )
-    .classList.remove(
-      "open"
-    );
+    .getElementById("avatarPanel")
+    .classList.remove("open");
 
 }
 
@@ -5292,12 +5640,8 @@ function loadAvatarPhoto(event) {
 
 
       document
-        .getElementById(
-          "avatarPanel"
-        )
-        .classList.remove(
-          "open"
-        );
+        .getElementById("avatarPanel")
+        .classList.remove("open");
 
     };
 
@@ -5317,9 +5661,7 @@ function toggleNameEditor() {
 
   const editor =
     document
-      .getElementById(
-        "nameEditor"
-      );
+      .getElementById("nameEditor");
 
 
   editor.classList.toggle(
@@ -5330,9 +5672,7 @@ function toggleNameEditor() {
   if (
     !editor
       .classList
-      .contains(
-        "hidden"
-      )
+      .contains("hidden")
   ) {
 
     setTimeout(
@@ -5340,9 +5680,7 @@ function toggleNameEditor() {
 
         const input =
           document
-            .getElementById(
-              "accountNameInput"
-            );
+            .getElementById("accountNameInput");
 
 
         input.focus();
@@ -5377,9 +5715,7 @@ function saveAccountName() {
 
   const value =
     document
-      .getElementById(
-        "accountNameInput"
-      )
+      .getElementById("accountNameInput")
       .value
       .trim();
 
@@ -5399,12 +5735,8 @@ function saveAccountName() {
 
 
   document
-    .getElementById(
-      "nameEditor"
-    )
-    .classList.add(
-      "hidden"
-    );
+    .getElementById("nameEditor")
+    .classList.add("hidden");
 
 }
 
@@ -5623,9 +5955,7 @@ function renderAccount() {
 
 
   document
-    .getElementById(
-      "accountTime"
-    )
+    .getElementById("accountTime")
     .textContent =
       formatDuration(
         getLiveTotalTime()
@@ -5633,9 +5963,7 @@ function renderAccount() {
 
 
   document
-    .getElementById(
-      "accountAccuracy"
-    )
+    .getElementById("accountAccuracy")
     .textContent =
       accuracy !== null
       ?
@@ -5645,25 +5973,19 @@ function renderAccount() {
 
 
   document
-    .getElementById(
-      "accountQuizCount"
-    )
+    .getElementById("accountQuizCount")
     .textContent =
       history.length;
 
 
   document
-    .getElementById(
-      "accountQuestions"
-    )
+    .getElementById("accountQuestions")
     .textContent =
       totalSeen;
 
 
   document
-    .getElementById(
-      "accountAverage"
-    )
+    .getElementById("accountAverage")
     .textContent =
       average !== null
       ?
@@ -5673,9 +5995,7 @@ function renderAccount() {
 
 
   document
-    .getElementById(
-      "accountBest"
-    )
+    .getElementById("accountBest")
     .textContent =
       best !== null
       ?
@@ -5685,9 +6005,7 @@ function renderAccount() {
 
 
   document
-    .getElementById(
-      "accountLast"
-    )
+    .getElementById("accountLast")
     .textContent =
       last !== null
       ?
@@ -5697,33 +6015,25 @@ function renderAccount() {
 
 
   document
-    .getElementById(
-      "accountTested"
-    )
+    .getElementById("accountTested")
     .textContent =
       `${tested}/100`;
 
 
   document
-    .getElementById(
-      "accountMastered"
-    )
+    .getElementById("accountMastered")
     .textContent =
       mastered;
 
 
   document
-    .getElementById(
-      "accountWeak"
-    )
+    .getElementById("accountWeak")
     .textContent =
       weak;
 
 
   document
-    .getElementById(
-      "accountAvgQuizTime"
-    )
+    .getElementById("accountAvgQuizTime")
     .textContent =
       averageQuizTime
       ?
@@ -5735,9 +6045,7 @@ function renderAccount() {
 
 
   document
-    .getElementById(
-      "soundToggle"
-    )
+    .getElementById("soundToggle")
     .checked =
       isSoundEnabled();
 
@@ -5857,9 +6165,7 @@ function renderRankings(stats) {
 
 
   document
-    .getElementById(
-      "worstVerbs"
-    )
+    .getElementById("worstVerbs")
     .innerHTML =
 
       worst.length
@@ -5878,9 +6184,7 @@ function renderRankings(stats) {
 
 
   document
-    .getElementById(
-      "bestVerbs"
-    )
+    .getElementById("bestVerbs")
     .innerHTML =
 
       best.length
@@ -6028,7 +6332,7 @@ function exportBackup() {
   const backup = {
 
     version:
-      3,
+      4,
 
     exportedAt:
       new Date().toISOString(),
@@ -6205,16 +6509,6 @@ function importBackup(event) {
         }
 
 
-        /*
-          Compatibile sia con:
-          - vecchie foto
-          - nuovi avatar custom
-          - vecchie emoji
-
-          Le emoji verranno automaticamente
-          convertite nel leone al loadProfile.
-        */
-
         if (
           backup.avatarType
         ) {
@@ -6284,6 +6578,9 @@ function importBackup(event) {
 
 
         initialiseQuizSize();
+
+
+        loadProfile();
 
 
         alert(
