@@ -14724,6 +14724,1245 @@ nav button{
   paintAllCefrBadges();
 })();
 </script>
+<!-- =========================================================
+     V11 — CEFR, LIVE SEARCH, DYNAMIC HOME, LEXICON QA
+     Incolla questo blocco IMMEDIATAMENTE prima di </body>,
+     dopo lo script V10.
+========================================================= -->
+
+<style id="v11-style">
+/* ---------- CEFR palette definitiva ---------- */
+.cefr-badge{
+  height:30px!important;
+  min-width:46px!important;
+  padding:0 11px!important;
+  border-radius:999px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  font-size:12px!important;
+  line-height:1!important;
+  font-weight:950!important;
+  letter-spacing:.35px!important;
+  border:1px solid transparent!important;
+}
+.cefr-A1{background:#eef1f5!important;color:#667085!important;border-color:#d7dce5!important}
+.cefr-A2{background:#e3f1ff!important;color:#2472b5!important;border-color:#b7daf7!important}
+.cefr-B1{background:#e4f6ea!important;color:#23794d!important;border-color:#b8e1c7!important}
+.cefr-B2{background:#fff4c9!important;color:#8a6a00!important;border-color:#efd882!important}
+.cefr-C1{background:#ffead7!important;color:#b75d17!important;border-color:#efbd91!important}
+.cefr-C2{background:#fde4e7!important;color:#b9364c!important;border-color:#efadb8!important}
+
+/* ---------- Quiz: CEFR sopra direzione, perfettamente centrato ---------- */
+.question-meta-row-v10{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:7px!important;
+  margin:2px 0 11px!important;
+}
+.question-meta-row-v10 .direction,
+.question-meta-row-v10 .question-meta{
+  margin:0!important;
+}
+.question-meta-row-v10 .direction{
+  height:30px!important;
+  min-height:30px!important;
+  padding:0 11px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  border-radius:999px!important;
+  line-height:1!important;
+}
+.app.quiz-mode .question-meta-row-v10{
+  margin:2px 0 8px!important;
+}
+.app.quiz-mode #quizArea.wrong-state .question-meta-row-v10{
+  gap:4px!important;
+  margin-bottom:5px!important;
+}
+.app.quiz-mode #quizArea.wrong-state .direction,
+.app.quiz-mode #quizArea.wrong-state .cefr-badge{
+  height:27px!important;
+  min-height:27px!important;
+}
+
+/* ---------- HOME V11: naturale, senza box stirati ---------- */
+.app.home-mode{
+  height:auto!important;
+  min-height:100dvh!important;
+  overflow:visible!important;
+  padding-bottom:calc(84px + env(safe-area-inset-bottom))!important;
+}
+.app.home-mode #home{
+  height:auto!important;
+  min-height:calc(100dvh - 173px)!important;
+  overflow:visible!important;
+  padding:16px 16px max(18px,env(safe-area-inset-bottom))!important;
+}
+.app.home-mode #startArea{
+  height:auto!important;
+  min-height:0!important;
+  display:block!important;
+}
+.app.home-mode #startArea > .card{
+  margin-bottom:14px!important;
+}
+.app.home-mode .hero-quiz{
+  padding:20px!important;
+  border-radius:24px!important;
+}
+.app.home-mode .hero-quiz .section-title{
+  font-size:25px!important;
+  letter-spacing:-.55px!important;
+}
+.app.home-mode .quiz-size-label{
+  margin:16px 0 8px!important;
+}
+.app.home-mode .quiz-size-selector{
+  gap:9px!important;
+  margin-bottom:11px!important;
+}
+.app.home-mode .quiz-size-button{
+  min-height:44px!important;
+  border-radius:14px!important;
+}
+.app.home-mode .hero-quiz .main-button{
+  min-height:49px!important;
+  margin-top:8px!important;
+  padding:12px!important;
+  font-size:17px!important;
+}
+.app.home-mode .hero-quiz .secondary-button{
+  min-height:45px!important;
+  margin-top:7px!important;
+  padding:11px!important;
+  font-size:16px!important;
+}
+
+/* Il tuo progresso: contenuto compatto, nessuna altezza forzata */
+.app.home-mode #startArea > .card:last-child{
+  display:block!important;
+  min-height:0!important;
+  padding:18px!important;
+  border-radius:23px!important;
+}
+.app.home-mode #startArea > .card:last-child .section-title{
+  margin:0 0 12px!important;
+  font-size:21px!important;
+}
+.app.home-mode .mini-grid{
+  gap:10px!important;
+  margin:0!important;
+}
+.app.home-mode .mini-card{
+  min-height:78px!important;
+  padding:11px 8px!important;
+  border-radius:17px!important;
+}
+.app.home-mode .mini-card strong{
+  margin-bottom:2px!important;
+  font-size:26px!important;
+}
+.app.home-mode .mini-card span{
+  font-size:11.5px!important;
+}
+.app.home-mode .home-last-result{
+  margin-top:10px!important;
+  min-height:0!important;
+  padding:11px 13px!important;
+  border-radius:16px!important;
+}
+
+/* Grafico aperto: compressione armonica dell'intera Home */
+.app.home-mode.chart-open #startArea > .card{
+  margin-bottom:9px!important;
+}
+.app.home-mode.chart-open .hero-quiz{
+  padding:14px 17px!important;
+}
+.app.home-mode.chart-open .hero-quiz .eyebrow{
+  margin-bottom:2px!important;
+  font-size:10.5px!important;
+}
+.app.home-mode.chart-open .hero-quiz .section-title{
+  font-size:21px!important;
+}
+.app.home-mode.chart-open .quiz-size-label{
+  margin:8px 0 5px!important;
+  font-size:10.5px!important;
+}
+.app.home-mode.chart-open .quiz-size-selector{
+  margin-bottom:7px!important;
+}
+.app.home-mode.chart-open .quiz-size-button{
+  min-height:36px!important;
+  font-size:14px!important;
+}
+.app.home-mode.chart-open #performanceChartWrap{
+  margin:7px 0!important;
+  padding:8px!important;
+}
+.app.home-mode.chart-open .performance-chart{
+  height:105px!important;
+}
+.app.home-mode.chart-open .hero-quiz .main-button{
+  min-height:40px!important;
+  padding:8px!important;
+  font-size:15px!important;
+}
+.app.home-mode.chart-open .hero-quiz .secondary-button{
+  min-height:38px!important;
+  padding:8px!important;
+  font-size:14px!important;
+}
+.app.home-mode.chart-open #startArea > .card:last-child{
+  padding:12px 14px!important;
+}
+.app.home-mode.chart-open #startArea > .card:last-child .section-title{
+  margin-bottom:7px!important;
+  font-size:18px!important;
+}
+.app.home-mode.chart-open .mini-card{
+  min-height:56px!important;
+  padding:6px!important;
+}
+.app.home-mode.chart-open .mini-card strong{
+  font-size:21px!important;
+}
+.app.home-mode.chart-open .mini-card span{
+  font-size:10px!important;
+}
+.app.home-mode.chart-open .home-last-result{
+  margin-top:6px!important;
+  padding:7px 10px!important;
+}
+
+/* ---------- Grafico: usa tutta la larghezza ---------- */
+.performance-chart{
+  width:100%!important;
+}
+.chart-dot{
+  width:10px!important;
+  height:10px!important;
+}
+
+/* ---------- Database controls + ricerca live ---------- */
+.v10-db-controls{
+  grid-template-columns:minmax(0,1fr) 46px 46px!important;
+  gap:8px!important;
+  margin:8px 0 8px!important;
+}
+.v11-db-search-toggle{
+  min-width:46px;
+  min-height:44px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:#f7f8fc;
+  color:var(--text);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:19px;
+  font-weight:900;
+}
+.v11-db-search{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px;
+  max-height:0;
+  opacity:0;
+  overflow:hidden;
+  margin:0;
+  transform:translateY(-5px);
+  transition:max-height .22s ease,opacity .18s ease,margin .22s ease,transform .22s ease;
+}
+.v11-db-search.open{
+  max-height:60px;
+  opacity:1;
+  margin:0 0 11px;
+  transform:translateY(0);
+}
+.v11-db-search-input{
+  width:100%;
+  min-height:44px;
+  padding:0 14px 0 41px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  outline:none;
+  background:#fff;
+  color:var(--text);
+  font-size:15px;
+  font-weight:700;
+  background-image:
+    linear-gradient(transparent,transparent);
+}
+.v11-db-search-wrap{
+  position:relative;
+}
+.v11-db-search-wrap::before{
+  content:"⌕";
+  position:absolute;
+  z-index:2;
+  left:14px;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--muted);
+  font-size:20px;
+  pointer-events:none;
+}
+.v11-db-search-clear{
+  min-width:44px;
+  min-height:44px;
+  border:0;
+  border-radius:14px;
+  background:#f0f2f6;
+  color:#687083;
+  font-size:20px;
+}
+.v11-db-result-count{
+  margin:0 2px 10px;
+  color:var(--muted);
+  font-size:11px;
+  font-weight:800;
+}
+.database-card-head .cefr-badge{
+  flex:0 0 auto;
+}
+
+/* ---------- Database title count dinamico ---------- */
+.database-title .v11-count{
+  color:var(--primary);
+}
+
+@media(max-width:390px){
+  .app.home-mode #home{
+    padding-left:14px!important;
+    padding-right:14px!important;
+  }
+  .app.home-mode .hero-quiz{
+    padding:18px!important;
+  }
+}
+</style>
+
+<script id="v11-script">
+(function(){
+'use strict';
+
+/* =========================================================
+   1) CEFR PEDAGOGICO
+   Il livello indica quando è realistico aspettarsi che lo
+   studente conosca QUEL SIGNIFICATO, non la mera frequenza.
+========================================================= */
+const V11_LEVELS = {
+  A2: new Set([
+    "Come back","Find out","Get in","Get out","Give up","Grow up","Look for",
+    "Pick up","Put on","Take off","Turn off","Turn on","Wake up","Get up",
+    "Go away","Go back","Go out","Go up","Go down","Sit down","Stand up",
+    "Eat out","Fill up","Clean up","Calm down","Cheer up","Check in",
+    "Come over","Bring along","Hang up","Run away","Throw away","Try on",
+    "Move in","Move out","Switch on","Switch off","Take away","Take out",
+    "Put away","Give back","Call back","Write down","Look around","Look at",
+    "Get on","Get off","Get together","Dress up","Warm up","Pass by",
+    "Send back","Hand back","Let in"
+  ]),
+  B1: new Set([
+    "Bring back","Carry on","Check out","Cut off","Deal with","Drop off","End up",
+    "Figure out","Fill in","Fill out","Get along with","Get away","Get back",
+    "Get by","Give in","Go on","Hold on","Join in","Look after","Look out",
+    "Look up","Move on","Pay back","Show up","Turn up","Work out","Ask around",
+    "Ask out","Answer back","Back away","Back down","Back out","Blow away",
+    "Blow out","Book in","Burn down","Catch up","Cross out","Cut in","Cut out",
+    "Cut up","Do over","Do up","Do without","Drop by","Drop in","Drop out",
+    "Fall apart","Fall for","Feel like","Fight back","Fit in","Fix up",
+    "Get ahead","Get along","Get around","Get into","Get on with","Get out of",
+    "Give away","Go after","Go around","Go for","Go into","Grow apart",
+    "Grow into","Hang around","Hang on","Hang out","Head for","Keep away",
+    "Keep off","Keep up","Knock down","Knock out","Live on","Log in","Log out",
+    "Look ahead","Look back","Look over","Look through","Look up to","Make out",
+    "Pass out","Pick on","Pick out","Pull away","Put aside","Put back",
+    "Put down","Put out","Read over","Ring back","Run after","Run out",
+    "Set off","Settle down","Show off","Shut down","Sign in","Sign up",
+    "Split up","Start off","Stay away","Stay on","Take after","Take apart",
+    "Take down","Talk into","Talk out of","Tear down","Tear up","Throw out",
+    "Try out","Turn around","Turn away","Turn in","Turn into","Turn to",
+    "Use up","Wait around","Walk away","Wear off","Work on","Wrap up",
+    "Break free","Come apart","Go without","Call around"
+  ]),
+  B2: new Set([
+    "Back up","Break down","Break out","Break up","Bring about","Bring up",
+    "Call off","Carry out","Come across","Come down to","Come out",
+    "Come up with","Cut down on","Fall behind","Follow up","Get over",
+    "Get through","Go ahead","Go over","Go through","Hand in","Hand out",
+    "Keep away from","Keep on","Keep up with","Leave behind","Leave out",
+    "Let down","Look back on","Look forward to","Look into","Make up",
+    "Make up for","Pass away","Point out","Put off","Put together","Put up with",
+    "Rule out","Run into","Run out of","Set out","Set up","Sort out","Speak up",
+    "Stand out","Step down","Step up","Sum up","Take back","Take on","Take over",
+    "Take up","Think over","Turn down","Turn out","Act on","Act out","Act up",
+    "Add up","Add up to","Back out of","Bear with","Blow up","Book up",
+    "Break away","Break in","Break into","Break off","Break through","Bring down",
+    "Bring forward","Bring in","Bring on","Bring out","Bring together",
+    "Brush up on","Build on","Build up","Bump into","Burn out","Burst into",
+    "Call for","Call in","Call on","Care for","Carry over","Catch on",
+    "Catch up on","Check into","Check over","Check up on","Chip in","Clear away",
+    "Clear out","Clear up","Close down","Come about","Come along","Come around",
+    "Come between","Come forward","Come off","Come on","Come through","Come up",
+    "Count on","Cut back","Cut back on","Die down","Die out","Dig into","Dig up",
+    "Face up to","Fall out","Fall through","Feel for","Follow through",
+    "Get across","Get around to","Get away with","Get back to","Get down to",
+    "Get through to","Give off","Give out","Go about","Go against","Go along with",
+    "Go by","Go down with","Go off","Go through with","Go under","Grow on",
+    "Grow out of","Hand over","Head off","Hold back","Hold onto","Hold out",
+    "Hold up","Keep at","Keep back","Keep down","Keep from","Keep to","Kick off",
+    "Lay off","Lead to","Let off","Live up to","Look down on","Make for",
+    "Make of","Make off","Mark down","Narrow down","Opt for","Opt out","Own up",
+    "Pass on","Pay off","Pick out","Pull apart","Pull back","Pull out",
+    "Pull through","Put across","Put forward","Put through","Put up","Run across",
+    "Run down","Run over","Run through","See off","Sell off","Set about",
+    "Set aside","Set back","Shop around","Sit back","Speak out","Stand by",
+    "Stand for","Stand up for","Step in","Stick around","Stick to","Stick with",
+    "Take in","Think through","Turn over","Wait on","Walk out","Wear out",
+    "Wind down","Work through","Branch off","Cut across","Drop away","Fall away",
+    "Hold against","Lay out"
+  ]),
+  C1: new Set([
+    "Brush aside","Boil down to","Branch out","Bring round","Buy into","Buy out",
+    "Close in on","Come in for","Come under","Come up against","Come up to",
+    "Die away","Do away with","Drag on","Draw back","Draw on","Draw up",
+    "Fall back on","Fend off","Figure on","Fit in with","Flare up","Get at",
+    "Get back at","Get down","Go back on","Go in for","Hand down","Iron out",
+    "Let on","Make off","Phase in","Phase out","Pull off","Reel off","See through",
+    "Sign off","Wind up","Wipe out","Zero in on","Account for","Adhere to",
+    "Allow for","Bank on","Bear out","Break even","Buy up","Cash in on",
+    "Clamp down on","Crack down on","Crop up","Delve into","Factor in","Fall back",
+    "Flesh out","Forge ahead","Gear up for","Hinge on","Home in on","Map out",
+    "Mull over","Pan out","Pare down","Play down","Press ahead","Prop up",
+    "Roll out","Scale back","Scale up","Shore up","Single out","Spell out",
+    "Stem from","Taper off","Touch on","Weed out","Weigh up","Boil over",
+    "Buckle down","Cave in","Chalk up","Drum up","Gloss over","Hammer out",
+    "Lash out","Level off","Live down","Rein in","Root out","Scrape by",
+    "Shrug off","Step aside","Strike down","Strike up","Tone down","Water down"
+  ]),
+  C2: new Set([
+    "Eke out","Fizzle out","Stave off","Tide over","Trump up","While away"
+  ])
+};
+
+function v11LevelFor(verb,current){
+  for(const [level,set] of Object.entries(V11_LEVELS)){
+    if(set.has(verb)) return level;
+  }
+  return current || "B2";
+}
+
+/* =========================================================
+   2) ESEMPI NATURALI PER LE VOCI TEMPLATE
+   Questi sostituiscono il vecchio "In this context..."
+========================================================= */
+const V11_EXAMPLES = {
+"Act on":["We acted on the lawyer's advice immediately.","Abbiamo agito immediatamente seguendo il consiglio dell'avvocato."],
+"Act out":["The students acted out the scene in front of the class.","Gli studenti hanno messo in scena la scena davanti alla classe."],
+"Act up":["My laptop has been acting up all morning.","Il mio portatile ha funzionato male per tutta la mattina."],
+"Add up":["His explanation doesn't add up.","La sua spiegazione non torna."],
+"Add up to":["The extra charges add up to more than €200.","I costi aggiuntivi ammontano a più di 200 euro."],
+"Answer back":["Don't answer back when your teacher is speaking to you.","Non rispondere male quando l'insegnante ti sta parlando."],
+"Ask around":["I asked around, but nobody knew where he had gone.","Ho chiesto in giro, ma nessuno sapeva dove fosse andato."],
+"Ask out":["He finally asked her out for dinner.","Alla fine le ha chiesto di uscire a cena."],
+"Back away":["The dog growled, so I slowly backed away.","Il cane ha ringhiato, quindi sono indietreggiato lentamente."],
+"Back down":["Neither side was willing to back down.","Nessuna delle due parti era disposta a fare marcia indietro."],
+"Back out":["She agreed to help, then backed out at the last minute.","Aveva accettato di aiutare, poi si è tirata indietro all'ultimo momento."],
+"Back out of":["They backed out of the deal before signing the contract.","Si sono ritirati dall'accordo prima di firmare il contratto."],
+"Back onto":["The house backs onto a large public park.","La casa dà su un grande parco pubblico."],
+"Back away from":["The company is backing away from its original plan.","L'azienda si sta allontanando dal piano iniziale."],
+"Bail out":["The government stepped in to bail out the bank.","Il governo è intervenuto per salvare finanziariamente la banca."],
+"Bear with":["Bear with me for a moment while I check the figures.","Abbi pazienza un momento mentre controllo i dati."],
+"Blow away":["The view from the top of the mountain blew me away.","La vista dalla cima della montagna mi ha lasciato senza parole."],
+"Blow out":["She blew out the candles on her birthday cake.","Ha spento le candeline sulla torta di compleanno."],
+"Blow over":["The controversy will probably blow over in a few days.","La polemica probabilmente passerà nel giro di qualche giorno."],
+"Blow up":["They had to blow up the old bridge.","Hanno dovuto far esplodere il vecchio ponte."],
+"Boil down to":["The decision boils down to cost and timing.","La decisione si riduce essenzialmente a costi e tempistiche."],
+"Book in":["We booked in at the hotel just before midnight.","Abbiamo fatto il check-in in hotel poco prima di mezzanotte."],
+"Book up":["Hotels in the city centre book up quickly in summer.","Gli hotel in centro si riempiono rapidamente d'estate."],
+"Branch out":["The company wants to branch out into renewable energy.","L'azienda vuole espandersi nel settore delle energie rinnovabili."],
+"Break away":["One runner broke away from the group near the finish.","Un corridore si è staccato dal gruppo vicino al traguardo."],
+"Break in":["Someone broke in while we were away.","Qualcuno è entrato con la forza mentre eravamo via."],
+"Break into":["Thieves broke into the office during the night.","I ladri sono entrati con la forza nell'ufficio durante la notte."],
+"Break off":["They broke off negotiations after two difficult meetings.","Hanno interrotto le trattative dopo due riunioni difficili."],
+"Break through":["The research team finally broke through the technical barrier.","Il team di ricerca è finalmente riuscito a superare l'ostacolo tecnico."],
+"Bring along":["You can bring a friend along to the event.","Puoi portare con te un amico all'evento."],
+"Bring down":["Higher competition could bring down prices.","Una maggiore concorrenza potrebbe ridurre i prezzi."],
+"Bring forward":["They brought the meeting forward to Tuesday.","Hanno anticipato la riunione a martedì."],
+"Bring in":["The new service brings in about €50,000 a month.","Il nuovo servizio genera circa 50.000 euro al mese."],
+"Bring on":["Lack of sleep can bring on severe headaches.","La mancanza di sonno può provocare forti mal di testa."],
+"Bring out":["The interview brought out a more confident side of her.","L'intervista ha fatto emergere un lato più sicuro di lei."],
+"Bring round":["We eventually brought him round to our point of view.","Alla fine siamo riusciti a convincerlo del nostro punto di vista."],
+"Bring together":["The project brought together experts from five countries.","Il progetto ha riunito esperti provenienti da cinque paesi."],
+"Brush aside":["The minister brushed aside concerns about the cost.","Il ministro ha liquidato le preoccupazioni relative ai costi."],
+"Brush up on":["I need to brush up on my English before the interview.","Devo ripassare il mio inglese prima del colloquio."],
+"Build on":["The new strategy builds on what worked last year.","La nuova strategia sviluppa ciò che ha funzionato l'anno scorso."],
+"Build up":["It takes time to build up trust with a new client.","Ci vuole tempo per costruire un rapporto di fiducia con un nuovo cliente."],
+"Bump into":["I bumped into an old colleague at the station.","Ho incontrato per caso un ex collega alla stazione."],
+"Burn down":["The warehouse burned down during the night.","Il magazzino è bruciato completamente durante la notte."],
+"Burn out":["He burned out after months of working every weekend.","È andato in burnout dopo mesi di lavoro ogni fine settimana."],
+"Burst into":["She burst into tears when she heard the news.","È scoppiata a piangere quando ha sentito la notizia."],
+"Buy into":["Not everyone in the team has bought into the new strategy.","Non tutti nel team hanno aderito alla nuova strategia."],
+"Buy out":["The founders were bought out by a larger competitor.","I fondatori sono stati rilevati da un concorrente più grande."],
+"Call for":["The situation calls for a quick decision.","La situazione richiede una decisione rapida."],
+"Call in":["We called in an external expert to review the contract.","Abbiamo chiamato un esperto esterno per esaminare il contratto."],
+"Call on":["The chair called on me to present the results.","Il presidente mi ha invitato a presentare i risultati."],
+"Calm down":["Take a minute to calm down before you answer.","Prenditi un minuto per calmarti prima di rispondere."],
+"Care for":["She cared for her father during his illness.","Si è presa cura di suo padre durante la malattia."],
+"Carry forward":["Unused losses can be carried forward to future years.","Le perdite inutilizzate possono essere riportate agli esercizi futuri."],
+"Carry over":["Some of the work will carry over into next week.","Una parte del lavoro si protrarrà fino alla prossima settimana."],
+"Catch on":["It took me a while to catch on, but now I understand.","Mi ci è voluto un po' per capire, ma ora ho capito."],
+"Catch up":["I need to catch up after missing two lessons.","Devo recuperare dopo aver perso due lezioni."],
+"Catch up on":["I spent Sunday catching up on emails.","Ho passato la domenica a recuperare le email arretrate."],
+"Check in":["We checked in online the night before the flight.","Abbiamo fatto il check-in online la sera prima del volo."],
+"Check into":["The company is checking into the cause of the error.","L'azienda sta indagando sulla causa dell'errore."],
+"Check over":["Could you check over this report before I send it?","Potresti controllare attentamente questo report prima che lo invii?"],
+"Check up on":["I'll check up on the order this afternoon.","Controllerò lo stato dell'ordine questo pomeriggio."],
+"Cheer up":["I bought her some flowers to cheer her up.","Le ho comprato dei fiori per tirarla su di morale."],
+"Chip in":["Everyone chipped in to buy him a leaving present.","Tutti hanno contribuito per comprargli un regalo di addio."],
+"Clean up":["We need to clean up the kitchen after dinner.","Dobbiamo pulire la cucina dopo cena."],
+"Clear away":["Please clear away the dishes when you've finished.","Per favore sgombera i piatti quando hai finito."],
+"Clear out":["We spent the weekend clearing out the garage.","Abbiamo passato il fine settimana a svuotare il garage."],
+"Clear up":["The report helped clear up several misunderstandings.","Il report ha aiutato a chiarire diversi malintesi."],
+"Close down":["The factory closed down after years of losses.","La fabbrica ha chiuso definitivamente dopo anni di perdite."],
+"Close in on":["The police are closing in on the suspect.","La polizia si sta avvicinando al sospettato."],
+"Come about":["How did this misunderstanding come about?","Come si è verificato questo malinteso?"],
+"Come along":["Your English has really come along this year.","Il tuo inglese è migliorato molto quest'anno."],
+"Come around":["He eventually came around and supported the proposal.","Alla fine ha cambiato idea e ha sostenuto la proposta."],
+"Come between":["I don't want money to come between us.","Non voglio che il denaro si metta tra di noi."],
+"Come forward":["Two witnesses came forward after the appeal.","Due testimoni si sono fatti avanti dopo l'appello."],
+"Come in for":["The plan came in for heavy criticism.","Il piano è stato oggetto di forti critiche."],
+"Come off":["The handle came off in my hand.","La maniglia si è staccata e mi è rimasta in mano."],
+"Come on":["Come on, we're going to be late!","Dai, faremo tardi!"],
+"Come over":["Why don't you come over for dinner tonight?","Perché non passi da noi a cena stasera?"],
+"Come through":["She came through a very difficult period.","È riuscita a superare un periodo molto difficile."],
+"Come under":["The company has come under pressure from investors.","L'azienda è finita sotto pressione da parte degli investitori."],
+"Come up":["A problem came up during the final review.","È emerso un problema durante la revisione finale."],
+"Come up against":["We came up against several legal obstacles.","Ci siamo scontrati con diversi ostacoli legali."],
+"Come up to":["The hotel didn't come up to our expectations.","L'hotel non è stato all'altezza delle nostre aspettative."],
+"Count on":["You can always count on me if you need help.","Puoi sempre contare su di me se hai bisogno di aiuto."],
+"Cross out":["Cross out the wrong answer and write the correct one.","Barra la risposta sbagliata e scrivi quella corretta."],
+"Cut back":["The company is cutting back because sales have fallen.","L'azienda sta riducendo le attività perché le vendite sono diminuite."],
+"Cut back on":["I'm trying to cut back on coffee.","Sto cercando di ridurre il consumo di caffè."],
+"Cut in":["Sorry to cut in, but I need to clarify one point.","Scusa se interrompo, ma devo chiarire un punto."],
+"Cut out":["I decided to cut out sugary drinks completely.","Ho deciso di eliminare completamente le bevande zuccherate."],
+"Cut up":["Cut up the vegetables before you add them to the pan.","Taglia le verdure a pezzi prima di aggiungerle in padella."],
+"Die away":["The sound of the music slowly died away.","Il suono della musica si è affievolito lentamente."],
+"Die down":["The wind finally died down after midnight.","Il vento finalmente si è calmato dopo mezzanotte."],
+"Die out":["Many traditional crafts are in danger of dying out.","Molti mestieri tradizionali rischiano di scomparire."],
+"Dig into":["We need to dig into the data before drawing conclusions.","Dobbiamo approfondire i dati prima di trarre conclusioni."],
+"Dig up":["The journalist dug up new evidence about the case.","Il giornalista ha scoperto nuove prove sul caso."],
+"Do away with":["The new system does away with paper forms.","Il nuovo sistema elimina i moduli cartacei."],
+"Do over":["This isn't good enough; we'll have to do it over.","Non è abbastanza buono; dovremo rifarlo."],
+"Do up":["They bought an old flat and did it up themselves.","Hanno comprato un vecchio appartamento e lo hanno ristrutturato da soli."],
+"Do without":["We can do without a car while we live in the city centre.","Possiamo fare a meno dell'auto mentre viviamo in centro."],
+"Drag on":["The meeting dragged on for more than three hours.","La riunione si è trascinata per più di tre ore."],
+"Draw back":["She drew back when she saw the snake.","È arretrata quando ha visto il serpente."],
+"Draw on":["The report draws on data from several independent sources.","Il report attinge a dati provenienti da diverse fonti indipendenti."],
+"Draw up":["The lawyers drew up a new agreement.","Gli avvocati hanno redatto un nuovo accordo."],
+"Dress up":["You don't need to dress up for the party.","Non è necessario vestirsi elegante per la festa."],
+"Drop back":["He dropped back to fifth place near the end of the race.","È sceso al quinto posto verso la fine della gara."],
+"Drop by":["I'll drop by after work if you're at home.","Passerò dopo il lavoro se sei a casa."],
+"Drop in":["Feel free to drop in whenever you're nearby.","Passa pure quando sei nei paraggi."],
+"Drop out":["He dropped out of university after his first year.","Ha abbandonato l'università dopo il primo anno."],
+"Eat out":["We usually eat out on Friday evenings.","Di solito mangiamo fuori il venerdì sera."],
+"End in":["The discussion ended in an argument.","La discussione è finita con un litigio."],
+"End with":["The presentation ended with a short Q&A session.","La presentazione si è conclusa con una breve sessione di domande e risposte."],
+"Face up to":["We need to face up to the fact that the plan isn't working.","Dobbiamo affrontare il fatto che il piano non sta funzionando."],
+"Fall apart":["The old chair fell apart when I sat on it.","La vecchia sedia è andata in pezzi quando mi ci sono seduto."],
+"Fall back on":["If the first plan fails, we can fall back on the original option.","Se il primo piano fallisce, possiamo ripiegare sull'opzione iniziale."],
+"Fall for":["I can't believe I fell for that trick.","Non posso credere di essere cascato in quel trucco."],
+"Fall out":["They fell out over money and stopped speaking.","Hanno litigato per soldi e hanno smesso di parlarsi."],
+"Fall through":["The deal fell through at the last minute.","L'accordo è saltato all'ultimo momento."],
+"Feel for":["I really feel for people who have lost their homes.","Provo molta empatia per le persone che hanno perso la casa."],
+"Feel like":["Do you feel like going out tonight?","Hai voglia di uscire stasera?"],
+"Fend off":["The company managed to fend off a hostile takeover bid.","L'azienda è riuscita a respingere un'offerta pubblica di acquisto ostile."],
+"Fight back":["The team fought back and equalised in the final minutes.","La squadra ha reagito e ha pareggiato negli ultimi minuti."],
+"Figure on":["We hadn't figured on such a large increase in costs.","Non avevamo previsto un aumento dei costi così elevato."],
+"Fill up":["Could you fill up the tank before we leave?","Potresti fare il pieno prima di partire?"],
+"Fit in":["It took her a few weeks to fit in at her new school.","Le ci sono volute alcune settimane per integrarsi nella nuova scuola."],
+"Fit in with":["The proposal doesn't fit in with our long-term strategy.","La proposta non si adatta alla nostra strategia di lungo periodo."],
+"Fix up":["I'll fix up a meeting with the client for next week.","Organizzerò una riunione con il cliente per la prossima settimana."],
+"Flare up":["The dispute flared up again after the announcement.","La disputa è divampata di nuovo dopo l'annuncio."],
+"Follow through":["You need to follow through on the commitments you made.","Devi portare a termine gli impegni che hai preso."],
+"Get across":["She managed to get her point across clearly.","È riuscita a far capire chiaramente il suo punto di vista."],
+"Get ahead":["You need experience as well as qualifications to get ahead.","Per fare carriera servono esperienza oltre alle qualifiche."],
+"Get along":["How are you getting along in your new job?","Come te la stai cavando nel nuovo lavoro?"],
+"Get around":["It's easy to get around the city by metro.","È facile spostarsi in città con la metropolitana."],
+"Get around to":["I finally got around to replying to his email.","Finalmente ho trovato il tempo di rispondere alla sua email."],
+"Get at":["What exactly are you getting at?","Che cosa stai cercando di dire esattamente?"],
+"Get away with":["He cheated on the test and thought he could get away with it.","Ha copiato al test e pensava di poterla fare franca."],
+"Get back at":["She wanted to get back at him for lying to her.","Voleva vendicarsi di lui per averle mentito."],
+"Get back to":["I'll get back to you once I've checked the numbers.","Ti ricontatterò dopo aver controllato i numeri."],
+"Get down":["All this bad news is starting to get me down.","Tutte queste brutte notizie stanno iniziando a deprimermi."],
+"Get down to":["Let's get down to work.","Mettiamoci seriamente al lavoro."],
+"Get into":["I got into photography while I was at university.","Mi sono appassionato alla fotografia quando ero all'università."],
+"Get off":["We need to get off at the next stop.","Dobbiamo scendere alla prossima fermata."],
+"Get on":["We got on the train just before it left.","Siamo saliti sul treno poco prima che partisse."],
+"Get on with":["I get on well with everyone in my team.","Vado d'accordo con tutti nel mio team."],
+"Get out of":["He tried to get out of attending the meeting.","Ha cercato di evitare di partecipare alla riunione."],
+"Get through to":["I couldn't get through to customer service this morning.","Non sono riuscito a mettermi in contatto con il servizio clienti stamattina."],
+"Get together":["We should get together for lunch next week.","Dovremmo vederci per pranzo la prossima settimana."],
+"Get up":["I get up at six thirty on weekdays.","Mi alzo alle sei e mezza nei giorni feriali."],
+"Give away":["She gave away most of her old clothes.","Ha regalato la maggior parte dei suoi vecchi vestiti."],
+"Give off":["The machine gives off a lot of heat.","La macchina emana molto calore."],
+"Give out":["They gave out free samples outside the station.","Hanno distribuito campioni gratuiti fuori dalla stazione."],
+"Go about":["What's the best way to go about solving this problem?","Qual è il modo migliore per affrontare questo problema?"],
+"Go after":["The company is going after a younger customer base.","L'azienda sta puntando a una clientela più giovane."],
+"Go against":["That decision goes against our internal policy.","Quella decisione va contro la nostra policy interna."],
+"Go along with":["I don't completely agree, but I'll go along with the plan.","Non sono completamente d'accordo, ma appoggerò il piano."],
+"Go around":["A flu virus is going around the office.","In ufficio sta circolando un virus influenzale."],
+"Go away":["We're going away for a few days in September.","Andremo via per qualche giorno a settembre."],
+"Go back":["I'd like to go back to Japan one day.","Mi piacerebbe tornare in Giappone un giorno."],
+"Go back on":["He promised to help and then went back on his word.","Aveva promesso di aiutare e poi si è rimangiato la parola."],
+"Go by":["If we go by last year's figures, sales should rise again.","Se ci basiamo sui dati dell'anno scorso, le vendite dovrebbero aumentare di nuovo."],
+"Go down":["Prices went down sharply in July.","I prezzi sono scesi bruscamente a luglio."],
+"Go down with":["Three people in the office have gone down with the flu.","Tre persone in ufficio si sono ammalate di influenza."],
+"Go for":["I'll go for the cheaper option.","Sceglierò l'opzione più economica."],
+"Go in for":["She doesn't really go in for competitive sports.","Non si dedica molto agli sport competitivi."],
+"Go into":["The report doesn't go into enough detail.","Il report non entra abbastanza nel dettaglio."],
+"Go off":["The alarm went off at six o'clock.","La sveglia è suonata alle sei."],
+"Go out":["We went out for dinner after work.","Siamo usciti a cena dopo il lavoro."],
+"Go through with":["She decided to go through with the move despite her doubts.","Ha deciso di portare a termine il trasferimento nonostante i dubbi."],
+"Go under":["Several small businesses went under during the recession.","Diverse piccole imprese sono fallite durante la recessione."],
+"Go up":["Rent has gone up again this year.","L'affitto è aumentato di nuovo quest'anno."],
+"Grow apart":["We were close at school, but we gradually grew apart.","Eravamo molto amici a scuola, ma col tempo ci siamo allontanati."],
+"Grow into":["The small start-up grew into an international company.","La piccola start-up è cresciuta fino a diventare un'azienda internazionale."],
+"Grow on":["I didn't like the song at first, but it grew on me.","All'inizio non mi piaceva la canzone, ma col tempo ha iniziato a piacermi."],
+"Grow out of":["Most children grow out of that habit.","La maggior parte dei bambini supera quell'abitudine crescendo."],
+"Hand back":["The teacher handed back our tests this morning.","L'insegnante ci ha restituito i test stamattina."],
+"Hand down":["The court handed down its decision on Friday.","Il tribunale ha emesso la sua decisione venerdì."],
+"Hand over":["He handed over responsibility to his deputy.","Ha trasferito la responsabilità al suo vice."],
+"Hang around":["We hung around outside the cinema waiting for them.","Siamo rimasti nei paraggi del cinema ad aspettarli."],
+"Hang on":["Hang on a second, I'm almost ready.","Aspetta un secondo, sono quasi pronto."],
+"Hang out":["We used to hang out together after school.","Passavamo spesso il tempo insieme dopo scuola."],
+"Hang up":["Don't hang up; I need to ask you one more thing.","Non riagganciare; devo chiederti ancora una cosa."],
+"Head for":["We headed for the station as soon as it started raining.","Ci siamo diretti verso la stazione non appena ha iniziato a piovere."],
+"Head off":["We headed off early to avoid the traffic.","Siamo partiti presto per evitare il traffico."],
+"Hold back":["She struggled to hold back her tears.","Ha faticato a trattenere le lacrime."],
+"Hold onto":["Hold onto your ticket until the end of the journey.","Tieni stretto il biglietto fino alla fine del viaggio."],
+"Hold out":["The small company held out for months before accepting the offer.","La piccola azienda ha resistito per mesi prima di accettare l'offerta."],
+"Hold up":["Traffic held us up for nearly an hour.","Il traffico ci ha ritardato di quasi un'ora."],
+"Iron out":["We still need to iron out a few details before signing.","Dobbiamo ancora risolvere alcuni dettagli prima di firmare."],
+"Keep at":["Keep at it and your pronunciation will improve.","Continua con costanza e la tua pronuncia migliorerà."],
+"Keep away":["Keep away from the edge of the platform.","Stai lontano dal bordo della banchina."],
+"Keep back":["The police kept the crowd back.","La polizia ha tenuto indietro la folla."],
+"Keep down":["We need to keep costs down this quarter.","Dobbiamo mantenere bassi i costi questo trimestre."],
+"Keep from":["I couldn't keep myself from laughing.","Non sono riuscito a trattenermi dal ridere."],
+"Keep off":["Please keep off the grass.","Per favore non camminare sull'erba."],
+"Keep to":["Let's keep to the original schedule.","Atteniamoci al programma iniziale."],
+"Keep up":["Keep up the good work.","Continua così con il buon lavoro."],
+"Kick off":["The conference kicks off at nine tomorrow morning.","La conferenza inizia domani mattina alle nove."],
+"Knock down":["They knocked down the old building last year.","Hanno abbattuto il vecchio edificio l'anno scorso."],
+"Knock out":["One punch knocked him out.","Un pugno lo ha messo KO."],
+"Lay off":["The company laid off 200 employees.","L'azienda ha licenziato 200 dipendenti."],
+"Lead to":["Poor communication can lead to serious mistakes.","Una cattiva comunicazione può portare a errori gravi."],
+"Let in":["Could you let me in? I forgot my keys.","Mi fai entrare? Ho dimenticato le chiavi."],
+"Let off":["The teacher let him off with a warning.","L'insegnante lo ha lasciato andare con un semplice avvertimento."],
+"Let on":["He knew the answer but didn't let on.","Conosceva la risposta ma non lo ha lasciato capire."],
+"Live on":["It's difficult to live on such a low salary.","È difficile vivere con uno stipendio così basso."],
+"Live up to":["The film didn't live up to the reviews.","Il film non è stato all'altezza delle recensioni."],
+"Log in":["Log in with your email address and password.","Accedi con il tuo indirizzo email e la password."],
+"Log out":["Remember to log out when you finish.","Ricordati di disconnetterti quando hai finito."],
+"Look ahead":["We need to look ahead and plan for next year.","Dobbiamo guardare avanti e pianificare il prossimo anno."],
+"Look around":["We spent the afternoon looking around the old town.","Abbiamo passato il pomeriggio a guardarci intorno nel centro storico."],
+"Look at":["Let's look at the numbers before making a decision.","Guardiamo i numeri prima di prendere una decisione."],
+"Look back":["When I look back, I realise how much I've learned.","Ripensandoci, mi rendo conto di quanto ho imparato."],
+"Look down on":["He looks down on people who didn't go to university.","Guarda dall'alto in basso le persone che non sono andate all'università."],
+"Look over":["Could you look over my CV before I send it?","Potresti dare un'occhiata al mio CV prima che lo invii?"],
+"Look through":["I looked through the documents before the meeting.","Ho esaminato i documenti prima della riunione."],
+"Look up to":["I've always looked up to my older brother.","Ho sempre ammirato mio fratello maggiore."],
+"Make for":["The crowd made for the exits when the alarm sounded.","La folla si è diretta verso le uscite quando è suonato l'allarme."],
+"Make of":["What do you make of the new proposal?","Che cosa pensi della nuova proposta?"],
+"Make off":["The thief made off with two expensive watches.","Il ladro è fuggito con due orologi costosi."],
+"Make out":["I could barely make out the sign in the fog.","Riuscivo a malapena a distinguere il cartello nella nebbia."],
+"Mark down":["The store marked down all its winter coats.","Il negozio ha ribassato tutti i cappotti invernali."],
+"Move in":["We're moving in next Saturday.","Ci trasferiamo nella nuova casa sabato prossimo."],
+"Move out":["She moved out of the flat at the end of the month.","Ha lasciato l'appartamento alla fine del mese."],
+"Narrow down":["We've narrowed down the list to three candidates.","Abbiamo ristretto la lista a tre candidati."],
+"Opt for":["We opted for the cheaper hotel.","Abbiamo optato per l'hotel più economico."],
+"Opt out":["Employees can opt out of the scheme if they wish.","I dipendenti possono scegliere di non aderire al programma."],
+"Own up":["He eventually owned up to breaking the window.","Alla fine ha confessato di aver rotto la finestra."],
+"Pass by":["I pass by the station every morning.","Passo davanti alla stazione ogni mattina."],
+"Pass on":["Could you pass this message on to Laura?","Potresti trasmettere questo messaggio a Laura?"],
+"Pass out":["He passed out because of the heat.","È svenuto a causa del caldo."],
+"Pay for":["I'll pay for dinner tonight.","Pago io la cena stasera."],
+"Pay off":["All the extra training finally paid off.","Tutto l'allenamento extra alla fine ha dato risultati."],
+"Phase in":["The new rules will be phased in over six months.","Le nuove regole saranno introdotte gradualmente nell'arco di sei mesi."],
+"Phase out":["The company is phasing out the old software.","L'azienda sta eliminando gradualmente il vecchio software."],
+"Pick on":["Why do they always pick on him?","Perché se la prendono sempre con lui?"],
+"Pick out":["Can you pick out the person you saw?","Riesci a riconoscere la persona che hai visto?"],
+"Pull apart":["The mechanic pulled the engine apart to inspect it.","Il meccanico ha smontato il motore per controllarlo."],
+"Pull away":["The train pulled away from the platform.","Il treno si è allontanato dalla banchina."],
+"Pull back":["The company pulled back from the overseas market.","L'azienda si è ritirata dal mercato estero."],
+"Pull off":["They pulled off a deal that nobody thought was possible.","Sono riusciti a concludere un accordo che nessuno riteneva possibile."],
+"Pull out":["The investor pulled out of the deal unexpectedly.","L'investitore si è ritirato dall'accordo inaspettatamente."],
+"Pull through":["Doctors are confident that he'll pull through.","I medici sono fiduciosi che riuscirà a riprendersi."],
+"Put across":["She puts her ideas across very clearly.","Comunica le sue idee in modo molto chiaro."],
+"Put aside":["I put aside some money every month.","Metto da parte un po' di soldi ogni mese."],
+"Put back":["Put the book back when you've finished with it.","Rimetti il libro al suo posto quando hai finito."],
+"Put down":["Please put the box down over there.","Per favore posa la scatola laggiù."],
+"Put forward":["The team put forward three possible solutions.","Il team ha proposto tre possibili soluzioni."],
+"Put out":["Firefighters put out the fire in less than an hour.","I vigili del fuoco hanno spento l'incendio in meno di un'ora."],
+"Put through":["Could you put me through to the finance department?","Potresti mettermi in contatto con il reparto finanziario?"],
+"Put up":["My cousin put me up for the weekend.","Mio cugino mi ha ospitato per il fine settimana."],
+"Read over":["Read over your email before you send it.","Rileggi la tua email prima di inviarla."],
+"Reel off":["She reeled off a long list of reasons for leaving.","Ha snocciolato rapidamente una lunga lista di motivi per andarsene."],
+"Ring back":["I'll ring you back as soon as I'm free.","Ti richiamerò appena sarò libero."],
+"Ring up":["I rang up the hotel to confirm the booking.","Ho telefonato all'hotel per confermare la prenotazione."],
+"Run across":["I ran across an old photograph while cleaning the attic.","Mi sono imbattuto in una vecchia fotografia mentre pulivo la soffitta."],
+"Run after":["The child ran after the ball.","Il bambino è corso dietro alla palla."],
+"Run away":["The dog ran away when the gate was left open.","Il cane è scappato quando il cancello è rimasto aperto."],
+"Run down":["Don't run yourself down by working every night.","Non sfinirti lavorando tutte le sere."],
+"Run out":["Our patience is beginning to run out.","La nostra pazienza sta iniziando a esaurirsi."],
+"Run over":["Let's run over the main points before the call.","Ripassiamo i punti principali prima della chiamata."],
+"Run through":["Can we run through the presentation once more?","Possiamo ripassare la presentazione ancora una volta?"],
+"See off":["We went to the station to see them off.","Siamo andati alla stazione per salutarli alla partenza."],
+"See through":["I could see through his excuse immediately.","Ho capito subito la vera natura della sua scusa."],
+"Sell off":["The group sold off several non-core businesses.","Il gruppo ha venduto diverse attività non strategiche."],
+"Send back":["The food was cold, so we sent it back.","Il cibo era freddo, quindi lo abbiamo rimandato indietro."],
+"Set about":["We set about reorganising the department after the merger.","Ci siamo messi a riorganizzare il reparto dopo la fusione."],
+"Set aside":["We should set aside some time to discuss the issue.","Dovremmo mettere da parte un po' di tempo per discutere la questione."],
+"Set back":["The technical problem set the project back by two weeks.","Il problema tecnico ha ritardato il progetto di due settimane."],
+"Set off":["We set off before sunrise.","Siamo partiti prima dell'alba."],
+"Settle down":["It took the children a while to settle down.","Ci è voluto un po' perché i bambini si calmassero."],
+"Shop around":["Shop around before you decide which insurance policy to buy.","Confronta le offerte prima di decidere quale polizza assicurativa acquistare."],
+"Show off":["He loves showing off his new car.","Adora mettere in mostra la sua nuova auto."],
+"Shut down":["Please shut down the computer before you leave.","Per favore spegni il computer prima di andare via."],
+"Sign in":["Visitors must sign in at reception.","I visitatori devono registrarsi alla reception."],
+"Sign off":["The director signed off on the final budget.","Il direttore ha approvato il budget finale."],
+"Sign up":["I signed up for an evening English course.","Mi sono iscritto a un corso serale di inglese."],
+"Sit back":["Sit back and enjoy the journey.","Rilassati e goditi il viaggio."],
+"Sit down":["Please sit down and make yourself comfortable.","Per favore siediti e mettiti comodo."],
+"Speak out":["Several employees spoke out against the decision.","Diversi dipendenti hanno parlato apertamente contro la decisione."],
+"Split up":["The group split up into teams of four.","Il gruppo si è diviso in squadre da quattro."],
+"Stand by":["A technician is standing by in case anything goes wrong.","Un tecnico è pronto a intervenire nel caso qualcosa vada storto."],
+"Stand for":["What does this abbreviation stand for?","Che cosa significa questa abbreviazione?"],
+"Stand up":["Everyone stood up when she entered the room.","Tutti si sono alzati quando è entrata nella stanza."],
+"Stand up for":["You should stand up for yourself.","Dovresti difendere te stesso."],
+"Start off":["We started off with a short introduction.","Abbiamo iniziato con una breve introduzione."],
+"Stay away":["Stay away from the construction area.","Stai lontano dall'area dei lavori."],
+"Stay on":["She stayed on after the meeting to ask a question.","È rimasta più a lungo dopo la riunione per fare una domanda."],
+"Step in":["The manager had to step in and resolve the dispute.","Il manager ha dovuto intervenire e risolvere la disputa."],
+"Stick around":["Stick around after the meeting if you have questions.","Resta nei paraggi dopo la riunione se hai domande."],
+"Stick to":["Let's stick to the facts.","Atteniamoci ai fatti."],
+"Stick with":["I think we should stick with the original plan.","Penso che dovremmo restare fedeli al piano originale."],
+"Switch off":["Switch off the lights before you leave.","Spegni le luci prima di andare via."],
+"Switch on":["Can you switch on the heating?","Puoi accendere il riscaldamento?"],
+"Take after":["She takes after her mother in both looks and personality.","Assomiglia a sua madre sia nell'aspetto sia nel carattere."],
+"Take apart":["He took the clock apart to see how it worked.","Ha smontato l'orologio per vedere come funzionava."],
+"Take away":["Please take these empty boxes away.","Per favore porta via queste scatole vuote."],
+"Take down":["I took down her phone number.","Ho annotato il suo numero di telefono."],
+"Take in":["I needed a moment to take in what he had said.","Ho avuto bisogno di un momento per comprendere ciò che aveva detto."],
+"Take out":["He took out his wallet to pay.","Ha tirato fuori il portafoglio per pagare."],
+"Talk into":["She talked me into applying for the job.","Mi ha convinto a candidarmi per il lavoro."],
+"Talk out of":["I tried to talk him out of resigning.","Ho cercato di dissuaderlo dal dimettersi."],
+"Tear down":["They tore down the old stadium last year.","Hanno demolito il vecchio stadio l'anno scorso."],
+"Tear up":["She tore up the letter and threw it away.","Ha strappato la lettera e l'ha buttata via."],
+"Think through":["We need to think the consequences through carefully.","Dobbiamo valutare attentamente tutte le conseguenze."],
+"Throw away":["Don't throw away the receipt.","Non buttare via lo scontrino."],
+"Throw out":["They threw out all the broken furniture.","Hanno buttato via tutti i mobili rotti."],
+"Try on":["Can I try on this jacket?","Posso provare questa giacca?"],
+"Try out":["We're trying out a new booking system.","Stiamo testando un nuovo sistema di prenotazione."],
+"Turn around":["The new CEO managed to turn the company around.","Il nuovo CEO è riuscito a risollevare l'azienda."],
+"Turn away":["They had to turn people away because the venue was full.","Hanno dovuto mandare via alcune persone perché il locale era pieno."],
+"Turn in":["I turned in my assignment a day early.","Ho consegnato il compito con un giorno di anticipo."],
+"Turn into":["The old factory was turned into apartments.","La vecchia fabbrica è stata trasformata in appartamenti."],
+"Turn over":["The company turns over more than €10 million a year.","L'azienda fattura più di 10 milioni di euro l'anno."],
+"Turn to":["She turned to her manager for advice.","Si è rivolta al suo manager per un consiglio."],
+"Use up":["We've used up all the milk.","Abbiamo consumato tutto il latte."],
+"Wait around":["I don't want to wait around all afternoon.","Non voglio aspettare senza fare nulla tutto il pomeriggio."],
+"Wait on":["He waited on tables while he was at university.","Serviva ai tavoli mentre frequentava l'università."],
+"Walk away":["He was prepared to walk away from the deal.","Era pronto a rinunciare all'accordo."],
+"Walk out":["The workers walked out in protest.","I lavoratori sono usciti per protesta."],
+"Warm up":["Always warm up before you start running.","Riscaldati sempre prima di iniziare a correre."],
+"Wear off":["The painkiller should wear off in a few hours.","L'effetto dell'antidolorifico dovrebbe svanire tra qualche ora."],
+"Wear out":["These shoes wore out after only six months.","Queste scarpe si sono consumate dopo appena sei mesi."],
+"Wind down":["I like to read for half an hour to wind down before bed.","Mi piace leggere per mezz'ora per rilassarmi prima di dormire."],
+"Wind up":["We wound up talking until two in the morning.","Abbiamo finito per parlare fino alle due del mattino."],
+"Wipe out":["The crash wiped out most of the day's gains.","Il crollo ha cancellato gran parte dei guadagni della giornata."],
+"Work on":["I'm working on a new presentation for the client.","Sto lavorando a una nuova presentazione per il cliente."],
+"Work through":["Let's work through the problem one step at a time.","Affrontiamo il problema un passaggio alla volta."],
+"Wrap up":["Let's wrap up the meeting in the next five minutes.","Concludiamo la riunione nei prossimi cinque minuti."],
+"Zero in on":["The investigation zeroed in on a small number of transactions.","L'indagine si è concentrata su un numero ristretto di transazioni."],
+"Account for":["Online sales account for almost half of total revenue.","Le vendite online rappresentano quasi la metà dei ricavi totali."],
+"Adhere to":["All employees must adhere to the company's code of conduct.","Tutti i dipendenti devono attenersi al codice di condotta aziendale."],
+"Allow for":["You need to allow for delays when planning the journey.","Devi tenere conto dei ritardi quando pianifichi il viaggio."],
+"Bank on":["You can't bank on interest rates falling soon.","Non puoi fare affidamento sul fatto che i tassi scendano presto."],
+"Bear out":["The latest figures bear out our initial conclusion.","Gli ultimi dati confermano la nostra conclusione iniziale."],
+"Break even":["The business expects to break even next year.","L'azienda prevede di raggiungere il pareggio l'anno prossimo."],
+"Buy up":["Investors bought up most of the available shares.","Gli investitori hanno acquistato in massa la maggior parte delle azioni disponibili."],
+"Cash in on":["Some firms are trying to cash in on the sudden rise in demand.","Alcune aziende stanno cercando di trarre profitto dall'improvviso aumento della domanda."],
+"Clamp down on":["Authorities are clamping down on illegal short-term rentals.","Le autorità stanno inasprendo i controlli sugli affitti brevi illegali."],
+"Crack down on":["The regulator has promised to crack down on misleading advertising.","L'autorità di vigilanza ha promesso di reprimere severamente la pubblicità ingannevole."],
+"Crop up":["A few unexpected problems cropped up during testing.","Durante i test sono emersi alcuni problemi imprevisti."],
+"Delve into":["The article delves into the causes of the financial crisis.","L'articolo approfondisce le cause della crisi finanziaria."],
+"Factor in":["We need to factor in higher labour costs.","Dobbiamo tenere in considerazione costi del lavoro più elevati."],
+"Fall back":["Demand fell back slightly in the second quarter.","La domanda è diminuita leggermente nel secondo trimestre."],
+"Flesh out":["We need to flesh out the proposal before presenting it to the board.","Dobbiamo sviluppare la proposta nei dettagli prima di presentarla al consiglio."],
+"Forge ahead":["Despite the criticism, the company forged ahead with the project.","Nonostante le critiche, l'azienda ha proceduto con decisione con il progetto."],
+"Gear up for":["Retailers are gearing up for the Christmas season.","I rivenditori si stanno preparando per il periodo natalizio."],
+"Hinge on":["The success of the deal hinges on regulatory approval.","Il successo dell'accordo dipende dall'approvazione dell'autorità di vigilanza."],
+"Home in on":["The discussion quickly homed in on the main source of the problem.","La discussione si è rapidamente concentrata sulla causa principale del problema."],
+"Map out":["We mapped out a three-year expansion plan.","Abbiamo pianificato nei dettagli un piano di espansione triennale."],
+"Mull over":["I need a few days to mull over the offer.","Ho bisogno di qualche giorno per riflettere attentamente sull'offerta."],
+"Pan out":["The investment didn't pan out as expected.","L'investimento non è andato come previsto."],
+"Pare down":["We pared down the presentation to ten slides.","Abbiamo ridotto la presentazione all'essenziale, portandola a dieci slide."],
+"Play down":["Management tried to play down the impact of the delay.","Il management ha cercato di minimizzare l'impatto del ritardo."],
+"Press ahead":["They pressed ahead with the launch despite the technical issues.","Hanno proceduto con il lancio nonostante i problemi tecnici."],
+"Prop up":["Emergency funding was used to prop up the struggling business.","I finanziamenti d'emergenza sono stati usati per sostenere l'azienda in difficoltà."],
+"Roll out":["The bank is rolling out the new app across Europe.","La banca sta introducendo la nuova app in tutta Europa."],
+"Scale back":["The company scaled back its expansion plans.","L'azienda ha ridimensionato i propri piani di espansione."],
+"Scale up":["We need to scale up production before demand peaks.","Dobbiamo aumentare la produzione su larga scala prima del picco della domanda."],
+"Shore up":["The capital increase was designed to shore up the balance sheet.","L'aumento di capitale era pensato per rafforzare il bilancio."],
+"Single out":["The report singled out two divisions for criticism.","Il report ha individuato due divisioni come oggetto di critica."],
+"Spell out":["The contract spells out exactly what each party must do.","Il contratto spiega chiaramente ciò che ciascuna parte deve fare."],
+"Stem from":["Most of the problems stem from poor communication.","La maggior parte dei problemi deriva da una comunicazione insufficiente."],
+"Taper off":["Sales growth began to taper off in the second half of the year.","La crescita delle vendite ha iniziato a diminuire gradualmente nella seconda metà dell'anno."],
+"Touch on":["The speaker briefly touched on the tax implications.","Il relatore ha accennato brevemente alle implicazioni fiscali."],
+"Weed out":["The first interview round is designed to weed out unsuitable candidates.","Il primo turno di colloqui serve a eliminare i candidati non adatti."],
+"Weigh up":["We need to weigh up the risks before investing.","Dobbiamo valutare attentamente i rischi prima di investire."],
+"Boil over":["Tensions boiled over into open conflict.","Le tensioni sono esplose trasformandosi in conflitto aperto."],
+"Buckle down":["I need to buckle down and finish this report tonight.","Devo mettermi seriamente al lavoro e finire questo report stasera."],
+"Cave in":["After weeks of pressure, the company finally caved in.","Dopo settimane di pressioni, l'azienda alla fine ha ceduto."],
+"Chalk up":["The team chalked up another impressive victory.","La squadra ha registrato un'altra vittoria impressionante."],
+"Drum up":["The campaign was designed to drum up support for the proposal.","La campagna era pensata per generare sostegno alla proposta."],
+"Eke out":["The business managed to eke out a small profit.","L'azienda è riuscita a ottenere a fatica un piccolo profitto."],
+"Fizzle out":["The negotiations fizzled out without an agreement.","Le trattative si sono spente gradualmente senza raggiungere un accordo."],
+"Gloss over":["The report glosses over several serious weaknesses.","Il report sorvola su diverse debolezze importanti."],
+"Hammer out":["The two sides spent all night hammering out an agreement.","Le due parti hanno passato tutta la notte a definire con fatica un accordo."],
+"Lash out":["He lashed out at reporters after the hearing.","Si è scagliato contro i giornalisti dopo l'udienza."],
+"Level off":["Inflation is expected to level off later this year.","Si prevede che l'inflazione si stabilizzi più avanti quest'anno."],
+"Live down":["He'll never live down that embarrassing mistake.","Non riuscirà mai a far dimenticare quella figuraccia."],
+"Rein in":["The central bank is trying to rein in inflation.","La banca centrale sta cercando di tenere sotto controllo l'inflazione."],
+"Root out":["The audit was designed to root out fraud.","L'audit era finalizzato a eliminare le frodi alla radice."],
+"Scrape by":["They were just scraping by on one salary.","Riuscivano a tirare avanti a malapena con un solo stipendio."],
+"Shrug off":["Markets shrugged off the disappointing data.","I mercati hanno ignorato i dati deludenti senza risentirne."],
+"Stave off":["The emergency loan helped stave off bankruptcy.","Il prestito d'emergenza ha contribuito a scongiurare il fallimento."],
+"Step aside":["The chairman agreed to step aside during the investigation.","Il presidente ha accettato di farsi da parte durante l'indagine."],
+"Strike down":["The court struck down the new rule.","Il tribunale ha annullato la nuova norma."],
+"Strike up":["She struck up a conversation with the person next to her.","Ha iniziato una conversazione con la persona accanto a lei."],
+"Tide over":["This loan should tide us over until the next payment arrives.","Questo prestito dovrebbe aiutarci a superare il periodo fino al prossimo pagamento."],
+"Tone down":["You should tone down the language in the email.","Dovresti attenuare il linguaggio nell'email."],
+"Trump up":["They accused officials of trumping up charges against him.","Hanno accusato i funzionari di aver inventato false accuse contro di lui."],
+"Water down":["The final version of the law was heavily watered down.","La versione finale della legge è stata fortemente indebolita."],
+"While away":["We whiled away the afternoon playing cards.","Abbiamo passato il pomeriggio giocando a carte."],
+"Branch off":["A narrow road branches off to the left after the bridge.","Una strada stretta si dirama sulla sinistra dopo il ponte."],
+"Break free":["The horse broke free and ran across the field.","Il cavallo si è liberato ed è corso attraverso il campo."],
+"Call around":["I called around to compare prices before booking.","Ho telefonato in giro per confrontare i prezzi prima di prenotare."],
+"Come apart":["The old suitcase came apart at the handle.","La vecchia valigia si è rotta all'altezza della maniglia."],
+"Cut across":["The issue cuts across several departments.","La questione coinvolge trasversalmente diversi reparti."],
+"Drop away":["Demand began to drop away toward the end of the year.","La domanda ha iniziato a diminuire verso la fine dell'anno."],
+"Fall away":["Support for the proposal fell away after the announcement.","Il sostegno alla proposta è diminuito dopo l'annuncio."],
+"Go without":["We had to go without heating for two days.","Abbiamo dovuto fare a meno del riscaldamento per due giorni."],
+"Hold against":["I hope you won't hold that mistake against me.","Spero che non mi rinfaccerai quell'errore."],
+"Lay out":["The report lays out the main risks in a clear way.","Il report illustra chiaramente i principali rischi."]
+};
+
+/* Note aggiuntive per i significati più delicati */
+const V11_NOTES = {
+"Add up":"Si usa soprattutto quando fatti, numeri o spiegazioni risultano coerenti e plausibili; in forma negativa significa spesso «non tornare».",
+"Act on":"Indica che un'azione viene presa sulla base di un'informazione, un consiglio, una raccomandazione o un ordine ricevuto.",
+"Act out":"Può significare rappresentare fisicamente una scena oppure manifestare emozioni o disagio attraverso il comportamento.",
+"Act up":"Si usa informalmente per persone che si comportano male o per dispositivi e parti del corpo che funzionano in modo anomalo.",
+"Back down":"Indica smettere di sostenere una posizione o una richiesta dopo un confronto o una pressione.",
+"Bear with":"Formula cortese usata per chiedere a qualcuno di aspettare o avere pazienza per un breve periodo.",
+"Blow over":"Descrive un problema, una polemica o una tensione che si attenua e passa senza conseguenze durature.",
+"Boil down to":"Riduce una questione complessa al suo elemento essenziale o alla causa decisiva.",
+"Bring round":"In inglese britannico può significare convincere qualcuno oppure farlo riprendere conoscenza.",
+"Brush aside":"Implica ignorare o liquidare un'obiezione o una preoccupazione senza darle molta considerazione.",
+"Buy into":"In senso figurato significa accettare e sostenere un'idea, una strategia o una visione; in ambito finanziario può anche indicare l'acquisto di una partecipazione.",
+"Cash in on":"Indica sfruttare una situazione o una tendenza per ottenere un vantaggio economico, talvolta con sfumatura opportunistica.",
+"Come in for":"Si usa soprattutto con criticism, praise, attack e simili per indicare che qualcuno o qualcosa diventa oggetto di una reazione.",
+"Come off":"Può indicare che qualcosa si stacca; in altri contesti significa che un piano o un tentativo riesce.",
+"Come under":"È frequente in combinazioni come come under pressure, scrutiny, attack, criticism.",
+"Draw on":"Significa utilizzare esperienza, conoscenze, risorse o fonti disponibili come base per qualcosa.",
+"Fend off":"Indica respingere un attacco, una minaccia, una critica o un tentativo di acquisizione.",
+"Figure on":"Più comune in inglese americano; significa prevedere o fare affidamento sul fatto che qualcosa accada.",
+"Get at":"Spesso compare nella domanda «What are you getting at?» per chiedere quale sia il vero punto o significato implicito.",
+"Go in for":"Può significare dedicarsi o avere interesse per un'attività, oppure partecipare a una competizione o selezione.",
+"Hammer out":"Descrive il raggiungimento di un accordo o la definizione di dettagli attraverso una discussione lunga e difficile.",
+"Hinge on":"Indica dipendenza decisiva: il risultato cambia in funzione di un singolo fattore o condizione.",
+"Live down":"Quasi sempre usato in forma negativa per un errore o una figuraccia che gli altri continuano a ricordare.",
+"Pan out":"Indica come una situazione, un piano o un investimento si sviluppa o finisce, soprattutto rispetto alle aspettative iniziali.",
+"Prop up":"Implica sostenere qualcosa che altrimenti sarebbe debole o rischierebbe di crollare, anche finanziariamente.",
+"Rein in":"Deriva dall'immagine delle redini: significa limitare, controllare o ridurre qualcosa che sta diventando eccessivo.",
+"Shore up":"Significa rafforzare qualcosa di debole o vulnerabile, spesso finanze, fiducia, sostegno o una struttura.",
+"Stave off":"Indica ritardare o impedire temporaneamente un evento negativo, come una crisi, una malattia o un fallimento.",
+"Tide over":"Si usa quando un aiuto, spesso denaro o risorse, permette di superare un periodo temporaneamente difficile.",
+"Trump up":"Ha valore negativo: significa inventare accuse, prove o motivazioni false per danneggiare qualcuno.",
+"Water down":"In senso figurato significa rendere una proposta, una regola o un messaggio meno forte, radicale o efficace."
+};
+
+function v11Explanation(row){
+  const verb=row[0], meaning=capitalizeFirst(row[1]);
+  if(V11_NOTES[verb]) return V11_NOTES[verb];
+  if(String(row[1]).includes("/")){
+    return `Può assumere i significati indicati («${meaning}») a seconda del contesto. È importante osservare l'oggetto e la situazione della frase, perché la stessa combinazione può avere un uso concreto e uno figurato.`;
+  }
+  return `Si usa per esprimere l'idea di «${meaning}». Va imparato come unità lessicale completa, perché la particella modifica il significato del verbo di base e ne determina l'uso naturale nella frase.`;
+}
+
+function normaliseV11Lexicon(){
+  phrasalVerbs.forEach(row=>{
+    row[5]=v11LevelFor(row[0],row[5]);
+    const ex=V11_EXAMPLES[row[0]];
+    const isTemplate=String(row[2]||"").includes("È utile impararlo come unità lessicale completa");
+    if(isTemplate){
+      row[2]=v11Explanation(row);
+      if(ex){
+        row[3]=ex[0];
+        row[4]=ex[1];
+      }
+    }
+  });
+}
+normaliseV11Lexicon();
+
+/* =========================================================
+   3) BADGE: stack verticale, colori coerenti
+========================================================= */
+const levelClass = level => `cefr-${String(level||"B2").toUpperCase()}`;
+
+function repaintBadges(root=document){
+  root.querySelectorAll(".cefr-badge").forEach(b=>{
+    ["A1","A2","B1","B2","C1","C2"].forEach(l=>b.classList.remove(`cefr-${l}`));
+    b.classList.add(levelClass(b.textContent.trim()));
+  });
+}
+
+const oldEnhanceQuestionMeta = window.enhanceQuestionMeta;
+function v11QuestionMeta(){
+  const q=quiz[currentIndex];
+  const box=document.querySelector("#quizArea .question-box");
+  const direction=document.getElementById("direction");
+  if(!q||!box||!direction)return;
+  let row=box.querySelector(".question-meta-row-v10");
+  if(!row){
+    row=document.createElement("div");
+    row.className="question-meta-row-v10";
+    box.insertBefore(row,box.firstChild);
+  }
+  let meta=box.querySelector(".question-meta");
+  if(!meta){
+    meta=document.createElement("div");
+    meta.className="question-meta";
+  }
+  let badge=meta.querySelector(".cefr-badge");
+  if(!badge){
+    badge=document.createElement("span");
+    badge.className="cefr-badge";
+    meta.appendChild(badge);
+  }
+  const level=getVerbLevel(q.verb);
+  badge.textContent=level;
+  repaintBadges(meta);
+  row.innerHTML="";
+  row.appendChild(meta);
+  row.appendChild(direction);
+}
+
+const rqBase=window.renderQuestion;
+window.renderQuestion=function(){
+  rqBase();
+  v11QuestionMeta();
+};
+
+/* =========================================================
+   4) GRAFICO DINAMICO: larghezza piena + sparisce al primo scroll
+========================================================= */
+window.renderPerformanceChart=function(size){
+  const wrap=document.getElementById("performanceChartWrap");
+  const chart=document.getElementById("performanceChart");
+  const meta=document.getElementById("chartMeta");
+  const title=document.getElementById("chartTitle");
+  if(!wrap||!chart||!meta||!title)return;
+
+  wrap.classList.add("visible");
+  document.getElementById("appShell").classList.add("chart-open");
+  title.textContent=`Andamento · Quiz da ${size}`;
+
+  const points=loadHistory()
+    .filter(h=>Number(h.total)===Number(size))
+    .slice(0,20)
+    .reverse();
+
+  meta.textContent=points.length?`${points.length} quiz`:"Nessun quiz";
+
+  if(!points.length){
+    chart.innerHTML='<div class="chart-empty">Completa un quiz di questa lunghezza per iniziare lo storico.</div>';
+    return;
+  }
+
+  const yMin=0,yMax=100;
+  const xPercent=i=>points.length===1?50:4+i*(92/(points.length-1));
+  const yPercent=v=>4+(100-Math.max(0,Math.min(100,Number(v))))*.92;
+
+  const bands=[
+    [90,100,"rgba(79,148,104,.12)"],
+    [80,90,"rgba(112,181,133,.10)"],
+    [50,80,"rgba(225,188,91,.11)"],
+    [0,50,"rgba(225,113,130,.10)"]
+  ].map(([from,to,color])=>{
+    const top=yPercent(to),bottom=yPercent(from);
+    return `<div style="position:absolute;left:0;right:0;top:${top}%;height:${bottom-top}%;background:${color}"></div>`;
+  }).join("");
+
+  const linePoints=points.map((p,i)=>`${xPercent(i)},${yPercent(p.percentage)}`).join(" ");
+  const dots=points.map((p,i)=>`<span class="chart-dot" style="left:${xPercent(i)}%;top:${yPercent(p.percentage)}%" title="${p.percentage}%"></span>`).join("");
+  const guides=[90,80,50].map(v=>`<line x1="0" y1="${yPercent(v)}" x2="100" y2="${yPercent(v)}" stroke="rgba(23,29,45,.08)" stroke-width=".6" vector-effect="non-scaling-stroke"/>`).join("");
+
+  chart.innerHTML=`
+    <div style="position:absolute;inset:0;overflow:hidden;border-radius:12px">${bands}</div>
+    <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+      ${guides}
+      <polyline points="${linePoints}" fill="none" stroke="#6379ee" stroke-width="1.4"
+        vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    ${dots}
+  `;
+};
+
+function v11HideChart(){
+  const wrap=document.getElementById("performanceChartWrap");
+  const app=document.getElementById("appShell");
+  if(wrap)wrap.classList.remove("visible");
+  if(app)app.classList.remove("chart-open");
+}
+
+let lastTouchY=null;
+window.addEventListener("touchstart",e=>{
+  if(e.touches&&e.touches[0]) lastTouchY=e.touches[0].clientY;
+},{passive:true});
+window.addEventListener("touchmove",e=>{
+  const home=document.getElementById("home");
+  const wrap=document.getElementById("performanceChartWrap");
+  if(!home?.classList.contains("active")||!wrap?.classList.contains("visible"))return;
+  const y=e.touches&&e.touches[0]?e.touches[0].clientY:null;
+  if(y!==null&&lastTouchY!==null&&Math.abs(y-lastTouchY)>6){
+    v11HideChart();
+  }
+},{passive:true});
+window.addEventListener("wheel",()=>{
+  const home=document.getElementById("home");
+  const wrap=document.getElementById("performanceChartWrap");
+  if(home?.classList.contains("active")&&wrap?.classList.contains("visible"))v11HideChart();
+},{passive:true});
+
+/* Ogni nuovo tap su 10/20/50/100 riapre il grafico */
+const selectV11Base=window.selectQuizSize;
+window.selectQuizSize=function(size,playSound=true){
+  selectV11Base(size,playSound);
+  if(playSound)requestAnimationFrame(()=>renderPerformanceChart(size));
+};
+
+/* =========================================================
+   5) DATABASE: search icon + live filtering
+========================================================= */
+let v11DbQuery="";
+
+function ensureV11DbControls(){
+  const controls=document.getElementById("v10DbControls");
+  if(!controls)return;
+
+  if(!document.getElementById("v11DbSearchToggle")){
+    const b=document.createElement("button");
+    b.id="v11DbSearchToggle";
+    b.className="v11-db-search-toggle";
+    b.type="button";
+    b.setAttribute("aria-label","Cerca nel database");
+    b.innerHTML="⌕";
+    controls.appendChild(b);
+    b.onclick=()=>{
+      playWoodClick();
+      const panel=document.getElementById("v11DbSearch");
+      panel.classList.toggle("open");
+      if(panel.classList.contains("open")){
+        setTimeout(()=>document.getElementById("v11DbSearchInput")?.focus(),80);
+      }
+    };
+  }
+
+  if(!document.getElementById("v11DbSearch")){
+    const panel=document.createElement("div");
+    panel.id="v11DbSearch";
+    panel.className="v11-db-search";
+    panel.innerHTML=`
+      <div class="v11-db-search-wrap">
+        <input id="v11DbSearchInput" class="v11-db-search-input"
+          type="search" autocomplete="off" autocapitalize="none"
+          placeholder="Cerca verbo o significato..." aria-label="Cerca phrasal verb">
+      </div>
+      <button id="v11DbSearchClear" class="v11-db-search-clear" type="button" aria-label="Cancella ricerca">×</button>
+    `;
+    controls.insertAdjacentElement("afterend",panel);
+
+    const count=document.createElement("div");
+    count.id="v11DbResultCount";
+    count.className="v11-db-result-count";
+    panel.insertAdjacentElement("afterend",count);
+
+    const input=panel.querySelector("#v11DbSearchInput");
+    input.value=v11DbQuery;
+    input.addEventListener("input",()=>{
+      v11DbQuery=input.value.trim().toLowerCase();
+      renderDatabase();
+    });
+    panel.querySelector("#v11DbSearchClear").onclick=()=>{
+      v11DbQuery="";
+      input.value="";
+      input.focus();
+      renderDatabase();
+    };
+  }
+}
+
+function v11FilteredRows(){
+  const stats=loadStats();
+  const rows=phrasalVerbs.map((item,index)=>({
+    item,index,stat:stats[item[0]]||{seen:0,correct:0,wrong:0}
+  })).filter(({item})=>{
+    if(!v11DbQuery)return true;
+    const hay=[
+      item[0],item[1],item[2],item[5]
+    ].join(" ").toLowerCase();
+    return hay.includes(v11DbQuery);
+  });
+
+  const key=localStorage.getItem("pvDbSortKey")||"alpha";
+  const dir=localStorage.getItem("pvDbSortDir")||"asc";
+  const order={A1:1,A2:2,B1:3,B2:4,C1:5,C2:6};
+
+  rows.sort((a,b)=>{
+    let cmp=0;
+    if(key==="alpha")cmp=a.item[0].localeCompare(b.item[0],"en");
+    else if(key==="level")cmp=(order[a.item[5]]||0)-(order[b.item[5]]||0);
+    else if(key==="wrong")cmp=(a.stat.wrong||0)-(b.stat.wrong||0);
+    if(cmp===0)cmp=a.item[0].localeCompare(b.item[0],"en");
+    return dir==="asc"?cmp:-cmp;
+  });
+  return rows;
+}
+
+window.renderDatabase=function(){
+  ensureV11DbControls();
+  const list=document.getElementById("databaseList");
+  if(!list)return;
+
+  const rows=v11FilteredRows();
+  const count=document.getElementById("v11DbResultCount");
+  if(count){
+    count.textContent=v11DbQuery
+      ? `${rows.length} ${rows.length===1?"risultato":"risultati"}`
+      : `${phrasalVerbs.length} phrasal verbs`;
+  }
+
+  list.innerHTML=rows.length?rows.map(({item,stat})=>{
+    const info=stat.seen
+      ?`${Math.round(stat.correct/stat.seen*100)}% · ${stat.correct}/${stat.seen} corrette · ${stat.wrong||0} errori`
+      :"Mai testato";
+    return `
+      <div class="card database-card" role="button" tabindex="0"
+        onclick="openVerbStudy(${JSON.stringify(item[0])})">
+        <div class="database-card-head">
+          <div>
+            <div class="verb">${escapeHTML(item[0])}</div>
+            <div class="translation">${escapeHTML(capitalizeFirst(item[1]))}</div>
+          </div>
+          <span class="cefr-badge ${levelClass(item[5])}">${escapeHTML(item[5])}</span>
+        </div>
+        <div class="translation" style="margin-top:8px">${info} · Tocca per studiare</div>
+      </div>`;
+  }).join(""):`<div class="empty">Nessun verbo corrisponde alla ricerca.</div>`;
+
+  repaintBadges(list);
+};
+
+/* Il titolo usa il numero reale, non 500 hard-coded */
+function updateV11Counts(){
+  const title=document.querySelector(".database-title");
+  if(title)title.textContent=`${phrasalVerbs.length} Phrasal Verbs`;
+  const accountText=document.querySelector(".account-action-card .setting-description");
+  if(accountText)accountText.textContent=`Consulta i ${phrasalVerbs.length} phrasal verbs e le statistiche di apprendimento.`;
+}
+
+/* =========================================================
+   6) Dettaglio database: badge colorato + contenuti aggiornati
+========================================================= */
+window.openDatabaseDetail=function(index){
+  const item=phrasalVerbs[index];
+  if(!item)return;
+  playWoodClick();
+
+  const stats=loadStats();
+  const st=stats[item[0]];
+  const info=st&&st.seen
+    ?`${Math.round(st.correct/st.seen*100)}% · ${st.correct}/${st.seen} corrette`
+    :"Mai testato";
+
+  const detail=document.getElementById("databaseDetail");
+  detail.innerHTML=`
+    <div class="database-detail-card">
+      <div class="database-detail-top">
+        <div>
+          <span class="cefr-badge ${levelClass(item[5])}">${escapeHTML(item[5])}</span>
+          <div class="section-title" style="margin-top:9px">${escapeHTML(item[0])}</div>
+        </div>
+        <button class="database-detail-close" onclick="closeDatabaseDetail()">×</button>
+      </div>
+      <div class="study-section">
+        <div class="study-label">Significato</div>
+        <div class="study-text">${escapeHTML(capitalizeFirst(item[1]))}</div>
+      </div>
+      <div class="study-section">
+        <div class="study-label">Spiegazione</div>
+        <div class="study-text">${escapeHTML(item[2])}</div>
+      </div>
+      <div class="study-section">
+        <div class="study-label">Esempio</div>
+        <div class="study-example">“${escapeHTML(item[3])}”</div>
+        <div class="study-translation">${escapeHTML(item[4])}</div>
+      </div>
+      <div class="study-section">
+        <div class="study-label">Le tue statistiche</div>
+        <div class="study-text">${info}</div>
+      </div>
+    </div>`;
+  detail.classList.remove("hidden");
+  document.body.style.overflow="hidden";
+};
+
+/* =========================================================
+   7) Stime / dashboard: usa il numero reale del database
+========================================================= */
+const renderAccountV11Base=window.renderAccount;
+window.renderAccount=function(){
+  renderAccountV11Base();
+  updateV11Counts();
+  repaintBadges();
+};
+
+const showScreenV11Base=window.showScreen;
+window.showScreen=function(screenId){
+  const result=showScreenV11Base(screenId);
+  if(screenId!=="home")v11HideChart();
+  if(screenId==="database"){
+    setTimeout(()=>{renderDatabase();updateV11Counts();},0);
+  }
+  return result;
+};
+
+updateV11Counts();
+repaintBadges();
+})();
+</script>
 
 </body>
 </html>
