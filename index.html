@@ -2,21 +2,16 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0, viewport-fit=cover"
   />
 
-  <meta
-    name="theme-color"
-    content="#171d2d"
-  />
+  <meta name="theme-color" content="#171d2d" />
 
   <title>Phrasal Verbs</title>
 
   <style>
-
     * {
       box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
@@ -55,7 +50,6 @@
     html,
     body {
       margin: 0;
-
       background: var(--background);
       color: var(--text);
 
@@ -88,9 +82,8 @@
       background: var(--surface);
 
       padding-bottom:
-        calc(80px + env(safe-area-inset-bottom));
+        calc(100px + env(safe-area-inset-bottom));
     }
-
 
     /* =====================================================
        HEADER
@@ -118,7 +111,7 @@
       padding:
         calc(30px + env(safe-area-inset-top))
         26px
-        28px;
+        27px;
     }
 
     header h1 {
@@ -127,7 +120,6 @@
       font-size: 30px;
       line-height: 1.08;
       letter-spacing: -.9px;
-
       font-weight: 900;
     }
 
@@ -137,7 +129,6 @@
       font-size: 15px;
       opacity: .74;
     }
-
 
     /* =====================================================
        NAV
@@ -151,42 +142,31 @@
       display: grid;
       grid-template-columns: repeat(4,1fr);
 
-      background:
-        rgba(255,255,255,.96);
+      background: rgba(255,255,255,.96);
 
-      backdrop-filter:
-        blur(16px);
+      backdrop-filter: blur(16px);
 
-      border-bottom:
-        1px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
 
     nav button {
-      padding:
-        16px 2px 14px;
+      padding: 16px 2px 14px;
 
       border: 0;
-      border-bottom:
-        3px solid transparent;
+      border-bottom: 3px solid transparent;
 
-      background:
-        transparent;
+      background: transparent;
 
-      color:
-        #798092;
+      color: #798092;
 
       font-size: 12px;
       font-weight: 850;
     }
 
     nav button.active {
-      color:
-        var(--primary);
-
-      border-bottom-color:
-        var(--primary);
+      color: var(--primary);
+      border-bottom-color: var(--primary);
     }
-
 
     /* =====================================================
        GENERAL
@@ -194,9 +174,7 @@
 
     .screen {
       display: none;
-
-      padding:
-        24px 20px;
+      padding: 24px 20px;
     }
 
     .screen.active {
@@ -204,24 +182,16 @@
     }
 
     .card {
-      margin-bottom:
-        16px;
+      margin-bottom: 16px;
+      padding: 20px;
 
-      padding:
-        20px;
+      background: white;
 
-      background:
-        white;
-
-      border:
-        1px solid var(--border);
-
-      border-radius:
-        23px;
+      border: 1px solid var(--border);
+      border-radius: 23px;
 
       box-shadow:
-        0 7px 22px
-        rgba(23,29,45,.05);
+        0 7px 22px rgba(23,29,45,.05);
     }
 
     .gradient-card {
@@ -237,69 +207,45 @@
     }
 
     .section-title {
-      margin:
-        2px 0 14px;
+      margin: 2px 0 14px;
 
-      font-size:
-        22px;
-
-      font-weight:
-        900;
-
-      letter-spacing:
-        -.5px;
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -.5px;
     }
 
     .subtle {
-      color:
-        var(--muted);
+      color: var(--muted);
 
-      font-size:
-        15px;
-
-      line-height:
-        1.5;
+      font-size: 15px;
+      line-height: 1.5;
     }
 
     .eyebrow {
-      margin-bottom:
-        8px;
+      margin-bottom: 7px;
 
-      color:
-        var(--primary);
+      color: var(--primary);
 
-      font-size:
-        12px;
+      font-size: 12px;
+      font-weight: 900;
 
-      font-weight:
-        900;
-
-      text-transform:
-        uppercase;
-
-      letter-spacing:
-        .7px;
+      text-transform: uppercase;
+      letter-spacing: .7px;
     }
 
     .hidden {
-      display:
-        none !important;
+      display: none !important;
     }
 
     .empty {
-      padding:
-        30px 10px;
+      padding: 30px 10px;
 
-      text-align:
-        center;
+      text-align: center;
 
-      color:
-        #9aa1ad;
+      color: #9aa1ad;
 
-      line-height:
-        1.5;
+      line-height: 1.5;
     }
-
 
     /* =====================================================
        BUTTONS
@@ -308,26 +254,16 @@
     .main-button,
     .secondary-button,
     .danger-button {
-      width:
-        100%;
+      width: 100%;
 
-      margin-top:
-        11px;
+      margin-top: 11px;
+      padding: 16px;
 
-      padding:
-        16px;
+      border: 0;
+      border-radius: 17px;
 
-      border:
-        0;
-
-      border-radius:
-        17px;
-
-      font-size:
-        17px;
-
-      font-weight:
-        850;
+      font-size: 17px;
+      font-weight: 850;
 
       transition:
         transform .12s ease,
@@ -340,14 +276,14 @@
     .answer:active,
     .quiz-size-button:active,
     .avatar-choice:active,
-    .result-size-button:active {
-      transform:
-        scale(.975);
+    .result-size-button:active,
+    .clickable-card:active,
+    .history-card-clickable:active {
+      transform: scale(.975);
     }
 
     .main-button {
-      color:
-        white;
+      color: white;
 
       background:
         linear-gradient(
@@ -357,157 +293,83 @@
         );
 
       box-shadow:
-        0 8px 19px
-        rgba(99,121,238,.23);
+        0 8px 19px rgba(99,121,238,.23);
     }
 
     .secondary-button {
-      color:
-        var(--text);
-
-      background:
-        #eff1f5;
+      color: var(--text);
+      background: #eff1f5;
     }
 
     .danger-button {
-      color:
-        var(--rose-text);
-
-      background:
-        var(--rose);
+      color: var(--rose-text);
+      background: var(--rose);
     }
-
 
     /* =====================================================
        HOME
-       Più ariosa verticalmente
     ===================================================== */
 
-    #startArea {
-      display:
-        flex;
-
-      flex-direction:
-        column;
-
-      gap:
-        18px;
-    }
-
-    #startArea .card {
-      margin-bottom:
-        0;
-    }
-
     .hero-quiz {
-      position:
-        relative;
+      position: relative;
+      overflow: hidden;
 
-      overflow:
-        hidden;
-
-      padding:
-        28px 26px;
+      padding: 23px;
     }
 
     .hero-quiz::after {
-      content:
-        "";
+      content: "";
 
-      position:
-        absolute;
+      position: absolute;
 
-      width:
-        150px;
+      width: 130px;
+      height: 130px;
 
-      height:
-        150px;
+      right: -48px;
+      top: -44px;
 
-      right:
-        -53px;
+      border-radius: 50%;
 
-      top:
-        -48px;
+      background: rgba(127,149,255,.13);
 
-      border-radius:
-        50%;
-
-      background:
-        rgba(127,149,255,.13);
-
-      pointer-events:
-        none;
-    }
-
-    .hero-quiz .section-title {
-      font-size:
-        25px;
-
-      margin-bottom:
-        4px;
+      pointer-events: none;
     }
 
     .quiz-size-label {
-      margin:
-        27px 0 11px;
+      margin: 22px 0 9px;
 
-      color:
-        var(--muted);
+      color: var(--muted);
 
-      font-size:
-        13px;
+      font-size: 12px;
+      font-weight: 850;
 
-      font-weight:
-        850;
-
-      text-transform:
-        uppercase;
-
-      letter-spacing:
-        .58px;
+      text-transform: uppercase;
+      letter-spacing: .55px;
     }
 
     .quiz-size-selector {
-      position:
-        relative;
+      position: relative;
+      z-index: 2;
 
-      z-index:
-        2;
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
 
-      display:
-        grid;
+      gap: 8px;
 
-      grid-template-columns:
-        repeat(4,1fr);
-
-      gap:
-        10px;
-
-      margin-bottom:
-        23px;
+      margin-bottom: 20px;
     }
 
     .quiz-size-button {
-      min-height:
-        54px;
+      min-height: 47px;
 
-      border:
-        1.5px solid #e0e4ef;
+      border: 1.5px solid #e0e4ef;
+      border-radius: 15px;
 
-      border-radius:
-        17px;
+      background: rgba(255,255,255,.72);
+      color: var(--muted);
 
-      background:
-        rgba(255,255,255,.72);
-
-      color:
-        var(--muted);
-
-      font-size:
-        17px;
-
-      font-weight:
-        900;
+      font-size: 15px;
+      font-weight: 900;
 
       transition:
         transform .12s ease,
@@ -516,223 +378,296 @@
     }
 
     .quiz-size-button.selected {
-      background:
-        var(--primary);
+      background: var(--primary);
+      color: white;
 
-      color:
-        white;
-
-      border-color:
-        var(--primary);
+      border-color: var(--primary);
 
       box-shadow:
-        0 5px 13px
-        rgba(99,121,238,.20);
-    }
-
-    .hero-quiz .main-button,
-    .hero-quiz .secondary-button {
-      min-height:
-        58px;
-
-      padding:
-        17px;
-
-      font-size:
-        18px;
-    }
-
-    .hero-quiz .main-button {
-      margin-top:
-        0;
-    }
-
-    .hero-quiz .secondary-button {
-      margin-top:
-        13px;
+        0 5px 13px rgba(99,121,238,.20);
     }
 
     .mini-grid {
-      display:
-        grid;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
 
-      grid-template-columns:
-        1fr 1fr;
+      gap: 12px;
 
-      gap:
-        13px;
-
-      margin-top:
-        18px;
+      margin-top: 15px;
     }
 
     .mini-card {
-      min-height:
-        118px;
+      min-height: 105px;
 
-      display:
-        flex;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
 
-      flex-direction:
-        column;
+      padding: 16px 10px;
 
-      justify-content:
-        center;
-
-      align-items:
-        center;
-
-      padding:
-        18px 10px;
-
-      text-align:
-        center;
+      text-align: center;
 
       border:
-        1px solid
-        rgba(225,228,239,.85);
+        1px solid rgba(225,228,239,.85);
 
-      border-radius:
-        20px;
+      border-radius: 19px;
 
       transition:
-        transform .15s ease,
-        box-shadow .15s ease;
+        transform .12s ease,
+        box-shadow .12s ease;
     }
 
     .mini-card:nth-child(1) {
-      background:
-        var(--sky);
+      background: var(--sky);
     }
 
     .mini-card:nth-child(2) {
-      background:
-        var(--mint);
+      background: var(--mint);
     }
 
     .mini-card strong {
-      display:
-        block;
+      display: block;
 
-      margin-bottom:
-        6px;
+      margin-bottom: 5px;
 
-      font-size:
-        30px;
-
-      font-weight:
-        900;
+      font-size: 26px;
+      font-weight: 900;
     }
 
     .mini-card span {
-      color:
-        var(--muted);
+      color: var(--muted);
 
-      font-size:
-        13px;
+      font-size: 12px;
+      line-height: 1.3;
+    }
 
-      line-height:
-        1.3;
+    .clickable-card {
+      cursor: pointer;
     }
 
     .home-last-result {
-      margin-top:
-        17px;
+      margin-top: 15px;
+      padding: 15px;
 
-      padding:
-        17px;
+      border-radius: 18px;
 
-      border-radius:
-        18px;
+      background: var(--cream);
 
-      background:
-        var(--cream);
+      cursor: pointer;
+
+      transition:
+        transform .12s ease;
+    }
+
+    .home-last-result:active {
+      transform: scale(.985);
     }
 
     .home-last-result strong {
-      font-size:
-        21px;
+      font-size: 20px;
     }
 
+    /* =====================================================
+       HOME FIT - PIÙ ARIOSA
+    ===================================================== */
+
+    .app.home-mode {
+      min-height: 100dvh;
+    }
+
+    /*
+      La Home viene adattata, ma senza schiacciarla
+      aggressivamente come nella versione precedente.
+    */
+
+    .app.home-mode header {
+      padding:
+        calc(24px + env(safe-area-inset-top))
+        24px
+        23px;
+    }
+
+    .app.home-mode header h1 {
+      font-size: 29px;
+    }
+
+    .app.home-mode header p {
+      margin-top: 8px;
+      font-size: 14px;
+    }
+
+    .app.home-mode nav button {
+      padding: 14px 2px 12px;
+    }
+
+    .app.home-mode #home {
+      padding:
+        18px 16px
+        max(16px,env(safe-area-inset-bottom));
+    }
+
+    .app.home-mode .hero-quiz {
+      margin-bottom: 15px;
+      padding: 21px;
+    }
+
+    .app.home-mode .hero-quiz .section-title {
+      font-size: 23px;
+    }
+
+    .app.home-mode .quiz-size-label {
+      margin: 17px 0 8px;
+    }
+
+    .app.home-mode .quiz-size-selector {
+      margin-bottom: 15px;
+    }
+
+    .app.home-mode .quiz-size-button {
+      min-height: 45px;
+    }
+
+    .app.home-mode .hero-quiz .main-button,
+    .app.home-mode .hero-quiz .secondary-button {
+      margin-top: 9px;
+      padding: 14px;
+    }
+
+    .app.home-mode #startArea > .card:last-child {
+      padding: 18px;
+    }
+
+    .app.home-mode #startArea > .card:last-child .section-title {
+      margin-bottom: 11px;
+      font-size: 21px;
+    }
+
+    .app.home-mode .mini-grid {
+      margin-top: 0;
+    }
+
+    .app.home-mode .mini-card {
+      min-height: 88px;
+      padding: 12px 9px;
+    }
+
+    .app.home-mode .mini-card strong {
+      font-size: 25px;
+    }
+
+    .app.home-mode .home-last-result {
+      margin-top: 12px;
+      padding: 12px 14px;
+    }
+
+    /*
+      Solo su schermi realmente bassi riduciamo,
+      ma senza arrivare alla compressione estrema.
+    */
+
+    @media (max-height:740px) {
+
+      .app.home-mode header {
+        padding:
+          calc(18px + env(safe-area-inset-top))
+          22px
+          18px;
+      }
+
+      .app.home-mode header h1 {
+        font-size: 26px;
+      }
+
+      .app.home-mode header p {
+        margin-top: 5px;
+        font-size: 13px;
+      }
+
+      .app.home-mode nav button {
+        padding: 11px 2px 9px;
+      }
+
+      .app.home-mode #home {
+        padding:
+          12px 14px
+          max(10px,env(safe-area-inset-bottom));
+      }
+
+      .app.home-mode .hero-quiz {
+        padding: 17px;
+      }
+
+      .app.home-mode .quiz-size-label {
+        margin: 12px 0 7px;
+      }
+
+      .app.home-mode .quiz-size-button {
+        min-height: 41px;
+      }
+
+      .app.home-mode .hero-quiz .main-button,
+      .app.home-mode .hero-quiz .secondary-button {
+        padding: 12px;
+      }
+
+      .app.home-mode .mini-card {
+        min-height: 75px;
+      }
+
+    }
 
     /* =====================================================
-       QUIZ — BASE
+       QUIZ BASE
     ===================================================== */
 
     .quiz-top {
-      display:
-        flex;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
 
-      justify-content:
-        space-between;
+      gap: 10px;
 
-      align-items:
-        center;
-
-      gap:
-        10px;
-
-      margin-bottom:
-        12px;
+      margin-bottom: 12px;
     }
 
     .counter-pill,
     .score-pill {
-      padding:
-        7px 11px;
+      padding: 7px 11px;
 
-      border-radius:
-        999px;
+      border-radius: 999px;
 
-      font-size:
-        13px;
-
-      font-weight:
-        850;
+      font-size: 13px;
+      font-weight: 850;
     }
 
     .counter-pill {
-      color:
-        var(--muted);
-
-      background:
-        #f0f2f6;
+      color: var(--muted);
+      background: #f0f2f6;
     }
 
     .score-pill {
-      color:
-        var(--primary);
-
-      background:
-        var(--primary-light);
+      color: var(--primary);
+      background: var(--primary-light);
     }
 
     .progress {
-      height:
-        11px;
+      height: 11px;
 
-      margin-bottom:
-        28px;
+      margin-bottom: 28px;
 
-      overflow:
-        hidden;
+      overflow: hidden;
 
-      border-radius:
-        999px;
+      border-radius: 999px;
 
-      background:
-        #eceff4;
+      background: #eceff4;
     }
 
     .progress-bar {
-      width:
-        0%;
+      width: 0%;
+      height: 100%;
 
-      height:
-        100%;
-
-      border-radius:
-        999px;
+      border-radius: 999px;
 
       background:
         linear-gradient(
@@ -741,1053 +676,636 @@
           var(--primary)
         );
 
-      transition:
-        width .3s ease;
+      transition: width .3s ease;
     }
 
     .question-box {
-      text-align:
-        center;
+      text-align: center;
 
-      padding:
-        4px 3px 10px;
+      padding: 4px 3px 10px;
     }
 
     .direction {
-      display:
-        inline-block;
+      display: inline-block;
 
-      margin-bottom:
-        16px;
+      margin-bottom: 16px;
+      padding: 7px 11px;
 
-      padding:
-        7px 11px;
+      border-radius: 999px;
 
-      border-radius:
-        999px;
+      color: var(--primary);
+      background: var(--primary-light);
 
-      color:
-        var(--primary);
+      font-size: 12px;
+      font-weight: 900;
 
-      background:
-        var(--primary-light);
-
-      font-size:
-        12px;
-
-      font-weight:
-        900;
-
-      text-transform:
-        uppercase;
-
-      letter-spacing:
-        .45px;
+      text-transform: uppercase;
+      letter-spacing: .45px;
     }
 
     .question {
-      max-width:
-        600px;
+      max-width: 600px;
 
-      margin:
-        0 auto 27px;
+      margin: 0 auto 27px;
 
-      text-align:
-        center;
+      text-align: center;
 
-      font-size:
-        25px;
+      font-size: 26px;
+      line-height: 1.25;
+      letter-spacing: -.5px;
 
-      line-height:
-        1.3;
-
-      letter-spacing:
-        -.45px;
-
-      font-weight:
-        900;
+      font-weight: 900;
     }
 
     .answers {
-      display:
-        grid;
-
-      gap:
-        12px;
+      display: grid;
+      gap: 12px;
     }
 
     .answer {
-      width:
-        100%;
+      width: 100%;
+      min-height: 68px;
 
-      min-height:
-        66px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-      display:
-        flex;
+      padding: 14px 16px;
 
-      justify-content:
-        center;
+      text-align: center;
 
-      align-items:
-        center;
+      color: var(--text);
+      background: white;
 
-      padding:
-        14px 16px;
+      border: 2px solid var(--border);
+      border-radius: 18px;
 
-      text-align:
-        center;
-
-      color:
-        var(--text);
-
-      background:
-        white;
-
-      border:
-        2px solid var(--border);
-
-      border-radius:
-        18px;
-
-      font-size:
-        16px;
-
-      line-height:
-        1.32;
-
-      font-weight:
-        750;
+      font-size: 17px;
+      line-height: 1.3;
+      font-weight: 780;
 
       transition:
-        min-height .25s ease,
-        padding .25s ease,
-        font-size .25s ease,
-        background .17s ease,
-        border-color .17s ease,
+        background .22s ease,
+        border-color .22s ease,
+        min-height .24s ease,
+        padding .24s ease,
+        font-size .24s ease,
+        gap .24s ease,
         transform .12s ease;
     }
 
     .answer.correct {
-      color:
-        var(--mint-text);
+      color: var(--mint-text);
+      background: var(--mint);
 
-      background:
-        var(--mint);
-
-      border-color:
-        #a5dfbf;
+      border-color: #a5dfbf;
     }
 
     .answer.wrong {
-      color:
-        var(--rose-text);
+      color: var(--rose-text);
+      background: var(--rose);
 
-      background:
-        var(--rose);
-
-      border-color:
-        #efacb8;
+      border-color: #efacb8;
     }
 
     .answer:disabled {
-      opacity:
-        1;
+      opacity: 1;
     }
 
     .feedback {
-      display:
-        none;
+      display: none;
 
-      margin-top:
-        18px;
+      margin-top: 18px;
+      padding: 17px;
 
-      padding:
-        17px;
+      text-align: center;
 
-      text-align:
-        center;
+      border-radius: 18px;
 
-      border-radius:
-        18px;
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.4;
 
-      font-weight:
-        800;
-
-      line-height:
-        1.45;
-
-      animation:
-        appear .22s ease;
+      animation: appear .18s ease;
     }
 
     .feedback.correct {
-      display:
-        block;
+      display: block;
 
-      color:
-        var(--mint-text);
-
-      background:
-        var(--mint);
+      color: var(--mint-text);
+      background: var(--mint);
     }
 
     .feedback.wrong {
-      display:
-        block;
+      display: block;
 
-      color:
-        var(--rose-text);
-
-      background:
-        var(--rose);
+      color: var(--rose-text);
+      background: var(--rose);
     }
 
     .learning-box {
-      margin-top:
-        12px;
+      margin-top: 12px;
+      padding: 12px;
 
-      padding:
-        14px;
+      text-align: left;
 
-      text-align:
-        left;
-
-      color:
-        var(--text);
+      color: var(--text);
 
       background:
         rgba(255,255,255,.78);
 
       border:
-        1px solid
-        rgba(189,80,99,.13);
+        1px solid rgba(189,80,99,.13);
 
-      border-radius:
-        15px;
+      border-radius: 15px;
     }
 
     .learning-title {
-      margin-bottom:
-        5px;
+      margin-bottom: 5px;
 
-      color:
-        var(--rose-text);
+      color: var(--rose-text);
 
-      font-size:
-        13px;
+      font-size: 13px;
+      font-weight: 900;
 
-      font-weight:
-        900;
-
-      text-transform:
-        uppercase;
-
-      letter-spacing:
-        .45px;
+      text-transform: uppercase;
+      letter-spacing: .45px;
     }
 
     .learning-meaning {
-      margin-bottom:
-        8px;
+      margin-bottom: 7px;
 
-      font-size:
-        15px;
-
-      line-height:
-        1.3;
-
-      font-weight:
-        800;
+      font-size: 14px;
+      font-weight: 800;
+      line-height: 1.28;
     }
 
     .learning-explanation {
-      margin-bottom:
-        8px;
+      margin-bottom: 7px;
 
-      color:
-        #4f5667;
+      color: #4f5667;
 
-      font-size:
-        14px;
-
-      line-height:
-        1.4;
-
-      font-weight:
-        650;
+      font-size: 13px;
+      line-height: 1.35;
+      font-weight: 600;
     }
 
     .learning-example {
-      font-size:
-        14px;
-
-      line-height:
-        1.4;
-
-      font-style:
-        italic;
-
-      font-weight:
-        700;
+      font-size: 13.5px;
+      line-height: 1.35;
+      font-style: italic;
+      font-weight: 650;
     }
 
     .learning-translation {
-      margin-top:
-        4px;
+      margin-top: 3px;
 
-      color:
-        var(--muted);
+      color: var(--muted);
 
-      font-size:
-        13px;
-
-      line-height:
-        1.38;
-
-      font-weight:
-        650;
+      font-size: 13px;
+      line-height: 1.35;
+      font-weight: 600;
     }
 
     @keyframes appear {
       from {
-        opacity:
-          0;
-
-        transform:
-          translateY(8px);
+        opacity: 0;
+        transform: translateY(5px);
       }
 
       to {
-        opacity:
-          1;
-
-        transform:
-          translateY(0);
+        opacity: 1;
+        transform: translateY(0);
       }
     }
 
-
     /* =====================================================
        QUIZ ONE-SCREEN
-       Stato iniziale: risposte GRANDI
     ===================================================== */
 
     .app.quiz-mode {
-      height:
-        100dvh;
+      height: 100dvh;
+      min-height: 100dvh;
 
-      min-height:
-        100dvh;
+      overflow: hidden;
 
-      overflow:
-        hidden;
-
-      padding-bottom:
-        0;
+      padding-bottom: 0;
     }
 
     .app.quiz-mode header {
-      display:
-        none;
+      display: none;
     }
 
     .app.quiz-mode nav {
-      position:
-        relative;
-
-      min-height:
-        47px;
+      position: relative;
+      min-height: 45px;
     }
 
     .app.quiz-mode nav button {
-      padding:
-        12px 2px 11px;
+      padding: 12px 2px 10px;
 
-      font-size:
-        12px;
+      font-size: 11.5px;
     }
 
     .app.quiz-mode #home {
       height:
         calc(
           100dvh
-          - 50px
+          - 48px
           - env(safe-area-inset-bottom)
         );
 
       padding:
-        11px
-        16px
-        max(
-          9px,
-          env(safe-area-inset-bottom)
-        );
+        10px 16px
+        max(8px,env(safe-area-inset-bottom));
 
-      overflow:
-        hidden;
+      overflow: hidden;
     }
 
     .app.quiz-mode #quizArea {
-      height:
-        100%;
+      height: 100%;
 
-      display:
-        flex;
+      display: flex;
+      flex-direction: column;
 
-      flex-direction:
-        column;
-
-      overflow:
-        hidden;
+      overflow: hidden;
     }
 
     .app.quiz-mode .quiz-top {
-      margin-bottom:
-        7px;
+      margin-bottom: 6px;
 
-      flex:
-        0 0 auto;
+      flex: 0 0 auto;
     }
 
     .app.quiz-mode .counter-pill,
     .app.quiz-mode .score-pill {
-      padding:
-        7px 11px;
+      padding: 6px 10px;
 
-      font-size:
-        13px;
+      font-size: 13px;
     }
 
     .app.quiz-mode .progress {
-      height:
-        8px;
+      height: 7px;
 
-      margin-bottom:
-        12px;
+      margin-bottom: 11px;
 
-      flex:
-        0 0 auto;
+      flex: 0 0 auto;
     }
 
-    /*
-      La domanda viene spostata leggermente
-      verso il centro verticale.
-    */
-
     .app.quiz-mode .question-box {
-      padding:
-        0;
+      padding: 0;
 
-      margin-top:
-        clamp(
-          8px,
-          2.3dvh,
-          24px
-        );
-
-      flex:
-        0 0 auto;
-
-      transition:
-        margin .25s ease;
+      flex: 0 0 auto;
     }
 
     .app.quiz-mode .direction {
-      margin-bottom:
-        9px;
+      margin-bottom: 8px;
 
-      padding:
-        6px 11px;
+      padding: 6px 10px;
 
-      font-size:
-        11px;
+      font-size: 11.5px;
     }
 
     .app.quiz-mode .question {
-      margin-bottom:
-        clamp(
-          14px,
-          2.3dvh,
-          23px
-        );
+      margin-bottom: 13px;
 
       font-size:
         clamp(
-          22px,
-          5.5vw,
-          27px
+          23px,
+          5.8vw,
+          28px
         );
 
-      line-height:
-        1.18;
+      line-height: 1.15;
     }
 
     /*
-      STATO PRE-RISPOSTA:
-      rettangoli più grandi,
-      più importanti,
-      maggiormente centrali.
+      STATO NORMALE:
+      le alternative sono più alte, centrali e importanti.
     */
 
     .app.quiz-mode .answers {
-      gap:
-        clamp(
-          10px,
-          1.5dvh,
-          14px
-        );
+      display: grid;
+      gap: 10px;
 
-      flex:
-        0 0 auto;
+      flex: 0 0 auto;
 
       transition:
         gap .25s ease;
     }
 
     .app.quiz-mode .answer {
-      min-height:
-        clamp(
-          64px,
-          8.2dvh,
-          78px
-        );
+      min-height: 70px;
 
-      padding:
-        12px 16px;
+      padding: 13px 15px;
 
-      border-radius:
-        18px;
+      border-radius: 17px;
 
-      font-size:
-        clamp(
-          16px,
-          4.2vw,
-          19px
-        );
-
-      line-height:
-        1.22;
-
-      font-weight:
-        800;
+      font-size: 18px;
+      line-height: 1.2;
+      font-weight: 800;
     }
 
     /*
-      Feedback corretto:
-      rimane semplice.
+      Se la risposta è corretta NON comprimiamo nulla.
     */
 
-    .app.quiz-mode .feedback.correct {
-      margin-top:
-        11px;
+    .app.quiz-mode.correct-state .answers {
+      gap: 10px;
+    }
 
-      padding:
-        13px 14px;
+    .app.quiz-mode.correct-state .answer {
+      min-height: 70px;
 
-      border-radius:
-        16px;
+      padding: 13px 15px;
 
-      font-size:
-        15px;
-
-      line-height:
-        1.3;
-
-      flex:
-        0 0 auto;
+      font-size: 18px;
     }
 
     /*
-      Pulsante prossima domanda.
+      Solo quando la risposta è sbagliata
+      le quattro alternative si comprimono.
     */
+
+    .app.quiz-mode.wrong-state .question {
+      margin-bottom: 8px;
+
+      font-size:
+        clamp(
+          21px,
+          5.2vw,
+          25px
+        );
+    }
+
+    .app.quiz-mode.wrong-state .answers {
+      gap: 5px;
+    }
+
+    .app.quiz-mode.wrong-state .answer {
+      min-height: 39px;
+
+      padding: 5px 10px;
+
+      border-radius: 12px;
+
+      font-size: 14.5px;
+      line-height: 1.12;
+    }
+
+    /*
+      Feedback corretto: semplice, senza trasformare
+      il resto dell'interfaccia.
+    */
+
+    .app.quiz-mode.correct-state .feedback {
+      margin-top: 10px;
+
+      padding: 12px 14px;
+
+      border-radius: 15px;
+
+      font-size: 16px;
+      line-height: 1.3;
+
+      flex: 0 0 auto;
+    }
+
+    /*
+      Feedback sbagliato:
+      box grande, dominante, con testi molto più leggibili.
+    */
+
+    .app.quiz-mode.wrong-state .feedback {
+      margin-top: 7px;
+
+      padding: 11px 12px 12px;
+
+      border-radius: 16px;
+
+      font-size: 16.5px;
+      line-height: 1.28;
+
+      flex: 0 0 auto;
+    }
+
+    .app.quiz-mode.wrong-state .learning-box {
+      margin-top: 8px;
+
+      padding: 14px 15px;
+
+      border-radius: 15px;
+    }
+
+    .app.quiz-mode.wrong-state .learning-title {
+      margin-bottom: 6px;
+
+      font-size: 13.5px;
+      line-height: 1.15;
+    }
+
+    .app.quiz-mode.wrong-state .learning-meaning {
+      margin-bottom: 8px;
+
+      font-size: 16px;
+      line-height: 1.25;
+    }
+
+    .app.quiz-mode.wrong-state .learning-explanation {
+      margin-bottom: 9px;
+
+      font-size: 15px;
+      line-height: 1.32;
+    }
+
+    .app.quiz-mode.wrong-state .learning-example {
+      font-size: 15px;
+      line-height: 1.3;
+    }
+
+    .app.quiz-mode.wrong-state .learning-translation {
+      margin-top: 4px;
+
+      font-size: 14.5px;
+      line-height: 1.3;
+    }
 
     .app.quiz-mode #nextButton {
-      min-height:
-        50px;
+      min-height: 47px;
 
-      margin-top:
-        10px;
+      margin-top: 9px;
+      padding: 11px;
 
-      padding:
-        12px;
+      border-radius: 15px;
 
-      border-radius:
-        16px;
+      font-size: 16px;
 
-      font-size:
-        16px;
-
-      flex:
-        0 0 auto;
-    }
-
-
-    /* =====================================================
-       RISPOSTA SBAGLIATA
-       Layout dinamicamente compresso
-    ===================================================== */
-
-    .app.quiz-mode
-    #quizArea.answered-wrong
-    .question-box {
-      margin-top:
-        0;
-    }
-
-    .app.quiz-mode
-    #quizArea.answered-wrong
-    .direction {
-      margin-bottom:
-        5px;
-
-      padding:
-        4px 9px;
-
-      font-size:
-        10px;
-    }
-
-    .app.quiz-mode
-    #quizArea.answered-wrong
-    .question {
-      margin-bottom:
-        8px;
-
-      font-size:
-        clamp(
-          19px,
-          4.8vw,
-          23px
-        );
-
-      line-height:
-        1.15;
-    }
-
-    .app.quiz-mode
-    #quizArea.answered-wrong
-    .answers {
-      gap:
-        5px;
-    }
-
-    .app.quiz-mode
-    #quizArea.answered-wrong
-    .answer {
-      min-height:
-        42px;
-
-      padding:
-        6px 10px;
-
-      border-radius:
-        13px;
-
-      font-size:
-        14px;
-
-      line-height:
-        1.16;
+      flex: 0 0 auto;
     }
 
     /*
-      Il box errore diventa protagonista.
+      Schermi più bassi:
+      conserviamo la differenza concettuale
+      tra stato normale e stato errore.
     */
 
-    .app.quiz-mode
-    #quizArea.answered-wrong
-    .feedback.wrong {
-      display:
-        block;
-
-      margin-top:
-        8px;
-
-      padding:
-        11px;
-
-      border-radius:
-        17px;
-
-      font-size:
-        15px;
-
-      line-height:
-        1.28;
-
-      flex:
-        0 0 auto;
-    }
-
-    .app.quiz-mode
-    #quizArea.answered-wrong
-    .learning-box {
-      margin-top:
-        8px;
-
-      padding:
-        13px 14px;
-
-      border-radius:
-        14px;
-    }
-
-    .app.quiz-mode
-    #quizArea.answered-wrong
-    .learning-title {
-      margin-bottom:
-        5px;
-
-      font-size:
-        12px;
-
-      line-height:
-        1.2;
-    }
-
-    .app.quiz-mode
-    #quizArea.answered-wrong
-    .learning-meaning {
-      margin-bottom:
-        7px;
-
-      font-size:
-        16px;
-
-      line-height:
-        1.28;
-
-      font-weight:
-        850;
-    }
-
-    .app.quiz-mode
-    #quizArea.answered-wrong
-    .learning-explanation {
-      margin-bottom:
-        7px;
-
-      font-size:
-        14.5px;
-
-      line-height:
-        1.34;
-
-      font-weight:
-        650;
-    }
-
-    .app.quiz-mode
-    #quizArea.answered-wrong
-    .learning-example {
-      font-size:
-        14.5px;
-
-      line-height:
-        1.34;
-
-      font-weight:
-        750;
-    }
-
-    .app.quiz-mode
-    #quizArea.answered-wrong
-    .learning-translation {
-      margin-top:
-        3px;
-
-      font-size:
-        13.5px;
-
-      line-height:
-        1.32;
-    }
-
-    .app.quiz-mode
-    #quizArea.answered-wrong
-    #nextButton {
-      min-height:
-        46px;
-
-      margin-top:
-        8px;
-
-      padding:
-        10px;
-
-      font-size:
-        15px;
-    }
-
-
-    /* =====================================================
-       RISPOSTA CORRETTA
-       Non comprimiamo brutalmente
-    ===================================================== */
-
-    .app.quiz-mode
-    #quizArea.answered-correct
-    .answers {
-      gap:
-        9px;
-    }
-
-    .app.quiz-mode
-    #quizArea.answered-correct
-    .answer {
-      min-height:
-        clamp(
-          57px,
-          7dvh,
-          67px
-        );
-    }
-
-
-    /* =====================================================
-       Schermi bassi
-    ===================================================== */
-
-    @media (max-height: 760px) {
+    @media (max-height:760px) {
 
       .app.quiz-mode nav button {
-        padding:
-          9px 2px 8px;
-
-        font-size:
-          11px;
+        padding: 9px 2px 8px;
       }
 
       .app.quiz-mode #home {
-        padding-top:
-          6px;
+        padding-top: 5px;
       }
 
       .app.quiz-mode .quiz-top {
-        margin-bottom:
-          4px;
+        margin-bottom: 3px;
       }
 
       .app.quiz-mode .progress {
-        margin-bottom:
-          7px;
-      }
-
-      .app.quiz-mode .question-box {
-        margin-top:
-          3px;
+        margin-bottom: 6px;
       }
 
       .app.quiz-mode .direction {
-        margin-bottom:
-          5px;
+        margin-bottom: 5px;
+
+        font-size: 10.5px;
       }
 
       .app.quiz-mode .question {
-        margin-bottom:
-          9px;
+        margin-bottom: 8px;
 
-        font-size:
-          20px;
+        font-size: 22px;
       }
-
-      /*
-        Anche sui display bassi
-        manteniamo comunque risposte
-        più importanti rispetto
-        alla versione precedente.
-      */
 
       .app.quiz-mode .answers {
-        gap:
-          7px;
+        gap: 7px;
       }
 
-      .app.quiz-mode .answer {
-        min-height:
-          52px;
+      .app.quiz-mode .answer,
+      .app.quiz-mode.correct-state .answer {
+        min-height: 58px;
 
-        padding:
-          8px 11px;
+        padding: 9px 12px;
 
-        font-size:
-          15px;
+        font-size: 16.5px;
       }
 
-      .app.quiz-mode
-      #quizArea.answered-wrong
-      .answers {
-        gap:
-          4px;
+      .app.quiz-mode.wrong-state .answers {
+        gap: 4px;
       }
 
-      .app.quiz-mode
-      #quizArea.answered-wrong
-      .answer {
-        min-height:
-          36px;
+      .app.quiz-mode.wrong-state .answer {
+        min-height: 34px;
 
-        padding:
-          4px 8px;
+        padding: 4px 8px;
 
-        font-size:
-          12.5px;
+        font-size: 13.5px;
       }
 
-      .app.quiz-mode
-      #quizArea.answered-wrong
-      .question {
-        margin-bottom:
-          5px;
+      .app.quiz-mode.wrong-state .feedback {
+        margin-top: 5px;
 
-        font-size:
-          18px;
+        padding: 8px 9px;
+
+        font-size: 14.5px;
       }
 
-      .app.quiz-mode
-      #quizArea.answered-wrong
-      .feedback.wrong {
-        margin-top:
-          5px;
+      .app.quiz-mode.wrong-state .learning-box {
+        margin-top: 5px;
 
-        padding:
-          8px;
-
-        font-size:
-          13px;
+        padding: 10px 11px;
       }
 
-      .app.quiz-mode
-      #quizArea.answered-wrong
-      .learning-box {
-        margin-top:
-          5px;
-
-        padding:
-          8px 10px;
+      .app.quiz-mode.wrong-state .learning-title {
+        font-size: 11.5px;
       }
 
-      .app.quiz-mode
-      #quizArea.answered-wrong
-      .learning-meaning {
-        font-size:
-          13.5px;
+      .app.quiz-mode.wrong-state .learning-meaning {
+        margin-bottom: 5px;
+
+        font-size: 14px;
       }
 
-      .app.quiz-mode
-      #quizArea.answered-wrong
-      .learning-explanation {
-        font-size:
-          12px;
+      .app.quiz-mode.wrong-state .learning-explanation {
+        margin-bottom: 5px;
+
+        font-size: 12.8px;
+        line-height: 1.22;
       }
 
-      .app.quiz-mode
-      #quizArea.answered-wrong
-      .learning-example {
-        font-size:
-          12px;
+      .app.quiz-mode.wrong-state .learning-example {
+        font-size: 12.8px;
+        line-height: 1.22;
       }
 
-      .app.quiz-mode
-      #quizArea.answered-wrong
-      .learning-translation {
-        font-size:
-          11.5px;
+      .app.quiz-mode.wrong-state .learning-translation {
+        font-size: 12.2px;
+        line-height: 1.2;
       }
 
       .app.quiz-mode #nextButton {
-        min-height:
-          42px;
+        min-height: 40px;
 
-        margin-top:
-          6px;
+        margin-top: 5px;
 
-        padding:
-          8px;
+        padding: 8px;
+
+        font-size: 14.5px;
       }
 
     }
-
 
     /* =====================================================
        RESULTS
     ===================================================== */
 
     .score-big {
-      margin:
-        15px 0 0;
+      margin: 15px 0 0;
 
-      text-align:
-        center;
+      text-align: center;
 
-      font-size:
-        58px;
-
-      font-weight:
-        950;
-
-      letter-spacing:
-        -2px;
+      font-size: 58px;
+      font-weight: 950;
+      letter-spacing: -2px;
     }
 
     .percentage {
-      width:
-        max-content;
+      width: max-content;
 
-      margin:
-        8px auto 25px;
+      margin: 8px auto 25px;
 
-      padding:
-        7px 13px;
+      padding: 7px 13px;
 
-      color:
-        var(--primary);
+      color: var(--primary);
+      background: var(--primary-light);
 
-      background:
-        var(--primary-light);
+      border-radius: 999px;
 
-      border-radius:
-        999px;
-
-      font-size:
-        20px;
-
-      font-weight:
-        900;
+      font-size: 20px;
+      font-weight: 900;
     }
 
     .result-actions {
-      display:
-        grid;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
 
-      grid-template-columns:
-        1fr 1fr;
+      gap: 10px;
 
-      gap:
-        10px;
-
-      margin-top:
-        10px;
+      margin-top: 10px;
     }
 
-    .result-actions
-    .main-button,
-    .result-actions
-    .secondary-button {
-      margin-top:
-        0;
+    .result-actions .main-button,
+    .result-actions .secondary-button {
+      margin-top: 0;
     }
 
     .result-new-quiz {
-      margin-top:
-        15px;
+      margin-top: 15px;
+      padding: 16px;
 
-      padding:
-        16px;
-
-      border-radius:
-        18px;
+      border-radius: 18px;
 
       background:
         linear-gradient(
@@ -1797,446 +1315,507 @@
           #eff9ff
         );
 
-      animation:
-        appear .18s ease;
+      animation: appear .18s ease;
     }
 
     .result-new-quiz-title {
-      margin-bottom:
-        11px;
+      margin-bottom: 11px;
 
-      text-align:
-        center;
+      text-align: center;
 
-      color:
-        var(--text);
+      color: var(--text);
 
-      font-size:
-        15px;
-
-      font-weight:
-        900;
+      font-size: 15px;
+      font-weight: 900;
     }
 
     .result-size-grid {
-      display:
-        grid;
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
 
-      grid-template-columns:
-        repeat(4,1fr);
-
-      gap:
-        7px;
+      gap: 7px;
     }
 
     .result-size-button {
-      min-height:
-        45px;
+      min-height: 45px;
 
-      border:
-        1.5px solid #dde2ef;
+      border: 1.5px solid #dde2ef;
+      border-radius: 14px;
 
-      border-radius:
-        14px;
+      background: white;
 
-      background:
-        white;
+      color: var(--primary);
 
-      color:
-        var(--primary);
-
-      font-size:
-        15px;
-
-      font-weight:
-        900;
+      font-size: 15px;
+      font-weight: 900;
     }
-
 
     /* =====================================================
        STATS
     ===================================================== */
 
     .stats-grid {
-      display:
-        grid;
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
 
-      grid-template-columns:
-        repeat(2,1fr);
+      gap: 11px;
 
-      gap:
-        11px;
-
-      margin-top:
-        15px;
+      margin-top: 15px;
     }
 
     .stat-box {
-      min-height:
-        103px;
+      min-height: 103px;
 
-      display:
-        flex;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
 
-      flex-direction:
-        column;
+      padding: 15px;
 
-      justify-content:
-        center;
-
-      padding:
-        15px;
-
-      border-radius:
-        18px;
+      border-radius: 18px;
     }
 
     .stat-box.blue {
-      background:
-        var(--sky);
+      background: var(--sky);
     }
 
     .stat-box.green {
-      background:
-        var(--mint);
+      background: var(--mint);
     }
 
     .stat-box.yellow {
-      background:
-        var(--cream);
+      background: var(--cream);
     }
 
     .stat-box.purple {
-      background:
-        var(--lavender);
+      background: var(--lavender);
     }
 
     .stat-box.rose {
-      background:
-        var(--rose);
+      background: var(--rose);
     }
 
     .stat-box.gray {
-      background:
-        #f0f2f6;
+      background: #f0f2f6;
     }
 
     .stat-box strong {
-      display:
-        block;
+      display: block;
 
-      margin-bottom:
-        4px;
+      margin-bottom: 4px;
 
-      font-size:
-        25px;
-
-      font-weight:
-        900;
+      font-size: 25px;
+      font-weight: 900;
     }
 
     .stat-box span {
-      color:
-        var(--muted);
+      color: var(--muted);
 
-      font-size:
-        12px;
-
-      line-height:
-        1.25;
+      font-size: 12px;
+      line-height: 1.25;
     }
 
     .stat-row {
-      display:
-        grid;
+      display: grid;
+      grid-template-columns: 1fr auto;
 
-      grid-template-columns:
-        1fr auto;
+      gap: 12px;
 
-      gap:
-        12px;
+      align-items: center;
 
-      align-items:
-        center;
+      padding: 14px 0;
 
-      padding:
-        14px 0;
-
-      border-bottom:
-        1px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
 
     .stat-row:last-child {
-      border-bottom:
-        0;
+      border-bottom: 0;
     }
 
     .verb {
-      font-size:
-        16px;
-
-      font-weight:
-        900;
+      font-size: 16px;
+      font-weight: 900;
     }
 
     .translation {
-      margin-top:
-        4px;
+      margin-top: 4px;
 
-      color:
-        var(--muted);
+      color: var(--muted);
 
-      font-size:
-        13px;
-
-      line-height:
-        1.35;
+      font-size: 13px;
+      line-height: 1.35;
     }
 
     .stat-number {
-      min-width:
-        58px;
+      min-width: 58px;
 
-      padding:
-        7px 9px;
+      padding: 7px 9px;
 
-      text-align:
-        center;
+      text-align: center;
 
-      border-radius:
-        999px;
+      border-radius: 999px;
 
-      background:
-        #f1f3f6;
+      background: #f1f3f6;
+      color: var(--muted);
 
-      color:
-        var(--muted);
-
-      font-weight:
-        900;
+      font-weight: 900;
     }
 
     .stat-number.good {
-      color:
-        var(--mint-text);
-
-      background:
-        var(--mint);
+      color: var(--mint-text);
+      background: var(--mint);
     }
 
     .stat-number.bad {
-      color:
-        var(--rose-text);
-
-      background:
-        var(--rose);
+      color: var(--rose-text);
+      background: var(--rose);
     }
 
     .mastery-track {
-      max-width:
-        230px;
+      max-width: 230px;
+      height: 7px;
 
-      height:
-        7px;
+      margin-top: 8px;
 
-      margin-top:
-        8px;
+      overflow: hidden;
 
-      overflow:
-        hidden;
+      border-radius: 999px;
 
-      border-radius:
-        999px;
-
-      background:
-        #edf0f4;
+      background: #edf0f4;
     }
 
     .mastery-bar {
-      height:
-        100%;
+      height: 100%;
 
-      border-radius:
-        999px;
+      border-radius: 999px;
     }
-
 
     /* =====================================================
        HISTORY
     ===================================================== */
 
     .history-card {
-      padding:
-        19px;
+      padding: 19px;
+    }
+
+    .history-card-clickable {
+      cursor: pointer;
+
+      transition:
+        transform .12s ease,
+        box-shadow .12s ease;
+    }
+
+    .history-card-clickable:active {
+      box-shadow:
+        0 3px 14px rgba(23,29,45,.08);
     }
 
     .history-head {
-      display:
-        flex;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
 
-      justify-content:
-        space-between;
-
-      align-items:
-        flex-start;
-
-      gap:
-        12px;
+      gap: 12px;
     }
 
     .history-score {
-      font-size:
-        30px;
-
-      font-weight:
-        950;
-
-      letter-spacing:
-        -1px;
+      font-size: 30px;
+      font-weight: 950;
+      letter-spacing: -1px;
     }
 
     .history-date {
-      margin-top:
-        5px;
+      margin-top: 5px;
 
-      color:
-        var(--muted);
+      color: var(--muted);
 
-      font-size:
-        13px;
+      font-size: 13px;
+    }
+
+    .history-open-hint {
+      margin-top: 11px;
+
+      color: var(--primary);
+
+      font-size: 12px;
+      font-weight: 850;
     }
 
     .history-badge {
-      padding:
-        7px 11px;
+      padding: 7px 11px;
 
-      border-radius:
-        999px;
+      border-radius: 999px;
 
-      font-size:
-        14px;
-
-      font-weight:
-        900;
+      font-size: 14px;
+      font-weight: 900;
     }
 
     .history-badge.excellent {
-      color:
-        var(--mint-text);
-
-      background:
-        var(--mint);
+      color: var(--mint-text);
+      background: var(--mint);
     }
 
     .history-badge.good {
-      color:
-        var(--primary);
-
-      background:
-        var(--primary-light);
+      color: var(--primary);
+      background: var(--primary-light);
     }
 
     .history-badge.medium {
-      color:
-        var(--cream-text);
-
-      background:
-        var(--cream);
+      color: var(--cream-text);
+      background: var(--cream);
     }
 
     .history-badge.low {
-      color:
-        var(--rose-text);
-
-      background:
-        var(--rose);
+      color: var(--rose-text);
+      background: var(--rose);
     }
 
     .review-label {
-      margin-top:
-        16px;
+      margin-top: 16px;
+      margin-bottom: 8px;
 
-      margin-bottom:
-        8px;
+      color: var(--muted);
 
-      color:
-        var(--muted);
+      font-size: 12px;
+      font-weight: 900;
 
-      font-size:
-        12px;
-
-      font-weight:
-        900;
-
-      text-transform:
-        uppercase;
-
-      letter-spacing:
-        .6px;
+      text-transform: uppercase;
+      letter-spacing: .6px;
     }
 
     .error-tags {
-      display:
-        flex;
+      display: flex;
+      flex-wrap: wrap;
 
-      flex-wrap:
-        wrap;
-
-      gap:
-        7px;
+      gap: 7px;
     }
 
     .error-tag,
     .perfect-tag {
-      display:
-        inline-flex;
+      display: inline-flex;
 
-      padding:
-        7px 10px;
+      padding: 7px 10px;
 
-      border-radius:
-        999px;
+      border-radius: 999px;
 
-      font-size:
-        12px;
-
-      font-weight:
-        800;
+      font-size: 12px;
+      font-weight: 800;
     }
 
     .error-tag {
-      color:
-        var(--rose-text);
-
-      background:
-        var(--rose);
+      color: var(--rose-text);
+      background: var(--rose);
     }
 
     .perfect-tag {
-      color:
-        var(--mint-text);
-
-      background:
-        var(--mint);
+      color: var(--mint-text);
+      background: var(--mint);
     }
 
+    /* =====================================================
+       HISTORY DETAIL
+    ===================================================== */
+
+    .history-detail-top {
+      display: flex;
+      align-items: center;
+
+      gap: 11px;
+
+      margin-bottom: 18px;
+    }
+
+    .history-back-button {
+      width: 42px;
+      height: 42px;
+
+      flex-shrink: 0;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border: 0;
+
+      border-radius: 14px;
+
+      background: #f0f2f6;
+
+      color: var(--text);
+
+      font-size: 22px;
+      font-weight: 900;
+    }
+
+    .history-detail-heading {
+      flex: 1;
+    }
+
+    .history-detail-title {
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -.4px;
+    }
+
+    .history-detail-subtitle {
+      margin-top: 3px;
+
+      color: var(--muted);
+
+      font-size: 13px;
+    }
+
+    .history-detail-summary {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+
+      gap: 9px;
+
+      margin-bottom: 17px;
+    }
+
+    .history-detail-summary-box {
+      padding: 13px 8px;
+
+      text-align: center;
+
+      border-radius: 17px;
+
+      background: #f5f6f9;
+    }
+
+    .history-detail-summary-box strong {
+      display: block;
+
+      font-size: 21px;
+      font-weight: 900;
+    }
+
+    .history-detail-summary-box span {
+      display: block;
+
+      margin-top: 3px;
+
+      color: var(--muted);
+
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .answer-review-card {
+      margin-bottom: 11px;
+
+      padding: 15px 16px;
+
+      border-radius: 18px;
+
+      border: 1px solid transparent;
+    }
+
+    .answer-review-card.correct {
+      color: var(--mint-text);
+
+      background: #ebf9f1;
+
+      border-color: #c4ead5;
+    }
+
+    .answer-review-card.wrong {
+      color: var(--rose-text);
+
+      background: #fff0f3;
+
+      border-color: #f2c5ce;
+    }
+
+    .answer-review-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+
+      gap: 10px;
+
+      margin-bottom: 8px;
+    }
+
+    .answer-review-number {
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .4px;
+
+      text-transform: uppercase;
+    }
+
+    .answer-review-status {
+      padding: 5px 8px;
+
+      border-radius: 999px;
+
+      background: rgba(255,255,255,.65);
+
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .answer-review-question {
+      color: var(--text);
+
+      font-size: 16px;
+      line-height: 1.3;
+      font-weight: 900;
+    }
+
+    .answer-review-line {
+      margin-top: 7px;
+
+      color: var(--text);
+
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .answer-review-line strong {
+      font-weight: 900;
+    }
+
+    .answer-review-meaning {
+      margin-top: 9px;
+      padding-top: 8px;
+
+      border-top:
+        1px solid rgba(23,29,45,.08);
+
+      color: #656e80;
+
+      font-size: 12px;
+      line-height: 1.35;
+      font-weight: 650;
+    }
+
+    .legacy-history-card {
+      padding: 18px;
+
+      border-radius: 18px;
+
+      background: var(--cream);
+
+      color: var(--cream-text);
+
+      line-height: 1.45;
+    }
 
     /* =====================================================
        ACCOUNT
     ===================================================== */
 
     .profile-card {
-      position:
-        relative;
+      position: relative;
+      overflow: hidden;
 
-      overflow:
-        hidden;
+      text-align: center;
 
-      text-align:
-        center;
-
-      border:
-        0;
+      border: 0;
 
       background:
         linear-gradient(
@@ -2248,75 +1827,48 @@
     }
 
     .profile-card::before {
-      content:
-        "";
+      content: "";
 
-      position:
-        absolute;
+      position: absolute;
 
-      width:
-        160px;
+      width: 160px;
+      height: 160px;
 
-      height:
-        160px;
+      top: -90px;
+      left: -60px;
 
-      top:
-        -90px;
-
-      left:
-        -60px;
-
-      border-radius:
-        50%;
+      border-radius: 50%;
 
       background:
         rgba(125,143,255,.13);
     }
 
     .avatar-wrapper {
-      position:
-        relative;
+      position: relative;
+      z-index: 2;
 
-      z-index:
-        2;
-
-      width:
-        96px;
-
-      height:
-        96px;
+      width: 96px;
+      height: 96px;
 
       margin:
         4px auto 17px;
 
-      cursor:
-        pointer;
+      cursor: pointer;
     }
 
     .avatar {
-      width:
-        96px;
+      width: 96px;
+      height: 96px;
 
-      height:
-        96px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-      display:
-        flex;
+      overflow: hidden;
 
-      align-items:
-        center;
+      border-radius: 50%;
 
-      justify-content:
-        center;
-
-      overflow:
-        hidden;
-
-      border-radius:
-        50%;
-
-      background:
-        white;
+      background: white;
 
       border:
         4px solid
@@ -2338,43 +1890,26 @@
     }
 
     .avatar img {
-      width:
-        100%;
+      width: 100%;
+      height: 100%;
 
-      height:
-        100%;
-
-      object-fit:
-        cover;
+      object-fit: cover;
     }
 
     .avatar-edit-hint {
-      position:
-        absolute;
+      position: absolute;
 
-      right:
-        -7px;
+      right: -7px;
+      bottom: -3px;
 
-      bottom:
-        -3px;
+      width: 31px;
+      height: 31px;
 
-      width:
-        31px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-      height:
-        31px;
-
-      display:
-        flex;
-
-      align-items:
-        center;
-
-      justify-content:
-        center;
-
-      border-radius:
-        50%;
+      border-radius: 50%;
 
       background:
         linear-gradient(
@@ -2383,17 +1918,13 @@
           #596fe8
         );
 
-      color:
-        white;
+      color: white;
 
       border:
         3px solid white;
 
-      font-size:
-        13px;
-
-      font-weight:
-        900;
+      font-size: 13px;
+      font-weight: 900;
 
       box-shadow:
         0 4px 10px
@@ -2401,69 +1932,43 @@
     }
 
     .profile-name {
-      position:
-        relative;
+      position: relative;
+      z-index: 2;
 
-      z-index:
-        2;
+      width: max-content;
+      max-width: 100%;
 
-      width:
-        max-content;
+      margin: 0 auto;
 
-      max-width:
-        100%;
+      font-size: 23px;
+      font-weight: 900;
+      letter-spacing: -.4px;
 
-      margin:
-        0 auto;
-
-      font-size:
-        23px;
-
-      font-weight:
-        900;
-
-      letter-spacing:
-        -.4px;
-
-      cursor:
-        pointer;
+      cursor: pointer;
     }
 
     .profile-subtitle {
-      position:
-        relative;
+      position: relative;
+      z-index: 2;
 
-      z-index:
-        2;
+      margin-top: 4px;
 
-      margin-top:
-        4px;
+      color: var(--muted);
 
-      color:
-        var(--muted);
-
-      font-size:
-        13px;
+      font-size: 13px;
     }
 
     .avatar-panel {
-      display:
-        none;
+      display: none;
 
-      position:
-        relative;
+      position: relative;
+      z-index: 3;
 
-      z-index:
-        3;
-
-      margin-top:
-        18px;
-
+      margin-top: 18px;
       padding:
         17px 13px;
 
-      border-radius:
-        20px;
+      border-radius: 20px;
 
       background:
         rgba(255,255,255,.78);
@@ -2474,47 +1979,34 @@
     }
 
     .avatar-panel.open {
-      display:
-        block;
+      display: block;
     }
 
     .avatar-panel-title {
-      margin-bottom:
-        14px;
+      margin-bottom: 14px;
 
       color:
         var(--muted);
 
-      font-size:
-        12px;
+      font-size: 12px;
+      font-weight: 900;
 
-      font-weight:
-        900;
-
-      text-transform:
-        uppercase;
-
-      letter-spacing:
-        .7px;
+      text-transform: uppercase;
+      letter-spacing: .7px;
     }
 
     .avatar-options {
-      display:
-        grid;
-
+      display: grid;
       grid-template-columns:
         repeat(2,1fr);
 
-      gap:
-        10px;
+      gap: 10px;
     }
 
     .avatar-choice {
-      position:
-        relative;
+      position: relative;
 
-      width:
-        100%;
+      width: 100%;
 
       padding:
         7px 7px 10px;
@@ -2522,14 +2014,12 @@
       border:
         2px solid transparent;
 
-      border-radius:
-        18px;
+      border-radius: 18px;
 
       background:
         rgba(255,255,255,.78);
 
-      color:
-        var(--text);
+      color: var(--text);
 
       transition:
         transform .12s ease,
@@ -2541,8 +2031,7 @@
       border-color:
         var(--primary);
 
-      background:
-        white;
+      background: white;
 
       box-shadow:
         0 5px 14px
@@ -2550,127 +2039,80 @@
     }
 
     .avatar-choice.selected::after {
-      content:
-        "✓";
+      content: "✓";
 
-      position:
-        absolute;
+      position: absolute;
 
-      top:
-        7px;
+      top: 7px;
+      right: 7px;
 
-      right:
-        7px;
+      width: 22px;
+      height: 22px;
 
-      width:
-        22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-      height:
-        22px;
+      border-radius: 50%;
 
-      display:
-        flex;
-
-      align-items:
-        center;
-
-      justify-content:
-        center;
-
-      border-radius:
-        50%;
-
-      color:
-        white;
+      color: white;
 
       background:
         var(--primary);
 
-      font-size:
-        12px;
-
-      font-weight:
-        900;
+      font-size: 12px;
+      font-weight: 900;
 
       border:
         2px solid white;
     }
 
     .avatar-choice img {
-      display:
-        block;
+      display: block;
 
-      width:
-        100%;
+      width: 100%;
+      aspect-ratio: 1;
 
-      aspect-ratio:
-        1;
+      object-fit: cover;
 
-      object-fit:
-        cover;
+      border-radius: 14px;
 
-      border-radius:
-        14px;
-
-      background:
-        #f4f7ff;
+      background: #f4f7ff;
     }
 
     .avatar-choice-name {
-      margin-top:
-        7px;
+      margin-top: 7px;
 
-      font-size:
-        13px;
+      font-size: 13px;
+      line-height: 1.15;
+      font-weight: 900;
 
-      line-height:
-        1.15;
-
-      font-weight:
-        900;
-
-      text-align:
-        center;
+      text-align: center;
     }
 
     .avatar-choice-caption {
-      min-height:
-        34px;
+      min-height: 34px;
 
-      margin-top:
-        4px;
+      margin-top: 4px;
 
       color:
         var(--muted);
 
-      font-size:
-        10px;
+      font-size: 10px;
+      line-height: 1.25;
+      font-weight: 600;
 
-      line-height:
-        1.25;
-
-      font-weight:
-        600;
-
-      text-align:
-        center;
+      text-align: center;
     }
 
     .upload-photo-button {
-      width:
-        100%;
+      width: 100%;
 
-      margin-top:
-        13px;
+      margin-top: 13px;
+      padding: 13px;
 
-      padding:
-        13px;
-
-      border:
-        0;
-
-      border-radius:
-        14px;
+      border: 0;
+      border-radius: 14px;
 
       background:
         var(--primary-light);
@@ -2678,132 +2120,89 @@
       color:
         var(--primary);
 
-      font-size:
-        14px;
-
-      font-weight:
-        850;
+      font-size: 14px;
+      font-weight: 850;
     }
 
     .account-name-input {
-      width:
-        100%;
+      width: 100%;
 
-      margin-top:
-        14px;
-
+      margin-top: 14px;
       padding:
         13px 14px;
 
       border:
         1px solid var(--border);
 
-      border-radius:
-        14px;
+      border-radius: 14px;
 
-      font-size:
-        16px;
+      font-size: 16px;
 
-      text-align:
-        center;
+      text-align: center;
     }
 
     .sound-setting {
-      display:
-        flex;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
 
-      justify-content:
-        space-between;
-
-      align-items:
-        center;
-
-      gap:
-        14px;
+      gap: 14px;
     }
 
     .setting-title {
-      font-size:
-        16px;
-
-      font-weight:
-        900;
+      font-size: 16px;
+      font-weight: 900;
     }
 
     .setting-description {
-      margin-top:
-        4px;
+      margin-top: 4px;
 
       color:
         var(--muted);
 
-      font-size:
-        13px;
-
-      line-height:
-        1.35;
+      font-size: 13px;
+      line-height: 1.35;
     }
 
     .switch {
-      position:
-        relative;
+      position: relative;
 
-      width:
-        52px;
+      width: 52px;
+      height: 31px;
 
-      height:
-        31px;
-
-      flex-shrink:
-        0;
+      flex-shrink: 0;
     }
 
     .switch input {
-      display:
-        none;
+      display: none;
     }
 
     .switch-slider {
-      position:
-        absolute;
+      position: absolute;
+      inset: 0;
 
-      inset:
-        0;
+      border-radius: 999px;
 
-      border-radius:
-        999px;
-
-      background:
-        #d9dde7;
+      background: #d9dde7;
 
       transition:
         .2s ease;
     }
 
     .switch-slider::before {
-      content:
-        "";
+      content: "";
 
-      position:
-        absolute;
+      position: absolute;
 
-      width:
-        25px;
+      width: 25px;
+      height: 25px;
 
-      height:
-        25px;
+      left: 3px;
+      top: 3px;
 
-      left:
-        3px;
+      border-radius: 50%;
 
-      top:
-        3px;
-
-      border-radius:
-        50%;
-
-      background:
-        white;
+      background: white;
 
       box-shadow:
         0 2px 6px
@@ -2826,69 +2225,44 @@
     }
 
     .backup-row {
-      display:
-        grid;
-
+      display: grid;
       grid-template-columns:
         1fr 1fr;
 
-      gap:
-        10px;
+      gap: 10px;
     }
 
     .backup-button {
-      padding:
-        14px;
+      padding: 14px;
 
-      border:
-        0;
+      border: 0;
+      border-radius: 16px;
 
-      border-radius:
-        16px;
+      color: var(--text);
+      background: #f0f2f6;
 
-      color:
-        var(--text);
-
-      background:
-        #f0f2f6;
-
-      font-size:
-        14px;
-
-      font-weight:
-        850;
+      font-size: 14px;
+      font-weight: 850;
     }
 
     #avatarFile,
     #backupFile {
-      display:
-        none;
+      display: none;
     }
 
     .database-card {
-      padding:
-        17px;
+      padding: 17px;
     }
 
-
-    @media (max-width: 390px) {
+    @media (max-width:390px) {
 
       .screen {
-        padding-left:
-          16px;
-
-        padding-right:
-          16px;
+        padding-left: 16px;
+        padding-right: 16px;
       }
 
       .card {
-        padding:
-          18px;
-      }
-
-      .hero-quiz {
-        padding:
-          25px 22px;
+        padding: 18px;
       }
 
       .avatar-options {
@@ -2901,14 +2275,12 @@
   </style>
 </head>
 
-
 <body>
 
 <div
   id="appShell"
   class="app"
 >
-
 
   <header>
 
@@ -2928,29 +2300,25 @@
     <button
       id="navHome"
       class="active"
-      onclick="showScreen('home')"
-    >
+      onclick="showScreen('home')">
       Quiz
     </button>
 
     <button
       id="navHistory"
-      onclick="showScreen('history')"
-    >
+      onclick="showScreen('history')">
       Storico
     </button>
 
     <button
       id="navDatabase"
-      onclick="showScreen('database')"
-    >
+      onclick="showScreen('database')">
       Database
     </button>
 
     <button
       id="navAccount"
-      onclick="showScreen('account')"
-    >
+      onclick="showScreen('account')">
       Account
     </button>
 
@@ -2958,7 +2326,7 @@
 
 
   <!-- ==================================================
-       QUIZ / HOME
+       HOME / QUIZ
   =================================================== -->
 
   <section
@@ -2966,9 +2334,7 @@
     class="screen active"
   >
 
-
     <div id="startArea">
-
 
       <div
         class="
@@ -2997,35 +2363,28 @@
           <button
             class="quiz-size-button"
             data-size="10"
-            onclick="selectQuizSize(10)"
-          >
+            onclick="selectQuizSize(10)">
             10
           </button>
-
 
           <button
             class="quiz-size-button selected"
             data-size="20"
-            onclick="selectQuizSize(20)"
-          >
+            onclick="selectQuizSize(20)">
             20
           </button>
-
 
           <button
             class="quiz-size-button"
             data-size="50"
-            onclick="selectQuizSize(50)"
-          >
+            onclick="selectQuizSize(50)">
             50
           </button>
-
 
           <button
             class="quiz-size-button"
             data-size="100"
-            onclick="selectQuizSize(100)"
-          >
+            onclick="selectQuizSize(100)">
             100
           </button>
 
@@ -3034,16 +2393,14 @@
 
         <button
           class="main-button"
-          onclick="startQuiz('normal')"
-        >
+          onclick="startQuiz('normal')">
           Inizia quiz
         </button>
 
 
         <button
           class="secondary-button"
-          onclick="startQuiz('mistakes')"
-        >
+          onclick="startQuiz('mistakes')">
           Ripassa i miei errori
         </button>
 
@@ -3059,7 +2416,15 @@
 
         <div class="mini-grid">
 
-          <div class="mini-card">
+          <div
+            class="
+              mini-card
+              clickable-card
+            "
+            role="button"
+            tabindex="0"
+            onclick="openHistoryFromHome()"
+          >
 
             <strong id="homeQuizCount">
               0
@@ -3072,7 +2437,15 @@
           </div>
 
 
-          <div class="mini-card">
+          <div
+            class="
+              mini-card
+              clickable-card
+            "
+            role="button"
+            tabindex="0"
+            onclick="openAccountDashboard()"
+          >
 
             <strong id="homeAverage">
               —
@@ -3090,6 +2463,9 @@
         <div
           id="homeLastResult"
           class="home-last-result hidden"
+          role="button"
+          tabindex="0"
+          onclick="openLatestQuiz()"
         >
         </div>
 
@@ -3097,8 +2473,6 @@
 
     </div>
 
-
-    <!-- QUIZ ATTIVO -->
 
     <div
       id="quizArea"
@@ -3171,15 +2545,12 @@
       <button
         id="nextButton"
         class="main-button hidden"
-        onclick="nextQuestion()"
-      >
+        onclick="nextQuestion()">
         Prossima domanda
       </button>
 
     </div>
 
-
-    <!-- RISULTATO -->
 
     <div
       id="resultArea"
@@ -3214,16 +2585,13 @@
 
           <button
             class="secondary-button"
-            onclick="goHomeAfterQuiz()"
-          >
+            onclick="goHomeAfterQuiz()">
             Home
           </button>
 
-
           <button
             class="main-button"
-            onclick="toggleResultQuizChooser()"
-          >
+            onclick="toggleResultQuizChooser()">
             Nuovo quiz
           </button>
 
@@ -3232,7 +2600,10 @@
 
         <div
           id="resultQuizChooser"
-          class="result-new-quiz hidden"
+          class="
+            result-new-quiz
+            hidden
+          "
         >
 
           <div class="result-new-quiz-title">
@@ -3244,29 +2615,25 @@
 
             <button
               class="result-size-button"
-              onclick="startQuizFromResult(10)"
-            >
+              onclick="startQuizFromResult(10)">
               10
             </button>
 
             <button
               class="result-size-button"
-              onclick="startQuizFromResult(20)"
-            >
+              onclick="startQuizFromResult(20)">
               20
             </button>
 
             <button
               class="result-size-button"
-              onclick="startQuizFromResult(50)"
-            >
+              onclick="startQuizFromResult(50)">
               50
             </button>
 
             <button
               class="result-size-button"
-              onclick="startQuizFromResult(100)"
-            >
+              onclick="startQuizFromResult(100)">
               100
             </button>
 
@@ -3302,11 +2669,26 @@
     class="screen"
   >
 
-    <div class="section-title">
-      Storico quiz
+    <div id="historyListView">
+
+      <div class="section-title">
+        Storico quiz
+      </div>
+
+      <div id="historyList">
+      </div>
+
     </div>
 
-    <div id="historyList">
+
+    <div
+      id="historyDetailView"
+      class="hidden"
+    >
+
+      <div id="historyDetailContent">
+      </div>
+
     </div>
 
   </section>
@@ -3347,7 +2729,6 @@
     id="account"
     class="screen"
   >
-
 
     <div
       class="
@@ -3452,7 +2833,10 @@
     </div>
 
 
-    <div class="card">
+    <div
+      id="accountDashboardCard"
+      class="card"
+    >
 
       <div class="section-title">
         Dashboard
@@ -3466,60 +2850,50 @@
           <span>Tempo totale nell'app</span>
         </div>
 
-
         <div class="stat-box green">
           <strong id="accountAccuracy">—</strong>
           <span>Accuracy totale</span>
         </div>
-
 
         <div class="stat-box purple">
           <strong id="accountQuizCount">0</strong>
           <span>Quiz completati</span>
         </div>
 
-
         <div class="stat-box yellow">
           <strong id="accountQuestions">0</strong>
           <span>Domande risposte</span>
         </div>
-
 
         <div class="stat-box yellow">
           <strong id="accountAverage">—</strong>
           <span>Media quiz</span>
         </div>
 
-
         <div class="stat-box green">
           <strong id="accountBest">—</strong>
           <span>Miglior risultato</span>
         </div>
-
 
         <div class="stat-box blue">
           <strong id="accountLast">—</strong>
           <span>Ultimo quiz</span>
         </div>
 
-
         <div class="stat-box purple">
           <strong id="accountTested">0/100</strong>
           <span>Verbi testati</span>
         </div>
-
 
         <div class="stat-box green">
           <strong id="accountMastered">0</strong>
           <span>Verbi ≥80%</span>
         </div>
 
-
         <div class="stat-box rose">
           <strong id="accountWeak">0</strong>
           <span>Verbi ≤50%</span>
         </div>
-
 
         <div class="stat-box gray">
           <strong id="accountAvgQuizTime">—</strong>
@@ -3542,7 +2916,7 @@
           </div>
 
           <div class="setting-description">
-            Feedback sonoro per pulsanti,
+            Feedback sonoro per selezioni,
             risposte e completamento del quiz.
           </div>
 
@@ -3554,7 +2928,11 @@
           <input
             id="soundToggle"
             type="checkbox"
-            onchange="setSoundEnabled(this.checked)"
+            onchange="
+              setSoundEnabled(
+                this.checked
+              )
+            "
           />
 
           <span class="switch-slider">
@@ -3696,7 +3074,7 @@ const phrasalVerbs = [
 ["Get out","uscire","Significa lasciare un luogo o uscire da qualcosa.","Get out of the car.","Esci dalla macchina."],
 ["Get over","superare / riprendersi da","Significa recuperare da una difficoltà, una malattia o una situazione negativa.","It took him months to get over the disappointment.","Gli sono serviti mesi per superare la delusione."],
 ["Get through","superare / riuscire a contattare","Può significare superare un periodo difficile oppure riuscire a comunicare con qualcuno.","We got through a very difficult period.","Abbiamo superato un periodo molto difficile."],
-["Give back","restituire","Significa restituire qualcosa al proprietario.","Can you give back the book tomorrow?","Puoi restituire il libro domani?"],
+["Give back","restituire","Significa restituire qualcosa al proprietario.","Can you give back the book tomorrow?","Puoi restituire il libro domani."],
 ["Give in","cedere","Significa smettere di opporsi e accettare qualcosa.","After a long discussion, he finally gave in.","Dopo una lunga discussione, alla fine ha ceduto."],
 ["Give up","rinunciare / smettere","Significa smettere di provare oppure abbandonare un'attività.","Don't give up just because it's difficult.","Non arrenderti solo perché è difficile."],
 ["Go ahead","procedere","Significa iniziare o continuare qualcosa dopo aver ricevuto il permesso o preso una decisione.","Let's go ahead with the project.","Procediamo con il progetto."],
@@ -3771,7 +3149,8 @@ const avatarDefinitions = {
 
   lion: {
     name: "Leone",
-    caption: "Coraggioso e leader naturale",
+    caption:
+      "Coraggioso e leader naturale",
     type: "lion",
     face: "#d99a3f",
     accent: "#7f4825"
@@ -3779,7 +3158,8 @@ const avatarDefinitions = {
 
   dog: {
     name: "Cane",
-    caption: "Leale e affettuoso, sempre al tuo fianco",
+    caption:
+      "Leale e affettuoso, sempre al tuo fianco",
     type: "dog",
     face: "#e2b05c",
     accent: "#895b31"
@@ -3787,7 +3167,8 @@ const avatarDefinitions = {
 
   polarBear: {
     name: "Orso polare",
-    caption: "Forte e resistente, affronta ogni sfida",
+    caption:
+      "Forte e resistente, affronta ogni sfida",
     type: "polarBear",
     face: "#f5f7f8",
     accent: "#313746"
@@ -3795,7 +3176,8 @@ const avatarDefinitions = {
 
   koala: {
     name: "Koala",
-    caption: "Tranquillo e rilassato, ama il focus",
+    caption:
+      "Tranquillo e rilassato, ama il focus",
     type: "koala",
     face: "#a79bad",
     accent: "#403847"
@@ -3803,7 +3185,8 @@ const avatarDefinitions = {
 
   wolf: {
     name: "Lupo",
-    caption: "Intelligente e strategico, ama lavorare in squadra",
+    caption:
+      "Intelligente e strategico, ama lavorare in squadra",
     type: "wolf",
     face: "#8995a2",
     accent: "#303946"
@@ -3811,7 +3194,8 @@ const avatarDefinitions = {
 
   fox: {
     name: "Volpe",
-    caption: "Astuta e curiosa, sempre un passo avanti",
+    caption:
+      "Astuta e curiosa, sempre un passo avanti",
     type: "fox",
     face: "#e87832",
     accent: "#61351f"
@@ -3819,7 +3203,8 @@ const avatarDefinitions = {
 
   panda: {
     name: "Panda",
-    caption: "Paziente e costante, migliora ogni giorno",
+    caption:
+      "Paziente e costante, migliora ogni giorno",
     type: "panda",
     face: "#f7f7f5",
     accent: "#202530"
@@ -3833,11 +3218,8 @@ function makeAnimalAvatar(key) {
   const a =
     avatarDefinitions[key];
 
-  let behind =
-    "";
-
-  let front =
-    "";
+  let behind = "";
+  let front = "";
 
 
   if (a.type === "lion") {
@@ -3854,7 +3236,13 @@ function makeAnimalAvatar(key) {
     `;
 
     front = `
-      <ellipse cx="60" cy="66" rx="17" ry="11" fill="#efbf71"/>
+      <ellipse
+        cx="60"
+        cy="66"
+        rx="17"
+        ry="11"
+        fill="#efbf71"
+      />
     `;
 
   }
@@ -3863,20 +3251,40 @@ function makeAnimalAvatar(key) {
   if (a.type === "dog") {
 
     behind = `
-      <ellipse cx="31" cy="47" rx="13" ry="27"
+      <ellipse
+        cx="31"
+        cy="47"
+        rx="13"
+        ry="27"
         fill="#a96832"
         transform="rotate(18 31 47)"
       />
 
-      <ellipse cx="89" cy="47" rx="13" ry="27"
+      <ellipse
+        cx="89"
+        cy="47"
+        rx="13"
+        ry="27"
         fill="#a96832"
         transform="rotate(-18 89 47)"
       />
     `;
 
     front = `
-      <ellipse cx="60" cy="66" rx="18" ry="12" fill="#f2ca81"/>
-      <circle cx="43" cy="35" r="6" fill="#c18140"/>
+      <ellipse
+        cx="60"
+        cy="66"
+        rx="18"
+        ry="12"
+        fill="#f2ca81"
+      />
+
+      <circle
+        cx="43"
+        cy="35"
+        r="6"
+        fill="#c18140"
+      />
     `;
 
   }
@@ -3887,13 +3295,18 @@ function makeAnimalAvatar(key) {
     behind = `
       <circle cx="35" cy="30" r="14" fill="#f0f3f5"/>
       <circle cx="85" cy="30" r="14" fill="#f0f3f5"/>
-
       <circle cx="35" cy="30" r="7" fill="#d9dee3"/>
       <circle cx="85" cy="30" r="7" fill="#d9dee3"/>
     `;
 
     front = `
-      <ellipse cx="60" cy="66" rx="18" ry="12" fill="#e2e6e9"/>
+      <ellipse
+        cx="60"
+        cy="66"
+        rx="18"
+        ry="12"
+        fill="#e2e6e9"
+      />
     `;
 
   }
@@ -3904,13 +3317,18 @@ function makeAnimalAvatar(key) {
     behind = `
       <circle cx="28" cy="44" r="21" fill="#817487"/>
       <circle cx="92" cy="44" r="21" fill="#817487"/>
-
       <circle cx="28" cy="44" r="13" fill="#bbb2c0"/>
       <circle cx="92" cy="44" r="13" fill="#bbb2c0"/>
     `;
 
     front = `
-      <ellipse cx="60" cy="61" rx="8" ry="12" fill="#34303a"/>
+      <ellipse
+        cx="60"
+        cy="61"
+        rx="8"
+        ry="12"
+        fill="#34303a"
+      />
     `;
 
   }
@@ -3919,25 +3337,10 @@ function makeAnimalAvatar(key) {
   if (a.type === "wolf") {
 
     behind = `
-      <path
-        d="M33 37 L39 8 L54 36 Z"
-        fill="#5f6c79"
-      />
-
-      <path
-        d="M87 37 L81 8 L66 36 Z"
-        fill="#5f6c79"
-      />
-
-      <path
-        d="M39 28 L42 16 L49 32 Z"
-        fill="#c7ccd2"
-      />
-
-      <path
-        d="M81 28 L78 16 L71 32 Z"
-        fill="#c7ccd2"
-      />
+      <path d="M33 37 L39 8 L54 36 Z" fill="#5f6c79"/>
+      <path d="M87 37 L81 8 L66 36 Z" fill="#5f6c79"/>
+      <path d="M39 28 L42 16 L49 32 Z" fill="#c7ccd2"/>
+      <path d="M81 28 L78 16 L71 32 Z" fill="#c7ccd2"/>
     `;
 
     front = `
@@ -3959,25 +3362,10 @@ function makeAnimalAvatar(key) {
   if (a.type === "fox") {
 
     behind = `
-      <path
-        d="M30 40 L38 7 L56 38 Z"
-        fill="#cb5f27"
-      />
-
-      <path
-        d="M90 40 L82 7 L64 38 Z"
-        fill="#cb5f27"
-      />
-
-      <path
-        d="M38 29 L42 16 L50 33 Z"
-        fill="#583126"
-      />
-
-      <path
-        d="M82 29 L78 16 L70 33 Z"
-        fill="#583126"
-      />
+      <path d="M30 40 L38 7 L56 38 Z" fill="#cb5f27"/>
+      <path d="M90 40 L82 7 L64 38 Z" fill="#cb5f27"/>
+      <path d="M38 29 L42 16 L50 33 Z" fill="#583126"/>
+      <path d="M82 29 L78 16 L70 33 Z" fill="#583126"/>
     `;
 
     front = `
@@ -4157,10 +3545,7 @@ function makeAnimalAvatar(key) {
 
 
     <path
-      d="
-        M53 68
-        Q60 75 67 68
-      "
+      d="M53 68 Q60 75 67 68"
       fill="none"
       stroke="${a.accent}"
       stroke-width="2.1"
@@ -4184,27 +3569,22 @@ function makeAnimalAvatar(key) {
    STATE
 ========================================================= */
 
-let quiz =
-  [];
+let quiz = [];
 
-let currentIndex =
-  0;
+let currentIndex = 0;
+let score = 0;
+let answered = false;
 
-let score =
-  0;
+let quizErrors = [];
+let quizAnswers = [];
 
-let answered =
-  false;
-
-let quizErrors =
-  [];
-
-let quizStartTime =
-  null;
+let quizStartTime = null;
 
 let selectedQuizSize =
   Number(
-    localStorage.getItem("pvQuizSize")
+    localStorage.getItem(
+      "pvQuizSize"
+    )
     ||
     20
   );
@@ -4240,17 +3620,47 @@ function shuffle(array) {
 }
 
 
+function escapeHTML(value) {
+
+  if (
+    value === null
+    ||
+    value === undefined
+  ) {
+    return "";
+  }
+
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
 /* =========================================================
    STORAGE
 ========================================================= */
 
 function loadStats() {
 
-  return JSON.parse(
-    localStorage.getItem("pvStats")
-    ||
-    "{}"
-  );
+  try {
+
+    return JSON.parse(
+      localStorage.getItem(
+        "pvStats"
+      )
+      ||
+      "{}"
+    );
+
+  } catch {
+
+    return {};
+
+  }
 
 }
 
@@ -4267,11 +3677,21 @@ function saveStats(stats) {
 
 function loadHistory() {
 
-  return JSON.parse(
-    localStorage.getItem("pvHistory")
-    ||
-    "[]"
-  );
+  try {
+
+    return JSON.parse(
+      localStorage.getItem(
+        "pvHistory"
+      )
+      ||
+      "[]"
+    );
+
+  } catch {
+
+    return [];
+
+  }
 
 }
 
@@ -4290,8 +3710,7 @@ function saveHistory(history) {
    SOUND
 ========================================================= */
 
-let audioContext =
-  null;
+let audioContext = null;
 
 
 function isSoundEnabled() {
@@ -4309,23 +3728,6 @@ function isSoundEnabled() {
       :
       saved === "true"
   );
-
-}
-
-
-function setSoundEnabled(enabled) {
-
-  localStorage.setItem(
-    "pvSoundEnabled",
-    enabled
-  );
-
-
-  if (enabled) {
-
-    ensureAudioContext();
-
-  }
 
 }
 
@@ -4353,10 +3755,35 @@ function ensureAudioContext() {
   if (
     audioContext
     &&
-    audioContext.state === "suspended"
+    audioContext.state
+    ===
+    "suspended"
   ) {
 
     audioContext.resume();
+
+  }
+
+}
+
+
+function setSoundEnabled(enabled) {
+
+  localStorage.setItem(
+    "pvSoundEnabled",
+    enabled
+  );
+
+
+  if (enabled) {
+
+    ensureAudioContext();
+
+    setTimeout(
+      () =>
+        playWoodClick(),
+      20
+    );
 
   }
 
@@ -4385,11 +3812,13 @@ function playTone(
 
 
   const oscillator =
-    audioContext.createOscillator();
+    audioContext
+      .createOscillator();
 
 
   const gain =
-    audioContext.createGain();
+    audioContext
+      .createGain();
 
 
   oscillator.type =
@@ -4400,10 +3829,7 @@ function playTone(
     frequency;
 
 
-  oscillator.connect(
-    gain
-  );
-
+  oscillator.connect(gain);
 
   gain.connect(
     audioContext.destination
@@ -4447,7 +3873,7 @@ function playTone(
 
 
 /* =========================================================
-   CLICK LEGNOSO
+   CLICK SECCO / LEGNOSO
 ========================================================= */
 
 function playWoodClick() {
@@ -4470,75 +3896,81 @@ function playWoodClick() {
 
 
   const osc =
-    audioContext.createOscillator();
+    audioContext
+      .createOscillator();
 
 
   const gain =
-    audioContext.createGain();
+    audioContext
+      .createGain();
 
 
   osc.type =
-    "triangle";
+    "square";
 
 
-  osc.frequency.setValueAtTime(
-    340,
-    now
-  );
+  osc.frequency
+    .setValueAtTime(
+      560,
+      now
+    );
 
 
-  osc.frequency.exponentialRampToValueAtTime(
-    165,
-    now + .025
-  );
+  osc.frequency
+    .exponentialRampToValueAtTime(
+      250,
+      now + .015
+    );
 
 
-  gain.gain.setValueAtTime(
-    .105,
-    now
-  );
+  gain.gain
+    .setValueAtTime(
+      .032,
+      now
+    );
 
 
-  gain.gain.exponentialRampToValueAtTime(
-    .001,
-    now + .032
-  );
+  gain.gain
+    .exponentialRampToValueAtTime(
+      .001,
+      now + .018
+    );
 
 
-  osc.connect(
-    gain
-  );
-
+  osc.connect(gain);
 
   gain.connect(
     audioContext.destination
   );
 
 
-  osc.start(
-    now
-  );
-
+  osc.start(now);
 
   osc.stop(
-    now + .036
+    now + .020
   );
+
+
+  const duration =
+    .008;
 
 
   const buffer =
-    audioContext.createBuffer(
-      1,
-      Math.floor(
+    audioContext
+      .createBuffer(
+        1,
+        Math.floor(
+          audioContext.sampleRate
+          *
+          duration
+        ),
         audioContext.sampleRate
-        *
-        .014
-      ),
-      audioContext.sampleRate
-    );
+      );
 
 
   const data =
-    buffer.getChannelData(0);
+    buffer
+      .getChannelData(0);
 
 
   for (
@@ -4548,9 +3980,10 @@ function playWoodClick() {
   ) {
 
     const envelope =
-      1
-      -
-      i / data.length;
+      Math.pow(
+        1 - i / data.length,
+        3
+      );
 
 
     data[i] =
@@ -4564,7 +3997,8 @@ function playWoodClick() {
 
 
   const noise =
-    audioContext.createBufferSource();
+    audioContext
+      .createBufferSource();
 
 
   noise.buffer =
@@ -4572,7 +4006,8 @@ function playWoodClick() {
 
 
   const filter =
-    audioContext.createBiquadFilter();
+    audioContext
+      .createBiquadFilter();
 
 
   filter.type =
@@ -4580,50 +4015,51 @@ function playWoodClick() {
 
 
   filter.frequency.value =
-    1250;
+    2200;
 
 
   filter.Q.value =
-    2.5;
+    2;
 
 
   const noiseGain =
-    audioContext.createGain();
+    audioContext
+      .createGain();
 
 
-  noiseGain.gain.setValueAtTime(
-    .028,
-    now
-  );
+  noiseGain.gain
+    .setValueAtTime(
+      .048,
+      now
+    );
 
 
-  noiseGain.gain.exponentialRampToValueAtTime(
-    .001,
-    now + .014
-  );
+  noiseGain.gain
+    .exponentialRampToValueAtTime(
+      .001,
+      now + duration
+    );
 
 
-  noise.connect(
-    filter
-  );
-
+  noise.connect(filter);
 
   filter.connect(
     noiseGain
   );
-
 
   noiseGain.connect(
     audioContext.destination
   );
 
 
-  noise.start(
-    now
-  );
+  noise.start(now);
 
 }
 
+
+/* =========================================================
+   CORRECT / WRONG / COMPLETION
+========================================================= */
 
 function playCorrectSound() {
 
@@ -4664,7 +4100,7 @@ function playCompletionSound() {
     520,
     .08,
     "sine",
-    .05
+    .045
   );
 
 
@@ -4672,7 +4108,7 @@ function playCompletionSound() {
     680,
     .09,
     "sine",
-    .05,
+    .045,
     .07
   );
 
@@ -4681,48 +4117,11 @@ function playCompletionSound() {
     900,
     .14,
     "sine",
-    .05,
+    .045,
     .15
   );
 
 }
-
-
-/*
-  Nessun click neutro sulle risposte,
-  perché corretto/errato hanno
-  già il proprio feedback.
-*/
-
-document.addEventListener(
-  "pointerdown",
-  event => {
-
-    const target =
-      event.target.closest(
-        "button, .avatar-wrapper, .profile-name"
-      );
-
-
-    if (!target) {
-      return;
-    }
-
-
-    if (
-      target.classList.contains(
-        "answer"
-      )
-    ) {
-      return;
-    }
-
-
-    playWoodClick();
-
-  },
-  true
-);
 
 
 /* =========================================================
@@ -4782,7 +4181,9 @@ function saveVisibleSessionTime() {
 function startVisibleSession() {
 
   if (
-    document.visibilityState === "visible"
+    document.visibilityState
+    ===
+    "visible"
     &&
     !activeSessionStart
   ) {
@@ -4855,6 +4256,11 @@ function getLiveTotalTime() {
 
 function formatDuration(seconds) {
 
+  if (!seconds) {
+    return "0s";
+  }
+
+
   if (seconds < 60) {
 
     return `${seconds}s`;
@@ -4895,24 +4301,82 @@ function formatDuration(seconds) {
 
 
 /* =========================================================
+   APP MODE
+========================================================= */
+
+function syncAppMode() {
+
+  const app =
+    document.getElementById(
+      "appShell"
+    );
+
+
+  const home =
+    document.getElementById(
+      "home"
+    );
+
+
+  const startArea =
+    document.getElementById(
+      "startArea"
+    );
+
+
+  const quizArea =
+    document.getElementById(
+      "quizArea"
+    );
+
+
+  const homeIsActive =
+    home.classList.contains(
+      "active"
+    );
+
+
+  const startVisible =
+    !startArea.classList.contains(
+      "hidden"
+    );
+
+
+  const quizVisible =
+    !quizArea.classList.contains(
+      "hidden"
+    );
+
+
+  app.classList.toggle(
+    "home-mode",
+    homeIsActive
+    &&
+    startVisible
+    &&
+    !quizVisible
+  );
+
+}
+
+
+/* =========================================================
    NAVIGATION
 ========================================================= */
 
 function showScreen(screenId) {
 
-  if (
-    screenId !== "home"
-  ) {
+  const app =
+    document.getElementById(
+      "appShell"
+    );
 
-    document
-      .getElementById(
-        "appShell"
-      )
-      .classList.remove(
-        "quiz-mode"
-      );
 
-  }
+  app.classList.remove(
+    "quiz-mode",
+    "correct-state",
+    "wrong-state"
+  );
 
 
   document
@@ -4976,6 +4440,11 @@ function showScreen(screenId) {
       );
 
 
+    closeHistoryDetail(
+      false
+    );
+
+
     renderHistory();
 
   }
@@ -5019,6 +4488,78 @@ function showScreen(screenId) {
 
   updateHomeStats();
 
+  syncAppMode();
+
+}
+
+
+/* =========================================================
+   HOME NAVIGATION
+========================================================= */
+
+function openHistoryFromHome() {
+
+  showScreen(
+    "history"
+  );
+
+
+  window.scrollTo(
+    0,
+    0
+  );
+
+}
+
+
+function openAccountDashboard() {
+
+  showScreen(
+    "account"
+  );
+
+
+  setTimeout(
+    () => {
+
+      const dashboard =
+        document.getElementById(
+          "accountDashboardCard"
+        );
+
+
+      dashboard.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+
+    },
+    80
+  );
+
+}
+
+
+function openLatestQuiz() {
+
+  const history =
+    loadHistory();
+
+
+  if (!history.length) {
+    return;
+  }
+
+
+  showScreen(
+    "history"
+  );
+
+
+  openHistoryDetail(
+    0
+  );
+
 }
 
 
@@ -5026,7 +4567,10 @@ function showScreen(screenId) {
    QUIZ SIZE
 ========================================================= */
 
-function selectQuizSize(size) {
+function selectQuizSize(
+  size,
+  playSound = true
+) {
 
   selectedQuizSize =
     size;
@@ -5057,6 +4601,13 @@ function selectQuizSize(size) {
       }
     );
 
+
+  if (playSound) {
+
+    playWoodClick();
+
+  }
+
 }
 
 
@@ -5084,7 +4635,8 @@ function initialiseQuizSize() {
 
 
   selectQuizSize(
-    selectedQuizSize
+    selectedQuizSize,
+    false
   );
 
 }
@@ -5094,9 +4646,19 @@ function initialiseQuizSize() {
    QUIZ
 ========================================================= */
 
-function startQuiz(mode = "normal") {
+function startQuiz(
+  mode = "normal",
+  playClick = true
+) {
 
   ensureAudioContext();
+
+
+  if (playClick) {
+
+    playWoodClick();
+
+  }
 
 
   const stats =
@@ -5200,7 +4762,9 @@ function startQuiz(mode = "normal") {
 
 
     if (
-      wrongVerbs.length === 0
+      wrongVerbs.length
+      ===
+      0
     ) {
 
       alert(
@@ -5224,9 +4788,7 @@ function startQuiz(mode = "normal") {
 
 
   const half =
-    selectedQuizSize
-    /
-    2;
+    selectedQuizSize / 2;
 
 
   quiz =
@@ -5253,32 +4815,28 @@ function startQuiz(mode = "normal") {
 
         direction:
           index < half
-            ?
-            "IT_EN"
-            :
-            "EN_IT"
+          ?
+          "IT_EN"
+          :
+          "EN_IT"
 
       })
     );
 
 
   quiz =
-    shuffle(
-      quiz
-    );
+    shuffle(quiz);
 
 
-  currentIndex =
-    0;
+  currentIndex = 0;
 
-  score =
-    0;
+  score = 0;
 
-  answered =
-    false;
+  answered = false;
 
-  quizErrors =
-    [];
+  quizErrors = [];
+
+  quizAnswers = [];
 
 
   quizStartTime =
@@ -5321,13 +4879,22 @@ function startQuiz(mode = "normal") {
     );
 
 
-  document
-    .getElementById(
+  const app =
+    document.getElementById(
       "appShell"
-    )
-    .classList.add(
-      "quiz-mode"
     );
+
+
+  app.classList.remove(
+    "home-mode",
+    "correct-state",
+    "wrong-state"
+  );
+
+
+  app.classList.add(
+    "quiz-mode"
+  );
 
 
   window.scrollTo(
@@ -5347,21 +4914,19 @@ function renderQuestion() {
     false;
 
 
-  const quizArea =
+  const app =
     document.getElementById(
-      "quizArea"
+      "appShell"
     );
 
 
   /*
-    IMPORTANTISSIMO:
-    ogni nuova domanda torna
-    allo stato grande.
+    Ogni nuova domanda riparte dalla modalità ampia.
   */
 
-  quizArea.classList.remove(
-    "answered-wrong",
-    "answered-correct"
+  app.classList.remove(
+    "correct-state",
+    "wrong-state"
   );
 
 
@@ -5369,20 +4934,18 @@ function renderQuestion() {
     quiz[currentIndex];
 
 
-  document
-    .getElementById(
+  const feedback =
+    document.getElementById(
       "feedback"
-    )
-    .className =
-      "feedback";
+    );
 
 
-  document
-    .getElementById(
-      "feedback"
-    )
-    .innerHTML =
-      "";
+  feedback.className =
+    "feedback";
+
+
+  feedback.innerHTML =
+    "";
 
 
   document
@@ -5439,12 +5002,13 @@ function renderQuestion() {
 
 
   let correctAnswer;
-
   let wrongOptions;
 
 
   if (
-    q.direction === "IT_EN"
+    q.direction
+    ===
+    "IT_EN"
   ) {
 
     direction.textContent =
@@ -5466,7 +5030,9 @@ function renderQuestion() {
 
         .filter(
           v =>
-            v[0] !== q.verb
+            v[0]
+            !==
+            q.verb
         )
 
         .map(
@@ -5503,7 +5069,9 @@ function renderQuestion() {
 
         .filter(
           v =>
-            v[0] !== q.verb
+            v[0]
+            !==
+            q.verb
         )
 
         .map(
@@ -5520,6 +5088,14 @@ function renderQuestion() {
       );
 
   }
+
+
+  q.questionText =
+    question.textContent;
+
+
+  q.correctAnswer =
+    correctAnswer;
 
 
   const options =
@@ -5600,32 +5176,36 @@ function answerQuestion(
     correctAnswer;
 
 
-  const quizArea =
+  const app =
     document.getElementById(
-      "quizArea"
+      "appShell"
     );
 
 
   /*
-    Qui il layout diventa dinamico.
+    Stato dinamico:
+    - corretto = NON comprimere
+    - sbagliato = comprimere le alternative
   */
-
-  quizArea.classList.remove(
-    "answered-wrong",
-    "answered-correct"
-  );
-
 
   if (correct) {
 
-    quizArea.classList.add(
-      "answered-correct"
+    app.classList.remove(
+      "wrong-state"
+    );
+
+    app.classList.add(
+      "correct-state"
     );
 
   } else {
 
-    quizArea.classList.add(
-      "answered-wrong"
+    app.classList.remove(
+      "correct-state"
+    );
+
+    app.classList.add(
+      "wrong-state"
     );
 
   }
@@ -5640,16 +5220,9 @@ function answerQuestion(
   ) {
 
     stats[q.verb] = {
-
-      seen:
-        0,
-
-      correct:
-        0,
-
-      wrong:
-        0
-
+      seen: 0,
+      correct: 0,
+      wrong: 0
     };
 
   }
@@ -5686,13 +5259,11 @@ function answerQuestion(
 
 
     quizErrors.push({
-
       verb:
         q.verb,
 
       italian:
         q.italian
-
     });
 
 
@@ -5719,6 +5290,44 @@ function answerQuestion(
       );
 
   }
+
+
+  quizAnswers.push({
+
+    number:
+      currentIndex + 1,
+
+    verb:
+      q.verb,
+
+    italian:
+      q.italian,
+
+    direction:
+      q.direction,
+
+    question:
+      q.questionText,
+
+    selectedAnswer:
+      selected,
+
+    correctAnswer:
+      correctAnswer,
+
+    correct:
+      correct,
+
+    explanation:
+      q.explanation,
+
+    exampleEN:
+      q.exampleEN,
+
+    exampleIT:
+      q.exampleIT
+
+  });
 
 
   saveStats(
@@ -5752,6 +5361,7 @@ function answerQuestion(
     feedback.innerHTML =
       `
       ✓ Corretto
+
       <br>
 
       <small>
@@ -5769,10 +5379,11 @@ function answerQuestion(
     feedback.innerHTML =
       `
       <div>
-        ✕ Errato ·
+        ✕ Errato
+        ·
         Risposta corretta:
         <strong>
-          ${correctAnswer}
+          ${escapeHTML(correctAnswer)}
         </strong>
       </div>
 
@@ -5787,27 +5398,32 @@ function answerQuestion(
         <div class="learning-meaning">
 
           <strong>
-            ${q.verb}
+            ${escapeHTML(q.verb)}
           </strong>
 
           =
-          ${capitalizeFirst(q.italian)}
+
+          ${escapeHTML(
+            capitalizeFirst(
+              q.italian
+            )
+          )}
 
         </div>
 
 
         <div class="learning-explanation">
-          ${q.explanation}
+          ${escapeHTML(q.explanation)}
         </div>
 
 
         <div class="learning-example">
-          “${q.exampleEN}”
+          “${escapeHTML(q.exampleEN)}”
         </div>
 
 
         <div class="learning-translation">
-          ${q.exampleIT}
+          ${escapeHTML(q.exampleIT)}
         </div>
 
       </div>
@@ -5816,7 +5432,6 @@ function answerQuestion(
       <div
         style="
           margin-top:7px;
-          font-size:13px;
           font-weight:850;
         "
       >
@@ -5873,16 +5488,6 @@ function finishQuiz() {
 
   document
     .getElementById(
-      "quizArea"
-    )
-    .classList.remove(
-      "answered-wrong",
-      "answered-correct"
-    );
-
-
-  document
-    .getElementById(
       "resultQuizChooser"
     )
     .classList.add(
@@ -5890,13 +5495,17 @@ function finishQuiz() {
     );
 
 
-  document
-    .getElementById(
+  const app =
+    document.getElementById(
       "appShell"
-    )
-    .classList.remove(
-      "quiz-mode"
     );
+
+
+  app.classList.remove(
+    "quiz-mode",
+    "correct-state",
+    "wrong-state"
+  );
 
 
   document
@@ -5931,18 +5540,18 @@ function finishQuiz() {
 
   const durationSeconds =
     quizStartTime
-      ?
-      Math.round(
-        (
-          Date.now()
-          -
-          quizStartTime
-        )
-        /
-        1000
+    ?
+    Math.round(
+      (
+        Date.now()
+        -
+        quizStartTime
       )
-      :
-      null;
+      /
+      1000
+    )
+    :
+    null;
 
 
   document
@@ -5968,7 +5577,9 @@ function finishQuiz() {
 
 
   if (
-    quizErrors.length === 0
+    quizErrors.length
+    ===
+    0
   ) {
 
     resultErrors.innerHTML =
@@ -5988,7 +5599,7 @@ function finishQuiz() {
           error =>
             `
             <span class="error-tag">
-              ${error.verb}
+              ${escapeHTML(error.verb)}
             </span>
             `
         ).join("")}
@@ -6005,6 +5616,12 @@ function finishQuiz() {
 
   history.unshift({
 
+    id:
+      Date.now(),
+
+    version:
+      6,
+
     date:
       new Date().toISOString(),
 
@@ -6018,7 +5635,10 @@ function finishQuiz() {
     durationSeconds,
 
     errors:
-      quizErrors
+      quizErrors,
+
+    answers:
+      quizAnswers
 
   });
 
@@ -6042,6 +5662,9 @@ function finishQuiz() {
     0
   );
 
+
+  syncAppMode();
+
 }
 
 
@@ -6050,6 +5673,9 @@ function finishQuiz() {
 ========================================================= */
 
 function goHomeAfterQuiz() {
+
+  playWoodClick();
+
 
   document
     .getElementById(
@@ -6078,6 +5704,9 @@ function goHomeAfterQuiz() {
 
 function toggleResultQuizChooser() {
 
+  playWoodClick();
+
+
   document
     .getElementById(
       "resultQuizChooser"
@@ -6089,7 +5718,12 @@ function toggleResultQuizChooser() {
 }
 
 
-function startQuizFromResult(size) {
+function startQuizFromResult(
+  size
+) {
+
+  playWoodClick();
+
 
   selectedQuizSize =
     size;
@@ -6114,7 +5748,8 @@ function startQuizFromResult(size) {
 
 
   startQuiz(
-    "normal"
+    "normal",
+    false
   );
 
 }
@@ -6131,17 +5766,9 @@ function resetQuizView() {
       "appShell"
     )
     .classList.remove(
-      "quiz-mode"
-    );
-
-
-  document
-    .getElementById(
-      "quizArea"
-    )
-    .classList.remove(
-      "answered-wrong",
-      "answered-correct"
+      "quiz-mode",
+      "correct-state",
+      "wrong-state"
     );
 
 
@@ -6170,6 +5797,9 @@ function resetQuizView() {
     .classList.remove(
       "hidden"
     );
+
+
+  syncAppMode();
 
 }
 
@@ -6220,11 +5850,11 @@ function updateHomeStats() {
       history.reduce(
         (
           sum,
-          quiz
+          quizItem
         ) =>
           sum
           +
-          quiz.percentage,
+          quizItem.percentage,
         0
       )
 
@@ -6261,11 +5891,12 @@ function updateHomeStats() {
     `
     <div
       style="
-        font-size:12px;
+        font-size:11px;
         font-weight:900;
         text-transform:uppercase;
         color:#9c7425;
-        margin-bottom:4px;
+        margin-bottom:3px;
+        letter-spacing:.4px;
       "
     >
       Ultimo quiz
@@ -6276,6 +5907,17 @@ function updateHomeStats() {
       ·
       ${last.percentage}%
     </strong>
+
+    <div
+      style="
+        margin-top:3px;
+        color:#9c7425;
+        font-size:11px;
+        font-weight:700;
+      "
+    >
+      Tocca per vedere il recap
+    </div>
     `;
 
 }
@@ -6284,6 +5926,40 @@ function updateHomeStats() {
 /* =========================================================
    HISTORY
 ========================================================= */
+
+function closeHistoryDetail(
+  scroll = true
+) {
+
+  document
+    .getElementById(
+      "historyDetailView"
+    )
+    .classList.add(
+      "hidden"
+    );
+
+
+  document
+    .getElementById(
+      "historyListView"
+    )
+    .classList.remove(
+      "hidden"
+    );
+
+
+  if (scroll) {
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  }
+
+}
+
 
 function renderHistory() {
 
@@ -6316,11 +5992,14 @@ function renderHistory() {
 
   container.innerHTML =
     history.map(
-      quiz => {
+      (
+        quizItem,
+        index
+      ) => {
 
         const date =
           new Date(
-            quiz.date
+            quizItem.date
           );
 
 
@@ -6334,11 +6013,8 @@ function renderHistory() {
           date.toLocaleTimeString(
             "it-IT",
             {
-              hour:
-                "2-digit",
-
-              minute:
-                "2-digit"
+              hour: "2-digit",
+              minute: "2-digit"
             }
           );
 
@@ -6348,21 +6024,27 @@ function renderHistory() {
 
 
         if (
-          quiz.percentage >= 90
+          quizItem.percentage
+          >=
+          90
         ) {
 
           badgeClass =
             "excellent";
 
         } else if (
-          quiz.percentage >= 75
+          quizItem.percentage
+          >=
+          75
         ) {
 
           badgeClass =
             "good";
 
         } else if (
-          quiz.percentage >= 60
+          quizItem.percentage
+          >=
+          60
         ) {
 
           badgeClass =
@@ -6372,9 +6054,9 @@ function renderHistory() {
 
 
         const errors =
-          quiz.errors
+          quizItem.errors
           &&
-          quiz.errors.length
+          quizItem.errors.length
 
           ?
           `
@@ -6384,11 +6066,13 @@ function renderHistory() {
 
           <div class="error-tags">
 
-            ${quiz.errors.map(
+            ${quizItem.errors.map(
               error =>
                 `
                 <span class="error-tag">
-                  ${error.verb}
+                  ${escapeHTML(
+                    error.verb
+                  )}
                 </span>
                 `
             ).join("")}
@@ -6409,17 +6093,15 @@ function renderHistory() {
 
 
         const duration =
-          quiz.durationSeconds
+          quizItem.durationSeconds
 
           ?
           `
           <div class="history-date">
-
             Tempo quiz:
             ${formatDuration(
-              quiz.durationSeconds
+              quizItem.durationSeconds
             )}
-
           </div>
           `
 
@@ -6428,14 +6110,25 @@ function renderHistory() {
 
 
         return `
-        <div class="card history-card">
+        <div
+          class="
+            card
+            history-card
+            history-card-clickable
+          "
+          onclick="
+            openHistoryDetail(
+              ${index}
+            )
+          "
+        >
 
           <div class="history-head">
 
             <div>
 
               <div class="history-score">
-                ${quiz.score}/${quiz.total}
+                ${quizItem.score}/${quizItem.total}
               </div>
 
               <div class="history-date">
@@ -6453,12 +6146,18 @@ function renderHistory() {
                 ${badgeClass}
               "
             >
-              ${quiz.percentage}%
+              ${quizItem.percentage}%
             </div>
 
           </div>
 
+
           ${errors}
+
+
+          <div class="history-open-hint">
+            Apri il recap →
+          </div>
 
         </div>
         `;
@@ -6466,6 +6165,357 @@ function renderHistory() {
       }
     )
     .join("");
+
+}
+
+
+function openHistoryDetail(
+  index
+) {
+
+  const history =
+    loadHistory();
+
+
+  const quizItem =
+    history[index];
+
+
+  if (!quizItem) {
+    return;
+  }
+
+
+  document
+    .getElementById(
+      "historyListView"
+    )
+    .classList.add(
+      "hidden"
+    );
+
+
+  document
+    .getElementById(
+      "historyDetailView"
+    )
+    .classList.remove(
+      "hidden"
+    );
+
+
+  const container =
+    document.getElementById(
+      "historyDetailContent"
+    );
+
+
+  const date =
+    new Date(
+      quizItem.date
+    );
+
+
+  const formattedDate =
+    date.toLocaleDateString(
+      "it-IT"
+    )
+    +
+    " · "
+    +
+    date.toLocaleTimeString(
+      "it-IT",
+      {
+        hour: "2-digit",
+        minute: "2-digit"
+      }
+    );
+
+
+  const wrongCount =
+    quizItem.total
+    -
+    quizItem.score;
+
+
+  let answersHTML =
+    "";
+
+
+  if (
+    Array.isArray(
+      quizItem.answers
+    )
+    &&
+    quizItem.answers.length
+  ) {
+
+    answersHTML =
+      quizItem.answers
+      .map(
+        (
+          answer,
+          answerIndex
+        ) => {
+
+          const statusClass =
+            answer.correct
+            ?
+            "correct"
+            :
+            "wrong";
+
+
+          const status =
+            answer.correct
+            ?
+            "✓ Corretta"
+            :
+            "✕ Errata";
+
+
+          const directionLabel =
+            answer.direction
+            ===
+            "IT_EN"
+            ?
+            "Italiano → Inglese"
+            :
+            "Inglese → Italiano";
+
+
+          const wrongLine =
+            answer.correct
+            ?
+            ""
+            :
+            `
+            <div class="answer-review-line">
+              <strong>
+                Risposta corretta:
+              </strong>
+
+              ${escapeHTML(
+                answer.correctAnswer
+              )}
+            </div>
+            `;
+
+
+          return `
+          <div
+            class="
+              answer-review-card
+              ${statusClass}
+            "
+          >
+
+            <div class="answer-review-head">
+
+              <div class="answer-review-number">
+                ${answerIndex + 1}
+                ·
+                ${directionLabel}
+              </div>
+
+              <div class="answer-review-status">
+                ${status}
+              </div>
+
+            </div>
+
+
+            <div class="answer-review-question">
+              ${escapeHTML(
+                answer.question
+              )}
+            </div>
+
+
+            <div class="answer-review-line">
+              <strong>
+                La tua risposta:
+              </strong>
+
+              ${escapeHTML(
+                answer.selectedAnswer
+              )}
+            </div>
+
+
+            ${wrongLine}
+
+
+            <div class="answer-review-meaning">
+
+              <strong>
+                ${escapeHTML(
+                  answer.verb
+                )}
+              </strong>
+
+              =
+
+              ${escapeHTML(
+                capitalizeFirst(
+                  answer.italian
+                )
+              )}
+
+            </div>
+
+          </div>
+          `;
+
+        }
+      )
+      .join("");
+
+  } else {
+
+    const legacyErrors =
+      quizItem.errors
+      &&
+      quizItem.errors.length
+
+      ?
+      `
+      <div
+        class="error-tags"
+        style="margin-top:12px;"
+      >
+
+        ${quizItem.errors.map(
+          error =>
+            `
+            <span class="error-tag">
+              ${escapeHTML(
+                error.verb
+              )}
+            </span>
+            `
+        ).join("")}
+
+      </div>
+      `
+
+      :
+      `
+      <div
+        style="
+          margin-top:10px;
+          font-weight:800;
+        "
+      >
+        Nessun errore registrato.
+      </div>
+      `;
+
+
+    answersHTML =
+      `
+      <div class="legacy-history-card">
+
+        <strong>
+          Quiz della versione precedente
+        </strong>
+
+        <div style="margin-top:7px;">
+          Questo quiz è stato salvato prima
+          dell'introduzione del recap completo
+          delle singole risposte.
+          Il punteggio e gli errori disponibili
+          restano comunque conservati.
+        </div>
+
+        ${legacyErrors}
+
+      </div>
+      `;
+
+  }
+
+
+  container.innerHTML =
+    `
+    <div class="history-detail-top">
+
+      <button
+        class="history-back-button"
+        onclick="
+          closeHistoryDetail()
+        "
+      >
+        ‹
+      </button>
+
+
+      <div class="history-detail-heading">
+
+        <div class="history-detail-title">
+          Recap quiz
+        </div>
+
+        <div class="history-detail-subtitle">
+          ${formattedDate}
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="history-detail-summary">
+
+      <div class="history-detail-summary-box">
+
+        <strong>
+          ${quizItem.score}/${quizItem.total}
+        </strong>
+
+        <span>
+          Punteggio
+        </span>
+
+      </div>
+
+
+      <div class="history-detail-summary-box">
+
+        <strong>
+          ${quizItem.percentage}%
+        </strong>
+
+        <span>
+          Accuracy
+        </span>
+
+      </div>
+
+
+      <div class="history-detail-summary-box">
+
+        <strong>
+          ${wrongCount}
+        </strong>
+
+        <span>
+          Errori
+        </span>
+
+      </div>
+
+    </div>
+
+
+    ${answersHTML}
+    `;
+
+
+  window.scrollTo(
+    0,
+    0
+  );
 
 }
 
@@ -6530,19 +6580,30 @@ function renderDatabase() {
 
 
           return `
-          <div class="card database-card">
+          <div
+            class="
+              card
+              database-card
+            "
+          >
 
             <div class="verb">
-              ${verb}
+              ${escapeHTML(verb)}
             </div>
 
             <div class="translation">
-              ${capitalizeFirst(italian)}
+              ${escapeHTML(
+                capitalizeFirst(
+                  italian
+                )
+              )}
             </div>
 
             <div
               class="translation"
-              style="margin-top:8px;"
+              style="
+                margin-top:8px;
+              "
             >
               ${info}
             </div>
@@ -6558,7 +6619,7 @@ function renderDatabase() {
 
 
 /* =========================================================
-   AVATAR OPTIONS
+   ACCOUNT AVATARS
 ========================================================= */
 
 function renderAvatarOptions() {
@@ -6598,9 +6659,13 @@ function renderAvatarOptions() {
 
 
         const selected =
-          currentType === "custom"
+          currentType
+          ===
+          "custom"
           &&
-          currentValue === key;
+          currentValue
+          ===
+          key;
 
 
         return `
@@ -6609,7 +6674,11 @@ function renderAvatarOptions() {
             avatar-choice
             ${selected ? "selected" : ""}
           "
-          onclick="setCustomAvatar('${key}')"
+          onclick="
+            setCustomAvatar(
+              '${key}'
+            )
+          "
         >
 
           <img
@@ -6780,6 +6849,9 @@ function setCustomAvatar(key) {
   }
 
 
+  playWoodClick();
+
+
   localStorage.setItem(
     "pvAvatarType",
     "custom"
@@ -6834,6 +6906,9 @@ function loadAvatarPhoto(event) {
         "pvAvatarValue",
         reader.result
       );
+
+
+      playWoodClick();
 
 
       loadProfile();
@@ -6933,6 +7008,9 @@ function saveAccountName() {
   }
 
 
+  playWoodClick();
+
+
   localStorage.setItem(
     "pvProfileName",
     value
@@ -7001,6 +7079,7 @@ function renderAccount() {
 
   const accuracy =
     totalSeen
+
     ?
     Math.round(
       (
@@ -7011,48 +7090,58 @@ function renderAccount() {
       *
       100
     )
+
     :
     null;
 
 
   const average =
     history.length
+
     ?
     Math.round(
+
       history.reduce(
         (
           sum,
-          quiz
+          quizItem
         ) =>
           sum
           +
-          quiz.percentage,
+          quizItem.percentage,
         0
       )
+
       /
       history.length
+
     )
+
     :
     null;
 
 
   const best =
     history.length
+
     ?
     Math.max(
       ...history.map(
-        quiz =>
-          quiz.percentage
+        quizItem =>
+          quizItem.percentage
       )
     )
+
     :
     null;
 
 
   const last =
     history.length
+
     ?
     history[0].percentage
+
     :
     null;
 
@@ -7120,8 +7209,8 @@ function renderAccount() {
 
   const timedQuizzes =
     history.filter(
-      quiz =>
-        quiz.durationSeconds
+      quizItem =>
+        quizItem.durationSeconds
     );
 
 
@@ -7139,11 +7228,11 @@ function renderAccount() {
         timedQuizzes.reduce(
           (
             sum,
-            quiz
+            quizItem
           ) =>
             sum
             +
-            quiz.durationSeconds,
+            quizItem.durationSeconds,
           0
         )
 
@@ -7347,7 +7436,10 @@ function renderRankings(stats) {
     [...entries]
 
     .sort(
-      (a,b) =>
+      (
+        a,
+        b
+      ) =>
         a.accuracy
         -
         b.accuracy
@@ -7367,7 +7459,10 @@ function renderRankings(stats) {
     [...entries]
 
     .sort(
-      (a,b) =>
+      (
+        a,
+        b
+      ) =>
         b.accuracy
         -
         a.accuracy
@@ -7394,8 +7489,7 @@ function renderRankings(stats) {
       ?
       worst.map(
         renderStatRow
-      )
-      .join("")
+      ).join("")
 
       :
       `
@@ -7416,8 +7510,7 @@ function renderRankings(stats) {
       ?
       best.map(
         renderStatRow
-      )
-      .join("")
+      ).join("")
 
       :
       `
@@ -7481,19 +7574,36 @@ function renderStatRow(item) {
     <div>
 
       <div class="verb">
-        ${item.verb}
+        ${escapeHTML(
+          item.verb
+        )}
       </div>
 
-      <div class="translation">
-        ${capitalizeFirst(item.italian)}
-      </div>
 
       <div class="translation">
-        ${item.correct} corrette
+        ${escapeHTML(
+          capitalizeFirst(
+            item.italian
+          )
+        )}
+      </div>
+
+
+      <div class="translation">
+
+        ${item.correct}
+        corrette
+
         ·
-        ${item.wrong} errate
+
+        ${item.wrong}
+        errate
+
         ·
-        ${item.seen} tentativi
+
+        ${item.seen}
+        tentativi
+
       </div>
 
 
@@ -7534,6 +7644,9 @@ function renderStatRow(item) {
 
 function exportBackup() {
 
+  playWoodClick();
+
+
   saveVisibleSessionTime();
 
   startVisibleSession();
@@ -7541,8 +7654,7 @@ function exportBackup() {
 
   const backup = {
 
-    version:
-      5,
+    version: 6,
 
     exportedAt:
       new Date().toISOString(),
@@ -7795,6 +7907,8 @@ function importBackup(event) {
 
         loadProfile();
 
+        playWoodClick();
+
 
         alert(
           "Backup ripristinato correttamente."
@@ -7803,7 +7917,12 @@ function importBackup(event) {
 
         updateHomeStats();
 
+        renderHistory();
+
         renderAccount();
+
+
+        syncAppMode();
 
       } catch (error) {
 
@@ -7838,6 +7957,9 @@ function resetAllData() {
   if (!confirmation) {
     return;
   }
+
+
+  playWoodClick();
 
 
   localStorage.removeItem(
@@ -7901,11 +8023,66 @@ function resetAllData() {
   renderAccount();
 
 
+  closeHistoryDetail(
+    false
+  );
+
+
+  syncAppMode();
+
+
   alert(
     "Tutti i dati sono stati eliminati."
   );
 
 }
+
+
+/* =========================================================
+   KEYBOARD ACCESSIBILITY
+========================================================= */
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if (
+      event.key !== "Enter"
+      &&
+      event.key !== " "
+    ) {
+      return;
+    }
+
+
+    const target =
+      event.target;
+
+
+    if (
+      target
+      &&
+      target.classList
+      &&
+      (
+        target.classList.contains(
+          "clickable-card"
+        )
+        ||
+        target.classList.contains(
+          "home-last-result"
+        )
+      )
+    ) {
+
+      event.preventDefault();
+
+      target.click();
+
+    }
+
+  }
+);
 
 
 /* =========================================================
@@ -7917,6 +8094,8 @@ loadProfile();
 initialiseQuizSize();
 
 updateHomeStats();
+
+syncAppMode();
 
 </script>
 
