@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="it">
 <head>
  <meta charset="UTF-8" />
@@ -4631,6 +4631,653 @@ body.modal-open {
 }
 
 
+/* =====================================================
+ VILLAGE V1
+===================================================== */
+
+/* 4 voci restano leggibili anche su iPhone compatti. */
+nav {
+  grid-template-columns: repeat(4,1fr);
+}
+
+.village-screen {
+  padding-top: 20px;
+}
+
+.village-hero {
+  position: relative;
+  overflow: hidden;
+  border: 0;
+  background:
+    radial-gradient(circle at 92% 5%, rgba(99,121,238,.16), transparent 34%),
+    radial-gradient(circle at 4% 100%, rgba(93,190,155,.14), transparent 38%),
+    linear-gradient(145deg,#f2f4ff 0%,#f8f5ff 52%,#eef9f7 100%);
+}
+
+.village-hero::after {
+  content: "";
+  position: absolute;
+  right: -52px;
+  top: -58px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.55);
+  pointer-events: none;
+}
+
+.village-header-row {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.village-header-copy {
+  min-width: 0;
+}
+
+.village-title {
+  margin: 0;
+  font-size: 27px;
+  line-height: 1.08;
+  letter-spacing: -.7px;
+  font-weight: 950;
+}
+
+.village-subtitle {
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.4;
+  font-weight: 650;
+}
+
+.village-coins {
+  flex: 0 0 auto;
+  min-width: 86px;
+  padding: 10px 12px;
+  border: 1px solid rgba(156,116,37,.13);
+  border-radius: 16px;
+  background: rgba(255,243,215,.86);
+  text-align: right;
+}
+
+.village-coins-label {
+  display: block;
+  color: var(--cream-text);
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .55px;
+}
+
+.village-coins-value {
+  display: block;
+  margin-top: 2px;
+  color: var(--text);
+  font-size: 21px;
+  line-height: 1;
+  font-weight: 950;
+}
+
+.village-kpis {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.village-kpi {
+  min-width: 0;
+  padding: 11px 8px;
+  border: 1px solid rgba(229,232,239,.9);
+  border-radius: 15px;
+  background: rgba(255,255,255,.7);
+  text-align: center;
+}
+
+.village-kpi strong {
+  display: block;
+  font-size: 18px;
+  line-height: 1;
+  font-weight: 950;
+}
+
+.village-kpi span {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 9.5px;
+  line-height: 1.2;
+  font-weight: 800;
+}
+
+.village-map-card {
+  padding: 14px;
+}
+
+.village-map {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1.08;
+  min-height: 340px;
+  overflow: hidden;
+  border: 1px solid rgba(92,135,111,.13);
+  border-radius: 27px;
+  background:
+    radial-gradient(circle at 22% 18%, rgba(255,255,255,.6) 0 2px, transparent 3px),
+    radial-gradient(circle at 78% 62%, rgba(255,255,255,.45) 0 1px, transparent 2px),
+    linear-gradient(145deg,#dcebdc 0%,#d5e9dc 42%,#e7eed6 100%);
+  box-shadow: inset 0 0 45px rgba(55,86,68,.06);
+}
+
+.village-map::before,
+.village-map::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(119,165,133,.17);
+  filter: blur(.2px);
+}
+
+.village-map::before {
+  width: 125px;
+  height: 72px;
+  left: -34px;
+  top: 55px;
+  transform: rotate(-15deg);
+}
+
+.village-map::after {
+  width: 150px;
+  height: 80px;
+  right: -45px;
+  bottom: 32px;
+  transform: rotate(18deg);
+}
+
+.village-roads {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.village-tree {
+  position: absolute;
+  z-index: 2;
+  width: 20px;
+  height: 27px;
+  pointer-events: none;
+}
+
+.village-tree::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  bottom: 0;
+  width: 4px;
+  height: 10px;
+  border-radius: 3px;
+  background: #8f775d;
+}
+
+.village-tree::after {
+  content: "";
+  position: absolute;
+  left: 1px;
+  top: 0;
+  width: 18px;
+  height: 20px;
+  border-radius: 50% 50% 46% 46%;
+  background: linear-gradient(145deg,#8fc3a1,#6fa98a);
+  box-shadow: 0 5px 9px rgba(55,86,68,.12);
+}
+
+.village-tree.t1 { left: 7%; top: 10%; transform: scale(.72); }
+.village-tree.t2 { right: 7%; top: 16%; transform: scale(.86); }
+.village-tree.t3 { left: 8%; bottom: 12%; transform: scale(.82); }
+.village-tree.t4 { right: 10%; bottom: 7%; transform: scale(.68); }
+
+.village-building-slot {
+  --building-x: 50%;
+  --building-y: 50%;
+  position: absolute;
+  z-index: 4;
+  left: var(--building-x);
+  top: var(--building-y);
+  width: clamp(76px,26%,105px);
+  min-height: 88px;
+  transform: translate(-50%,-50%);
+  padding: 4px 3px 7px;
+  border: 0;
+  border-radius: 18px;
+  background: transparent;
+  color: var(--text);
+  text-align: center;
+  touch-action: manipulation;
+  transition: transform .14s ease, filter .14s ease;
+}
+
+.village-building-slot:active {
+  transform: translate(-50%,-50%) scale(.96);
+}
+
+.village-building-slot:focus-visible {
+  outline: 3px solid rgba(99,121,238,.32);
+  outline-offset: 2px;
+}
+
+.village-building-visual {
+  position: relative;
+  width: 100%;
+  height: 62px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  filter: drop-shadow(0 7px 7px rgba(37,54,44,.13));
+}
+
+.village-building-visual svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+.village-building-name {
+  display: block;
+  margin-top: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 10px;
+  line-height: 1.1;
+  font-weight: 950;
+}
+
+.village-building-level {
+  display: block;
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 8.5px;
+  line-height: 1;
+  font-weight: 800;
+}
+
+.village-state-badge {
+  position: absolute;
+  z-index: 6;
+  top: 1px;
+  left: 50%;
+  max-width: 92px;
+  transform: translateX(-50%);
+  padding: 4px 7px;
+  border-radius: 999px;
+  white-space: nowrap;
+  font-size: 7.5px;
+  line-height: 1;
+  font-weight: 950;
+  letter-spacing: .25px;
+  text-transform: uppercase;
+  box-shadow: 0 2px 8px rgba(23,29,45,.09);
+}
+
+.village-building-slot.locked .village-building-visual {
+  opacity: .57;
+  filter: grayscale(.45) drop-shadow(0 6px 6px rgba(37,54,44,.08));
+}
+
+.village-building-slot.locked .village-state-badge {
+  color: #707785;
+  background: #eef0f3;
+}
+
+.village-building-slot.available .village-state-badge,
+.village-building-slot.upgrade-available .village-state-badge {
+  color: var(--mint-text);
+  background: #e0f6e9;
+}
+
+.village-building-slot.built .village-state-badge {
+  color: var(--primary);
+  background: #eef1ff;
+}
+
+.village-map-hint {
+  margin-top: 11px;
+  color: var(--muted);
+  text-align: center;
+  font-size: 11px;
+  line-height: 1.35;
+  font-weight: 700;
+}
+
+.village-building-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.village-building-summary {
+  min-height: 98px;
+  padding: 13px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: #fafbfe;
+}
+
+.village-building-summary strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 950;
+}
+
+.village-building-summary span {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 10.5px;
+  line-height: 1.3;
+  font-weight: 700;
+}
+
+.village-summary-state {
+  display: inline-block !important;
+  margin-top: 8px !important;
+  padding: 5px 7px;
+  border-radius: 999px;
+  background: var(--primary-light);
+  color: var(--primary) !important;
+  font-size: 8.5px !important;
+  font-weight: 900 !important;
+  text-transform: uppercase;
+}
+
+.village-modal-intro {
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.village-modal-level-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
+  padding: 11px 12px;
+  border-radius: 15px;
+  background: #f6f7fa;
+}
+
+.village-modal-level-row strong {
+  font-size: 14px;
+  font-weight: 950;
+}
+
+.village-modal-level-row span {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.village-requirement {
+  margin-top: 13px;
+}
+
+.village-requirement-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.village-requirement-title {
+  min-width: 0;
+  color: var(--text);
+  font-size: 12px;
+  line-height: 1.25;
+  font-weight: 850;
+}
+
+.village-requirement-value {
+  flex: 0 0 auto;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.village-progress-track {
+  height: 8px;
+  margin-top: 7px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #edf0f4;
+}
+
+.village-progress-bar {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg,#8fa0ff,var(--primary));
+  transition: width .3s ease;
+}
+
+.village-progress-bar.done {
+  background: linear-gradient(90deg,#8bd2aa,#62b88d);
+}
+
+.village-cost-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 16px;
+  padding: 13px;
+  border-radius: 16px;
+  background: var(--cream);
+}
+
+.village-cost-box strong {
+  font-size: 15px;
+  font-weight: 950;
+}
+
+.village-cost-box span {
+  color: var(--cream-text);
+  font-size: 11px;
+  line-height: 1.3;
+  font-weight: 800;
+  text-align: right;
+}
+
+.village-upgrade-button {
+  width: 100%;
+  min-height: 48px;
+  margin-top: 13px;
+  padding: 13px 15px;
+  border: 0;
+  border-radius: 15px;
+  color: white;
+  background: linear-gradient(135deg,#687ff5,#596fe8);
+  font-size: 15px;
+  font-weight: 900;
+  box-shadow: 0 7px 17px rgba(99,121,238,.2);
+}
+
+.village-upgrade-button:disabled {
+  color: #8d94a2;
+  background: #eef0f3;
+  box-shadow: none;
+  cursor: default;
+}
+
+.village-max-box {
+  margin-top: 15px;
+  padding: 14px;
+  border-radius: 16px;
+  color: var(--mint-text);
+  background: var(--mint);
+  font-size: 13px;
+  line-height: 1.4;
+  font-weight: 850;
+}
+
+.village-upgrade-success {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 15px;
+  color: var(--mint-text);
+  background: var(--mint);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 900;
+  animation: appear .2s ease;
+}
+
+.village-result-reward {
+  margin: 14px 0 4px;
+  padding: 14px;
+  border: 1px solid rgba(99,121,238,.1);
+  border-radius: 18px;
+  background: linear-gradient(145deg,#f4f6ff,#f7fbff);
+}
+
+.village-result-coins {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.village-result-coins strong {
+  font-size: 21px;
+  font-weight: 950;
+}
+
+.village-result-coins span {
+  color: var(--muted);
+  font-size: 10.5px;
+  font-weight: 800;
+}
+
+.village-result-mini {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(229,232,239,.9);
+}
+
+.village-result-mini-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 10.5px;
+  line-height: 1.3;
+  font-weight: 750;
+}
+
+.village-result-mini-row strong {
+  color: var(--text);
+  font-weight: 900;
+}
+
+.village-result-upgrade {
+  margin-top: 10px;
+  padding: 9px 10px;
+  border-radius: 13px;
+  color: var(--mint-text);
+  background: var(--mint);
+  font-size: 10.5px;
+  line-height: 1.35;
+  font-weight: 850;
+}
+
+.village-result-button {
+  width: 100%;
+  min-height: 44px;
+  margin-top: 10px;
+  border: 0;
+  border-radius: 14px;
+  color: var(--primary);
+  background: var(--primary-light);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.village-building-slot.village-upgraded {
+  animation: villageUpgradePulse .9s cubic-bezier(.2,.8,.2,1);
+}
+
+.village-building-slot.village-upgraded::after {
+  content: "";
+  position: absolute;
+  z-index: 7;
+  inset: 5px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,.95) 0 2px, transparent 3px),
+    radial-gradient(circle at 82% 28%, rgba(255,255,255,.9) 0 2px, transparent 3px),
+    radial-gradient(circle at 68% 80%, rgba(255,255,255,.8) 0 2px, transparent 3px),
+    radial-gradient(circle at 26% 76%, rgba(255,255,255,.85) 0 2px, transparent 3px);
+  pointer-events: none;
+  animation: villageSparkle .9s ease-out forwards;
+}
+
+@keyframes villageUpgradePulse {
+  0% { transform: translate(-50%,-50%) scale(1); filter: brightness(1); }
+  35% { transform: translate(-50%,-50%) scale(1.09); filter: brightness(1.08); }
+  100% { transform: translate(-50%,-50%) scale(1); filter: brightness(1); }
+}
+
+@keyframes villageSparkle {
+  0% { opacity: 0; transform: scale(.78); }
+  35% { opacity: 1; }
+  100% { opacity: 0; transform: scale(1.22); }
+}
+
+@media (max-width: 390px) {
+  nav button {
+    font-size: 11px;
+  }
+
+  .village-screen {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .village-map-card {
+    padding: 11px;
+  }
+
+  .village-map {
+    min-height: 330px;
+  }
+
+  .village-building-slot {
+    width: clamp(72px,26%,94px);
+  }
+
+  .village-building-list {
+    gap: 8px;
+  }
+}
+
+@media (max-height: 690px) {
+  .village-map {
+    min-height: 320px;
+  }
+}
+
 </style>
 </head>
 
@@ -4667,6 +5314,14 @@ body.modal-open {
  onclick="showScreen('home')"
 >
  Quiz
+</button>
+
+
+<button
+ id="navVillage"
+ onclick="showScreen('village')"
+>
+ Villaggio
 </button>
 
 
@@ -4938,6 +5593,14 @@ body.modal-open {
    >
    </div>
 
+
+   <div
+    id="villageQuizReward"
+    class="village-result-reward hidden"
+    aria-live="polite"
+   >
+   </div>
+
    <div class="result-actions">
     <button
      class="secondary-button"
@@ -4989,6 +5652,24 @@ body.modal-open {
    HISTORY<!-- ==================================================
    HISTORY
 =================================================== -->
+
+
+<!-- ==================================================
+   VILLAGE V1
+=================================================== -->
+<section
+ id="village"
+ class="screen village-screen"
+>
+
+ <div
+  id="villageRoot"
+  aria-live="polite"
+ >
+ </div>
+
+</section>
+
 
 <section
  id="history"
@@ -10876,11 +11557,18 @@ function showScreen(screenId) {
     clearNav();
 
 
-    document
-     .getElementById(
+    const targetScreen =
+     document.getElementById(
       screenId
-     )
-     .classList.add(
+     );
+
+
+    if (!targetScreen) {
+      return;
+    }
+
+
+    targetScreen.classList.add(
       "active"
      );
 
@@ -10894,6 +11582,22 @@ function showScreen(screenId) {
        .classList.add(
         "active"
        );
+
+    }
+
+
+    if (screenId === "village") {
+
+      document
+       .getElementById(
+        "navVillage"
+       )
+       .classList.add(
+        "active"
+       );
+
+      ensureVillageMigration();
+      renderVillage();
 
     }
 
@@ -12152,6 +12856,27 @@ function answerQuestion(
     const correct =
      selected === correctAnswer;
 
+
+    /*
+     Village V1: il primo input di un nuovo quiz azzera il contatore
+     di recuperi relativo alla sessione. La persistenza per-verbo resta
+     invece nel Village e sopravvive a refresh/uscite accidentali.
+    */
+    if (
+      currentIndex === 0
+      &&
+      quizAnswers.length === 0
+    ){
+      villageQuizRecovered = 0;
+    }
+
+
+    registerVillageAnswer(
+     q.verb,
+     correct
+    );
+
+
     const quizArea =
      document.getElementById(
       "quizArea"
@@ -12555,7 +13280,7 @@ function finishQuiz() {
      id:
       Date.now(),
      version:
-      9,
+      10,
      date:
       completedAt.toISOString(),
      score,
@@ -12583,6 +13308,25 @@ function finishQuiz() {
      completedAt.toISOString(),
      true
     );
+
+
+    const villageReward =
+     finalizeVillageQuiz({
+      score,
+      total:
+       quiz.length,
+      percentage,
+      completedAt,
+      recovered:
+       villageQuizRecovered
+     });
+
+
+    renderVillageQuizReward(
+     villageReward
+    );
+
+    renderVillage();
 
     playCompletionSound();
     updateHomeStats();
@@ -16176,6 +16920,2169 @@ function setFeaturedMedal(id) {
 }
 
 
+
+/* =========================================================
+ VILLAGE V1 — GAME LAYER OVER STUDY DATA
+========================================================= */
+
+const VILLAGE_STORAGE_KEY =
+ "pvVillage";
+
+const VILLAGE_MIGRATION_KEY =
+ "pvVillageMigrationDone";
+
+let villageQuizRecovered = 0;
+
+const villageBuildingOrder = [
+ "townHall",
+ "library",
+ "academy",
+ "workshop",
+ "tower",
+ "arena"
+];
+
+const villageBuildings = {
+ townHall: {
+  name:
+   "Municipio",
+  meaning:
+   "Rappresenta il progresso generale nell’app e coordina lo sviluppo del villaggio.",
+  position:
+   { x: 50, y: 22 },
+  levels: [
+   {
+    name:
+     "Municipio I",
+    cost:
+     120,
+    requirements: [
+     {
+      type:
+       "quizCount",
+      target:
+       1,
+      label:
+       "Quiz completati"
+     }
+    ]
+   },
+   {
+    name:
+     "Municipio II",
+    cost:
+     450,
+    requirements: [
+     {
+      type:
+       "quizCount",
+      target:
+       10,
+      label:
+       "Quiz completati"
+     },
+     {
+      type:
+       "otherBuildingsAtLevel",
+      level:
+       2,
+      target:
+       2,
+      label:
+       "Altri edifici almeno a Lv.2"
+     }
+    ]
+   },
+   {
+    name:
+     "Municipio III",
+    cost:
+     950,
+    requirements: [
+     {
+      type:
+       "quizCount",
+      target:
+       50,
+      label:
+       "Quiz completati"
+     },
+     {
+      type:
+       "otherBuildingsAtLevel",
+      level:
+       2,
+      target:
+       4,
+      label:
+       "Altri edifici almeno a Lv.2"
+     }
+    ]
+   }
+  ]
+ },
+ library: {
+  name:
+   "Biblioteca",
+  meaning:
+   "Rappresenta la tua ampiezza lessicale attraverso i phrasal verbs distinti realmente testati.",
+  position:
+   { x: 20, y: 44 },
+  levels: [
+   {
+    name:
+     "Biblioteca I",
+    cost:
+     130,
+    requirements: [
+     {
+      type:
+       "testedVerbs",
+      target:
+       25,
+      label:
+       "Verbi distinti testati"
+     }
+    ]
+   },
+   {
+    name:
+     "Biblioteca II",
+    cost:
+     420,
+    requirements: [
+     {
+      type:
+       "testedVerbs",
+      target:
+       100,
+      label:
+       "Verbi distinti testati"
+     }
+    ]
+   },
+   {
+    name:
+     "Biblioteca III",
+    cost:
+     900,
+    requirements: [
+     {
+      type:
+       "testedVerbs",
+      target:
+       250,
+      label:
+       "Verbi distinti testati"
+     }
+    ]
+   }
+  ]
+ },
+ academy: {
+  name:
+   "Accademia",
+  meaning:
+   "Rappresenta il livello CEFR stimato dall’algoritmo già utilizzato nel tuo Account.",
+  position:
+   { x: 80, y: 44 },
+  levels: [
+   {
+    name:
+     "Accademia I",
+    cost:
+     150,
+    requirements: [
+     {
+      type:
+       "cefr",
+      target:
+       "B1",
+      label:
+       "Livello CEFR consolidato"
+     }
+    ]
+   },
+   {
+    name:
+     "Accademia II",
+    cost:
+     450,
+    requirements: [
+     {
+      type:
+       "cefr",
+      target:
+       "B2",
+      label:
+       "Livello CEFR consolidato"
+     }
+    ]
+   },
+   {
+    name:
+     "Accademia III",
+    cost:
+     950,
+    requirements: [
+     {
+      type:
+       "cefr",
+      target:
+       "C1",
+      label:
+       "Livello CEFR consolidato"
+     }
+    ]
+   }
+  ]
+ },
+ workshop: {
+  name:
+   "Officina",
+  meaning:
+   "Rappresenta la capacità di trasformare gli errori in apprendimento: conta solo gli errori poi recuperati.",
+  position:
+   { x: 23, y: 77 },
+  levels: [
+   {
+    name:
+     "Officina I",
+    cost:
+     140,
+    requirements: [
+     {
+      type:
+       "recoveredErrors",
+      target:
+       10,
+      label:
+       "Errori recuperati"
+     }
+    ]
+   },
+   {
+    name:
+     "Officina II",
+    cost:
+     430,
+    requirements: [
+     {
+      type:
+       "recoveredErrors",
+      target:
+       50,
+      label:
+       "Errori recuperati"
+     }
+    ]
+   },
+   {
+    name:
+     "Officina III",
+    cost:
+     900,
+    requirements: [
+     {
+      type:
+       "recoveredErrors",
+      target:
+       150,
+      label:
+       "Errori recuperati"
+     }
+    ]
+   }
+  ]
+ },
+ tower: {
+  name:
+   "Torre",
+  meaning:
+   "Rappresenta la costanza: conta i giorni distinti nei quali hai completato almeno un quiz.",
+  position:
+   { x: 51, y: 69 },
+  levels: [
+   {
+    name:
+     "Torre I",
+    cost:
+     120,
+    requirements: [
+     {
+      type:
+       "activityDays",
+      target:
+       3,
+      label:
+       "Giorni distinti di attività"
+     }
+    ]
+   },
+   {
+    name:
+     "Torre II",
+    cost:
+     380,
+    requirements: [
+     {
+      type:
+       "activityDays",
+      target:
+       10,
+      label:
+       "Giorni distinti di attività"
+     }
+    ]
+   },
+   {
+    name:
+     "Torre III",
+    cost:
+     800,
+    requirements: [
+     {
+      type:
+       "activityDays",
+      target:
+       30,
+      label:
+       "Giorni distinti di attività"
+     }
+    ]
+   }
+  ]
+ },
+ arena: {
+  name:
+   "Arena",
+  meaning:
+   "Rappresenta le performance elevate nei quiz completati.",
+  position:
+   { x: 80, y: 77 },
+  levels: [
+   {
+    name:
+     "Arena I",
+    cost:
+     150,
+    requirements: [
+     {
+      type:
+       "quizAtLeast80",
+      target:
+       3,
+      label:
+       "Quiz con accuracy ≥80%"
+     }
+    ]
+   },
+   {
+    name:
+     "Arena II",
+    cost:
+     450,
+    requirements: [
+     {
+      type:
+       "quizAtLeast90",
+      target:
+       5,
+      label:
+       "Quiz con accuracy ≥90%"
+     }
+    ]
+   },
+   {
+    name:
+     "Arena III",
+    cost:
+     900,
+    requirements: [
+     {
+      type:
+       "perfect50",
+      target:
+       1,
+      label:
+       "Quiz perfetto da almeno 50 domande"
+     }
+    ]
+   }
+  ]
+ }
+};
+
+function createDefaultVillageState() {
+
+    return {
+     coins:
+      0,
+     buildings: {
+      townHall:
+       0,
+      library:
+       0,
+      academy:
+       0,
+      workshop:
+       0,
+      tower:
+       0,
+      arena:
+       0
+     },
+     recoveredErrors:
+      0,
+     pendingRecoveries: {},
+     activityDays: [],
+     lastUpgrade:
+      null
+    };
+
+}
+
+function normaliseVillageState(raw) {
+
+    const fallback =
+     createDefaultVillageState();
+
+    const source =
+     raw
+     &&
+     typeof raw === "object"
+     &&
+     !Array.isArray(raw)
+     ?
+     raw
+     :
+     {};
+
+    const buildings =
+     {};
+
+
+    villageBuildingOrder.forEach(
+     id => {
+
+      const value =
+       source.buildings
+       &&
+       typeof source.buildings === "object"
+       ?
+       Number(source.buildings[id])
+       :
+       0;
+
+      buildings[id] =
+       Math.max(
+        0,
+        Math.min(
+         3,
+         Number.isFinite(value)
+         ?
+         Math.floor(value)
+         :
+         0
+        )
+       );
+
+     }
+    );
+
+
+    const pending =
+     {};
+
+    if (
+      source.pendingRecoveries
+      &&
+      typeof source.pendingRecoveries === "object"
+      &&
+      !Array.isArray(source.pendingRecoveries)
+    ){
+
+      Object.keys(
+       source.pendingRecoveries
+      )
+      .forEach(
+       verb => {
+
+        if (source.pendingRecoveries[verb]) {
+          pending[String(verb)] = true;
+        }
+
+       }
+      );
+
+    }
+
+
+    const activityDays =
+     Array.isArray(source.activityDays)
+     ?
+     [...new Set(
+      source.activityDays
+       .filter(
+        item =>
+         /^\d{4}-\d{2}-\d{2}$/.test(
+          String(item)
+         )
+       )
+       .map(String)
+     )].sort()
+     :
+     fallback.activityDays;
+
+
+    return {
+     coins:
+      Math.max(
+       0,
+       Math.floor(
+        Number(source.coins) || 0
+       )
+      ),
+     buildings,
+     recoveredErrors:
+      Math.max(
+       0,
+       Math.floor(
+        Number(source.recoveredErrors) || 0
+       )
+      ),
+     pendingRecoveries:
+      pending,
+     activityDays,
+     lastUpgrade:
+      source.lastUpgrade
+      &&
+      villageBuildings[source.lastUpgrade]
+      ?
+      source.lastUpgrade
+      :
+      null
+    };
+
+}
+
+function loadVillageState() {
+
+    try {
+
+      const raw =
+       safeStorageGet(
+        VILLAGE_STORAGE_KEY
+       );
+
+      if (!raw) {
+        return createDefaultVillageState();
+      }
+
+      return normaliseVillageState(
+       JSON.parse(raw)
+      );
+
+    } catch (error) {
+
+      return createDefaultVillageState();
+
+    }
+
+}
+
+function saveVillageState(state) {
+
+    const normalised =
+     normaliseVillageState(
+      state
+     );
+
+    safeStorageSet(
+     VILLAGE_STORAGE_KEY,
+     JSON.stringify(
+      normalised
+     )
+    );
+
+    return normalised;
+
+}
+
+function formatVillageDayKey(value) {
+
+    const date =
+     value instanceof Date
+     ?
+     value
+     :
+     new Date(value);
+
+
+    if (
+      Number.isNaN(
+       date.getTime()
+      )
+    ){
+      return null;
+    }
+
+
+    const year =
+     date.getFullYear();
+
+    const month =
+     String(
+      date.getMonth() + 1
+     )
+     .padStart(
+      2,
+      "0"
+     );
+
+    const day =
+     String(
+      date.getDate()
+     )
+     .padStart(
+      2,
+      "0"
+     );
+
+
+    return `${year}-${month}-${day}`;
+
+}
+
+function calculateLegacyVillageBonus(
+ stats,
+ history
+){
+
+    const testedVerbs =
+     Object.keys(stats || {})
+      .filter(
+       verb =>
+        Number(
+         stats[verb]
+         &&
+         stats[verb].seen
+         ||
+         0
+        ) > 0
+      )
+      .length;
+
+    const correctAnswers =
+     Object.values(stats || {})
+      .reduce(
+       (
+        total,
+        item
+       ) =>
+        total
+        +
+        Math.max(
+         0,
+         Number(
+          item
+          &&
+          item.correct
+          ||
+          0
+         )
+        ),
+       0
+      );
+
+    const quizCount =
+     Array.isArray(history)
+     ?
+     history.length
+     :
+     0;
+
+
+    return Math.min(
+     1200,
+     Math.round(
+      quizCount * 15
+      +
+      Math.min(
+       correctAnswers,
+       600
+      )
+      +
+      testedVerbs * 2
+     )
+    );
+
+}
+
+function rebuildLegacyVillageStudyState(
+ state,
+ history
+){
+
+    const pending = {};
+    let recovered = 0;
+    const days =
+     new Set(
+      state.activityDays || []
+     );
+
+
+    const chronological =
+     Array.isArray(history)
+     ?
+     [...history].reverse()
+     :
+     [];
+
+
+    chronological.forEach(
+     quizItem => {
+
+      const dayKey =
+       formatVillageDayKey(
+        quizItem
+        &&
+        quizItem.date
+       );
+
+      if (dayKey) {
+        days.add(dayKey);
+      }
+
+
+      if (
+        Array.isArray(
+         quizItem
+         &&
+         quizItem.answers
+        )
+        &&
+        quizItem.answers.length
+      ){
+
+        quizItem.answers.forEach(
+         answer => {
+
+          const verb =
+           String(
+            answer
+            &&
+            answer.verb
+            ||
+            ""
+           );
+
+          if (!verb) {
+            return;
+          }
+
+
+          if (answer.correct) {
+
+            if (pending[verb]) {
+              recovered++;
+              delete pending[verb];
+            }
+
+          } else {
+
+            pending[verb] = true;
+
+          }
+
+         }
+        );
+
+      } else if (
+        Array.isArray(
+         quizItem
+         &&
+         quizItem.errors
+        )
+      ){
+
+        /*
+         Nei backup legacy senza dettaglio domanda-per-domanda possiamo
+         sapere che l’errore esisteva, ma non inventare un recupero futuro.
+        */
+        quizItem.errors.forEach(
+         error => {
+
+          const verb =
+           String(
+            error
+            &&
+            error.verb
+            ||
+            ""
+           );
+
+          if (verb) {
+            pending[verb] = true;
+          }
+
+         }
+        );
+
+      }
+
+     }
+    );
+
+
+    state.recoveredErrors =
+     Math.max(
+      Number(state.recoveredErrors) || 0,
+      recovered
+     );
+
+    state.pendingRecoveries =
+     pending;
+
+    state.activityDays =
+     [...days].sort();
+
+
+    return state;
+
+}
+
+function ensureVillageMigration() {
+
+    const migrationDone =
+     safeStorageGet(
+      VILLAGE_MIGRATION_KEY
+     ) === "true";
+
+
+    if (migrationDone) {
+      return loadVillageState();
+    }
+
+
+    const stats =
+     loadStats();
+
+    const history =
+     loadHistory();
+
+    let state =
+     loadVillageState();
+
+
+    state =
+     rebuildLegacyVillageStudyState(
+      state,
+      history
+     );
+
+
+    state.coins +=
+     calculateLegacyVillageBonus(
+      stats,
+      history
+     );
+
+
+    state =
+     saveVillageState(
+      state
+     );
+
+    safeStorageSet(
+     VILLAGE_MIGRATION_KEY,
+     "true"
+    );
+
+
+    return state;
+
+}
+
+function registerVillageAnswer(
+ verb,
+ correct
+){
+
+    const state =
+     ensureVillageMigration();
+
+    const key =
+     String(verb || "");
+
+
+    if (!key) {
+      return false;
+    }
+
+
+    if (correct) {
+
+      if (
+        state.pendingRecoveries[key]
+      ){
+
+        state.recoveredErrors++;
+        delete state.pendingRecoveries[key];
+        villageQuizRecovered++;
+        saveVillageState(state);
+        return true;
+
+      }
+
+      return false;
+
+    }
+
+
+    state.pendingRecoveries[key] =
+     true;
+
+    saveVillageState(state);
+
+    return false;
+
+}
+
+function calculateVillageQuizCoins(
+ scoreValue,
+ totalValue,
+ percentageValue,
+ recoveredValue
+){
+
+    const safeScore =
+     Math.max(
+      0,
+      Number(scoreValue) || 0
+     );
+
+    const safeTotal =
+     Math.max(
+      0,
+      Number(totalValue) || 0
+     );
+
+    const percentage =
+     Math.max(
+      0,
+      Math.min(
+       100,
+       Number(percentageValue) || 0
+      )
+     );
+
+    const recovered =
+     Math.max(
+      0,
+      Number(recoveredValue) || 0
+     );
+
+
+    let reward =
+     safeScore * 2
+     +
+     safeTotal;
+
+
+    if (percentage === 100) {
+      reward += 25;
+    } else if (percentage >= 90) {
+      reward += 15;
+    } else if (percentage >= 80) {
+      reward += 10;
+    }
+
+
+    reward +=
+     Math.min(
+      recovered * 8,
+      40
+     );
+
+
+    return Math.max(
+     0,
+     Math.round(reward)
+    );
+
+}
+
+function finalizeVillageQuiz(data) {
+
+    const state =
+     ensureVillageMigration();
+
+    const dayKey =
+     formatVillageDayKey(
+      data.completedAt
+     );
+
+
+    if (
+      dayKey
+      &&
+      !state.activityDays.includes(
+       dayKey
+      )
+    ){
+      state.activityDays.push(
+       dayKey
+      );
+      state.activityDays.sort();
+    }
+
+
+    const coinsEarned =
+     calculateVillageQuizCoins(
+      data.score,
+      data.total,
+      data.percentage,
+      data.recovered
+     );
+
+
+    state.coins +=
+     coinsEarned;
+
+    saveVillageState(state);
+
+
+    return {
+     coinsEarned,
+     recovered:
+      Math.max(
+       0,
+       Number(data.recovered) || 0
+      ),
+     totalCoins:
+      state.coins
+    };
+
+}
+
+function getVillageMetrics(
+ providedState = null
+){
+
+    const state =
+     providedState
+     ?
+     normaliseVillageState(
+      providedState
+     )
+     :
+     ensureVillageMigration();
+
+    const stats =
+     loadStats();
+
+    const history =
+     loadHistory();
+
+    const testedVerbs =
+     Object.keys(stats)
+      .filter(
+       verb =>
+        Number(
+         stats[verb]
+         &&
+         stats[verb].seen
+         ||
+         0
+        ) > 0
+      )
+      .length;
+
+    const cefr =
+     estimateUserCefr(
+      stats
+     );
+
+    const quizAtLeast80 =
+     history.filter(
+      item =>
+       Number(item.percentage) >= 80
+     ).length;
+
+    const quizAtLeast90 =
+     history.filter(
+      item =>
+       Number(item.percentage) >= 90
+     ).length;
+
+    const perfect50 =
+     history.filter(
+      item =>
+       Number(item.total) >= 50
+       &&
+       Number(item.score) === Number(item.total)
+       &&
+       Number(item.total) > 0
+     ).length;
+
+    let medalCount = 0;
+
+    try {
+      medalCount =
+       Object.keys(
+        loadMedalDates()
+       ).length;
+    } catch (error) {
+      medalCount = 0;
+    }
+
+
+    return {
+     state,
+     stats,
+     history,
+     quizCount:
+      history.length,
+     testedVerbs,
+     cefrLevel:
+      cefr.level,
+     recoveredErrors:
+      state.recoveredErrors,
+     activityDays:
+      state.activityDays.length,
+     quizAtLeast80,
+     quizAtLeast90,
+     perfect50,
+     medalCount
+    };
+
+}
+
+function getVillageRequirementResult(
+ requirement,
+ metrics,
+ buildingId
+){
+
+    let current = 0;
+    let target =
+     requirement.target;
+    let met = false;
+    let valueText = "";
+    let progress = 0;
+
+
+    if (requirement.type === "quizCount") {
+      current = metrics.quizCount;
+    }
+
+    if (requirement.type === "testedVerbs") {
+      current = metrics.testedVerbs;
+    }
+
+    if (requirement.type === "recoveredErrors") {
+      current = metrics.recoveredErrors;
+    }
+
+    if (requirement.type === "activityDays") {
+      current = metrics.activityDays;
+    }
+
+    if (requirement.type === "quizAtLeast80") {
+      current = metrics.quizAtLeast80;
+    }
+
+    if (requirement.type === "quizAtLeast90") {
+      current = metrics.quizAtLeast90;
+    }
+
+    if (requirement.type === "perfect50") {
+      current = metrics.perfect50;
+    }
+
+
+    if (requirement.type === "otherBuildingsAtLevel") {
+
+      current =
+       villageBuildingOrder
+        .filter(
+         id =>
+          id !== buildingId
+          &&
+          Number(
+           metrics.state.buildings[id]
+          ) >= Number(requirement.level)
+        )
+        .length;
+
+    }
+
+
+    if (requirement.type === "cefr") {
+
+      const currentIndex =
+       CEFR_ORDER.indexOf(
+        metrics.cefrLevel
+       );
+
+      const targetIndex =
+       CEFR_ORDER.indexOf(
+        requirement.target
+       );
+
+      met =
+       currentIndex >= 0
+       &&
+       targetIndex >= 0
+       &&
+       currentIndex >= targetIndex;
+
+      valueText =
+       `${metrics.cefrLevel || "—"} → ${requirement.target}`;
+
+      progress =
+       targetIndex >= 0
+       ?
+       Math.max(
+        0,
+        Math.min(
+         100,
+         (
+          Math.max(
+           0,
+           currentIndex + 1
+          )
+          /
+          (targetIndex + 1)
+         )
+         *
+         100
+        )
+       )
+       :
+       0;
+
+      return {
+       met,
+       current:
+        metrics.cefrLevel || "—",
+       target:
+        requirement.target,
+       valueText,
+       progress,
+       label:
+        requirement.label
+      };
+
+    }
+
+
+    current =
+     Math.max(
+      0,
+      Number(current) || 0
+     );
+
+    target =
+     Math.max(
+      1,
+      Number(target) || 1
+     );
+
+    met =
+     current >= target;
+
+    valueText =
+     `${Math.min(current,target)} / ${target}`;
+
+    if (current > target) {
+      valueText =
+       `${current} / ${target}`;
+    }
+
+    progress =
+     Math.max(
+      0,
+      Math.min(
+       100,
+       current / target * 100
+      )
+     );
+
+
+    return {
+     met,
+     current,
+     target,
+     valueText,
+     progress,
+     label:
+      requirement.label
+    };
+
+}
+
+function getVillageBuildingStatus(
+ id,
+ state,
+ metrics
+){
+
+    const config =
+     villageBuildings[id];
+
+    const currentLevel =
+     Number(
+      state.buildings[id] || 0
+     );
+
+
+    if (
+      !config
+      ||
+      currentLevel >= config.levels.length
+    ){
+
+      return {
+       currentLevel,
+       nextLevel:
+        null,
+       requirementResults: [],
+       requirementsMet:
+        true,
+       canAfford:
+        true,
+       canUpgrade:
+        false,
+       status:
+        "BUILT",
+       statusClass:
+        "built"
+      };
+
+    }
+
+
+    const nextLevel =
+     config.levels[currentLevel];
+
+    const requirementResults =
+     nextLevel.requirements.map(
+      requirement =>
+       getVillageRequirementResult(
+        requirement,
+        metrics,
+        id
+       )
+     );
+
+    const requirementsMet =
+     requirementResults.every(
+      result =>
+       result.met
+     );
+
+    const canAfford =
+     state.coins >= nextLevel.cost;
+
+    let status =
+     "BUILT";
+
+    let statusClass =
+     "built";
+
+
+    if (currentLevel === 0) {
+
+      status =
+       requirementsMet
+       ?
+       "AVAILABLE"
+       :
+       "LOCKED";
+
+      statusClass =
+       requirementsMet
+       ?
+       "available"
+       :
+       "locked";
+
+    } else if (requirementsMet) {
+
+      status =
+       "UPGRADE AVAILABLE";
+
+      statusClass =
+       "upgrade-available";
+
+    }
+
+
+    return {
+     currentLevel,
+     nextLevel,
+     requirementResults,
+     requirementsMet,
+     canAfford,
+     canUpgrade:
+      requirementsMet
+      &&
+      canAfford,
+     status,
+     statusClass
+    };
+
+}
+
+function getVillageLevel(state) {
+
+    const totalBuildingLevels =
+     villageBuildingOrder.reduce(
+      (
+       total,
+       id
+      ) =>
+       total
+       +
+       Number(
+        state.buildings[id] || 0
+       ),
+      0
+     );
+
+
+    return 1
+     +
+     Math.floor(
+      totalBuildingLevels / 3
+     );
+
+}
+
+function getVillageBuiltCount(state) {
+
+    return villageBuildingOrder.filter(
+     id =>
+      Number(
+       state.buildings[id] || 0
+      ) > 0
+    ).length;
+
+}
+
+function villageBuildingSvg(
+ id,
+ level
+){
+
+    const safeLevel =
+     Math.max(
+      0,
+      Math.min(
+       3,
+       Number(level) || 0
+      )
+     );
+
+
+    if (safeLevel === 0) {
+
+      return `
+       <svg viewBox="0 0 120 82" aria-hidden="true">
+        <ellipse cx="60" cy="69" rx="38" ry="9" fill="rgba(55,73,62,.12)"/>
+        <polygon points="28,59 59,43 93,58 61,75" fill="#c3c7c5"/>
+        <polygon points="34,58 59,47 87,58 61,70" fill="#e1e3e1"/>
+        <path d="M43 56L58 49M58 49L76 56M49 62L64 54M64 54L78 60" stroke="#aeb3b0" stroke-width="3" stroke-linecap="round"/>
+       </svg>
+      `;
+
+    }
+
+
+    const rise =
+     safeLevel * 4;
+
+    const bodyY =
+     37 - rise;
+
+    const bodyH =
+     28 + rise;
+
+    const windowCount =
+     safeLevel + 1;
+
+    const windows =
+     Array.from(
+      {
+       length:
+        windowCount
+      },
+      (
+       _,
+       index
+      ) => {
+
+       const x =
+        44
+        +
+        index *
+        (
+         windowCount === 2
+         ?
+         17
+         :
+         windowCount === 3
+         ?
+         12
+         :
+         9
+        );
+
+       return `<rect x="${x}" y="${bodyY + 11}" width="7" height="9" rx="2" fill="#dbe6ff" stroke="rgba(23,29,45,.08)"/>`;
+
+      }
+     ).join("");
+
+
+    const commonShadow =
+     `<ellipse cx="60" cy="72" rx="39" ry="8" fill="rgba(55,73,62,.13)"/>`;
+
+    const platform =
+     `<polygon points="24,63 59,45 97,62 61,79" fill="#c5cdc7"/><polygon points="29,61 59,49 91,61 61,74" fill="#eef1ed"/>`;
+
+
+    if (id === "townHall") {
+
+      return `
+       <svg viewBox="0 0 120 82" aria-hidden="true">
+        ${commonShadow}${platform}
+        <rect x="34" y="${bodyY}" width="52" height="${bodyH}" rx="4" fill="#f5f2ff" stroke="#c9c5e5"/>
+        <polygon points="30,${bodyY + 2} 60,${bodyY - 14} 90,${bodyY + 2}" fill="#7c87c8"/>
+        <rect x="54" y="${bodyY - 13 - safeLevel*2}" width="12" height="${17 + safeLevel*2}" rx="2" fill="#e7e8f8" stroke="#bfc4df"/>
+        <polygon points="52,${bodyY - 11 - safeLevel*2} 60,${bodyY - 18 - safeLevel*2} 68,${bodyY - 11 - safeLevel*2}" fill="#6675bb"/>
+        ${windows}
+        <rect x="56" y="${bodyY + bodyH - 13}" width="10" height="13" rx="2" fill="#8a7b6f"/>
+        ${safeLevel >= 2 ? `<path d="M60 ${bodyY - 19 - safeLevel*2}V${bodyY - 29 - safeLevel*2}" stroke="#555d75" stroke-width="1.7"/><path d="M61 ${bodyY - 28 - safeLevel*2}h11l-4 4 4 4H61z" fill="#7d91f0"/>` : ""}
+       </svg>
+      `;
+
+    }
+
+
+    if (id === "library") {
+
+      return `
+       <svg viewBox="0 0 120 82" aria-hidden="true">
+        ${commonShadow}${platform}
+        <rect x="32" y="${bodyY + 3}" width="56" height="${bodyH - 3}" rx="4" fill="#fff8e9" stroke="#e0cfaa"/>
+        <polygon points="29,${bodyY + 4} 60,${bodyY - 10} 92,${bodyY + 4}" fill="#b89a69"/>
+        <rect x="39" y="${bodyY + 9}" width="5" height="${bodyH - 14}" rx="2" fill="#e7d4ae"/>
+        <rect x="76" y="${bodyY + 9}" width="5" height="${bodyH - 14}" rx="2" fill="#e7d4ae"/>
+        ${windows}
+        <rect x="56" y="${bodyY + bodyH - 13}" width="9" height="13" rx="2" fill="#91745b"/>
+        ${safeLevel >= 2 ? `<rect x="34" y="${bodyY - 3}" width="52" height="4" rx="2" fill="#d4b77f"/>` : ""}
+        ${safeLevel >= 3 ? `<circle cx="60" cy="${bodyY - 7}" r="4" fill="#eef1ff" stroke="#8b91b7"/>` : ""}
+       </svg>
+      `;
+
+    }
+
+
+    if (id === "academy") {
+
+      return `
+       <svg viewBox="0 0 120 82" aria-hidden="true">
+        ${commonShadow}${platform}
+        <rect x="34" y="${bodyY + 6}" width="52" height="${bodyH - 6}" rx="7" fill="#eff7ff" stroke="#bdd1e1"/>
+        <path d="M40 ${bodyY + 7} Q60 ${bodyY - 14 - safeLevel*2} 80 ${bodyY + 7}Z" fill="#8fb3d2"/>
+        <rect x="57" y="${bodyY - 9 - safeLevel*2}" width="6" height="${16 + safeLevel*2}" rx="3" fill="#d8e6f1"/>
+        ${windows}
+        <rect x="56" y="${bodyY + bodyH - 13}" width="10" height="13" rx="5 5 2 2" fill="#718aa0"/>
+        ${safeLevel >= 2 ? `<circle cx="60" cy="${bodyY - 10 - safeLevel*2}" r="4" fill="#f2e8ff" stroke="#8a73b8"/>` : ""}
+       </svg>
+      `;
+
+    }
+
+
+    if (id === "workshop") {
+
+      return `
+       <svg viewBox="0 0 120 82" aria-hidden="true">
+        ${commonShadow}${platform}
+        <rect x="30" y="${bodyY + 7}" width="62" height="${bodyH - 7}" rx="4" fill="#f3f0ed" stroke="#c9c0b8"/>
+        <path d="M29 ${bodyY + 10} L42 ${bodyY} L54 ${bodyY + 9} L67 ${bodyY - 1} L80 ${bodyY + 8} L94 ${bodyY - 2} V${bodyY + 10}Z" fill="#9b8a7b"/>
+        <rect x="78" y="${bodyY - 13 - safeLevel*2}" width="9" height="${22 + safeLevel*2}" rx="2" fill="#8d8178"/>
+        ${windows}
+        <rect x="42" y="${bodyY + bodyH - 14}" width="16" height="14" rx="2" fill="#857364"/>
+        ${safeLevel >= 2 ? `<rect x="63" y="${bodyY + bodyH - 15}" width="17" height="7" rx="2" fill="#c8d3da"/>` : ""}
+        ${safeLevel >= 3 ? `<path d="M82 ${bodyY - 15 - safeLevel*2}c6-8 13-2 10-12" fill="none" stroke="rgba(120,130,138,.35)" stroke-width="4" stroke-linecap="round"/>` : ""}
+       </svg>
+      `;
+
+    }
+
+
+    if (id === "tower") {
+
+      return `
+       <svg viewBox="0 0 120 82" aria-hidden="true">
+        ${commonShadow}${platform}
+        <rect x="47" y="${bodyY - 7 - safeLevel*5}" width="28" height="${bodyH + 10 + safeLevel*5}" rx="5" fill="#f0f1f6" stroke="#c4c7d4"/>
+        <polygon points="44,${bodyY - 5 - safeLevel*5} 61,${bodyY - 20 - safeLevel*5} 78,${bodyY - 5 - safeLevel*5}" fill="#747eaa"/>
+        <rect x="55" y="${bodyY + bodyH - 9}" width="11" height="9" rx="5 5 1 1" fill="#7d7880"/>
+        <rect x="55" y="${bodyY + 2}" width="5" height="7" rx="2" fill="#d8e6ff"/>
+        <rect x="64" y="${bodyY + 2}" width="5" height="7" rx="2" fill="#d8e6ff"/>
+        ${safeLevel >= 2 ? `<rect x="55" y="${bodyY + 15}" width="5" height="7" rx="2" fill="#d8e6ff"/><rect x="64" y="${bodyY + 15}" width="5" height="7" rx="2" fill="#d8e6ff"/>` : ""}
+        ${safeLevel >= 3 ? `<path d="M61 ${bodyY - 21 - safeLevel*5}V${bodyY - 32 - safeLevel*5}" stroke="#515a77" stroke-width="1.7"/><circle cx="61" cy="${bodyY - 34 - safeLevel*5}" r="2.8" fill="#7184e8"/>` : ""}
+       </svg>
+      `;
+
+    }
+
+
+    return `
+     <svg viewBox="0 0 120 82" aria-hidden="true">
+      ${commonShadow}${platform}
+      <ellipse cx="61" cy="${bodyY + 16}" rx="31" ry="18" fill="#f5ecef" stroke="#d6bbc4" stroke-width="5"/>
+      <ellipse cx="61" cy="${bodyY + 16}" rx="20" ry="10" fill="#dfe9dd" stroke="#c6d2c4"/>
+      <path d="M30 ${bodyY + 15}h62M39 ${bodyY + 3}l6 8M83 ${bodyY + 3}l-6 8" stroke="#b8919f" stroke-width="3" stroke-linecap="round"/>
+      ${safeLevel >= 2 ? `<path d="M35 ${bodyY - 2}Q61 ${bodyY - 15} 88 ${bodyY - 2}" fill="none" stroke="#b8919f" stroke-width="4"/>` : ""}
+      ${safeLevel >= 3 ? `<rect x="54" y="${bodyY - 14}" width="14" height="7" rx="2" fill="#ece8ff" stroke="#9d91c4"/>` : ""}
+     </svg>
+    `;
+
+}
+
+function renderVillageBuildingButton(
+ id,
+ metrics
+){
+
+    const state =
+     metrics.state;
+
+    const config =
+     villageBuildings[id];
+
+    const status =
+     getVillageBuildingStatus(
+      id,
+      state,
+      metrics
+     );
+
+    const levelLabel =
+     status.currentLevel > 0
+     ?
+     `Lv.${status.currentLevel}`
+     :
+     "Non costruito";
+
+
+    return `
+     <button
+      class="village-building-slot ${status.statusClass}"
+      style="--building-x:${config.position.x}%;--building-y:${config.position.y}%;"
+      data-village-building="${id}"
+      onclick="openVillageBuilding('${id}')"
+      aria-label="${escapeHTML(config.name)}, ${escapeHTML(levelLabel)}, ${escapeHTML(status.status)}"
+     >
+      <span class="village-state-badge">
+       ${escapeHTML(status.status)}
+      </span>
+      <span class="village-building-visual">
+       ${villageBuildingSvg(id,status.currentLevel)}
+      </span>
+      <span class="village-building-name">
+       ${escapeHTML(config.name)}
+      </span>
+      <span class="village-building-level">
+       ${escapeHTML(levelLabel)}
+      </span>
+     </button>
+    `;
+
+}
+
+function renderVillage() {
+
+    const root =
+     document.getElementById(
+      "villageRoot"
+     );
+
+
+    if (!root) {
+      return;
+    }
+
+
+    const state =
+     ensureVillageMigration();
+
+    const metrics =
+     getVillageMetrics(
+      state
+     );
+
+    const villageLevel =
+     getVillageLevel(
+      state
+     );
+
+    const builtCount =
+     getVillageBuiltCount(
+      state
+     );
+
+    const summaries =
+     villageBuildingOrder.map(
+      id => {
+
+       const config =
+        villageBuildings[id];
+
+       const status =
+        getVillageBuildingStatus(
+         id,
+         state,
+         metrics
+        );
+
+       return `
+        <button
+         class="village-building-summary"
+         onclick="openVillageBuilding('${id}')"
+         aria-label="Apri ${escapeHTML(config.name)}"
+        >
+         <strong>${escapeHTML(config.name)} · Lv.${status.currentLevel}</strong>
+         <span>${escapeHTML(config.meaning)}</span>
+         <span class="village-summary-state">${escapeHTML(status.status)}</span>
+        </button>
+       `;
+
+      }
+     ).join("");
+
+
+    root.innerHTML =
+     `
+     <div class="card village-hero">
+      <div class="village-header-row">
+       <div class="village-header-copy">
+        <div class="eyebrow">Progressione</div>
+        <h2 class="village-title">Il tuo Villaggio</h2>
+        <div class="village-subtitle">
+         Studia, completa quiz e sviluppa il tuo villaggio.
+        </div>
+       </div>
+       <div class="village-coins" aria-label="Coins disponibili">
+        <span class="village-coins-label">Coins</span>
+        <strong class="village-coins-value">${state.coins}</strong>
+       </div>
+      </div>
+
+      <div class="village-kpis">
+       <div class="village-kpi">
+        <strong>${villageLevel}</strong>
+        <span>Village Level</span>
+       </div>
+       <div class="village-kpi">
+        <strong>${builtCount}/6</strong>
+        <span>Edifici costruiti</span>
+       </div>
+       <div class="village-kpi">
+        <strong>${metrics.medalCount}</strong>
+        <span>Medaglie</span>
+       </div>
+      </div>
+     </div>
+
+     <div class="card village-map-card">
+      <div class="village-map" aria-label="Mappa del villaggio">
+       <svg class="village-roads" viewBox="0 0 100 108" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M50 10 C49 30 51 43 51 96" fill="none" stroke="rgba(206,190,153,.72)" stroke-width="8" stroke-linecap="round"/>
+        <path d="M9 47 C28 47 35 47 51 48 C66 48 78 46 93 48" fill="none" stroke="rgba(206,190,153,.72)" stroke-width="7" stroke-linecap="round"/>
+        <path d="M13 81 C31 74 39 69 51 69 C66 70 79 78 92 84" fill="none" stroke="rgba(206,190,153,.64)" stroke-width="6" stroke-linecap="round"/>
+        <path d="M50 10 C49 30 51 43 51 96" fill="none" stroke="rgba(240,230,205,.58)" stroke-width="3" stroke-linecap="round"/>
+       </svg>
+       <span class="village-tree t1"></span>
+       <span class="village-tree t2"></span>
+       <span class="village-tree t3"></span>
+       <span class="village-tree t4"></span>
+       ${villageBuildingOrder.map(
+        id =>
+         renderVillageBuildingButton(
+          id,
+          metrics
+         )
+       ).join("")}
+      </div>
+      <div class="village-map-hint">
+       Tocca un edificio per vedere requisiti, progresso e costi di upgrade.
+      </div>
+     </div>
+
+     <div class="section-title" style="margin-top:4px;">
+      Edifici
+     </div>
+     <div class="village-building-list">
+      ${summaries}
+     </div>
+     `;
+
+}
+
+function renderVillageRequirement(
+ result
+){
+
+    const width =
+     Math.round(
+      result.progress
+     );
+
+
+    return `
+     <div class="village-requirement">
+      <div class="village-requirement-head">
+       <div class="village-requirement-title">
+        ${escapeHTML(result.label)}
+       </div>
+       <div class="village-requirement-value">
+        ${escapeHTML(result.valueText)} ${result.met ? "✓" : ""}
+       </div>
+      </div>
+      <div class="village-progress-track" aria-hidden="true">
+       <div
+        class="village-progress-bar ${result.met ? "done" : ""}"
+        style="width:${width}%;"
+       ></div>
+      </div>
+     </div>
+    `;
+
+}
+
+function openVillageBuilding(
+ id,
+ upgraded = false
+){
+
+    const config =
+     villageBuildings[id];
+
+
+    if (!config) {
+      return;
+    }
+
+
+    playWoodClick();
+
+    const state =
+     ensureVillageMigration();
+
+    const metrics =
+     getVillageMetrics(
+      state
+     );
+
+    const status =
+     getVillageBuildingStatus(
+      id,
+      state,
+      metrics
+     );
+
+    const currentLabel =
+     status.currentLevel > 0
+     ?
+     `Livello ${status.currentLevel}`
+     :
+     "Non costruito";
+
+    let body =
+     `
+     ${modalHeader(config.name)}
+     <div class="village-modal-intro">
+      ${escapeHTML(config.meaning)}
+     </div>
+     <div class="village-modal-level-row">
+      <strong>${escapeHTML(currentLabel)}</strong>
+      <span>${escapeHTML(status.status)}</span>
+     </div>
+     ${upgraded ? `<div class="village-upgrade-success">Upgrade completato. Il villaggio è stato aggiornato.</div>` : ""}
+     `;
+
+
+    if (!status.nextLevel) {
+
+      body +=
+       `
+       <div class="village-max-box">
+        Edificio completato: hai raggiunto il livello massimo disponibile nella Village V1.
+       </div>
+       `;
+
+    } else {
+
+      body +=
+       `
+       <div class="study-section">
+        <div class="study-label">Prossimo livello</div>
+        <div class="study-text">${escapeHTML(status.nextLevel.name)}</div>
+       </div>
+       ${status.requirementResults.map(
+        renderVillageRequirement
+       ).join("")}
+       <div class="village-cost-box">
+        <strong>${status.nextLevel.cost} Coins</strong>
+        <span>
+         ${state.coins >= status.nextLevel.cost
+          ? `Disponibili: ${state.coins}`
+          : `Ti mancano ${status.nextLevel.cost - state.coins} Coins`}
+        </span>
+       </div>
+       <button
+        class="village-upgrade-button"
+        onclick="upgradeVillageBuilding('${id}')"
+        ${status.canUpgrade ? "" : "disabled"}
+       >
+        ${status.currentLevel === 0 ? "COSTRUISCI" : "MIGLIORA"}
+       </button>
+       `;
+
+    }
+
+
+    openAppModal(
+     body
+    );
+
+}
+
+function upgradeVillageBuilding(id) {
+
+    const config =
+     villageBuildings[id];
+
+
+    if (!config) {
+      return;
+    }
+
+
+    const state =
+     ensureVillageMigration();
+
+    const metrics =
+     getVillageMetrics(
+      state
+     );
+
+    const status =
+     getVillageBuildingStatus(
+      id,
+      state,
+      metrics
+     );
+
+
+    if (
+      !status.nextLevel
+      ||
+      !status.requirementsMet
+      ||
+      !status.canAfford
+    ){
+      openVillageBuilding(id);
+      return;
+    }
+
+
+    state.coins -=
+     status.nextLevel.cost;
+
+    state.buildings[id] =
+     status.currentLevel + 1;
+
+    state.lastUpgrade =
+     id;
+
+    saveVillageState(state);
+
+    renderVillage();
+
+    playCompletionSound();
+
+
+    window.setTimeout(
+     () => {
+
+      const button =
+       document.querySelector(
+        `[data-village-building="${id}"]`
+       );
+
+      if (button) {
+        button.classList.add(
+         "village-upgraded"
+        );
+      }
+
+     },
+     30
+    );
+
+
+    openVillageBuilding(
+     id,
+     true
+    );
+
+}
+
+function getVillageAvailableUpgrades(
+ state = null
+){
+
+    const safeState =
+     state
+     ?
+     normaliseVillageState(state)
+     :
+     ensureVillageMigration();
+
+    const metrics =
+     getVillageMetrics(
+      safeState
+     );
+
+
+    return villageBuildingOrder.filter(
+     id => {
+
+      const status =
+       getVillageBuildingStatus(
+        id,
+        safeState,
+        metrics
+       );
+
+      return (
+       status.nextLevel
+       &&
+       status.requirementsMet
+      );
+
+     }
+    );
+
+}
+
+function getVillageProgressLine(
+ id,
+ metrics
+){
+
+    const state =
+     metrics.state;
+
+    const config =
+     villageBuildings[id];
+
+    const status =
+     getVillageBuildingStatus(
+      id,
+      state,
+      metrics
+     );
+
+
+    if (!status.nextLevel) {
+      return `${config.name}: completata`;
+    }
+
+
+    const first =
+     status.requirementResults[0];
+
+    return `${config.name}: ${first.valueText}`;
+
+}
+
+function renderVillageQuizReward(reward) {
+
+    const box =
+     document.getElementById(
+      "villageQuizReward"
+     );
+
+
+    if (!box) {
+      return;
+    }
+
+
+    const state =
+     ensureVillageMigration();
+
+    const metrics =
+     getVillageMetrics(
+      state
+     );
+
+    const upgrades =
+     getVillageAvailableUpgrades(
+      state
+     );
+
+    const upgradeText =
+     upgrades.length
+     ?
+     `Upgrade disponibile: ${upgrades.map(
+      id =>
+       villageBuildings[id].name
+     ).join(", ")}.`
+     :
+     "";
+
+
+    box.innerHTML =
+     `
+     <div class="village-result-coins">
+      <strong>+${reward.coinsEarned} Coins</strong>
+      <span>Saldo: ${reward.totalCoins}</span>
+     </div>
+     <div class="village-result-mini">
+      <div class="village-result-mini-row">
+       <strong>${escapeHTML(getVillageProgressLine("library",metrics))}</strong>
+      </div>
+      <div class="village-result-mini-row">
+       <strong>${escapeHTML(getVillageProgressLine("workshop",metrics))}</strong>
+      </div>
+      ${reward.recovered > 0 ? `<div class="village-result-mini-row"><span>Recuperi in questo quiz</span><strong>+${reward.recovered}</strong></div>` : ""}
+     </div>
+     ${upgradeText ? `<div class="village-result-upgrade">${escapeHTML(upgradeText)}</div>` : ""}
+     <button
+      class="village-result-button"
+      onclick="showScreen('village')"
+     >
+      Vai al Villaggio
+     </button>
+     `;
+
+    box.classList.remove(
+     "hidden"
+    );
+
+}
+
+
 /* =========================================================
  BACKUP
 ========================================================= */
@@ -16190,10 +19097,13 @@ function exportBackup() {
     const medalDates =
      syncAchievements();
 
+    const village =
+     ensureVillageMigration();
+
 
     const backup = {
      version:
-      9,
+      10,
      exportedAt:
       new Date().toISOString(),
      stats:
@@ -16231,7 +19141,13 @@ function exportBackup() {
      featuredMedal:
       safeStorageGet(
        "pvFeaturedMedal"
-      )
+      ),
+     village:
+      village,
+     villageMigrationDone:
+      safeStorageGet(
+       VILLAGE_MIGRATION_KEY
+      ) === "true"
     };
 
 
@@ -16535,6 +19451,52 @@ function importBackup(event) {
         }
 
 
+        if (
+          backup.village
+          &&
+          typeof backup.village === "object"
+          &&
+          !Array.isArray(backup.village)
+        ){
+
+          saveVillageState(
+           backup.village
+          );
+
+          safeStorageSet(
+           VILLAGE_MIGRATION_KEY,
+           backup.villageMigrationDone === false
+           ?
+           "false"
+           :
+           "true"
+          );
+
+        } else {
+
+          /*
+           Backup legacy: nessun Village presente.
+           Ripartiamo da stato neutro e ricostruiamo solo ciò che i dati
+           storici permettono realmente di dimostrare.
+          */
+          saveVillageState(
+           createDefaultVillageState()
+          );
+
+          safeStorageSet(
+           VILLAGE_MIGRATION_KEY,
+           "false"
+          );
+
+          ensureVillageMigration();
+
+        }
+
+
+        villageQuizRecovered =
+         0;
+
+
         databaseSearchQuery =
          "";
 
@@ -16551,6 +19513,7 @@ function importBackup(event) {
         renderHistory();
         renderDatabase();
         renderAccount();
+        renderVillage();
         syncAppMode();
 
         playWoodClick();
@@ -16799,6 +19762,8 @@ runBootStep(loadProfile);
 runBootStep(initialiseQuizSize);
 runBootStep(closePerformanceChart);
 runBootStep(updateHomeStats);
+runBootStep(ensureVillageMigration);
+runBootStep(renderVillage);
 runBootStep(syncAchievements);
 runBootStep(renderFeaturedMedal);
 runBootStep(syncDatabaseControls);
