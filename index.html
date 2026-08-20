@@ -6057,16 +6057,93 @@ body {
   font-size: 9px;
 }
 
-  .forge-quick-grid{
-    grid-template-columns:repeat(4,minmax(0,1fr));
-    gap:7px;
-    margin-bottom:8px;
-  }
-  .forge-quick-card{min-height:92px;padding:9px 7px;border-radius:16px;}
-  .forge-quick-icon{width:26px;height:26px;margin-bottom:5px;}
-  .forge-quick-icon svg{width:24px;height:24px;}
-  .forge-quick-card strong{font-size:10.5px;line-height:1.12;}
-  .forge-quick-card span{margin-top:3px;font-size:8px;line-height:1.18;}
+  .forge-quick-grid {
+  display: grid;
+
+  grid-template-columns: none;
+  grid-auto-flow: column;
+
+  grid-auto-columns:
+   calc(
+    (
+     100%
+     -
+     12px
+    )
+    /
+    2
+   );
+
+  gap: 12px;
+
+  margin-bottom: 12px;
+
+  padding:
+   2px
+   2px
+   11px;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: 2px;
+
+  overscroll-behavior-x: contain;
+  touch-action: pan-x;
+
+  -webkit-overflow-scrolling: touch;
+
+  scrollbar-width: none;
+}
+
+
+.forge-quick-grid::-webkit-scrollbar {
+  display: none;
+}
+
+
+.forge-quick-card {
+  min-width: 0;
+  min-height: 145px;
+
+  padding:
+   17px
+   15px;
+
+  border-radius: 20px;
+
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+}
+
+
+.forge-quick-icon {
+  width: 40px;
+  height: 40px;
+
+  margin-bottom: 11px;
+}
+
+
+.forge-quick-icon svg {
+  width: 36px;
+  height: 36px;
+}
+
+
+.forge-quick-card strong {
+  font-size: 15px;
+  line-height: 1.12;
+}
+
+
+.forge-quick-card span {
+  margin-top: 6px;
+
+  font-size: 11px;
+  line-height: 1.25;
+}
 
   .forge-subbar{gap:9px;margin-bottom:12px;}
   .forge-subbar-title strong{font-size:18px;}
@@ -6089,7 +6166,7 @@ body {
 .app:not(.quiz-mode):not(.learning-mode) {
   padding-bottom:
    calc(
-    100px
+    122px
     +
     env(safe-area-inset-bottom)
    );
@@ -6097,13 +6174,13 @@ body {
 
 
 .bottom-nav {
-  gap: 4px;
+  gap: 3px;
 
   padding:
+   8px
    10px
-   12px
    calc(
-    10px
+    28px
     +
     env(safe-area-inset-bottom)
    );
@@ -6111,19 +6188,19 @@ body {
 
 
 .bottom-nav button {
-  min-height: 58px !important;
+  min-height: 52px !important;
 
   padding:
-   7px
-   4px !important;
+   5px
+   3px !important;
 
-  border-radius: 16px !important;
+  border-radius: 14px !important;
 
-  font-size: 11.5px !important;
+  font-size: 10.5px !important;
   line-height: 1 !important;
   font-weight: 800 !important;
 
-  gap: 4px;
+  gap: 3px;
 }
 
 
@@ -6133,7 +6210,7 @@ body {
     46,
     103,
     217,
-    0.07
+    0.055
    ) !important;
 
   box-shadow:
@@ -6142,16 +6219,16 @@ body {
     46,
     103,
     217,
-    0.08
+    0.06
    );
 }
 
 
 .bottom-nav svg {
-  width: 27px;
-  height: 27px;
+  width: 25px;
+  height: 25px;
 
-  stroke-width: 2;
+  stroke-width: 1.9;
 }
 }
 
@@ -6215,8 +6292,13 @@ body {
 <div id="homeModuleGrid" class="forge-module-grid"></div>
 
       <div class="forge-section-head">
-        <h2>Allenamento rapido</h2>
-      </div>
+  <h2>Allenamento rapido</h2>
+
+  <span class="forge-scroll-hint">
+    Scorri
+    <span data-ef-icon="chevron"></span>
+  </span>
+</div>
       <div class="forge-quick-grid">
         <button class="forge-quick-card" onclick="efOpenQuickQuizPicker()">
           <div class="forge-quick-icon"><span data-ef-icon="bolt"></span></div><strong>Quick Quiz</strong><span>Scegli modulo e durata</span>
