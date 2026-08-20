@@ -6673,6 +6673,39 @@ button.forge-home-fact {
   }
 
 }
+/* =========================================================
+   FIX — ISOLAMENTO COMPLETO DEL QUIZ
+========================================================= */
+
+.app.quiz-mode {
+  position: fixed !important;
+  inset: 0 !important;
+
+  width: 100%;
+  max-width: 720px;
+  height: 100dvh !important;
+  min-height: 100dvh !important;
+
+  margin: 0 auto;
+
+  overflow: hidden !important;
+}
+
+/* Durante il quiz nessun'altra schermata può apparire */
+.app.quiz-mode > .screen {
+  display: none !important;
+}
+
+/* Il quiz classico si trova dentro la schermata Home */
+.app.quiz-mode > #home {
+  display: block !important;
+}
+
+/* Header e navigazione devono sparire completamente */
+.app.quiz-mode .forge-brandbar,
+.app.quiz-mode .bottom-nav {
+  display: none !important;
+}
 </style>
 </head>
 
@@ -13550,7 +13583,46 @@ function startQuiz(
     quizErrors = [];
     quizAnswers = [];
     quizStartTime = Date.now();
+    /*
+     Il quiz classico risiede dentro #home.
+     Rendiamo quindi Home l'unica schermata attiva,
+     indipendentemente dal punto da cui parte il test.
+    */
 
+    document
+     .querySelectorAll(
+      ".screen"
+     )
+     .forEach(
+      screen =>
+       screen.classList.remove(
+        "active"
+       )
+     );
+
+
+    document
+     .getElementById(
+      "home"
+     )
+     .classList.add(
+      "active"
+     );
+
+
+    efSetBottomNav(
+     "home"
+    );
+
+
+    document
+     .getElementById(
+      "appShell"
+     )
+     .classList.remove(
+      "home-mode",
+      "learning-mode"
+     );
 
     document
      .getElementById(
