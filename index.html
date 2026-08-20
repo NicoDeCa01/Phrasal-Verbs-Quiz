@@ -28848,11 +28848,281 @@ function efRestoreLegacyFields(backup){
   if(backup.medalDates&&typeof backup.medalDates==='object'&&!Array.isArray(backup.medalDates))safeStorageSet('pvMedalDates',JSON.stringify(backup.medalDates));if(backup.featuredMedal)safeStorageSet('pvFeaturedMedal',String(backup.featuredMedal));
 }
 function importBackup(event){
-  const file=event.target.files?.[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const backup=JSON.parse(reader.result);if(!backup||typeof backup!=='object'||Array.isArray(backup))throw new Error('invalid');
-      efRestoreLegacyFields(backup);
-      if(backup.storage&&typeof backup.storage==='object'&&!Array.isArray(backup.storage)){Object.entries(backup.storage).forEach(([key,value])=>{if(key.startsWith('pv')&&value!==undefined&&value!==null)safeStorageSet(key,String(value));});}
-      efMigrateLearningData();databaseSearchQuery='';closeAllModals(false,false);initialiseQuizSize();loadProfile();syncAchievements();updateHomeStats();renderHistory();renderDatabase();renderAccount();efRenderStudy();if(document.getElementById('stats')?.classList.contains('active'))efRenderStats();syncAppMode();playWoodClick();alert('Backup ripristinato correttamente.');
-    }catch(error){alert('Il file selezionato non è un backup valido.');}finally{event.target.value='';}};reader.readAsText(file);
+
+  const input=event.target;
+  const file=input.files?.[0];
+
+  if(!file){
+    return;
+  }
+
+  /*
+   Copia di sicurezza temporanea dello stato corrente.
+  */
+  const previousStorage={};
+
+  safeStorageKeys()
+   .filter(key=>key.startsWith('pv'))
+   .forEach(key=>{
+
+    const value=safeStorageGet(key);
+
+    if(value!==null){
+      previousStorage[key]=value;
+    }
+
+   });
+
+  const reader=new FileReader();
+
+  reader.onload=()=>{
+
+    let storageChanged=false;
+
+    try{
+
+      const backup=JSON.parse(reader.result);
+
+      if(
+       !backup
+       ||
+       typeof backup!=='object'
+       ||
+       Array.isArray(backup)
+      ){
+        throw new Error('invalid-backup');
+      }
+
+      const cleanBackup={
+       ...backup
+      };
+
+      const cleanStorage=(
+       backup.storage
+       &&
+       typeof backup.storage==='object'
+       &&
+       !Array.isArray(backup.storage)
+      )
+       ?
+       {
+        ...backup.storage
+       }
+       :
+       null;
+
+      const hasLegacyData=(
+       Array.isArray(backup.history)
+       ||
+       (
+        backup.stats
+        &&
+        typeof backup.stats==='object'
+        &&
+        !Array.isArray(backup.stats)
+       )
+      );
+
+      if(
+       !cleanStorage
+       &&
+       !hasLegacyData
+      ){
+        throw new Error('invalid-backup');
+      }
+
+      /*
+       Controllo della foto contenuta nel backup.
+      */
+      const restoredAvatarType=
+       cleanStorage?.pvAvatarType
+       ??
+       cleanBackup.avatarType
+       ??
+       null;
+
+      const restoredAvatarValue=
+       cleanStorage?.pvAvatarValue
+       ??
+       cleanBackup.avatarValue
+       ??
+       null;
+
+      let avatarSkipped=false;
+
+      if(
+       restoredAvatarType==='photo'
+       &&
+       restoredAvatarValue
+       &&
+       !(
+        typeof restoredAvatarValue==='string'
+        &&
+        /^data:image\/(?:jpeg|png|webp);base64,/i
+         .test(restoredAvatarValue)
+        &&
+        restoredAvatarValue.length<=900000
+       )
+      ){
+
+        avatarSkipped=true;
+
+        delete cleanBackup.avatarType;
+        delete cleanBackup.avatarValue;
+
+        if(cleanStorage){
+          delete cleanStorage.pvAvatarType;
+          delete cleanStorage.pvAvatarValue;
+        }
+
+      }
+
+      /*
+       Il vecchio stato viene rimosso solo dopo
+       che il backup è stato validato.
+      */
+      safeStorageKeys()
+       .filter(key=>key.startsWith('pv'))
+       .forEach(safeStorageRemove);
+
+      storageChanged=true;
+
+      efRestoreLegacyFields(
+       cleanBackup
+      );
+
+      if(cleanStorage){
+
+        Object.entries(cleanStorage)
+         .forEach(
+          ([key,value])=>{
+
+           if(
+            key.startsWith('pv')
+            &&
+            value!==undefined
+            &&
+            value!==null
+            &&
+            !safeStorageSet(
+             key,
+             String(value)
+            )
+           ){
+             throw new Error('storage-full');
+           }
+
+          }
+         );
+
+      }
+
+      /*
+       Se il backup è precedente al sistema V2,
+       la migrazione viene forzata nuovamente.
+      */
+      if(
+       !cleanStorage
+       ||
+       !Object.prototype.hasOwnProperty.call(
+        cleanStorage,
+        EF_STORAGE.stats
+       )
+      ){
+        safeStorageRemove(
+         EF_STORAGE.schema
+        );
+      }
+
+      efMigrateLearningData();
+
+      databaseSearchQuery='';
+
+      closeAllModals(
+       false,
+       false
+      );
+
+      initialiseQuizSize();
+      loadProfile();
+      syncAchievements();
+      updateHomeStats();
+      renderHistory();
+      renderDatabase();
+      renderAccount();
+      efRenderStudy();
+
+      if(
+       document
+        .getElementById('stats')
+        ?.classList
+        .contains('active')
+      ){
+        efRenderStats();
+      }
+
+      syncAppMode();
+      playWoodClick();
+
+      alert(
+       avatarSkipped
+       ?
+       'Backup ripristinato. La vecchia foto profilo non è stata importata perché troppo grande o non valida.'
+       :
+       'Backup ripristinato correttamente.'
+      );
+
+    }catch(error){
+
+      /*
+       Rollback completo in caso di errore.
+      */
+      if(storageChanged){
+
+        safeStorageKeys()
+         .filter(key=>key.startsWith('pv'))
+         .forEach(safeStorageRemove);
+
+        Object.entries(previousStorage)
+         .forEach(
+          ([key,value])=>{
+           safeStorageSet(
+            key,
+            value
+           );
+          }
+         );
+
+      }
+
+      alert(
+       error?.message==='storage-full'
+       ?
+       'Spazio insufficiente per ripristinare questo backup. I dati precedenti sono stati ripristinati.'
+       :
+       'Il file selezionato non è un backup valido. I dati precedenti non sono stati modificati.'
+      );
+
+    }finally{
+
+      input.value='';
+
+    }
+
+  };
+
+  reader.onerror=()=>{
+
+    input.value='';
+
+    alert(
+     'Non è stato possibile leggere il file di backup.'
+    );
+
+  };
+
+  reader.readAsText(file);
+
 }
 function resetAllData(){
   if(!confirm('Vuoi davvero cancellare tutti i dati di English Forge? Storico, statistiche, mastery, SRS, profilo, preferenze e medaglie verranno rimossi.'))return;playWoodClick();safeStorageKeys().filter(k=>k.startsWith('pv')).forEach(safeStorageRemove);selectedQuizSize=20;databaseSortKey='alpha';databaseSortDir='asc';databaseSearchQuery='';activeSessionStart=Date.now();closeAllModals(false,false);EF_SESSION=null;EF_AVATAR_DRAFT=null;document.getElementById('appShell')?.classList.remove('quiz-mode','learning-mode');resetQuizView();closeHistoryDetail(false);loadProfile();updateHomeStats();renderHistory();renderDatabase();renderAccount();efRenderStudy();showScreen('home');
