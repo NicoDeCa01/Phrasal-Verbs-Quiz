@@ -15193,94 +15193,85 @@ function getLevelPerformance(stats) {
 
     const result = {};
 
-
-    CEFR_ORDER.forEach(
-     level => {
-
+    CEFR_ORDER.forEach(level => {
       result[level] = {
        level,
-       distinct:
-        0,
-       attempts:
-        0,
-       correct:
-        0,
-       wrong:
-        0,
-       accuracy:
-        null
+       distinct: 0,
+       attempts: 0,
+       correct: 0,
+       wrong: 0,
+       accuracy: null
       };
+    });
 
-     }
-    );
+    const learningStats =
+     typeof efGetLearningStats === "function"
+     ? efGetLearningStats()
+     : {};
 
+    const learningEntries =
+     Object.values(learningStats).filter(
+      entry =>
+       entry
+       && Number(entry.attempts || 0) > 0
+       && result[entry.level]
+     );
 
-    phrasalVerbs.forEach(
-     item => {
+    if (learningEntries.length) {
 
-      const stat =
-       stats[item[0]];
+      learningEntries.forEach(entry => {
+        const bucket = result[entry.level];
 
+        bucket.distinct++;
+        bucket.attempts += Number(entry.attempts || 0);
+        bucket.correct += Number(entry.correct || 0);
+        bucket.wrong += Number(entry.wrong || 0);
+      });
 
-      if (
-        !stat
-        ||
-        Number(stat.seen || 0) <= 0
-      ){
-        return;
-      }
+    } else {
 
+      /*
+       Compatibilità con i dati precedenti:
+       se il sistema V2 non contiene ancora statistiche,
+       vengono utilizzati i vecchi dati Phrasal Verbs.
+      */
 
-      const level =
-       item[5];
+      phrasalVerbs.forEach(item => {
+        const stat = stats[item[0]];
 
-      const bucket =
-       result[level];
+        if (!stat || Number(stat.seen || 0) <= 0) {
+          return;
+        }
 
+        const bucket = result[item[5]];
 
-      if (!bucket) {
-        return;
-      }
+        if (!bucket) {
+          return;
+        }
 
+        bucket.distinct++;
+        bucket.attempts += Number(stat.seen || 0);
+        bucket.correct += Number(stat.correct || 0);
+        bucket.wrong += Number(stat.wrong || 0);
+      });
 
-      bucket.distinct++;
-      bucket.attempts +=
-       Number(stat.seen || 0);
-      bucket.correct +=
-       Number(stat.correct || 0);
-      bucket.wrong +=
-       Number(stat.wrong || 0);
+    }
 
-     }
-    );
+    CEFR_ORDER.forEach(level => {
+      const bucket = result[level];
 
-
-    CEFR_ORDER.forEach(
-     level => {
-
-      const bucket =
-       result[level];
-
-
-      bucket.accuracy =
-       bucket.attempts
-       ?
-       Math.round(
-        bucket.correct
-        /
-        bucket.attempts
-        *
-        100
-       )
-       :
-       null;
-
-     }
-    );
-
+      bucket.accuracy = bucket.attempts
+       ? Math.round(
+          bucket.correct
+          /
+          bucket.attempts
+          *
+          100
+         )
+       : null;
+    });
 
     return result;
-
 }
 
 
