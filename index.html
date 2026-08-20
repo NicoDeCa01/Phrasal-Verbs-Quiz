@@ -10,8 +10,28 @@
 />
 
 <meta
+ name="apple-mobile-web-app-capable"
+ content="yes"
+/>
+
+<meta
+ name="mobile-web-app-capable"
+ content="yes"
+/>
+
+<meta
+ name="apple-mobile-web-app-status-bar-style"
+ content="black-translucent"
+/>
+
+<meta
+ name="apple-mobile-web-app-title"
+ content="English Forge"
+/>
+
+<meta
  name="theme-color"
- content="#171d2d"
+ content="#fbfaf6"
 />
 
 <title>English Forge</title>
@@ -4661,6 +4681,36 @@ body{
   color:var(--forge-ink);
   overscroll-behavior-x:none;
 }
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  min-height: 100dvh;
+}
+
+@media (display-mode: standalone) {
+
+  html,
+  body {
+    background: var(--forge-cream);
+  }
+
+  .app {
+    min-height: 100dvh;
+  }
+
+  .forge-brandbar {
+    padding-top:
+     calc(
+      10px
+      +
+      env(safe-area-inset-top)
+     );
+  }
+
+}
+
 .app{
   max-width:720px;
   min-height:100vh;
