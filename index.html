@@ -6231,7 +6231,448 @@ body {
   stroke-width: 1.9;
 }
 }
+/* =========================================================
+   HOME PROFILE HERO — AVATAR STUDIO STYLE
+========================================================= */
 
+.forge-profile-hero {
+  position: relative;
+  isolation: isolate;
+
+  min-height: 282px;
+
+  margin:
+   32px 0
+   29px;
+
+  padding:
+   22px
+   16px
+   15px;
+
+  overflow: visible;
+
+  background:
+   linear-gradient(
+    145deg,
+    #fffefa 0%,
+    #f8faff 58%,
+    #edf4ff 100%
+   );
+}
+
+
+.forge-profile-hero::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  z-index: -1;
+
+  border-radius: inherit;
+
+  background:
+   radial-gradient(
+    circle at 88% 20%,
+    rgba(46,103,217,.13),
+    transparent 37%
+   ),
+   linear-gradient(
+    145deg,
+    rgba(255,255,255,.15),
+    rgba(234,242,255,.2)
+   );
+
+  pointer-events: none;
+}
+
+
+.forge-profile-hero::after {
+  right: -55px;
+  top: -75px;
+
+  width: 220px;
+  height: 220px;
+
+  z-index: 0;
+
+  background:
+   radial-gradient(
+    circle,
+    rgba(197,154,69,.1),
+    rgba(197,154,69,0) 70%
+   );
+}
+
+
+.forge-home-copy {
+  position: relative;
+
+  z-index: 3;
+
+  width: 57%;
+}
+
+
+.forge-home-eyebrow {
+  margin-bottom: 5px;
+
+  color: var(--forge-gold);
+
+  font-size: 8.5px;
+  line-height: 1;
+  font-weight: 900;
+
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+}
+
+
+.forge-home-hello {
+  color: var(--forge-muted);
+
+  font-size: 15px;
+  line-height: 1.1;
+  font-weight: 750;
+}
+
+
+.forge-greeting {
+  margin-top: 1px;
+
+  color: var(--forge-navy);
+
+  font-family:
+   Georgia,
+   "Times New Roman",
+   serif;
+
+  font-size: 25px;
+  line-height: 1.03;
+  font-weight: 700;
+
+  letter-spacing: -.4px;
+
+  overflow-wrap: anywhere;
+}
+
+
+.forge-home-facts {
+  display: grid;
+
+  gap: 7px;
+
+  margin-top: 15px;
+}
+
+
+.forge-home-fact {
+  width: 100%;
+  min-width: 0;
+  min-height: 43px;
+
+  display: grid;
+
+  grid-template-columns:
+   30px
+   minmax(0,1fr);
+
+  align-items: center;
+
+  gap: 8px;
+
+  padding:
+   6px
+   8px;
+
+  border:
+   1px solid
+   rgba(221,226,235,.88);
+
+  border-radius: 14px;
+
+  background:
+   rgba(255,255,255,.7);
+
+  color: var(--forge-ink);
+
+  text-align: left;
+
+  box-shadow:
+   0 4px 12px
+   rgba(17,35,65,.035);
+}
+
+
+button.forge-home-fact {
+  appearance: none;
+  cursor: pointer;
+}
+
+
+.forge-home-fact-icon {
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: var(--forge-blue-soft);
+
+  color: var(--forge-blue);
+}
+
+
+.forge-home-fact-icon svg {
+  width: 17px;
+  height: 17px;
+}
+
+
+.forge-home-fact-content {
+  min-width: 0;
+
+  display: block;
+}
+
+
+.forge-home-fact-content small {
+  display: block;
+
+  margin-bottom: 1px;
+
+  color: var(--forge-muted);
+
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 750;
+}
+
+
+.forge-home-fact-value {
+  min-width: 0;
+
+  display: flex;
+
+  align-items: baseline;
+
+  gap: 5px;
+}
+
+
+.forge-home-fact-value strong {
+  color: var(--forge-navy);
+
+  font-size: 13px;
+  line-height: 1.15;
+  font-weight: 900;
+}
+
+
+.forge-home-fact-value em {
+  min-width: 0;
+
+  overflow: hidden;
+
+  color: var(--forge-muted);
+
+  font-size: 7.5px;
+  line-height: 1;
+
+  font-style: normal;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.forge-home-avatar-stage {
+  position: absolute;
+
+  right: -10px;
+  top: -47px;
+
+  z-index: 2;
+
+  width: 51%;
+  height: 265px;
+
+  padding: 0;
+
+  overflow: visible;
+
+  border: 0;
+
+  background: transparent;
+
+  color: inherit;
+
+  appearance: none;
+}
+
+
+.forge-home-avatar {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  overflow: visible;
+
+  border: 0;
+  border-radius: 0;
+
+  background: transparent;
+
+  box-shadow: none;
+
+  filter:
+   drop-shadow(
+    0 14px 16px
+    rgba(17,35,65,.16)
+   );
+}
+
+
+.forge-home-avatar img,
+.forge-home-avatar svg {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  overflow: visible;
+
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+
+/*
+ Rimuove lo sfondo quadrato dagli avatar SVG
+ solamente nella hero della Home.
+*/
+.forge-home-avatar svg > rect:first-of-type,
+.forge-home-avatar svg > path:first-of-type {
+  display: none;
+}
+
+
+.forge-home-avatar-edit {
+  position: absolute;
+
+  right: 18px;
+  bottom: 25px;
+
+  width: 31px;
+  height: 31px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border:
+   1px solid
+   #dce3ee;
+
+  border-radius: 50%;
+
+  background: white;
+
+  color: var(--forge-navy);
+
+  box-shadow:
+   0 5px 13px
+   rgba(17,35,65,.15);
+}
+
+
+.forge-home-avatar-edit svg {
+  width: 14px;
+  height: 14px;
+}
+
+
+.forge-profile-hero .forge-overall-progress {
+  position: relative;
+
+  z-index: 5;
+
+  margin-top: 18px;
+
+  padding:
+   12px
+   4px
+   0;
+
+  background:
+   rgba(255,254,250,.76);
+
+  backdrop-filter:
+   blur(8px);
+
+  -webkit-backdrop-filter:
+   blur(8px);
+}
+
+
+/*
+ Per ora la scelta rimane esclusivamente
+ basata sugli avatar.
+*/
+.upload-photo-button {
+  display: none !important;
+}
+
+
+@media (max-width:390px) {
+
+  .forge-profile-hero {
+    min-height: 286px;
+
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .forge-home-copy {
+    width: 59%;
+  }
+
+  .forge-greeting {
+    font-size: 22px;
+  }
+
+  .forge-home-avatar-stage {
+    right: -18px;
+    top: -40px;
+
+    width: 52%;
+    height: 250px;
+  }
+
+  .forge-home-fact {
+    grid-template-columns:
+     27px
+     minmax(0,1fr);
+
+    gap: 6px;
+
+    padding:
+     6px;
+  }
+
+  .forge-home-fact-icon {
+    width: 27px;
+    height: 27px;
+  }
+
+}
 </style>
 </head>
 
@@ -6255,25 +6696,123 @@ body {
   <section id="home" class="screen active">
     <div id="startArea">
       <div class="forge-card forge-profile-hero">
-        <div class="forge-profile-main">
-          <div class="forge-home-avatar-wrap" onclick="openAvatarStudio()" role="button" tabindex="0" aria-label="Personalizza avatar">
-            <div id="homeAvatar" class="forge-home-avatar"></div>
-            <span class="forge-avatar-pencil"><span data-ef-icon="edit"></span></span>
-          </div>
-          <div>
-            <div class="forge-greeting" id="homeGreeting">Ciao!</div>
-            <div class="forge-motto">Keep learning, keep growing.</div>
-            <div class="forge-mini-kpis">
-              <div class="forge-mini-kpi"><span data-ef-icon="flame"></span><strong id="homeStudyDays">0</strong><span>giorni attivi</span></div>
-              <div class="forge-mini-kpi"><span data-ef-icon="trophy"></span><strong id="homeAttemptCount">0</strong><span>sessioni</span></div>
-            </div>
-          </div>
-          <div class="forge-cefr-box" onclick="showScreen('stats')" role="button" tabindex="0">
-            <span>Livello</span>
-            <strong id="homeCefr">&#x2014;</strong>
-            <small id="homeCefrLabel">In valutazione</small>
-          </div>
-        </div>
+
+  <div class="forge-home-copy">
+
+    <div class="forge-home-eyebrow">
+      Welcome back
+    </div>
+
+    <div class="forge-home-hello">
+      Ciao,
+    </div>
+
+    <div
+      class="forge-greeting"
+      id="homeGreeting"
+    >
+      My Account
+    </div>
+
+
+    <div class="forge-home-facts">
+
+      <button
+        type="button"
+        class="forge-home-fact"
+        onclick="showScreen('stats')"
+      >
+        <span
+          class="forge-home-fact-icon"
+          data-ef-icon="cap"
+        ></span>
+
+        <span class="forge-home-fact-content">
+          <small>Livello</small>
+
+          <span class="forge-home-fact-value">
+            <strong id="homeCefr">—</strong>
+            <em id="homeCefrLabel">In valutazione</em>
+          </span>
+        </span>
+      </button>
+
+
+      <div class="forge-home-fact">
+        <span
+          class="forge-home-fact-icon"
+          data-ef-icon="clock"
+        ></span>
+
+        <span class="forge-home-fact-content">
+          <small>Tempo di studio</small>
+
+          <span class="forge-home-fact-value">
+            <strong id="homeStudyTime">0s</strong>
+          </span>
+        </span>
+      </div>
+
+
+      <div class="forge-home-fact">
+        <span
+          class="forge-home-fact-icon"
+          data-ef-icon="flame"
+        ></span>
+
+        <span class="forge-home-fact-content">
+          <small>Streak quiz</small>
+
+          <span class="forge-home-fact-value">
+            <strong>
+              <span id="homeStudyStreak">0</span>
+              giorni
+            </strong>
+          </span>
+        </span>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <button
+    type="button"
+    class="forge-home-avatar-stage"
+    onclick="openAvatarStudio()"
+    aria-label="Apri Avatar Studio"
+  >
+    <span
+      id="homeAvatar"
+      class="forge-home-avatar"
+    ></span>
+
+    <span class="forge-home-avatar-edit">
+      <span data-ef-icon="edit"></span>
+    </span>
+  </button>
+
+
+  <div class="forge-overall-progress">
+    <span>Progressi generali</span>
+
+    <div class="forge-progress-track">
+      <div
+        id="homeProgressBar"
+        class="forge-progress-fill"
+      ></div>
+    </div>
+
+    <div
+      id="homeProgressText"
+      class="forge-progress-value"
+    >
+      0%
+    </div>
+  </div>
+
+</div>
         <div class="forge-overall-progress">
           <span>Progressi generali</span>
           <div class="forge-progress-track"><div id="homeProgressBar" class="forge-progress-fill"></div></div>
