@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -15030,56 +15028,336 @@ function setCustomAvatar(key) {
 }
 
 
-function loadAvatarPhoto(event) {
+function isSafeAvatarPhotoData(value) {
 
-    const file =
-     event.target.files[0];
+    return (
+     typeof value === "string"
+     &&
+     /^data:image\/(?:jpeg|png|webp);base64,/i
+      .test(value)
+     &&
+     value.length <= 900000
+    );
+
+}
 
 
-    if (!file) {
+function compressAvatarPhoto(file) {
+
+    return new Promise(
+     (resolve,reject) => {
+
+      if(
+       !file
+       ||
+       !String(file.type || "")
+        .startsWith("image/")
+      ){
+        reject(
+         new Error("invalid-type")
+        );
+
+        return;
+      }
+
+      if(
+       Number(file.size || 0)
+       >
+       15 * 1024 * 1024
+      ){
+        reject(
+         new Error("file-too-large")
+        );
+
+        return;
+      }
+
+      const reader=
+       new FileReader();
+
+      reader.onerror=
+       ()=>
+        reject(
+         new Error("read-failed")
+        );
+
+      reader.onload=
+       () => {
+
+        const image=
+         new Image();
+
+        image.onerror=
+         ()=>
+          reject(
+           new Error("decode-failed")
+          );
+
+        image.onload=
+         () => {
+
+          try{
+
+            const maxSide=512;
+
+            const scale=
+             Math.min(
+              1,
+              maxSide
+              /
+              Math.max(
+               image.naturalWidth,
+               image.naturalHeight
+              )
+             );
+
+            const width=
+             Math.max(
+              1,
+              Math.round(
+               image.naturalWidth
+               *
+               scale
+              )
+             );
+
+            const height=
+             Math.max(
+              1,
+              Math.round(
+               image.naturalHeight
+               *
+               scale
+              )
+             );
+
+            const canvas=
+             document.createElement(
+              "canvas"
+             );
+
+            canvas.width=width;
+            canvas.height=height;
+
+            const context=
+             canvas.getContext("2d");
+
+            if(!context){
+              throw new Error(
+               "canvas-failed"
+              );
+            }
+
+            /*
+             Sfondo bianco per le immagini
+             originariamente trasparenti.
+            */
+            context.fillStyle=
+             "#ffffff";
+
+            context.fillRect(
+             0,
+             0,
+             width,
+             height
+            );
+
+            context.drawImage(
+             image,
+             0,
+             0,
+             width,
+             height
+            );
+
+            let compressed=
+             canvas.toDataURL(
+              "image/jpeg",
+              .82
+             );
+
+            if(
+             compressed.length
+             >
+             750000
+            ){
+              compressed=
+               canvas.toDataURL(
+                "image/jpeg",
+                .68
+               );
+            }
+
+            if(
+             !isSafeAvatarPhotoData(
+              compressed
+             )
+            ){
+              throw new Error(
+               "compressed-too-large"
+              );
+            }
+
+            resolve(
+             compressed
+            );
+
+          }catch(error){
+
+            reject(error);
+
+          }
+
+        };
+
+        image.src=
+         String(
+          reader.result || ""
+         );
+
+      };
+
+      reader.readAsDataURL(
+       file
+      );
+
+     }
+    );
+
+}
+
+
+async function loadAvatarPhoto(event) {
+
+    const input=
+     event.target;
+
+    const file=
+     input.files?.[0];
+
+    if(!file){
       return;
     }
 
+    const previousType=
+     safeStorageGet(
+      "pvAvatarType"
+     );
 
-    const reader =
-     new FileReader();
+    const previousValue=
+     safeStorageGet(
+      "pvAvatarValue"
+     );
 
+    try{
 
-    reader.onload =
-     function() {
+      const compressed=
+       await compressAvatarPhoto(
+        file
+       );
 
-      safeStorageSet(
-       "pvAvatarType",
-       "photo"
-      );
+      /*
+       Il valore viene salvato prima del tipo:
+       se manca spazio, l'avatar precedente
+       rimane ancora utilizzabile.
+      */
+      if(
+       !safeStorageSet(
+        "pvAvatarValue",
+        compressed
+       )
+      ){
+        throw new Error(
+         "storage-full"
+        );
+      }
 
+      if(
+       !safeStorageSet(
+        "pvAvatarType",
+        "photo"
+       )
+      ){
 
-      safeStorageSet(
-       "pvAvatarValue",
-       reader.result
-      );
+        safeStorageRemove(
+         "pvAvatarValue"
+        );
 
+        if(
+         previousValue !== null
+        ){
+          safeStorageSet(
+           "pvAvatarValue",
+           previousValue
+          );
+        }
+
+        throw new Error(
+         "storage-full"
+        );
+
+      }
 
       playWoodClick();
-
-
       loadProfile();
 
-
       document
-          .getElementById(
-            "avatarPanel"
-          )
-          .classList.remove(
-            "open"
-          );
+       .getElementById(
+        "avatarPanel"
+       )
+       ?.classList
+       .remove(
+        "open"
+       );
 
-     };
+    }catch(error){
 
+      /*
+       Ripristino del vecchio avatar.
+      */
+      if(previousType !== null){
 
-    reader.readAsDataURL(
-     file
-    );
+        safeStorageSet(
+         "pvAvatarType",
+         previousType
+        );
+
+      }else{
+
+        safeStorageRemove(
+         "pvAvatarType"
+        );
+
+      }
+
+      if(previousValue !== null){
+
+        safeStorageSet(
+         "pvAvatarValue",
+         previousValue
+        );
+
+      }else{
+
+        safeStorageRemove(
+         "pvAvatarValue"
+        );
+
+      }
+
+      alert(
+       error?.message === "file-too-large"
+       ?
+       "La foto è troppo grande. Scegli un'immagine inferiore a 15 MB."
+       :
+       "Non è stato possibile salvare la foto. Prova con un'immagine JPG, PNG o WebP."
+      );
+
+    }finally{
+
+      input.value="";
+
+    }
 
 }
 
@@ -28294,10 +28572,39 @@ function efCurrentAvatarConfig(){
   let accessory=safeStorageGet(EF_STORAGE.avatarAccessory)||'none';if(!EF_ACCESSORIES[accessory])accessory='none';
   return {type,value:legacy,animal,outfit,accessory};
 }
-function efRenderAvatarInto(node,config,allowPhoto=true){
-  if(!node)return;
-  if(allowPhoto&&config.type==='photo'&&config.value){node.innerHTML=`<img src="${config.value}" alt="Foto profilo"/>`;return;}
-  node.innerHTML=efAvatarMarkup(config.animal,config.outfit,config.accessory);
+function efRenderAvatarInto(
+ node,
+ config,
+ allowPhoto=true
+){
+
+  if(!node){
+    return;
+  }
+
+  if(
+   allowPhoto
+   &&
+   config.type==='photo'
+   &&
+   isSafeAvatarPhotoData(
+    config.value
+   )
+  ){
+
+    node.innerHTML=
+     `<img src="${config.value}" alt="Foto profilo"/>`;
+
+    return;
+  }
+
+  node.innerHTML=
+   efAvatarMarkup(
+    config.animal,
+    config.outfit,
+    config.accessory
+   );
+
 }
 function loadProfile(){
   const name=safeStorageGet('pvProfileName')||'My Account';
