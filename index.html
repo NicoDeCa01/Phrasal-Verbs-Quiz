@@ -15837,115 +15837,72 @@ container.innerHTML =
 
 }
 
-
 function loadProfile() {
 
-    const name =
-     safeStorageGet(
-       "pvProfileName"
-     )
-     ||
-     "My Account";
+  const name =
+   safeStorageGet(
+    "pvProfileName"
+   )
+   ||
+   "My Account";
 
 
-    document
-     .getElementById(
-       "profileNameDisplay"
-     )
-     .textContent =
-       name;
+  const display =
+   document.getElementById(
+    "profileNameDisplay"
+   );
+
+  if (display) {
+    display.textContent = name;
+  }
 
 
-    document
-     .getElementById(
-       "accountNameInput"
-     )
-     .value =
-       name;
+  const input =
+   document.getElementById(
+    "accountNameInput"
+   );
+
+  if (input) {
+    input.value = name;
+  }
 
 
-    let avatarType =
-    safeStorageGet(
-     "pvAvatarType"
-    );
+  const config =
+   efCurrentAvatarConfig();
 
 
-let avatarValue =
- safeStorageGet(
-  "pvAvatarValue"
- );
+  /*
+   false impedisce di mostrare una foto personale.
+   Viene sempre usato l'avatar scelto nello Studio.
+  */
+  efRenderAvatarInto(
+   document.getElementById(
+    "profileAvatar"
+   ),
+   config,
+   false
+  );
+
+  efRenderAvatarInto(
+   document.getElementById(
+    "homeAvatar"
+   ),
+   config,
+   false
+  );
 
 
-if (
-  avatarType !== "photo"
-  &&
-  (
-    avatarType !== "custom"
-    ||
-    !avatarDefinitions[
-      avatarValue
-    ]
-  )
-){
+  const greeting =
+   document.getElementById(
+    "homeGreeting"
+   );
 
-    avatarType =
-     "custom";
-
-
-    avatarValue =
-     "lion";
-
-
-    safeStorageSet(
-     "pvAvatarType",
-     "custom"
-    );
-
-
-    safeStorageSet(
-     "pvAvatarValue",
-     "lion"
-    );
+  if (greeting) {
+    greeting.textContent = name;
+  }
 
 }
 
-
-const avatar =
-        document.getElementById(
-         "profileAvatar"
-        );
-
-
-    if (
-      avatarType === "photo"
-      &&
-      avatarValue
-    ){
-
-        avatar.innerHTML =
-         `          <img            src="${avatarValue}"            alt="Foto profilo"          />          `;
-
-    } else {
-
-        const key =
-         avatarDefinitions[
-           avatarValue
-         ]
-         ?
-         avatarValue
-         :
-         "lion";
-
-
-        avatar.innerHTML =
-         `          <img            src="${makeAnimalAvatar(key)}"            alt="${avatarDefinitions[key].name}"          />          `;
-
-    }
-
-
-    renderAvatarOptions();
-
-}
 function toggleAvatarPanel() {
 
     document
@@ -29658,11 +29615,131 @@ function openAccountDashboard(){showScreen('account');setTimeout(()=>document.ge
 function openLatestQuiz(){showScreen('history');setTimeout(()=>openHistoryDetail(0),60);}
 
 function efCefrLabel(level){return ({A1:'Beginner',A2:'Elementary',B1:'Intermediate',B2:'Upper Intermediate',C1:'Advanced',C2:'Proficient'})[level]||'In valutazione';}
-function efActiveDays(){
-  const dates=new Set();
-  loadHistory().forEach(h=>{const d=new Date(h.date);if(!Number.isNaN(d.getTime()))dates.add(d.toISOString().slice(0,10));});
-  efGetEvents().forEach(e=>{const d=new Date(e.timestamp);if(!Number.isNaN(d.getTime()))dates.add(d.toISOString().slice(0,10));});
-  return dates.size;
+function efLocalDateKey(value) {
+
+  const date =
+   new Date(value);
+
+
+  if (
+   Number.isNaN(
+    date.getTime()
+   )
+  ) {
+    return null;
+  }
+
+
+  const year =
+   date.getFullYear();
+
+  const month =
+   String(
+    date.getMonth() + 1
+   )
+   .padStart(
+    2,
+    "0"
+   );
+
+  const day =
+   String(
+    date.getDate()
+   )
+   .padStart(
+    2,
+    "0"
+   );
+
+
+  return `${year}-${month}-${day}`;
+
+}
+
+
+function efQuizStreak() {
+
+  const quizActivities =
+   new Set([
+    "classicQuiz",
+    "quiz",
+    "boss",
+    "dailyChallenge"
+   ]);
+
+
+  const completedDays =
+   new Set(
+    loadHistory()
+     .filter(
+      item =>
+       quizActivities.has(
+        item.activityType
+        ||
+        "classicQuiz"
+       )
+     )
+     .map(
+      item =>
+       efLocalDateKey(
+        item.date
+       )
+     )
+     .filter(Boolean)
+   );
+
+
+  if (!completedDays.size) {
+    return 0;
+  }
+
+
+  const cursor =
+   new Date();
+
+  cursor.setHours(
+   12,
+   0,
+   0,
+   0
+  );
+
+
+  /*
+   Se oggi non è ancora stato completato un quiz,
+   controlla la streak maturata fino a ieri.
+  */
+  if (
+   !completedDays.has(
+    efLocalDateKey(cursor)
+   )
+  ) {
+    cursor.setDate(
+     cursor.getDate() - 1
+    );
+  }
+
+
+  let streak = 0;
+
+
+  while (
+   completedDays.has(
+    efLocalDateKey(cursor)
+   )
+  ) {
+
+    streak++;
+
+    cursor.setDate(
+     cursor.getDate() - 1
+    );
+
+  }
+
+
+  return streak;
+
 }
 function efTotalSessions(){return loadHistory().length;}
 function efUnifiedAccuracy(){
@@ -29671,14 +29748,96 @@ function efUnifiedAccuracy(){
   if(!attempts){const history=loadHistory();const vals=history.map(h=>Number(h.percentage)).filter(Number.isFinite);return vals.length?Math.round(vals.reduce((a,b)=>a+b,0)/vals.length):null;}
   return Math.round(correct/attempts*100);
 }
-function updateHomeStats(){
+function updateHomeStats() {
+
   loadProfile();
-  const cefr=estimateUserCefr(loadStats());const level=cefr?.level||null;
-  const cNode=document.getElementById('homeCefr'),lNode=document.getElementById('homeCefrLabel');if(cNode)cNode.textContent=level||'\u2014';if(lNode)lNode.textContent=efCefrLabel(level);
-  const days=document.getElementById('homeStudyDays');if(days)days.textContent=efActiveDays();
-  const sessions=document.getElementById('homeAttemptCount');if(sessions)sessions.textContent=efTotalSessions();
-  const progress=efOverallMastery();const bar=document.getElementById('homeProgressBar'),text=document.getElementById('homeProgressText');if(bar)bar.style.width=`${progress}%`;if(text)text.textContent=`${progress}%`;
-  efRenderHomeModules();efUpdateDailyNotice();
+
+
+  const cefr =
+   estimateUserCefr(
+    loadStats()
+   );
+
+  const level =
+   cefr?.level || null;
+
+
+  const cefrNode =
+   document.getElementById(
+    "homeCefr"
+   );
+
+  const cefrLabelNode =
+   document.getElementById(
+    "homeCefrLabel"
+   );
+
+
+  if (cefrNode) {
+    cefrNode.textContent =
+     level || "—";
+  }
+
+
+  if (cefrLabelNode) {
+    cefrLabelNode.textContent =
+     efCefrLabel(level);
+  }
+
+
+  const timeNode =
+   document.getElementById(
+    "homeStudyTime"
+   );
+
+  if (timeNode) {
+    timeNode.textContent =
+     formatStudyDuration(
+      getCompletedTestTime()
+     );
+  }
+
+
+  const streakNode =
+   document.getElementById(
+    "homeStudyStreak"
+   );
+
+  if (streakNode) {
+    streakNode.textContent =
+     efQuizStreak();
+  }
+
+
+  const progress =
+   efOverallMastery();
+
+  const bar =
+   document.getElementById(
+    "homeProgressBar"
+   );
+
+  const text =
+   document.getElementById(
+    "homeProgressText"
+   );
+
+
+  if (bar) {
+    bar.style.width =
+     `${progress}%`;
+  }
+
+
+  if (text) {
+    text.textContent =
+     `${progress}%`;
+  }
+
+
+  efRenderHomeModules();
+  efUpdateDailyNotice();
+
 }
 function efModuleCardHTML(moduleId){
   const cfg=EF_MODULE_CONFIG[moduleId],metrics=efModuleMetrics(moduleId);
