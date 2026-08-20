@@ -5914,20 +5914,148 @@ body {
   .forge-section-title{font-size:19px;letter-spacing:-.3px;}
   .forge-text-button{font-size:11px;padding:6px 0;}
 
-  .forge-module-grid{
-    grid-template-columns:repeat(4,minmax(0,1fr));
-    gap:7px;
-    margin-bottom:16px;
-  }
-  .forge-module-card{min-height:124px;padding:9px 7px;border-radius:16px;}
-  .forge-module-icon{width:38px;height:38px;margin-bottom:7px;border-radius:12px;}
-  .forge-module-icon svg{width:24px;height:24px;}
-  .forge-module-title{min-height:28px;font-size:11.5px;line-height:1.08;letter-spacing:-.1px;}
-  .forge-module-meta{margin-top:2px;font-size:8.5px;}
-  .forge-module-foot{gap:4px;margin-top:7px;}
-  .forge-module-foot .forge-progress-track{height:5px;}
-  .forge-module-foot .forge-progress-value{font-size:8.5px;}
-  .forge-cefr-pill{margin-top:6px;padding:3px 6px;font-size:8px;}
+.forge-scroll-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+
+  color: var(--forge-muted);
+
+  font-size: 10.5px;
+  font-weight: 800;
+
+  pointer-events: none;
+}
+
+.forge-scroll-hint svg {
+  width: 13px;
+  height: 13px;
+}
+
+
+.forge-module-grid {
+  display: grid;
+
+  grid-template-columns: none;
+  grid-auto-flow: column;
+
+  /*
+   Tre card complete occupano quasi tutta la larghezza.
+   Una piccola porzione successiva suggerisce lo swipe.
+  */
+  grid-auto-columns:
+   calc(
+    (
+     100%
+     -
+     20px
+    )
+    /
+    3
+   );
+
+  gap: 10px;
+
+  margin-bottom: 20px;
+
+  padding:
+   2px
+   2px
+   11px;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: 2px;
+
+  overscroll-behavior-x: contain;
+  touch-action: pan-x;
+
+  -webkit-overflow-scrolling: touch;
+
+  scrollbar-width: none;
+}
+
+
+.forge-module-grid::-webkit-scrollbar {
+  display: none;
+}
+
+
+.forge-module-card {
+  min-width: 0;
+  min-height: 166px;
+
+  padding:
+   13px
+   10px;
+
+  border-radius: 18px;
+
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+}
+
+
+.forge-module-icon {
+  width: 45px;
+  height: 45px;
+
+  margin-bottom: 10px;
+
+  border-radius: 14px;
+}
+
+
+.forge-module-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+
+.forge-module-title {
+  min-height: 34px;
+
+  font-size: 13px;
+  line-height: 1.1;
+  letter-spacing: -0.1px;
+}
+
+
+.forge-module-meta {
+  margin-top: 4px;
+
+  font-size: 9.5px;
+}
+
+
+.forge-module-foot {
+  gap: 6px;
+
+  margin-top: 10px;
+}
+
+
+.forge-module-foot .forge-progress-track {
+  height: 6px;
+}
+
+
+.forge-module-foot .forge-progress-value {
+  font-size: 9.5px;
+}
+
+
+.forge-cefr-pill {
+  margin-top: 9px;
+
+  padding:
+   4px
+   8px;
+
+  font-size: 9px;
+}
 
   .forge-quick-grid{
     grid-template-columns:repeat(4,minmax(0,1fr));
@@ -6076,11 +6204,15 @@ body {
         </div>
       </div>
 
-      <div class="forge-section-head">
-        <h2>Scegli una sezione</h2>
-        <button class="forge-text-button" onclick="showScreen('study')">Vedi tutte <span data-ef-icon="chevron"></span></button>
-      </div>
-      <div id="homeModuleGrid" class="forge-module-grid"></div>
+<div class="forge-section-head">
+  <h2>Scegli una sezione</h2>
+  <span class="forge-scroll-hint">
+    Scorri
+    <span data-ef-icon="chevron"></span>
+  </span>
+</div>
+
+<div id="homeModuleGrid" class="forge-module-grid"></div>
 
       <div class="forge-section-head">
         <h2>Allenamento rapido</h2>
@@ -28931,9 +29063,26 @@ function efModuleCardHTML(moduleId){
   const cfg=EF_MODULE_CONFIG[moduleId],metrics=efModuleMetrics(moduleId);
   return `<button class="forge-module-card" onclick="efOpenModule('${moduleId}')"><div class="forge-module-icon">${efIcon(cfg.icon)}</div><div class="forge-module-title">${escapeHTML(cfg.name)}</div><div class="forge-module-meta">${metrics.total} elementi</div><div class="forge-module-foot"><div class="forge-progress-track"><div class="forge-progress-fill" style="width:${metrics.mastery}%"></div></div><div class="forge-progress-value">${metrics.mastery}%</div></div><span class="forge-cefr-pill">${escapeHTML(cfg.range)}</span></button>`;
 }
-function efRenderHomeModules(){
-  const host=document.getElementById('homeModuleGrid');if(!host)return;
-  host.innerHTML=EF_MODULE_ORDER.filter(id=>EF_MODULE_CONFIG[id].home).map(efModuleCardHTML).join('');
+function efRenderHomeModules() {
+
+  const host =
+   document.getElementById(
+    "homeModuleGrid"
+   );
+
+
+  if (!host) {
+    return;
+  }
+
+
+  host.innerHTML =
+   EF_MODULE_ORDER
+    .map(
+     efModuleCardHTML
+    )
+    .join("");
+
 }
 function efRenderStudy(){
   const host=document.getElementById('studyModuleGrid');if(!host)return;
