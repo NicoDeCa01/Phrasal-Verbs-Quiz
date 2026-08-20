@@ -28586,9 +28586,63 @@ function efBuildPhrasalQuestion(base,item,activity){
   if(activity==='synonym'){
     const synonym=EF_PHRASAL_SYNONYMS[item.verb],sentence=efReplacePhrasalExample(item,synonym,true);return {...base,type:'input',prompt:`Rewrite the highlighted idea with the appropriate phrasal verb:\n\n${sentence}`,context:`Meaning: ${capitalizeFirst(item.italian)}`,correctAnswer:item.verb,accepted:[item.verb]};
   }
-  if(activity==='correctSentence'){
-    const family=efRecords('phrasalVerbs').filter(r=>r.subtopic===item.subtopic&&r.id!==item.id);const wrong=shuffle(family).slice(0,3);const options=[item.exampleEN,...wrong.map(r=>efReplacePhrasalExample(item,r.verb,true))];return {...base,type:'choice',prompt:'Choose the only sentence whose phrasal verb fits the context.',options:shuffle(options),correctAnswer:item.exampleEN};
-  }
+if(activity==='correctSentence'){
+    const candidates=efRecords('phrasalVerbs').filter(r=>r.id!==item.id);
+
+    const sameFamily=shuffle(
+      candidates.filter(r=>r.subtopic===item.subtopic)
+    );
+
+    const sameLevel=shuffle(
+      candidates.filter(
+        r=>r.subtopic!==item.subtopic&&r.level===item.level
+      )
+    );
+
+    const otherLevels=shuffle(
+      candidates.filter(
+        r=>r.subtopic!==item.subtopic&&r.level!==item.level
+      )
+    );
+
+    const options=[item.exampleEN];
+    const used=new Set([
+      efNormalizeSentence(item.exampleEN)
+    ]);
+
+    for(const candidate of [
+      ...sameFamily,
+      ...sameLevel,
+      ...otherLevels
+    ]){
+      const sentence=efReplacePhrasalExample(
+        item,
+        candidate.verb,
+        true
+      );
+
+      const key=efNormalizeSentence(sentence);
+
+      if(!key||used.has(key)){
+        continue;
+      }
+
+      used.add(key);
+      options.push(sentence);
+
+      if(options.length===4){
+        break;
+      }
+    }
+
+    return {
+      ...base,
+      type:'choice',
+      prompt:'Choose the only sentence whose phrasal verb fits the context.',
+      options:shuffle(options),
+      correctAnswer:item.exampleEN
+    };
+}
   if(activity==='errorCorrection'){
     const family=efRecords('phrasalVerbs').filter(r=>r.subtopic===item.subtopic&&r.id!==item.id);const wrong=efRandom(family)||efRandom(efRecords('phrasalVerbs').filter(r=>r.id!==item.id));const wrongSentence=efReplacePhrasalExample(item,wrong.verb,true);return efBuildErrorQuestion(base,{...item,sentence:item.exampleEN,prompt:wrongSentence,errorChoice:wrong.verb,answer:item.verb,choices:[item.verb,wrong.verb,...shuffle(family).slice(0,2).map(r=>r.verb)]});
   }
