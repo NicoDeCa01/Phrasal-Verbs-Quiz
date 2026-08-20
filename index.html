@@ -4916,6 +4916,25 @@ body{
 .forge-size-chip.selected{background:var(--forge-blue);color:white;border-color:var(--forge-blue);}
 
 /* Stats */
+.forge-kpi-clickable {
+  width: 100%;
+  min-width: 0;
+  appearance: none;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.forge-kpi-clickable:active {
+  transform: scale(0.985);
+}
+
+.forge-kpi-clickable:focus-visible {
+  outline: 3px solid rgba(46, 103, 217, 0.25);
+  outline-offset: 2px;
+}
 .forge-kpi-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:18px;}
 .forge-kpi{padding:14px;border:1px solid #e7e4dc;border-radius:18px;background:#fffefa;box-shadow:0 5px 15px rgba(17,35,65,.035);}
 .forge-kpi strong{display:block;font-size:22px;letter-spacing:-.4px;}
@@ -6026,7 +6045,15 @@ body{
     <div class="forge-kpi-grid">
       <div class="forge-kpi"><strong id="statsQuizCount">0</strong><span>Sessioni completate</span></div>
       <div class="forge-kpi"><strong id="statsAccuracy">&#x2014;</strong><span>Accuracy complessiva</span></div>
-      <div class="forge-kpi"><strong id="statsTime">0m</strong><span>Tempo totale di studio</span></div>
+      <button
+  type="button"
+  class="forge-kpi forge-kpi-clickable"
+  onclick="openKpiModal('time')"
+  aria-label="Apri il dettaglio del tempo"
+>
+  <strong id="statsTime">0s</strong>
+  <span>Tempo effettivo nei test</span>
+</button>
       <div class="forge-kpi"><strong id="statsSrsDue">0</strong><span>Elementi SRS da ripassare</span></div>
     </div>
 
@@ -11096,7 +11123,42 @@ startVisibleSession();
 
 
 function getLiveTotalTime() {
+function getCompletedTestTime() {
+  return loadHistory().reduce(
+    (total, item) => {
+      const duration = Number(item?.durationSeconds);
 
+      return total + (
+        Number.isFinite(duration) && duration > 0
+          ? duration
+          : 0
+      );
+    },
+    0
+  );
+}
+
+
+function formatDetailedDuration(seconds) {
+  const total = Math.max(
+    0,
+    Math.floor(Number(seconds) || 0)
+  );
+
+  const hours = Math.floor(total / 3600);
+  const minutes = Math.floor((total % 3600) / 60);
+  const remainingSeconds = total % 60;
+
+  if (hours) {
+    return `${hours}h ${minutes}m ${remainingSeconds}s`;
+  }
+
+  if (minutes) {
+    return `${minutes}m ${remainingSeconds}s`;
+  }
+
+  return `${remainingSeconds}s`;
+}
     let total =
      getStoredTime();
 
@@ -28752,7 +28814,7 @@ function efRenderModuleDashboard(moduleId){
 
 function efRenderStats(){
   const history=loadHistory(),accuracy=efUnifiedAccuracy();
-  document.getElementById('statsQuizCount').textContent=history.length;document.getElementById('statsAccuracy').textContent=accuracy===null?'\u2014':`${accuracy}%`;document.getElementById('statsTime').textContent=formatDuration(getLiveTotalTime());document.getElementById('statsSrsDue').textContent=efSrsDueCount();
+  document.getElementById('statsQuizCount').textContent=history.length;document.getElementById('statsAccuracy').textContent=accuracy===null?'\u2014':`${accuracy}%`;document.getElementById('statsTime').textContent=formatDuration(getCompletedTestTime());document.getElementById('statsSrsDue').textContent=efSrsDueCount();
   const list=document.getElementById('statsModuleMastery');list.innerHTML=EF_MODULE_ORDER.map(id=>{const m=efModuleMetrics(id),cfg=EF_MODULE_CONFIG[id];return `<div class="forge-mastery-row"><strong>${escapeHTML(cfg.name)}</strong><div class="forge-progress-track"><div class="forge-progress-fill" style="width:${m.mastery}%"></div></div><span>${m.mastery}%</span></div>`;}).join('');
   const weak=efWeakItems(null,7),weakHost=document.getElementById('statsWeakest');weakHost.innerHTML=weak.length?weak.map(w=>`<div class="forge-weak-row"><div><strong>${escapeHTML(efItemLabel(w.moduleId,w.item))}</strong><span>${escapeHTML(EF_MODULE_CONFIG[w.moduleId]?.name||w.moduleId)} \u00B7 ${w.accuracy}% accuracy</span></div><strong>${w.mastery}%</strong></div>`).join(''):'<div class="forge-empty">Completa qualche esercizio: le aree deboli compariranno quando ci saranno dati sufficienti.</div>';
   renderPerformanceChart();
