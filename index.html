@@ -15449,35 +15449,89 @@ function estimateUserCefr(stats) {
 
 function getAccountMetrics() {
 
-    const history =
-     loadHistory();
+    const history = loadHistory();
 
-    const stats =
-     loadStats();
+    /*
+     Sono considerati quiz soltanto:
+     quiz classico, quiz di modulo, Boss Test
+     e Daily Challenge.
+    */
+    const quizActivities = new Set([
+     "classicQuiz",
+     "quiz",
+     "boss",
+     "dailyChallenge"
+    ]);
 
-    const totalTime =
-     getLiveTotalTime();
-
-
-    const percentages =
-     history
-      .map(
-       item =>
-        Number(item.percentage)
+    const quizHistory = history.filter(
+     item =>
+      quizActivities.has(
+       item.activityType || "classicQuiz"
       )
-      .filter(
-       value =>
-        Number.isFinite(value)
-      );
+    );
 
+    const legacyStats = loadStats();
 
-    const average =
-     percentages.length
+    const learningStats =
+     typeof efGetLearningStats === "function"
+     ? efGetLearningStats()
+     : {};
+
+    /*
+     Statistiche Phrasal Verbs unificate.
+     V2 ha la precedenza, ma i dati legacy
+     restano disponibili come fallback.
+    */
+    const stats = {};
+
+    phrasalVerbs.forEach(item => {
+      const verb = item[0];
+
+      const modern =
+       learningStats[
+        `phrasalVerbs:${efPhrasalId(verb)}`
+       ];
+
+      const legacy = legacyStats[verb];
+
+      if (
+       modern
+       &&
+       Number(modern.attempts || 0) > 0
+      ) {
+        stats[verb] = {
+         seen: Number(modern.attempts || 0),
+         correct: Number(modern.correct || 0),
+         wrong: Number(modern.wrong || 0)
+        };
+      } else if (
+       legacy
+       &&
+       Number(legacy.seen || 0) > 0
+      ) {
+        stats[verb] = {
+         seen: Number(legacy.seen || 0),
+         correct: Number(legacy.correct || 0),
+         wrong: Number(legacy.wrong || 0)
+        };
+      }
+    });
+
+    const totalTime = getLiveTotalTime();
+
+    /*
+     Media e durata sono calcolate soltanto
+     sulle attività realmente classificabili come quiz.
+    */
+    const percentages = quizHistory
+     .map(item => Number(item.percentage))
+     .filter(Number.isFinite);
+
+    const average = percentages.length
      ?
      Math.round(
       percentages.reduce(
-       (sum,value) =>
-        sum + value,
+       (sum,value) => sum + value,
        0
       )
       /
@@ -15486,28 +15540,20 @@ function getAccountMetrics() {
      :
      null;
 
+    const durations = quizHistory
+     .map(item => Number(item.durationSeconds))
+     .filter(
+      value =>
+       Number.isFinite(value)
+       &&
+       value > 0
+     );
 
-    const durations =
-     history
-      .map(
-       item =>
-        Number(item.durationSeconds)
-      )
-      .filter(
-       value =>
-        Number.isFinite(value)
-        &&
-        value > 0
-      );
-
-
-    const averageQuizTime =
-     durations.length
+    const averageQuizTime = durations.length
      ?
      Math.round(
       durations.reduce(
-       (sum,value) =>
-        sum + value,
+       (sum,value) => sum + value,
        0
       )
       /
@@ -15516,62 +15562,84 @@ function getAccountMetrics() {
      :
      null;
 
+    const statEntries = Object.values(stats);
 
-    const statEntries =
-     phrasalVerbs
-      .map(
-       item =>
-        stats[item[0]]
-      )
-      .filter(
-       stat =>
-        stat
-        &&
-        Number(stat.seen || 0) > 0
-      );
+    const tested = statEntries.length;
 
+    const phrasalAttempts = statEntries.reduce(
+     (sum,stat) =>
+      sum + Number(stat.seen || 0),
+     0
+    );
 
-    const tested =
-     statEntries.length;
+    const phrasalCorrect = statEntries.reduce(
+     (sum,stat) =>
+      sum + Number(stat.correct || 0),
+     0
+    );
 
-    const attempts =
-     statEntries.reduce(
-      (
-       sum,
-       stat
-      ) =>
-       sum
-       +
-       Number(stat.seen || 0),
-      0
+    const phrasalWrong = statEntries.reduce(
+     (sum,stat) =>
+      sum + Number(stat.wrong || 0),
+     0
+    );
+
+    /*
+     Performance complessiva English Forge:
+     tutti i moduli e tutte le attività verificabili.
+    */
+    const learningEntries =
+     Object.values(learningStats).filter(
+      entry =>
+       entry
+       &&
+       Number(entry.attempts || 0) > 0
      );
 
-    const totalCorrect =
-     statEntries.reduce(
-      (
-       sum,
-       stat
-      ) =>
-       sum
-       +
-       Number(stat.correct || 0),
-      0
-     );
+    let attempts = learningEntries.reduce(
+     (sum,entry) =>
+      sum + Number(entry.attempts || 0),
+     0
+    );
 
-    const totalWrong =
-     statEntries.reduce(
-      (
-       sum,
-       stat
-      ) =>
-       sum
-       +
-       Number(stat.wrong || 0),
-      0
-     );
+    let totalCorrect = learningEntries.reduce(
+     (sum,entry) =>
+      sum + Number(entry.correct || 0),
+     0
+    );
 
-    const overallAccuracy =
-     attempts
+    let totalWrong = learningEntries.reduce(
+     (sum,entry) =>
+      sum + Number(entry.wrong || 0),
+     0
+    );
+
+    /*
+     Aggiunge eventuali dati legacy non ancora migrati,
+     evitando di contarli due volte.
+    */
+    phrasalVerbs.forEach(item => {
+      const verb = item[0];
+
+      const modernKey =
+       `phrasalVerbs:${efPhrasalId(verb)}`;
+
+      const legacy = legacyStats[verb];
+
+      if (
+       !learningStats[modernKey]
+       &&
+       legacy
+       &&
+       Number(legacy.seen || 0) > 0
+      ) {
+        attempts += Number(legacy.seen || 0);
+        totalCorrect += Number(legacy.correct || 0);
+        totalWrong += Number(legacy.wrong || 0);
+      }
+    });
+
+    const overallAccuracy = attempts
      ?
      Math.round(
       totalCorrect
@@ -15583,28 +15651,27 @@ function getAccountMetrics() {
      :
      null;
 
-
     const cefr =
-     estimateUserCefr(
-      stats
-     );
-
+     estimateUserCefr(stats);
 
     return {
      history,
+     quizHistory,
      stats,
      totalTime,
      average,
      durations,
      averageQuizTime,
      tested,
+     phrasalAttempts,
+     phrasalCorrect,
+     phrasalWrong,
      attempts,
      totalCorrect,
      totalWrong,
      overallAccuracy,
      cefr
     };
-
 }
 
 
@@ -15659,7 +15726,7 @@ function renderAccount() {
 
     if (quizCountNode) {
       quizCountNode.textContent =
-       metrics.history.length;
+       metrics.quizHistory.length;
     }
 
 
@@ -15900,7 +15967,7 @@ function openKpiModal(type) {
 
       summary =
        String(
-        metrics.history.length
+        metrics.quizHistory.length
        );
 
 
@@ -15918,7 +15985,7 @@ function openKpiModal(type) {
         size => {
 
          const count =
-          metrics.history.filter(
+          metrics.quizHistory.filter(
            item =>
             Number(item.total)
             ===
@@ -15937,13 +16004,13 @@ function openKpiModal(type) {
        ).join("");
 
 
-      if (metrics.history.length) {
+      if (metrics.quizHistory.length) {
 
         details +=
          `
          <div class="kpi-detail-row">
           <span>Ultimo risultato</span>
-          <strong>${escapeHTML(metrics.history[0].percentage)}%</strong>
+          <strong>${escapeHTML(metrics.quizHistory[0].percentage)}%</strong>
          </div>
          `;
 
@@ -15968,10 +16035,10 @@ function openKpiModal(type) {
        `${metrics.average}%`;
 
       const best =
-       metrics.history.length
+       metrics.quizHistory.length
        ?
        Math.max(
-        ...metrics.history.map(
+        ...metrics.quizHistory.map(
          item =>
           Number(item.percentage || 0)
         )
@@ -15984,7 +16051,7 @@ function openKpiModal(type) {
        `
        <div class="kpi-detail-row">
         <span>Quiz utilizzati</span>
-        <strong>${metrics.history.length}</strong>
+        <strong>${metrics.quizHistory.length}</strong>
        </div>
        <div class="kpi-detail-row">
         <span>Miglior risultato</span>
@@ -16060,7 +16127,7 @@ function openKpiModal(type) {
        </div>
        <div class="kpi-detail-row">
         <span>Quiz totali</span>
-        <strong>${metrics.history.length}</strong>
+        <strong>${metrics.quizHistory.length}</strong>
        </div>
        `;
 
@@ -16447,7 +16514,7 @@ function medalIsSatisfied(
 ){
 
     if (medal.metric === "quiz") {
-      return metrics.history.length >= medal.threshold;
+      return metrics.quizHistory.length >= medal.threshold;
     }
 
     if (medal.metric === "tested") {
@@ -16467,7 +16534,7 @@ function medalIsSatisfied(
     }
 
     if (medal.metric === "perfect10") {
-      return metrics.history.some(
+      return metrics.quizHistory.some(
        item =>
         Number(item.total) >= 10
         &&
@@ -16476,7 +16543,7 @@ function medalIsSatisfied(
     }
 
     if (medal.metric === "perfect50") {
-      return metrics.history.some(
+      return metrics.quizHistory.some(
        item =>
         Number(item.total) >= 50
         &&
