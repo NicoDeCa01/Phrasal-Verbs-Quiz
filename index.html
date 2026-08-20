@@ -16256,45 +16256,34 @@ function openKpiModal(type) {
 
 
     if (type === "time") {
+  const testTime =
+    getCompletedTestTime();
 
-      title =
-       "Tempo totale nell'app";
+  const appTime =
+    getLiveTotalTime();
 
-      tone =
-       "#e8f4fb";
+  title =
+    "Dettaglio tempo";
 
-      summary =
-       formatDuration(
-        metrics.totalTime
-       );
+  tone =
+    "#e8f4fb";
 
-      const hours =
-       Math.floor(
-        metrics.totalTime / 3600
-       );
+  summary =
+    `${formatDuration(testTime)} nei test`;
 
-      const minutes =
-       Math.floor(
-        (
-         metrics.totalTime % 3600
-        )
-        /
-        60
-       );
+  details =
+    `
+    <div class="kpi-detail-row">
+      <span>Tempo effettivo nei test</span>
+      <strong>${formatDetailedDuration(testTime)}</strong>
+    </div>
 
-      details =
-       `
-       <div class="kpi-detail-row">
-        <span>Tempo complessivo</span>
-        <strong>${hours}h ${minutes}m</strong>
-       </div>
-       <div class="kpi-detail-row">
-        <span>Secondi registrati</span>
-        <strong>${metrics.totalTime}</strong>
-       </div>
-       `;
-
-    }
+    <div class="kpi-detail-row">
+      <span>Tempo totale nell'app</span>
+      <strong>${formatDetailedDuration(appTime)}</strong>
+    </div>
+    `;
+}
 
 
     if (type === "quizzes") {
