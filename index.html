@@ -6157,7 +6157,7 @@ body{
     <div id="accountDashboardCard" class="card">
       <div class="section-title">Dashboard</div>
       <div class="account-kpi-grid">
-        <button class="kpi-card kpi-blue" onclick="openKpiModal('time')"><strong id="accountTime">0m</strong><span>Tempo totale nell'app</span></button>
+        <button class="kpi-card kpi-blue" onclick="openKpiModal('time')"><strong id="accountTime">0s</strong><span>Tempo di studio</span></button>
         <button class="kpi-card kpi-green" onclick="openKpiModal('quizzes')"><strong id="accountQuizCount">0</strong><span>Quiz completati</span></button>
         <button class="kpi-card kpi-lavender" onclick="openKpiModal('average')"><strong id="accountAverage">&#x2014;</strong><span>Media quiz</span></button>
         <button class="kpi-card kpi-cream" onclick="openKpiModal('tested')"><strong id="accountTested">0/500</strong><span>Verbi testati</span></button>
@@ -11180,7 +11180,7 @@ function getCompletedTestTime() {
 }
 
 
-function formatDetailedDuration(seconds) {
+function formatStudyDuration(seconds) {
 
     const total =
      Math.max(
@@ -11190,12 +11190,29 @@ function formatDetailedDuration(seconds) {
       )
      );
 
+
+    if (total < 60) {
+      return `${total}s`;
+    }
+
+
+    const minutes =
+     Math.floor(
+      total / 60
+     );
+
+
+    if (total < 3600) {
+      return `${minutes}min`;
+    }
+
+
     const hours =
      Math.floor(
       total / 3600
      );
 
-    const minutes =
+    const remainingMinutes =
      Math.floor(
       (
        total % 3600
@@ -11204,24 +11221,10 @@ function formatDetailedDuration(seconds) {
       60
      );
 
-    const remainingSeconds =
-     total % 60;
 
-
-    if (hours) {
-      return `${hours}h ${minutes}m ${remainingSeconds}s`;
-    }
-
-
-    if (minutes) {
-      return `${minutes}m ${remainingSeconds}s`;
-    }
-
-
-    return `${remainingSeconds}s`;
+    return `${hours}h ${remainingMinutes}min`;
 
 }
-
 function formatDuration(seconds) {
 
     if (!seconds) {
@@ -16097,11 +16100,11 @@ function renderAccount() {
 
 
     if (timeNode) {
-      timeNode.textContent =
-       formatDuration(
-        metrics.totalTime
-       );
-    }
+  timeNode.textContent =
+   formatStudyDuration(
+    getCompletedTestTime()
+   );
+}
 
 
     if (quizCountNode) {
@@ -16296,35 +16299,39 @@ function openKpiModal(type) {
 
 
     if (type === "time") {
+
   const testTime =
-    getCompletedTestTime();
+   getCompletedTestTime();
 
   const appTime =
-    getLiveTotalTime();
+   getLiveTotalTime();
+
 
   title =
-    "Dettaglio tempo";
+   "Dettaglio tempo";
 
   tone =
-    "#e8f4fb";
+   "#e8f4fb";
 
   summary =
-    `${formatDuration(testTime)} nei test`;
+   formatStudyDuration(
+    testTime
+   );
 
   details =
-    `
-    <div class="kpi-detail-row">
-      <span>Tempo effettivo nei test</span>
-      <strong>${formatDetailedDuration(testTime)}</strong>
-    </div>
+   `
+   <div class="kpi-detail-row">
+    <span>Tempo trascorso facendo quiz</span>
+    <strong>${formatStudyDuration(testTime)}</strong>
+   </div>
 
-    <div class="kpi-detail-row">
-      <span>Tempo totale nell'app</span>
-      <strong>${formatDetailedDuration(appTime)}</strong>
-    </div>
-    `;
+   <div class="kpi-detail-row">
+    <span>Tempo totale nell'app</span>
+    <strong>${formatStudyDuration(appTime)}</strong>
+   </div>
+   `;
+
 }
-
 
     if (type === "quizzes") {
 
@@ -28843,7 +28850,7 @@ function efRenderModuleDashboard(moduleId){
 
 function efRenderStats(){
   const history=loadHistory(),accuracy=efUnifiedAccuracy();
-  document.getElementById('statsQuizCount').textContent=history.length;document.getElementById('statsAccuracy').textContent=accuracy===null?'\u2014':`${accuracy}%`;document.getElementById('statsTime').textContent=formatDuration(getCompletedTestTime());document.getElementById('statsSrsDue').textContent=efSrsDueCount();
+  document.getElementById('statsQuizCount').textContent=history.length;document.getElementById('statsAccuracy').textContent=accuracy===null?'\u2014':`${accuracy}%`;document.getElementById('statsTime').textContent=formatStudyDuration(getCompletedTestTime());document.getElementById('statsSrsDue').textContent=efSrsDueCount();
   const list=document.getElementById('statsModuleMastery');list.innerHTML=EF_MODULE_ORDER.map(id=>{const m=efModuleMetrics(id),cfg=EF_MODULE_CONFIG[id];return `<div class="forge-mastery-row"><strong>${escapeHTML(cfg.name)}</strong><div class="forge-progress-track"><div class="forge-progress-fill" style="width:${m.mastery}%"></div></div><span>${m.mastery}%</span></div>`;}).join('');
   const weak=efWeakItems(null,7),weakHost=document.getElementById('statsWeakest');weakHost.innerHTML=weak.length?weak.map(w=>`<div class="forge-weak-row"><div><strong>${escapeHTML(efItemLabel(w.moduleId,w.item))}</strong><span>${escapeHTML(EF_MODULE_CONFIG[w.moduleId]?.name||w.moduleId)} \u00B7 ${w.accuracy}% accuracy</span></div><strong>${w.mastery}%</strong></div>`).join(''):'<div class="forge-empty">Completa qualche esercizio: le aree deboli compariranno quando ci saranno dati sufficienti.</div>';
   renderPerformanceChart();
